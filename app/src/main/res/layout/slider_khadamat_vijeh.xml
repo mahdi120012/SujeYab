@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clcl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ebf0f6"
+    android:layoutDirection="ltr"
+    android:textDirection="rtl">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl1"
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imgAxFarakhan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout4">
+
+            <TextView
+                android:id="@+id/txOnvan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/iran_sans_bold"
+                android:text="عنوان خدمت"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txFerestande"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/iran_sans"
+                android:text="موضوع:"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/txOnvan"
+                app:layout_constraintTop_toBottomOf="@+id/txOnvan" />
+
+            <TextView
+                android:id="@+id/txMozo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="@font/iran_sans"
+                android:text="خانواده"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txFerestande"
+                app:layout_constraintEnd_toStartOf="@+id/txFerestande"
+                app:layout_constraintTop_toTopOf="@+id/txFerestande" />
+
+            <TextView
+                android:id="@+id/txMatnKholase"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
+                android:fontFamily="@font/iran_sans"
+                android:inputType="textMultiLine"
+                android:lines="2"
+                android:maxLines="2"
+                android:justificationMode="inter_word"
+                android:text="متن خلاصه اصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه "
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view2"
+                app:layout_constraintEnd_toStartOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txMozo" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="4dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="10dp"
+                android:background="#c1ceda"
+                app:layout_constraintEnd_toEndOf="@+id/txFerestande"
+                app:layout_constraintTop_toBottomOf="@+id/txFerestande" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="110dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_green_ba_hashiye"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/txMatnKholase">
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="مشاهده"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_white_border_model2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iran_sans"
+                android:text="خدمت های ویژه"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

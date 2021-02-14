@@ -1,0 +1,1210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clcl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ebf0f6"
+    android:layoutDirection="ltr"
+    android:textDirection="rtl">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#bbbbbb"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/iran_sans_bold"
+            android:text="تکمیل اطلاعات"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txEdame2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/iran_sans_bold"
+            android:text="ادامه"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back_icon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/net_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfileImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/plus_circle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/iran_sans"
+                android:text="تصویر شما (اختیاری)"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="@+id/imgProfileImage"
+                app:layout_constraintHorizontal_bias="0.411"
+                app:layout_constraintStart_toStartOf="@+id/imgProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/imgProfileImage" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="نام و نام خانوادگی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etNameFamily"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily">
+
+                <TextView
+                    android:id="@+id/textView293"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="تاریخ تولد"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etTarikhTavalod"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView293"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView293" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily34"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2">
+
+                <TextView
+                    android:id="@+id/textView294"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="جنسیت"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etJensiyat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="6dp"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView294"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/spinner_jensiyat"
+                    app:layout_constraintTop_toBottomOf="@+id/textView294" />
+
+                <Spinner
+                    android:id="@+id/spinner_jensiyat"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/etJensiyat"
+                    app:layout_constraintEnd_toEndOf="@+id/textView294"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView294" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily33"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily34"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily34"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily34">
+
+                <TextView
+                    android:id="@+id/textView295"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="وضعیت تاهل"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etVaziyatTaahol"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView295"
+                    app:layout_constraintStart_toStartOf="@+id/spinnerVaziyatTaahol"
+                    app:layout_constraintTop_toBottomOf="@+id/textView295" />
+
+                <Spinner
+                    android:id="@+id/spinnerVaziyatTaahol"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="@+id/etVaziyatTaahol"
+                    app:layout_constraintEnd_toEndOf="@+id/textView295"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView295" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily3"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily33"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily33"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily33">
+
+                <TextView
+                    android:id="@+id/textView296"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="وظیفه نظام وظیفه"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etVaziyatNezamVazife"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView296"
+                    app:layout_constraintStart_toStartOf="@+id/spinnerVaziyatNezamVazife"
+                    app:layout_constraintTop_toBottomOf="@+id/textView296" />
+
+                <Spinner
+                    android:id="@+id/spinnerVaziyatNezamVazife"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="@+id/etVaziyatNezamVazife"
+                    app:layout_constraintEnd_toEndOf="@+id/textView296"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView296" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily3342"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily3"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily3"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily3">
+
+                <TextView
+                    android:id="@+id/textView297"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="آخرین مدرک تحصیلی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etAkharinMadrakTahsili"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView297"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView297" />
+
+                <Spinner
+                    android:id="@+id/spinnerAkharinMadrakTahsili"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="@+id/etAkharinMadrakTahsili"
+                    app:layout_constraintEnd_toEndOf="@+id/textView297"
+                    app:layout_constraintStart_toStartOf="@+id/etAkharinMadrakTahsili"
+                    app:layout_constraintTop_toBottomOf="@+id/textView297" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily334244"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily3342"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily3342"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily3342">
+
+                <TextView
+                    android:id="@+id/textView298"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="معدل مدرک تحصیلی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etMoadelMadrakTahsili"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="number"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView298"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView298" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily3342441"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily334244"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily334244"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily334244">
+
+                <TextView
+                    android:id="@+id/textView200"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="رشته تحصیلی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etReshteTahsili"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView200"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView200" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily33424411"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily3342441"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily3342441"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily3342441">
+
+                <TextView
+                    android:id="@+id/textView299"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="زمینه مورد علاقه همکاری"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etZamineMoredAlaghaHamkari"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView299"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView299" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily334244114"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily33424411"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily33424411"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily33424411">
+
+                <TextView
+                    android:id="@+id/textView288"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="میزان سابقه کار مرتبط (ماه)"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etMizanSabegheKarMortabet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="number|textNoSuggestions"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView288"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView288" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily23"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily334244114"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily334244114"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily334244114">
+
+                <TextView
+                    android:id="@+id/textView277"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="سمت شغلی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etSematShoghli"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName|textNoSuggestions"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView277"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView277" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily25"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily23"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily23"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily23">
+
+                <TextView
+                    android:id="@+id/textView266"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="کد پرسنلی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etCodePerseneli"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="number|textNoSuggestions"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView266"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView266" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily251"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily25"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily25643"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily25">
+
+                <TextView
+                    android:id="@+id/textView244"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="آدرس پست الکترونیک"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textEmailAddress|textNoSuggestions"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView244"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView244" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily251SA"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily251"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily251"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily251">
+
+                <TextView
+                    android:id="@+id/textView233"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="شماره تلفن تماس"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etShomaeTelephoneTamas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="number|textNoSuggestions"
+                    android:padding="6dp"
+                    android:maxLength="11"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView233"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView233" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily41"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily251SA"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily251SA"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily251SA">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="کشور"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etKeshvar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView23"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <Spinner
+                    android:id="@+id/spinnerKeshvar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/etKeshvar"
+                    app:layout_constraintEnd_toEndOf="@+id/etKeshvar"
+                    app:layout_constraintStart_toStartOf="@+id/etKeshvar"
+                    app:layout_constraintTop_toTopOf="@+id/etKeshvar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily412"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily41"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily41"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily41">
+
+                <TextView
+                    android:id="@+id/textView2112"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="استان"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etOstan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView2112"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2112" />
+
+                <Spinner
+                    android:id="@+id/spinnerOstan"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/etOstan"
+                    app:layout_constraintEnd_toEndOf="@+id/etOstan"
+                    app:layout_constraintStart_toStartOf="@+id/etOstan"
+                    app:layout_constraintTop_toTopOf="@+id/etOstan" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2513"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily412"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily412"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily412">
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="شهرستان"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etShahrestan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                <Spinner
+                    android:id="@+id/spinnerShahrestan"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/etShahrestan"
+                    app:layout_constraintEnd_toEndOf="@+id/etShahrestan"
+                    app:layout_constraintStart_toStartOf="@+id/etShahrestan"
+                    app:layout_constraintTop_toTopOf="@+id/etShahrestan" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2514"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily2513"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2513"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2513">
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="شهر"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etShahr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView29"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+                <Spinner
+                    android:id="@+id/spinnerSahr"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/etShahr"
+                    app:layout_constraintEnd_toEndOf="@+id/etShahr"
+                    app:layout_constraintStart_toStartOf="@+id/etShahr"
+                    app:layout_constraintTop_toTopOf="@+id/etShahr" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2515"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily2514"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2514"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2514">
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="روستا"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etRosta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView28"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2516"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily2515"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2515"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2515">
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="نشانی"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etNeshani"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="clip_vertical"
+
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:lines="3"
+                    android:maxLines="3"
+                    android:padding="6dp"
+                    android:text="144"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView27"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily25156"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily2516"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2516"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2516">
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="معرف"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etMoaref"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="textPersonName|textNoSuggestions"
+                    android:padding="6dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView26"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2517"
+                android:layout_width="match_parent"
+                android:layout_height="84dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily25156"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily25156"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily25156">
+
+                <TextView
+                    android:id="@+id/textView212"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="تلفن تماس معرف"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etTelephoneTamasMoaref"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:inputType="number|textNoSuggestions"
+                    android:padding="6dp"
+                    android:maxLength="11"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView212"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView212" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2518"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                app:layout_constraintEnd_toEndOf="@+id/clNameAndFamily2517"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2517"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2517">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="توضیحات"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etTozihat"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_border"
+                    android:ems="10"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="clip_vertical"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:maxLines="3"
+                    android:singleLine="true"
+                    android:padding="6dp"
+                    android:scrollbars="none"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView25"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="42dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/clNameAndFamily2518"
+                app:layout_constraintTop_toBottomOf="@+id/clNameAndFamily2518" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
