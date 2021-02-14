@@ -816,7 +816,6 @@ public class LoadData {
     }
 
 
-
     public static void loadFarakhanVijehBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
 
 
