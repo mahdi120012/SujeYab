@@ -45,6 +45,7 @@ import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.SliderModel;
+import ir.e.sujeyab.models.TakmilEtelaatModel;
 import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -355,6 +356,80 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+    public static void loadMoshakhasatBaRetrofit(final Context c, final ConstraintLayout clWifi, EditText etNameFamily, EditText etTarikhTavalod
+            , EditText etJensiyat, EditText etVaziyatTaahol, EditText etVaziyatNezamVazife, EditText etAkharinMadrakTahsili, EditText etMoadelMadrakTahsili
+            , EditText etReshteTahsili, EditText etZamineMoredAlaghaHamkari, EditText etMizanSabegheKarMortabet, EditText etSematShoghli, EditText etCodePerseneli
+            , EditText etEmail, EditText etShomaeTelephoneTamas, EditText etKeshvar, EditText etOstan, EditText etShahrestan
+            , EditText etShahr, EditText etRosta, EditText etNeshani, EditText etMoaref, EditText etTelephoneTamasMoaref, EditText etTozihat, ImageView imgProfileImage) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List<TakmilEtelaatModel>> call = api.getTakmilEtelaat();
+        call.enqueue(new Callback<List<TakmilEtelaatModel>>() {
+            @Override
+            public void onResponse(Call<List<TakmilEtelaatModel>> call, retrofit2.Response<List<TakmilEtelaatModel>> response) {
+
+                List<TakmilEtelaatModel> takmilEtelaatModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (TakmilEtelaatModel takmilEtelaatModel:takmilEtelaatModels){
+                    lastId = takmilEtelaatModel.getId();
+                    etNameFamily.setText(takmilEtelaatModel.getName_family());
+                    etTarikhTavalod.setText(takmilEtelaatModel.getTarikh_tavallod());
+                    etJensiyat.setText(takmilEtelaatModel.getJensiyat());
+                    etVaziyatTaahol.setText(takmilEtelaatModel.getVaziyat_taahol());
+                    etVaziyatNezamVazife.setText(takmilEtelaatModel.getVaziyat_nezam_vazife());
+                    etAkharinMadrakTahsili.setText(takmilEtelaatModel.getAkharin_madrak_tahsili());
+                    etMoadelMadrakTahsili.setText(takmilEtelaatModel.getMoadel_madrak_tahsili());
+                    etReshteTahsili.setText(takmilEtelaatModel.getReshte_tahsili());
+                    etZamineMoredAlaghaHamkari.setText(takmilEtelaatModel.getZamine_morede_alaghe_hamkari());
+                    etMizanSabegheKarMortabet.setText(takmilEtelaatModel.getMizan_sabeghe_kar_motabet());
+                    etSematShoghli.setText(takmilEtelaatModel.getSemat_shoghli());
+                    etCodePerseneli.setText(takmilEtelaatModel.getCode_perseneli());
+                    etEmail.setText(takmilEtelaatModel.getEmail());
+                    etShomaeTelephoneTamas.setText(takmilEtelaatModel.getShomare_telephone());
+                    etKeshvar.setText(takmilEtelaatModel.getKeshvar());
+                    etOstan.setText(takmilEtelaatModel.getOstan());
+                    etShahrestan.setText(takmilEtelaatModel.getShahestan());
+                    etShahr.setText(takmilEtelaatModel.getShahr());
+                    etRosta.setText(takmilEtelaatModel.getRosta());
+                    etNeshani.setText(takmilEtelaatModel.getNeshani());
+                    etMoaref.setText(takmilEtelaatModel.getMoaref());
+                    etTelephoneTamasMoaref.setText(takmilEtelaatModel.getTelephone_tamas_moaref());
+                    etTozihat.setText(takmilEtelaatModel.getTozihat());
+
+                    if (takmilEtelaatModel.getProfile_picture().isEmpty()) {
+
+                        Picasso.get()
+                                .load(R.drawable.adamak_icon_for_setting)
+                                .centerInside()
+                                .fit()
+                                .error(R.drawable.adamak_icon_for_setting)
+                                .placeholder(R.drawable.adamak_icon_for_setting)
+                                .into(imgProfileImage);
+
+                    }else{
+                        Picasso.get()
+                                .load(takmilEtelaatModel.getProfile_picture() )
+                                .centerInside()
+                                .fit()
+                                .error(R.drawable.adamak_icon_for_setting)
+                                .placeholder(R.drawable.adamak_icon_for_setting)
+                                .into(imgProfileImage);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<TakmilEtelaatModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     public static void loadMoshakhasat(final Context c, final ConstraintLayout clWifi, EditText etNameFamily, EditText etTarikhTavalod
             , EditText etJensiyat, EditText etVaziyatTaahol, EditText etVaziyatNezamVazife, EditText etAkharinMadrakTahsili, EditText etMoadelMadrakTahsili
             , EditText etReshteTahsili, EditText etZamineMoredAlaghaHamkari, EditText etMizanSabegheKarMortabet, EditText etSematShoghli, EditText etCodePerseneli
@@ -525,6 +600,102 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+    public static void loadKhadamatVijehSliderBaRetrofit(Context c, final ConstraintLayout clWifi, ViewPager mPager,
+                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <FarakhanVijehModel>> call = api.getKhedmatHayeVijeh();
+
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+                    lastId = farakhanVijehModel.getId();
+                    ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getMozo(),farakhanVijehModel.getMatn_kholase(),""));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh"));
+                    indicator.setViewPager(mPager);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_khadamat_vijeh";
+        itShouldLoadMore = false;
+        final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        progressDialog.showProgress(c);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismissProgress();
+                itShouldLoadMore = true;
+
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اسلایدی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String onvan = null;
+                String mozo = null;
+                String matn_kholase = null;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        onvan = jsonObject.getString("onvan");
+                        mozo = jsonObject.getString("mozo");
+                        matn_kholase = jsonObject.getString("matn_kholase");
+
+                        ImgArray.add(new SliderModel(lastId, onvan,mozo,matn_kholase,""));
+                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh"));
+                        indicator.setViewPager(mPager);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                itShouldLoadMore = true;
+                progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       /* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*/
+                    }
+                });
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
     public static void loadKhadamatVijehSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,
                                                CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
 
@@ -598,6 +769,34 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+    public static void loadSujeHayeVijehSliderBaRetrofit(Context c, final ConstraintLayout clWifi, ViewPager mPager,
+                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List<FarakhanVijehModel>> call = api.getSujeHayeVijeh();
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+                    lastId = farakhanVijehModel.getId();
+                    ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh"));
+                    indicator.setViewPager(mPager);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     public static void loadSujeHayeVijehSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,
                                           CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {

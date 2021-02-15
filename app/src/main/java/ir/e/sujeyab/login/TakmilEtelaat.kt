@@ -348,7 +348,7 @@ class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerD
         var etTozihat = inflatedview!!.findViewById<View>(R.id.etTozihat) as EditText
 
 
-        LoadData.loadMoshakhasat(activity, clWifiState, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
+        LoadData.loadMoshakhasatBaRetrofit(activity, clWifiState, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
                 etKeshvar, etOstan, etShahrestan, etShahr, etRosta, etNeshani, etMoaref, etTelephoneTamasMoaref, etTozihat,imgProfileImage)
 
         txEdame2.setOnClickListener {

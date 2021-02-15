@@ -52,9 +52,11 @@ class Pishkhan_fr : Fragment() {
 
         //LoadData.loadPishkhanSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
 
-        LoadData.loadSujeHayeVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
+        LoadData.loadSujeHayeVijehSliderBaRetrofit(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
+        //LoadData.loadSujeHayeVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
 
-        LoadData.loadKhadamatVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
+        //LoadData.loadKhadamatVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
+        LoadData.loadKhadamatVijehSliderBaRetrofit(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
 
 
         rModels = ArrayList()
