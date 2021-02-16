@@ -627,7 +627,7 @@ public class LoadData {
         });
 
 
-        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_khadamat_vijeh";
+/*        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_khadamat_vijeh";
         itShouldLoadMore = false;
         final ProgressDialogClass progressDialog = new ProgressDialogClass();
         progressDialog.showProgress(c);
@@ -685,15 +685,15 @@ public class LoadData {
                     @Override
                     public void onClick(View v) {
 
-                       /* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
-                                recyclerView, "", clWifi);*/
+                       *//* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*//*
                     }
                 });
 
             }
         });
 
-        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);*/
     }
 
     public static void loadKhadamatVijehSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,
@@ -947,6 +947,36 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+    public static void loadFarakhanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <FarakhanVijehModel>> call = api.getFarakhanHa();
+
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
+                    lastId = farakhanVijehModel.getId();
+                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
+                            ,farakhanVijehModel.getModat_baghimande(),
+                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
     public static void loadVaziyatFarakhan(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
 
 
@@ -980,7 +1010,7 @@ public class LoadData {
                         lastId = jsonObject.getString("id");
                         name_vaziyat_farakhan = jsonObject.getString("name_vaziyat_farakhan");
 
-                        rModels.add(new RecyclerModel(lastId, name_vaziyat_farakhan,"","",""));
+                        rModels.add(new RecyclerModel(lastId, name_vaziyat_farakhan,"","","",""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1035,7 +1065,7 @@ public class LoadData {
 
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
                     lastId = farakhanVijehModel.getId();
-                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase()));
+                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),""));
                     rAdapter.notifyDataSetChanged();
                 }
 
@@ -1088,7 +1118,7 @@ public class LoadData {
                         onvan = jsonObject.getString("onvan");
                         modat_baghimande = jsonObject.getString("modat_baghimande");
                         matn_kholase = jsonObject.getString("matn_kholase");
-                        rModels.add(new RecyclerModel(lastId, picture,onvan,modat_baghimande,matn_kholase));
+                        rModels.add(new RecyclerModel(lastId, picture,onvan,modat_baghimande,matn_kholase,""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

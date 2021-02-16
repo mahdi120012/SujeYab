@@ -25,4 +25,7 @@ public interface Api {
     @GET("load_moshakhasat_user")
     Call<List<TakmilEtelaatModel>> getTakmilEtelaat();
 
+    @GET("load_farakhan_ha")
+    Call<List<FarakhanVijehModel>> getFarakhanHa();
+
 }

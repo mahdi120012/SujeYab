@@ -61,7 +61,7 @@ class Pishkhan_fr : Fragment() {
 
         rModels = ArrayList()
         rAdapter = RecyclerAdapter("farakhan_vije", activity, rModels, rAdapter)
-        Recyclerview.define_recyclerview(activity, inflatedview!!.rv1, rAdapter, rModels)
+        Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv1, rAdapter, rModels)
         //LoadData.loadFarakhanVijeh(activity, inflatedview!!.clWifiState, rModels, rAdapter)
         LoadData.loadFarakhanVijehBaRetrofit(activity, inflatedview!!.clWifiState, rModels, rAdapter)
 

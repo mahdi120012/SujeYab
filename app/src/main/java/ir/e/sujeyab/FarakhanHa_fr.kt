@@ -23,7 +23,7 @@ class FarakhanHa_fr : Fragment() {
     var inflatedview: View? = null
     private var rAdapter: RecyclerAdapter? = null
     private var rModels: ArrayList<RecyclerModel>? = null
-
+    private var rModels2: ArrayList<RecyclerModel>? = null
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -34,8 +34,15 @@ class FarakhanHa_fr : Fragment() {
 
         rModels = ArrayList()
         rAdapter = RecyclerAdapter("vaziyat_farakhan", activity, rModels, rAdapter)
-        Recyclerview.define_recyclerview(activity, inflatedview!!.rv1, rAdapter, rModels)
+        Recyclerview.defineRecyclerViewHorizontal(activity, inflatedview!!.rv1, rAdapter, rModels)
         LoadData.loadVaziyatFarakhan(activity, inflatedview!!.clWifiState, rModels, rAdapter)
+
+
+        rModels2 = ArrayList()
+        rAdapter = RecyclerAdapter("farakhan_ha", activity, rModels2, rAdapter)
+        Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv2, rAdapter, rModels2)
+        LoadData.loadFarakhanHaBaRetrofit(activity, inflatedview!!.clWifiState, rModels2, rAdapter)
+
 
 
         return inflatedview
