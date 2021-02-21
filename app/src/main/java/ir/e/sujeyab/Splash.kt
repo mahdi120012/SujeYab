@@ -25,7 +25,7 @@ class Splash : AppCompatActivity() {
             val intent = Intent(this, Pishkhan::class.java)
             this.startActivity(intent)
             this.finish()
-        }, 10)
+        }, 1000)
 
     }
 

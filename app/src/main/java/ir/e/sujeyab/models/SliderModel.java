@@ -1,11 +1,18 @@
 package ir.e.sujeyab.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class SliderModel {
+    @SerializedName("id")
+    @Expose
+
     private String id;
     private String picture;
     private String link;
     private String description;
     private String matn_kholase;
+
     public SliderModel(String id, String picture, String link , String description, String matn_kholase) {
         this.id = id;
         this.picture = picture;

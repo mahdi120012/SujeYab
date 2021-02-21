@@ -1,14 +1,13 @@
 package ir.e.sujeyab
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.text.Html
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
+import ir.e.sujeyab.SabtSuje.SabtForiSuje
+import ir.e.sujeyab.SabtSuje.TarhSujeFr
 import ir.e.sujeyab.login.Login
 import kotlinx.android.synthetic.main.setting.*
 
@@ -31,7 +30,9 @@ class Setting : AppCompatActivity() {
         }
 
         clTansimatAsli.setOnClickListener {
-            Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, SabtForiSuje::class.java)
+            startActivity(intent)
+            //Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
         }
 
         clElanat.setOnClickListener {

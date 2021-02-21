@@ -1,12 +1,12 @@
 package ir.e.sujeyab
 
+import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.models.RecyclerModel
@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.net_connection.view.*
 import kotlinx.android.synthetic.main.pishkhan_fr.*
 import kotlinx.android.synthetic.main.pishkhan_fr.view.*
-import kotlinx.android.synthetic.main.setting.*
-import me.relex.circleindicator.CircleIndicator
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -45,10 +43,13 @@ class Pishkhan_fr : Fragment() {
     ): View? {
 
         inflatedview = inflater.inflate(R.layout.pishkhan_fr, container, false)
+        inflatedview!!.nestedScrollView.visibility = View.GONE
         //val clVorodBaNamKarbari = inflatedview!!.findViewById<View>(R.id.clVorodBaNamKarbari) as ConstraintLayout
         //val etUsername = inflatedview!!.findViewById<View>(R.id.etUsername) as EditText
 
         LoadData.LoadPishkhanSliderByRetrofit(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
+        init()
+
 
         //LoadData.loadPishkhanSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
 
@@ -56,7 +57,8 @@ class Pishkhan_fr : Fragment() {
         //LoadData.loadSujeHayeVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
 
         //LoadData.loadKhadamatVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
-        LoadData.loadKhadamatVijehSliderBaRetrofit(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
+        LoadData.loadKhadamatVijehSliderBaRetrofit(activity, (activity as Pishkhan).clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh, inflatedview!!.nestedScrollView, inflatedview!!.progressBar)
+
 
 
         rModels = ArrayList()
@@ -93,6 +95,23 @@ class Pishkhan_fr : Fragment() {
         }*/
 
         return inflatedview
+    }
+
+    private fun init() {
+        val handler = Handler()
+        val Update = Runnable {
+            if (currentPage === 2) {
+                currentPage = 0
+            }
+            inflatedview!!.pager.setCurrentItem(currentPage++, true)
+        }
+        //Auto start
+        val swipeTimer = Timer()
+        swipeTimer.schedule(object : TimerTask() {
+            override fun run() {
+                handler.post(Update)
+            }
+        }, 3500, 3500)
     }
 
 /*    private fun init() {

@@ -293,1516 +293,1516 @@
     </string-array>
 
     <string-array name="ostan">
-    <item>	آذربایجان شرقی	</item>
-    <item>	آذربایجان غربی	</item>
-    <item>	اردبیل	</item>
-    <item>	اصفهان	</item>
-    <item>	ایلام	</item>
-    <item>	بوشهر	</item>
-    <item>	تهران	</item>
-    <item>	چهارمحال و بختیاری	</item>
-    <item>	خراسان جنوبی	</item>
-    <item>	خراسان رضوی	</item>
-    <item>	خراسان شمالی	</item>
-    <item>	خوزستان	</item>
-    <item>	زنجان	</item>
-    <item>	سمنان	</item>
-    <item>	سیستان و بلوچستان	</item>
-    <item>	شيراز	</item>
-    <item>	قزوین	</item>
-    <item>	قم	</item>
-    <item>	کردستان	</item>
-    <item>	کرمان	</item>
-    <item>	کرمانشاه	</item>
-    <item>	کهگیلویه و بویراحمد	</item>
-    <item>	گلستان	</item>
-    <item>	گیلان	</item>
-    <item>	لرستان	</item>
-    <item>	مازندران	</item>
-    <item>	مرکزی	</item>
-    <item>	هرمزگان	</item>
-    <item>	همدان	</item>
-    <item>	یزد	</item>
-</string-array>
+        <item>	آذربایجان شرقی	</item>
+        <item>	آذربایجان غربی	</item>
+        <item>	اردبیل	</item>
+        <item>	اصفهان	</item>
+        <item>	ایلام	</item>
+        <item>	بوشهر	</item>
+        <item>	تهران	</item>
+        <item>	چهارمحال و بختیاری	</item>
+        <item>	خراسان جنوبی	</item>
+        <item>	خراسان رضوی	</item>
+        <item>	خراسان شمالی	</item>
+        <item>	خوزستان	</item>
+        <item>	زنجان	</item>
+        <item>	سمنان	</item>
+        <item>	سیستان و بلوچستان	</item>
+        <item>	شيراز	</item>
+        <item>	قزوین	</item>
+        <item>	قم	</item>
+        <item>	کردستان	</item>
+        <item>	کرمان	</item>
+        <item>	کرمانشاه	</item>
+        <item>	کهگیلویه و بویراحمد	</item>
+        <item>	گلستان	</item>
+        <item>	گیلان	</item>
+        <item>	لرستان	</item>
+        <item>	مازندران	</item>
+        <item>	مرکزی	</item>
+        <item>	هرمزگان	</item>
+        <item>	همدان	</item>
+        <item>	یزد	</item>
+    </string-array>
 
     <string-array name="shahrestan">
-    <item>	آذرشهر	</item>
-    <item>	اسکو	</item>
-    <item>	اهر	</item>
-    <item>	بستان‌آباد	</item>
-    <item>	بناب	</item>
-    <item>	تبریز 	</item>
-    <item>	جلفا	</item>
-    <item>	چاراویماق	</item>
-    <item>	سراب	</item>
-    <item>	شبستر	</item>
-    <item>	عجب‌شیر	</item>
-    <item>	کلیبر	</item>
-    <item>	مراغه	</item>
-    <item>	مرند	</item>
-    <item>	ملکان	</item>
-    <item>	میانه	</item>
-    <item>	ورزقان	</item>
-    <item>	هریس	</item>
-    <item>	هشترود	</item>
-    <item>	ارومیه	</item>
-    <item>	اشنویه	</item>
-    <item>	بوکان	</item>
-    <item>	پیرانشهر	</item>
-    <item>	تکاب	</item>
-    <item>	چالدران	</item>
-    <item>	خوی	</item>
-    <item>	سردشت	</item>
-    <item>	سلماس	</item>
-    <item>	شاهین‌دژ	</item>
-    <item>	ماکو	</item>
-    <item>	مهاباد	</item>
-    <item>	میاندوآب	</item>
-    <item>	نقده	</item>
-    <item>	اردبیل	</item>
-    <item>	بیله‌سوار	</item>
-    <item>	پارس‌آباد	</item>
-    <item>	خلخال	</item>
-    <item>	کوثر 	</item>
-    <item>	گِرمی	</item>
-    <item>	مِشگین‌شهر	</item>
-    <item>	نَمین	</item>
-    <item>	نیر	</item>
-    <item>	آران و بیدگل	</item>
-    <item>	اردستان	</item>
-    <item>	اصفهان 	</item>
-    <item>	برخوار و میمه	</item>
-    <item>	تیران و کرون	</item>
-    <item>	چادگان	</item>
-    <item>	خمینی‌شهر	</item>
-    <item>	خوانسار	</item>
-    <item>	سمیرم	</item>
-    <item>	شهرضا	</item>
-    <item>	سمیرم سفلی	</item>
-    <item>	فریدن	</item>
-    <item>	فریدون‌شهر	</item>
-    <item>	فلاورجان	</item>
-    <item>	کاشان	</item>
-    <item>	گلپایگان	</item>
-    <item>	لنجان	</item>
-    <item>	مبارکه	</item>
-    <item>	نائین	</item>
-    <item>	نجف‌آباد 	</item>
-    <item>	نطنز	</item>
-    <item>	آبدانان	</item>
-    <item>	ایلام	</item>
-    <item>	ایوان	</item>
-    <item>	دره‌شهر	</item>
-    <item>	دهلران	</item>
-    <item>	شیروان و چرداول	</item>
-    <item>	مهران	</item>
-    <item>	بوشهر	</item>
-    <item>	تنگستان 	</item>
-    <item>	جم	</item>
-    <item>	دشتستان	</item>
-    <item>	دشتی	</item>
-    <item>	دیر	</item>
-    <item>	دیلم	</item>
-    <item>	کنگان 	</item>
-    <item>	گناوه	</item>
-    <item>	اسلام‌شهر	</item>
-    <item>	پاکدشت	</item>
-    <item>	تهران	</item>
-    <item>	دماوند	</item>
-    <item>	رباط‌کریم	</item>
-    <item>	ری	</item>
-    <item>	ساوجبلاغ	</item>
-    <item>	شمیرانات	</item>
-    <item>	شهریار	</item>
-    <item>	فیروزکوه	</item>
-    <item>	کرج 	</item>
-    <item>	نظرآباد	</item>
-    <item>	ورامین	</item>
-    <item>	اردل	</item>
-    <item>	بروجن	</item>
-    <item>	شهرکرد	</item>
-    <item>	فارسان	</item>
-    <item>	کوهرنگ	</item>
-    <item>	لردگان	</item>
-    <item>	بیرجند	</item>
-    <item>	درمیان	</item>
-    <item>	سرایان	</item>
-    <item>	سربیشه	</item>
-    <item>	فردوس	</item>
-    <item>	قائنات	</item>
-    <item>	نهبندان	</item>
-    <item>	بردسکن	</item>
-    <item>	تایباد	</item>
-    <item>	تربت جام	</item>
-    <item>	تربت حیدریه	</item>
-    <item>	چناران	</item>
-    <item>	خلیل‌آباد	</item>
-    <item>	خواف 	</item>
-    <item>	درگز	</item>
-    <item>	رشتخوار	</item>
-    <item>	سبزوار 	</item>
-    <item>	سرخس	</item>
-    <item>	فریمان	</item>
-    <item>	قوچان	</item>
-    <item>	کاشمر	</item>
-    <item>	کلات	</item>
-    <item>	گناباد	</item>
-    <item>	مشهد	</item>
-    <item>	مه ولات	</item>
-    <item>	نیشابور	</item>
-    <item>	اسفراین	</item>
-    <item>	بجنورد 	</item>
-    <item>	جاجرم	</item>
-    <item>	شیروان	</item>
-    <item>	فاروج	</item>
-    <item>	مانه و سملقان	</item>
-    <item>	آبادان	</item>
-    <item>	امیدیه	</item>
-    <item>	اندیمشک	</item>
-    <item>	اهواز	</item>
-    <item>	ایذه	</item>
-    <item>	باغ‌ملک	</item>
-    <item>	بندر ماهشهر	</item>
-    <item>	بهبهان	</item>
-    <item>	خرمشهر	</item>
-    <item>	دزفول	</item>
-    <item>	دشت آزادگان	</item>
-    <item>	رامشیر	</item>
-    <item>	رامهرمز	</item>
-    <item>	شادگان	</item>
-    <item>	شوش	</item>
-    <item>	شوشتر	</item>
-    <item>	گتوند	</item>
-    <item>	لالی	</item>
-    <item>	مسجد سلیمان	</item>
-    <item>	هندیجان	</item>
-    <item>	ابهر	</item>
-    <item>	ایجرود	</item>
-    <item>	خدابنده	</item>
-    <item>	خرمدره	</item>
-    <item>	زنجان 	</item>
-    <item>	طارم	</item>
-    <item>	ماه‌نشان	</item>
-    <item>	دامغان	</item>
-    <item>	سمنان	</item>
-    <item>	شاهرود	</item>
-    <item>	گرمسار	</item>
-    <item>	مهدی‌شهر	</item>
-    <item>	ایرانشهر 	</item>
-    <item>	چابهار	</item>
-    <item>	خاش	</item>
-    <item>	دلگان	</item>
-    <item>	زابل	</item>
-    <item>	زاهدان	</item>
-    <item>	زهک	</item>
-    <item>	سراوان	</item>
-    <item>	سرباز	</item>
-    <item>	کنارک	</item>
-    <item>	نیک‌شهر	</item>
-    <item>	آباده 	</item>
-    <item>	ارسنجان	</item>
-    <item>	استهبان 	</item>
-    <item>	اقلید	</item>
-    <item>	بوانات	</item>
-    <item>	پاسارگاد	</item>
-    <item>	جهرم	</item>
-    <item>	خرم‌بید	</item>
-    <item>	خنج	</item>
-    <item>	داراب	</item>
-    <item>	زرین‌دشت	</item>
-    <item>	سپیدان	</item>
-    <item>	شیراز	</item>
-    <item>	فراشبند	</item>
-    <item>	فسا	</item>
-    <item>	فیروزآباد	</item>
-    <item>	قیر و کارزین	</item>
-    <item>	کازرون	</item>
-    <item>	لارستان	</item>
-    <item>	لامِرد	</item>
-    <item>	مرودشت 	</item>
-    <item>	ممسنی	</item>
-    <item>	مهر	</item>
-    <item>	نی‌ریز	</item>
-    <item>	آبیک	</item>
-    <item>	البرز	</item>
-    <item>	بوئین‌زهرا	</item>
-    <item>	تاکستان	</item>
-    <item>	قزوین	</item>
-    <item>	قم	</item>
-    <item>	بانه 	</item>
-    <item>	بیجار	</item>
-    <item>	دیواندره	</item>
-    <item>	سروآباد	</item>
-    <item>	سقز 	</item>
-    <item>	سنندج	</item>
-    <item>	قروه	</item>
-    <item>	کامیاران	</item>
-    <item>	مریوان	</item>
-    <item>	بافت	</item>
-    <item>	بردسیر	</item>
-    <item>	بم	</item>
-    <item>	جیرفت	</item>
-    <item>	راور	</item>
-    <item>	رفسنجان	</item>
-    <item>	رودبار جنوب	</item>
-    <item>	زرند	</item>
-    <item>	سیرجان	</item>
-    <item>	شهر بابک	</item>
-    <item>	عنبرآباد	</item>
-    <item>	قلعه گنج 	</item>
-    <item>	کرمان	</item>
-    <item>	کوهبنان	</item>
-    <item>	کهنوج	</item>
-    <item>	منوجان	</item>
-    <item>	اسلام‌آباد غرب	</item>
-    <item>	پاوه	</item>
-    <item>	ثلاث باباجانی	</item>
-    <item>	جوانرود	</item>
-    <item>	دالاهو	</item>
-    <item>	روانسر	</item>
-    <item>	سرپل ذهاب	</item>
-    <item>	سنقر	</item>
-    <item>	صحنه	</item>
-    <item>	قصر شیرین	</item>
-    <item>	کرمانشاه 	</item>
-    <item>	کنگاور	</item>
-    <item>	گیلان غرب	</item>
-    <item>	هرسین	</item>
-    <item>	بویراحمد	</item>
-    <item>	بهمئی	</item>
-    <item>	دنا	</item>
-    <item>	کهگیلویه	</item>
-    <item>	گچساران	</item>
-    <item>	آزادشهر	</item>
-    <item>	آزادشهر	</item>
-    <item>	آق‌قلا	</item>
-    <item>	بندر گز	</item>
-    <item>	ترکمن 	</item>
-    <item>	رامیان	</item>
-    <item>	علی‌آباد	</item>
-    <item>	کردکوی	</item>
-    <item>	کلاله	</item>
-    <item>	گرگان 	</item>
-    <item>	گنبد کاووس	</item>
-    <item>	مراوه‌تپه	</item>
-    <item>	مینودشت	</item>
-    <item>	آستارا	</item>
-    <item>	آستانه اشرفیه	</item>
-    <item>	اَملَش	</item>
-    <item>	بندر انزلی	</item>
-    <item>	رشت	</item>
-    <item>	رضوانشهر	</item>
-    <item>	رودبار	</item>
-    <item>	رودسر	</item>
-    <item>	سیاهکل	</item>
-    <item>	شَفت	</item>
-    <item>	صومعه‌سرا	</item>
-    <item>	طوالش	</item>
-    <item>	فومَن	</item>
-    <item>	لاهیجان 	</item>
-    <item>	لنگرود	</item>
-    <item>	ماسال	</item>
-    <item>	ازنا	</item>
-    <item>	اليگودرز	</item>
-    <item>	بروجرد	</item>
-    <item>	پل‌دختر	</item>
-    <item>	خرم‌آباد 	</item>
-    <item>	دورود	</item>
-    <item>	دلفان 	</item>
-    <item>	سلسله	</item>
-    <item>	کوهدشت	</item>
-    <item>	آمل	</item>
-    <item>	بابل	</item>
-    <item>	بابلسر	</item>
-    <item>	بهشهر	</item>
-    <item>	تنکابن	</item>
-    <item>	جويبار	</item>
-    <item>	چالوس	</item>
-    <item>	رامسر	</item>
-    <item>	ساري	</item>
-    <item>	سوادکوه 	</item>
-    <item>	قائم‌شهر	</item>
-    <item>	گلوگاه	</item>
-    <item>	محمودآباد	</item>
-    <item>	نکا	</item>
-    <item>	نور	</item>
-    <item>	نوشهر	</item>
-    <item>	آشتيان	</item>
-    <item>	اراک	</item>
-    <item>	تفرش	</item>
-    <item>	خمين	</item>
-    <item>	دليجان 	</item>
-    <item>	زرنديه	</item>
-    <item>	ساوه	</item>
-    <item>	شازند	</item>
-    <item>	کميجان	</item>
-    <item>	محلات	</item>
-    <item>	ابوموسي	</item>
-    <item>	بستک	</item>
-    <item>	بندر عباس	</item>
-    <item>	بندر لنگه	</item>
-    <item>	جاسک	</item>
-    <item>	حاجي‌آباد	</item>
-    <item>	خمير 	</item>
-    <item>	رودان	</item>
-    <item>	قشم	</item>
-    <item>	گاوبندي	</item>
-    <item>	ميناب	</item>
-    <item>	اسدآباد	</item>
-    <item>	بهار	</item>
-    <item>	تويسرکان	</item>
-    <item>	رزن 	</item>
-    <item>	کبودرآهنگ	</item>
-    <item>	ملاير	</item>
-    <item>	نهاوند	</item>
-    <item>	همدان	</item>
-    <item>	ابرکوه	</item>
-    <item>	اردکان	</item>
-    <item>	بافق 	</item>
-    <item>	تفت	</item>
-    <item>	خاتم	</item>
-    <item>	صدوق	</item>
-    <item>	طبس	</item>
-    <item>	مهريز	</item>
-    <item>	مِيبُد	</item>
-    <item>	يزد	</item>
+        <item>	آذرشهر	</item>
+        <item>	اسکو	</item>
+        <item>	اهر	</item>
+        <item>	بستان‌آباد	</item>
+        <item>	بناب	</item>
+        <item>	تبریز 	</item>
+        <item>	جلفا	</item>
+        <item>	چاراویماق	</item>
+        <item>	سراب	</item>
+        <item>	شبستر	</item>
+        <item>	عجب‌شیر	</item>
+        <item>	کلیبر	</item>
+        <item>	مراغه	</item>
+        <item>	مرند	</item>
+        <item>	ملکان	</item>
+        <item>	میانه	</item>
+        <item>	ورزقان	</item>
+        <item>	هریس	</item>
+        <item>	هشترود	</item>
+        <item>	ارومیه	</item>
+        <item>	اشنویه	</item>
+        <item>	بوکان	</item>
+        <item>	پیرانشهر	</item>
+        <item>	تکاب	</item>
+        <item>	چالدران	</item>
+        <item>	خوی	</item>
+        <item>	سردشت	</item>
+        <item>	سلماس	</item>
+        <item>	شاهین‌دژ	</item>
+        <item>	ماکو	</item>
+        <item>	مهاباد	</item>
+        <item>	میاندوآب	</item>
+        <item>	نقده	</item>
+        <item>	اردبیل	</item>
+        <item>	بیله‌سوار	</item>
+        <item>	پارس‌آباد	</item>
+        <item>	خلخال	</item>
+        <item>	کوثر 	</item>
+        <item>	گِرمی	</item>
+        <item>	مِشگین‌شهر	</item>
+        <item>	نَمین	</item>
+        <item>	نیر	</item>
+        <item>	آران و بیدگل	</item>
+        <item>	اردستان	</item>
+        <item>	اصفهان 	</item>
+        <item>	برخوار و میمه	</item>
+        <item>	تیران و کرون	</item>
+        <item>	چادگان	</item>
+        <item>	خمینی‌شهر	</item>
+        <item>	خوانسار	</item>
+        <item>	سمیرم	</item>
+        <item>	شهرضا	</item>
+        <item>	سمیرم سفلی	</item>
+        <item>	فریدن	</item>
+        <item>	فریدون‌شهر	</item>
+        <item>	فلاورجان	</item>
+        <item>	کاشان	</item>
+        <item>	گلپایگان	</item>
+        <item>	لنجان	</item>
+        <item>	مبارکه	</item>
+        <item>	نائین	</item>
+        <item>	نجف‌آباد 	</item>
+        <item>	نطنز	</item>
+        <item>	آبدانان	</item>
+        <item>	ایلام	</item>
+        <item>	ایوان	</item>
+        <item>	دره‌شهر	</item>
+        <item>	دهلران	</item>
+        <item>	شیروان و چرداول	</item>
+        <item>	مهران	</item>
+        <item>	بوشهر	</item>
+        <item>	تنگستان 	</item>
+        <item>	جم	</item>
+        <item>	دشتستان	</item>
+        <item>	دشتی	</item>
+        <item>	دیر	</item>
+        <item>	دیلم	</item>
+        <item>	کنگان 	</item>
+        <item>	گناوه	</item>
+        <item>	اسلام‌شهر	</item>
+        <item>	پاکدشت	</item>
+        <item>	تهران	</item>
+        <item>	دماوند	</item>
+        <item>	رباط‌کریم	</item>
+        <item>	ری	</item>
+        <item>	ساوجبلاغ	</item>
+        <item>	شمیرانات	</item>
+        <item>	شهریار	</item>
+        <item>	فیروزکوه	</item>
+        <item>	کرج 	</item>
+        <item>	نظرآباد	</item>
+        <item>	ورامین	</item>
+        <item>	اردل	</item>
+        <item>	بروجن	</item>
+        <item>	شهرکرد	</item>
+        <item>	فارسان	</item>
+        <item>	کوهرنگ	</item>
+        <item>	لردگان	</item>
+        <item>	بیرجند	</item>
+        <item>	درمیان	</item>
+        <item>	سرایان	</item>
+        <item>	سربیشه	</item>
+        <item>	فردوس	</item>
+        <item>	قائنات	</item>
+        <item>	نهبندان	</item>
+        <item>	بردسکن	</item>
+        <item>	تایباد	</item>
+        <item>	تربت جام	</item>
+        <item>	تربت حیدریه	</item>
+        <item>	چناران	</item>
+        <item>	خلیل‌آباد	</item>
+        <item>	خواف 	</item>
+        <item>	درگز	</item>
+        <item>	رشتخوار	</item>
+        <item>	سبزوار 	</item>
+        <item>	سرخس	</item>
+        <item>	فریمان	</item>
+        <item>	قوچان	</item>
+        <item>	کاشمر	</item>
+        <item>	کلات	</item>
+        <item>	گناباد	</item>
+        <item>	مشهد	</item>
+        <item>	مه ولات	</item>
+        <item>	نیشابور	</item>
+        <item>	اسفراین	</item>
+        <item>	بجنورد 	</item>
+        <item>	جاجرم	</item>
+        <item>	شیروان	</item>
+        <item>	فاروج	</item>
+        <item>	مانه و سملقان	</item>
+        <item>	آبادان	</item>
+        <item>	امیدیه	</item>
+        <item>	اندیمشک	</item>
+        <item>	اهواز	</item>
+        <item>	ایذه	</item>
+        <item>	باغ‌ملک	</item>
+        <item>	بندر ماهشهر	</item>
+        <item>	بهبهان	</item>
+        <item>	خرمشهر	</item>
+        <item>	دزفول	</item>
+        <item>	دشت آزادگان	</item>
+        <item>	رامشیر	</item>
+        <item>	رامهرمز	</item>
+        <item>	شادگان	</item>
+        <item>	شوش	</item>
+        <item>	شوشتر	</item>
+        <item>	گتوند	</item>
+        <item>	لالی	</item>
+        <item>	مسجد سلیمان	</item>
+        <item>	هندیجان	</item>
+        <item>	ابهر	</item>
+        <item>	ایجرود	</item>
+        <item>	خدابنده	</item>
+        <item>	خرمدره	</item>
+        <item>	زنجان 	</item>
+        <item>	طارم	</item>
+        <item>	ماه‌نشان	</item>
+        <item>	دامغان	</item>
+        <item>	سمنان	</item>
+        <item>	شاهرود	</item>
+        <item>	گرمسار	</item>
+        <item>	مهدی‌شهر	</item>
+        <item>	ایرانشهر 	</item>
+        <item>	چابهار	</item>
+        <item>	خاش	</item>
+        <item>	دلگان	</item>
+        <item>	زابل	</item>
+        <item>	زاهدان	</item>
+        <item>	زهک	</item>
+        <item>	سراوان	</item>
+        <item>	سرباز	</item>
+        <item>	کنارک	</item>
+        <item>	نیک‌شهر	</item>
+        <item>	آباده 	</item>
+        <item>	ارسنجان	</item>
+        <item>	استهبان 	</item>
+        <item>	اقلید	</item>
+        <item>	بوانات	</item>
+        <item>	پاسارگاد	</item>
+        <item>	جهرم	</item>
+        <item>	خرم‌بید	</item>
+        <item>	خنج	</item>
+        <item>	داراب	</item>
+        <item>	زرین‌دشت	</item>
+        <item>	سپیدان	</item>
+        <item>	شیراز	</item>
+        <item>	فراشبند	</item>
+        <item>	فسا	</item>
+        <item>	فیروزآباد	</item>
+        <item>	قیر و کارزین	</item>
+        <item>	کازرون	</item>
+        <item>	لارستان	</item>
+        <item>	لامِرد	</item>
+        <item>	مرودشت 	</item>
+        <item>	ممسنی	</item>
+        <item>	مهر	</item>
+        <item>	نی‌ریز	</item>
+        <item>	آبیک	</item>
+        <item>	البرز	</item>
+        <item>	بوئین‌زهرا	</item>
+        <item>	تاکستان	</item>
+        <item>	قزوین	</item>
+        <item>	قم	</item>
+        <item>	بانه 	</item>
+        <item>	بیجار	</item>
+        <item>	دیواندره	</item>
+        <item>	سروآباد	</item>
+        <item>	سقز 	</item>
+        <item>	سنندج	</item>
+        <item>	قروه	</item>
+        <item>	کامیاران	</item>
+        <item>	مریوان	</item>
+        <item>	بافت	</item>
+        <item>	بردسیر	</item>
+        <item>	بم	</item>
+        <item>	جیرفت	</item>
+        <item>	راور	</item>
+        <item>	رفسنجان	</item>
+        <item>	رودبار جنوب	</item>
+        <item>	زرند	</item>
+        <item>	سیرجان	</item>
+        <item>	شهر بابک	</item>
+        <item>	عنبرآباد	</item>
+        <item>	قلعه گنج 	</item>
+        <item>	کرمان	</item>
+        <item>	کوهبنان	</item>
+        <item>	کهنوج	</item>
+        <item>	منوجان	</item>
+        <item>	اسلام‌آباد غرب	</item>
+        <item>	پاوه	</item>
+        <item>	ثلاث باباجانی	</item>
+        <item>	جوانرود	</item>
+        <item>	دالاهو	</item>
+        <item>	روانسر	</item>
+        <item>	سرپل ذهاب	</item>
+        <item>	سنقر	</item>
+        <item>	صحنه	</item>
+        <item>	قصر شیرین	</item>
+        <item>	کرمانشاه 	</item>
+        <item>	کنگاور	</item>
+        <item>	گیلان غرب	</item>
+        <item>	هرسین	</item>
+        <item>	بویراحمد	</item>
+        <item>	بهمئی	</item>
+        <item>	دنا	</item>
+        <item>	کهگیلویه	</item>
+        <item>	گچساران	</item>
+        <item>	آزادشهر	</item>
+        <item>	آزادشهر	</item>
+        <item>	آق‌قلا	</item>
+        <item>	بندر گز	</item>
+        <item>	ترکمن 	</item>
+        <item>	رامیان	</item>
+        <item>	علی‌آباد	</item>
+        <item>	کردکوی	</item>
+        <item>	کلاله	</item>
+        <item>	گرگان 	</item>
+        <item>	گنبد کاووس	</item>
+        <item>	مراوه‌تپه	</item>
+        <item>	مینودشت	</item>
+        <item>	آستارا	</item>
+        <item>	آستانه اشرفیه	</item>
+        <item>	اَملَش	</item>
+        <item>	بندر انزلی	</item>
+        <item>	رشت	</item>
+        <item>	رضوانشهر	</item>
+        <item>	رودبار	</item>
+        <item>	رودسر	</item>
+        <item>	سیاهکل	</item>
+        <item>	شَفت	</item>
+        <item>	صومعه‌سرا	</item>
+        <item>	طوالش	</item>
+        <item>	فومَن	</item>
+        <item>	لاهیجان 	</item>
+        <item>	لنگرود	</item>
+        <item>	ماسال	</item>
+        <item>	ازنا	</item>
+        <item>	اليگودرز	</item>
+        <item>	بروجرد	</item>
+        <item>	پل‌دختر	</item>
+        <item>	خرم‌آباد 	</item>
+        <item>	دورود	</item>
+        <item>	دلفان 	</item>
+        <item>	سلسله	</item>
+        <item>	کوهدشت	</item>
+        <item>	آمل	</item>
+        <item>	بابل	</item>
+        <item>	بابلسر	</item>
+        <item>	بهشهر	</item>
+        <item>	تنکابن	</item>
+        <item>	جويبار	</item>
+        <item>	چالوس	</item>
+        <item>	رامسر	</item>
+        <item>	ساري	</item>
+        <item>	سوادکوه 	</item>
+        <item>	قائم‌شهر	</item>
+        <item>	گلوگاه	</item>
+        <item>	محمودآباد	</item>
+        <item>	نکا	</item>
+        <item>	نور	</item>
+        <item>	نوشهر	</item>
+        <item>	آشتيان	</item>
+        <item>	اراک	</item>
+        <item>	تفرش	</item>
+        <item>	خمين	</item>
+        <item>	دليجان 	</item>
+        <item>	زرنديه	</item>
+        <item>	ساوه	</item>
+        <item>	شازند	</item>
+        <item>	کميجان	</item>
+        <item>	محلات	</item>
+        <item>	ابوموسي	</item>
+        <item>	بستک	</item>
+        <item>	بندر عباس	</item>
+        <item>	بندر لنگه	</item>
+        <item>	جاسک	</item>
+        <item>	حاجي‌آباد	</item>
+        <item>	خمير 	</item>
+        <item>	رودان	</item>
+        <item>	قشم	</item>
+        <item>	گاوبندي	</item>
+        <item>	ميناب	</item>
+        <item>	اسدآباد	</item>
+        <item>	بهار	</item>
+        <item>	تويسرکان	</item>
+        <item>	رزن 	</item>
+        <item>	کبودرآهنگ	</item>
+        <item>	ملاير	</item>
+        <item>	نهاوند	</item>
+        <item>	همدان	</item>
+        <item>	ابرکوه	</item>
+        <item>	اردکان	</item>
+        <item>	بافق 	</item>
+        <item>	تفت	</item>
+        <item>	خاتم	</item>
+        <item>	صدوق	</item>
+        <item>	طبس	</item>
+        <item>	مهريز	</item>
+        <item>	مِيبُد	</item>
+        <item>	يزد	</item>
     </string-array>
 
 
     <string-array name="shahr">
-    <item>	اردبيل	</item>
-    <item>	اصلاندوز	</item>
-    <item>	آبي بيگلو	</item>
-    <item>	بيله سوار	</item>
-    <item>	پارس آباد	</item>
-    <item>	تازه كند	</item>
-    <item>	تازه كندانگوت	</item>
-    <item>	جعفرآباد	</item>
-    <item>	خلخال	</item>
-    <item>	رضي	</item>
-    <item>	سرعين	</item>
-    <item>	عنبران	</item>
-    <item>	فخرآباد	</item>
-    <item>	كلور	</item>
-    <item>	كوراييم	</item>
-    <item>	گرمي	</item>
-    <item>	گيوي	</item>
-    <item>	لاهرود	</item>
-    <item>	مرادلو	</item>
-    <item>	مشگين شهر	</item>
-    <item>	نمين	</item>
-    <item>	نير	</item>
-    <item>	هشتجين	</item>
-    <item>	هير	</item>
-    <item>	ابريشم	</item>
-    <item>	ابوزيدآباد	</item>
-    <item>	اردستان	</item>
-    <item>	اژيه	</item>
-    <item>	اصفهان	</item>
-    <item>	افوس	</item>
-    <item>	انارك	</item>
-    <item>	ايمانشهر	</item>
-    <item>	آران وبيدگل	</item>
-    <item>	بادرود	</item>
-    <item>	باغ بهادران	</item>
-    <item>	بافران	</item>
-    <item>	برزك	</item>
-    <item>	برف انبار	</item>
-    <item>	بوئين ومياندشت	</item>
-    <item>	بهاران شهر	</item>
-    <item>	بهارستان	</item>
-    <item>	پيربكران	</item>
-    <item>	تودشك	</item>
-    <item>	تيران	</item>
-    <item>	جندق	</item>
-    <item>	جوزدان	</item>
-    <item>	جوشقان وكامو	</item>
-    <item>	چادگان	</item>
-    <item>	چرمهين	</item>
-    <item>	چمگردان	</item>
-    <item>	حبيب آباد	</item>
-    <item>	حسن آباد	</item>
-    <item>	حنا	</item>
-    <item>	خالدآباد	</item>
-    <item>	خميني شهر	</item>
-    <item>	خوانسار	</item>
-    <item>	خور	</item>
-    <item>	خوراسگان	</item>
-    <item>	خورزوق	</item>
-    <item>	داران	</item>
-    <item>	دامنه	</item>
-    <item>	درچه پياز	</item>
-    <item>	دستگرد	</item>
-    <item>	دولت آباد	</item>
-    <item>	دهاقان	</item>
-    <item>	دهق	</item>
-    <item>	ديزيچه	</item>
-    <item>	رزوه	</item>
-    <item>	رضوانشهر	</item>
-    <item>	زاينده رود	</item>
-    <item>	زرين شهر	</item>
-    <item>	زواره	</item>
-    <item>	زيباشهر	</item>
-    <item>	سده لنجان	</item>
-    <item>	سفيدشهر	</item>
-    <item>	سگزي	</item>
-    <item>	سميرم	</item>
-    <item>	شاپورآباد	</item>
-    <item>	شاهين شهر	</item>
-    <item>	شهرضا	</item>
-    <item>	طالخونچه	</item>
-    <item>	عسگران	</item>
-    <item>	علويچه	</item>
-    <item>	فرخي	</item>
-    <item>	فريدونشهر	</item>
-    <item>	فلاورجان	</item>
-    <item>	فولادشهر	</item>
-    <item>	قمصر	</item>
-    <item>	قهجاورستان	</item>
-    <item>	قهدريجان	</item>
-    <item>	كاشان	</item>
-    <item>	كركوند	</item>
-    <item>	كليشادوسودرجان	</item>
-    <item>	كمشچه	</item>
-    <item>	كمه	</item>
-    <item>	كوشك	</item>
-    <item>	كوهپايه	</item>
-    <item>	كهريزسنگ	</item>
-    <item>	گرگاب	</item>
-    <item>	گزبرخوار	</item>
-    <item>	گلپايگان	</item>
-    <item>	گلدشت	</item>
-    <item>	گلشن	</item>
-    <item>	گلشهر	</item>
-    <item>	گوگد	</item>
-    <item>	لاي بيد	</item>
-    <item>	مباركه	</item>
-    <item>	محمدآباد	</item>
-    <item>	مشكات	</item>
-    <item>	منظريه	</item>
-    <item>	مهاباد	</item>
-    <item>	ميمه	</item>
-    <item>	نائين	</item>
-    <item>	نجف آباد	</item>
-    <item>	نصرآباد	</item>
-    <item>	نطنز	</item>
-    <item>	نوش آباد	</item>
-    <item>	نياسر	</item>
-    <item>	نيك آباد	</item>
-    <item>	ورزنه	</item>
-    <item>	ورنامخواست	</item>
-    <item>	وزوان	</item>
-    <item>	ونك	</item>
-    <item>	هرند	</item>
-    <item>	اشتهارد	</item>
-    <item>	آسارا	</item>
-    <item>	تنكمان	</item>
-    <item>	چهارباغ	</item>
-    <item>	سيف آباد	</item>
-    <item>	شهرجديدهشتگرد	</item>
-    <item>	طالقان	</item>
-    <item>	كرج	</item>
-    <item>	كمال شهر	</item>
-    <item>	كوهسار	</item>
-    <item>	گرمدره	</item>
-    <item>	ماهدشت	</item>
-    <item>	محمدشهر	</item>
-    <item>	مشكين دشت	</item>
-    <item>	نظرآباد	</item>
-    <item>	هشتگرد	</item>
-    <item>	اركواز	</item>
-    <item>	ايلام	</item>
-    <item>	ايوان	</item>
-    <item>	آبدانان	</item>
-    <item>	آسمان آباد	</item>
-    <item>	بدره	</item>
-    <item>	پهله	</item>
-    <item>	توحيد	</item>
-    <item>	چوار	</item>
-    <item>	دره شهر	</item>
-    <item>	دلگشا	</item>
-    <item>	دهلران	</item>
-    <item>	زرنه	</item>
-    <item>	سراب باغ	</item>
-    <item>	سرابله	</item>
-    <item>	صالح آباد	</item>
-    <item>	لومار	</item>
-    <item>	مورموري	</item>
-    <item>	موسيان	</item>
-    <item>	مهران	</item>
-    <item>	ميمه 	</item>
-    <item>	اسكو	</item>
-    <item>	اهر	</item>
-    <item>	ايلخچي	</item>
-    <item>	آبش احمد	</item>
-    <item>	آذرشهر	</item>
-    <item>	آقكند	</item>
-    <item>	باسمنج	</item>
-    <item>	بخشايش	</item>
-    <item>	بستان آباد	</item>
-    <item>	بناب	</item>
-    <item>	بناب جديد	</item>
-    <item>	تبريز	</item>
-    <item>	ترك	</item>
-    <item>	تركمانچاي	</item>
-    <item>	تسوج	</item>
-    <item>	تيكمه داش	</item>
-    <item>	جلفا	</item>
-    <item>	خاروانا	</item>
-    <item>	خامنه	</item>
-    <item>	خراجو	</item>
-    <item>	خسروشهر	</item>
-    <item>	خمارلو	</item>
-    <item>	خواجه	</item>
-    <item>	دوزدوزان	</item>
-    <item>	زرنق	</item>
-    <item>	زنوز	</item>
-    <item>	سراب	</item>
-    <item>	سردرود	</item>
-    <item>	سيس	</item>
-    <item>	سيه رود	</item>
-    <item>	شبستر	</item>
-    <item>	شربيان	</item>
-    <item>	شرفخانه	</item>
-    <item>	شندآباد	</item>
-    <item>	شهرجديدسهند	</item>
-    <item>	صوفيان	</item>
-    <item>	عجب شير	</item>
-    <item>	قره آغاج	</item>
-    <item>	كشكسراي	</item>
-    <item>	كلوانق	</item>
-    <item>	كليبر	</item>
-    <item>	كوزه كنان	</item>
-    <item>	گوگان	</item>
-    <item>	ليلان	</item>
-    <item>	مراغه	</item>
-    <item>	مرند	</item>
-    <item>	ملكان	</item>
-    <item>	ممقان	</item>
-    <item>	مهربان	</item>
-    <item>	ميانه	</item>
-    <item>	نظركهريزي	</item>
-    <item>	وايقان	</item>
-    <item>	ورزقان	</item>
-    <item>	هاديشهر	</item>
-    <item>	هريس	</item>
-    <item>	هشترود	</item>
-    <item>	هوراند	</item>
-    <item>	يامچي	</item>
-    <item>	اروميه	</item>
-    <item>	اشنويه	</item>
-    <item>	ايواوغلي	</item>
-    <item>	آواجيق	</item>
-    <item>	باروق	</item>
-    <item>	بازرگان	</item>
-    <item>	بوكان	</item>
-    <item>	پلدشت	</item>
-    <item>	پيرانشهر	</item>
-    <item>	تازه شهر	</item>
-    <item>	تكاب	</item>
-    <item>	چهاربرج	</item>
-    <item>	خليفان	</item>
-    <item>	خوي	</item>
-    <item>	ديزج ديز	</item>
-    <item>	ربط	</item>
-    <item>	سردشت	</item>
-    <item>	سرو	</item>
-    <item>	سلماس	</item>
-    <item>	سيلوانه	</item>
-    <item>	سيمينه	</item>
-    <item>	سيه چشمه	</item>
-    <item>	شاهين دژ	</item>
-    <item>	شوط	</item>
-    <item>	فيرورق	</item>
-    <item>	قره ضياءالدين	</item>
-    <item>	قطور	</item>
-    <item>	قوشچي	</item>
-    <item>	كشاورز	</item>
-    <item>	گردكشانه	</item>
-    <item>	ماكو	</item>
-    <item>	محمديار	</item>
-    <item>	محمودآباد	</item>
-    <item>	مهاباد 	</item>
-    <item>	مياندوآب	</item>
-    <item>	ميرآباد	</item>
-    <item>	نالوس	</item>
-    <item>	نقده	</item>
-    <item>	نوشين	</item>
-    <item>	امام حسن	</item>
-    <item>	انارستان	</item>
-    <item>	اهرم	</item>
-    <item>	آبپخش	</item>
-    <item>	آبدان	</item>
-    <item>	برازجان	</item>
-    <item>	بردخون	</item>
-    <item>	بردستان	</item>
-    <item>	بندردير	</item>
-    <item>	بندرديلم	</item>
-    <item>	بندرريگ	</item>
-    <item>	بندركنگان	</item>
-    <item>	بندرگناوه	</item>
-    <item>	بنك	</item>
-    <item>	بوشهر	</item>
-    <item>	تنگ ارم	</item>
-    <item>	جم	</item>
-    <item>	چغادك	</item>
-    <item>	خارك	</item>
-    <item>	خورموج	</item>
-    <item>	دالكي	</item>
-    <item>	دلوار	</item>
-    <item>	ريز	</item>
-    <item>	سعدآباد	</item>
-    <item>	سيراف	</item>
-    <item>	شبانكاره	</item>
-    <item>	شنبه	</item>
-    <item>	عسلويه	</item>
-    <item>	كاكي	</item>
-    <item>	كلمه	</item>
-    <item>	نخل تقي	</item>
-    <item>	وحدتيه	</item>
-    <item>	ارجمند	</item>
-    <item>	اسلامشهر	</item>
-    <item>	انديشه	</item>
-    <item>	آبسرد	</item>
-    <item>	آبعلي	</item>
-    <item>	باغستان	</item>
-    <item>	باقرشهر	</item>
-    <item>	بومهن	</item>
-    <item>	پاكدشت	</item>
-    <item>	پرديس	</item>
-    <item>	پيشوا	</item>
-    <item>	تجريش	</item>
-    <item>	تهران	</item>
-    <item>	جوادآباد	</item>
-    <item>	چهاردانگه	</item>
-    <item>	حسن آباد 	</item>
-    <item>	دماوند	</item>
-    <item>	رباط كريم	</item>
-    <item>	رودهن	</item>
-    <item>	ري	</item>
-    <item>	شاهدشهر	</item>
-    <item>	شريف آباد	</item>
-    <item>	شهريار	</item>
-    <item>	صالح آباد 	</item>
-    <item>	صباشهر	</item>
-    <item>	صفادشت	</item>
-    <item>	فردوسيه	</item>
-    <item>	فرون آباد	</item>
-    <item>	فشم	</item>
-    <item>	فيروزكوه	</item>
-    <item>	قدس	</item>
-    <item>	قرچك	</item>
-    <item>	كهريزك	</item>
-    <item>	كيلان	</item>
-    <item>	گلستان	</item>
-    <item>	لواسان	</item>
-    <item>	ملارد	</item>
-    <item>	نسيم شهر	</item>
-    <item>	نصيرآباد	</item>
-    <item>	وحيديه	</item>
-    <item>	ورامين	</item>
-    <item>	اردل	</item>
-    <item>	آلوني	</item>
-    <item>	باباحيدر	</item>
-    <item>	بروجن	</item>
-    <item>	بلداجي	</item>
-    <item>	بن	</item>
-    <item>	جونقان	</item>
-    <item>	چلگرد	</item>
-    <item>	سامان	</item>
-    <item>	سفيددشت	</item>
-    <item>	سودجان	</item>
-    <item>	سورشجان	</item>
-    <item>	شلمزار	</item>
-    <item>	شهركرد	</item>
-    <item>	طاقانك	</item>
-    <item>	فارسان	</item>
-    <item>	فرادنبه	</item>
-    <item>	فرخ شهر	</item>
-    <item>	كيان	</item>
-    <item>	گندمان	</item>
-    <item>	گهرو	</item>
-    <item>	لردگان	</item>
-    <item>	مال خليفه	</item>
-    <item>	ناغان	</item>
-    <item>	نافچ	</item>
-    <item>	نقنه	</item>
-    <item>	هفشجان	</item>
-    <item>	ارسك	</item>
-    <item>	اسديه	</item>
-    <item>	اسفدن	</item>
-    <item>	اسلاميه	</item>
-    <item>	آرين شهر	</item>
-    <item>	آيسك	</item>
-    <item>	بشرويه	</item>
-    <item>	بيرجند	</item>
-    <item>	حاجي آباد	</item>
-    <item>	خضري دشت بياض	</item>
-    <item>	خوسف	</item>
-    <item>	زهان	</item>
-    <item>	سرايان	</item>
-    <item>	سربيشه	</item>
-    <item>	سه قلعه	</item>
-    <item>	شوسف	</item>
-    <item>	طبس مسينا	</item>
-    <item>	فردوس	</item>
-    <item>	قائن	</item>
-    <item>	قهستان	</item>
-    <item>	گزيك	</item>
-    <item>	محمد شهر	</item>
-    <item>	مود	</item>
-    <item>	نهبندان	</item>
-    <item>	نيمبلوك	</item>
-    <item>	احمدآبادصولت	</item>
-    <item>	انابد	</item>
-    <item>	باجگيران	</item>
-    <item>	باخرز	</item>
-    <item>	بار	</item>
-    <item>	بايگ	</item>
-    <item>	بجستان	</item>
-    <item>	بردسكن	</item>
-    <item>	بيدخت	</item>
-    <item>	تايباد	</item>
-    <item>	تربت جام	</item>
-    <item>	تربت حيدريه	</item>
-    <item>	جغتاي	</item>
-    <item>	جنگل	</item>
-    <item>	چاپشلو	</item>
-    <item>	چكنه	</item>
-    <item>	چناران	</item>
-    <item>	خرو	</item>
-    <item>	خليل آباد	</item>
-    <item>	خواف	</item>
-    <item>	داورزن	</item>
-    <item>	درگز	</item>
-    <item>	درود	</item>
-    <item>	دولت آباد 	</item>
-    <item>	رباط سنگ	</item>
-    <item>	رشتخوار	</item>
-    <item>	رضويه	</item>
-    <item>	روداب	</item>
-    <item>	ريوش	</item>
-    <item>	سبزوار	</item>
-    <item>	سرخس	</item>
-    <item>	سفيدسنگ	</item>
-    <item>	سلامي	</item>
-    <item>	سلطان آباد	</item>
-    <item>	سنگان	</item>
-    <item>	شادمهر	</item>
-    <item>	شانديز	</item>
-    <item>	ششتمد	</item>
-    <item>	شهرآباد	</item>
-    <item>	شهرزو	</item>
-    <item>	صالح آباد  	</item>
-    <item>	طرقبه	</item>
-    <item>	عشق آباد	</item>
-    <item>	فرهادگرد	</item>
-    <item>	فريمان	</item>
-    <item>	فيروزه	</item>
-    <item>	فيض آباد	</item>
-    <item>	قاسم آباد	</item>
-    <item>	قدمگاه	</item>
-    <item>	قلندرآباد	</item>
-    <item>	قوچان	</item>
-    <item>	كاخك	</item>
-    <item>	كاريز	</item>
-    <item>	كاشمر	</item>
-    <item>	كدكن	</item>
-    <item>	كلات	</item>
-    <item>	كندر	</item>
-    <item>	گلمكان	</item>
-    <item>	گناباد	</item>
-    <item>	لطف آباد	</item>
-    <item>	مزدآوند	</item>
-    <item>	مشهد	</item>
-    <item>	مشهدريزه	</item>
-    <item>	ملك آباد	</item>
-    <item>	نشتيفان	</item>
-    <item>	نصر آباد	</item>
-    <item>	نقاب	</item>
-    <item>	نوخندان	</item>
-    <item>	نيشابور	</item>
-    <item>	نيل شهر	</item>
-    <item>	همت آباد	</item>
-    <item>	يونسي	</item>
-    <item>	اسفراين	</item>
-    <item>	ايور	</item>
-    <item>	آشخانه	</item>
-    <item>	بجنورد	</item>
-    <item>	پيش قلعه	</item>
-    <item>	تيتكانلو	</item>
-    <item>	جاجرم	</item>
-    <item>	حصارگرمخان	</item>
-    <item>	درق	</item>
-    <item>	راز	</item>
-    <item>	سنخواست	</item>
-    <item>	شوقان	</item>
-    <item>	شيروان	</item>
-    <item>	صفي آباد	</item>
-    <item>	فاروج	</item>
-    <item>	قاضي	</item>
-    <item>	گرمه	</item>
-    <item>	لوجلي	</item>
-    <item>	اروندكنار	</item>
-    <item>	الوان	</item>
-    <item>	اميديه	</item>
-    <item>	انديمشك	</item>
-    <item>	اهواز	</item>
-    <item>	ايذه	</item>
-    <item>	آبادان	</item>
-    <item>	آغاجاري	</item>
-    <item>	باغ ملك	</item>
-    <item>	بستان	</item>
-    <item>	بندرامام خميني	</item>
-    <item>	بندرماهشهر	</item>
-    <item>	بهبهان	</item>
-    <item>	تركالكي	</item>
-    <item>	جايزان	</item>
-    <item>	جنت مكان	</item>
-    <item>	چغاميش	</item>
-    <item>	چمران	</item>
-    <item>	چوئبده	</item>
-    <item>	حر	</item>
-    <item>	حسينيه	</item>
-    <item>	حمزه	</item>
-    <item>	حميديه	</item>
-    <item>	خرمشهر	</item>
-    <item>	دارخوين	</item>
-    <item>	دزآب	</item>
-    <item>	دزفول	</item>
-    <item>	دهدز	</item>
-    <item>	رامشير	</item>
-    <item>	رامهرمز	</item>
-    <item>	رفيع	</item>
-    <item>	زهره	</item>
-    <item>	سالند	</item>
-    <item>	سردشت 	</item>
-    <item>	سماله	</item>
-    <item>	سوسنگرد	</item>
-    <item>	شادگان	</item>
-    <item>	شاوور	</item>
-    <item>	شرافت	</item>
-    <item>	شوش	</item>
-    <item>	شوشتر	</item>
-    <item>	شيبان	</item>
-    <item>	صالح شهر	</item>
-    <item>	صالح مشطط	</item>
-    <item>	صفي آباد 	</item>
-    <item>	صيدون	</item>
-    <item>	قلعه تل	</item>
-    <item>	قلعه خواجه	</item>
-    <item>	گتوند	</item>
-    <item>	گوريه	</item>
-    <item>	لالي	</item>
-    <item>	مسجدسليمان	</item>
-    <item>	مشراگه	</item>
-    <item>	مقاومت	</item>
-    <item>	ملاثاني	</item>
-    <item>	ميانرود	</item>
-    <item>	ميداود	</item>
-    <item>	مينوشهر	</item>
-    <item>	ويس	</item>
-    <item>	هفتگل	</item>
-    <item>	هنديجان	</item>
-    <item>	هويزه	</item>
-    <item>	ابهر	</item>
-    <item>	ارمغانخانه	</item>
-    <item>	آب بر	</item>
-    <item>	چورزق	</item>
-    <item>	حلب	</item>
-    <item>	خرمدره	</item>
-    <item>	دندي	</item>
-    <item>	زرين آباد	</item>
-    <item>	زرين رود	</item>
-    <item>	زنجان	</item>
-    <item>	سجاس	</item>
-    <item>	سلطانيه	</item>
-    <item>	سهرورد	</item>
-    <item>	صائين قلعه	</item>
-    <item>	قيدار	</item>
-    <item>	گرماب	</item>
-    <item>	ماه نشان	</item>
-    <item>	هيدج	</item>
-    <item>	اميريه	</item>
-    <item>	ايوانكي	</item>
-    <item>	آرادان	</item>
-    <item>	بسطام	</item>
-    <item>	بيارجمند	</item>
-    <item>	دامغان	</item>
-    <item>	درجزين	</item>
-    <item>	ديباج	</item>
-    <item>	سرخه	</item>
-    <item>	سمنان	</item>
-    <item>	شاهرود	</item>
-    <item>	شهميرزاد	</item>
-    <item>	كلاته خيج	</item>
-    <item>	گرمسار	</item>
-    <item>	مجن	</item>
-    <item>	مهدي شهر	</item>
-    <item>	ميامي	</item>
-    <item>	اديمي	</item>
-    <item>	اسپكه	</item>
-    <item>	ايرانشهر	</item>
-    <item>	بزمان	</item>
-    <item>	بمپور	</item>
-    <item>	بنت	</item>
-    <item>	بنجار	</item>
-    <item>	پيشين	</item>
-    <item>	جالق	</item>
-    <item>	چاه بهار	</item>
-    <item>	خاش	</item>
-    <item>	دوست محمد	</item>
-    <item>	راسك	</item>
-    <item>	زابل	</item>
-    <item>	زابلي	</item>
-    <item>	زاهدان	</item>
-    <item>	زرآباد	</item>
-    <item>	زهك	</item>
-    <item>	سراوان	</item>
-    <item>	سرباز	</item>
-    <item>	سوران	</item>
-    <item>	سيركان	</item>
-    <item>	علي اكبر	</item>
-    <item>	فنوج	</item>
-    <item>	قصرقند	</item>
-    <item>	كنارك	</item>
-    <item>	گشت	</item>
-    <item>	گلمورتي	</item>
-    <item>	محمدان	</item>
-    <item>	محمد آباد	</item>
-    <item>	محمدي	</item>
-    <item>	ميرجاوه	</item>
-    <item>	نصرت آباد	</item>
-    <item>	نگور	</item>
-    <item>	نوك آباد	</item>
-    <item>	نيك شهر	</item>
-    <item>	هيدوج	</item>
-    <item>	اردكان	</item>
-    <item>	ارسنجان	</item>
-    <item>	استهبان	</item>
-    <item>	اسير	</item>
-    <item>	اشكنان	</item>
-    <item>	افزر	</item>
-    <item>	اقليد	</item>
-    <item>	امام شهر	</item>
-    <item>	اوز	</item>
-    <item>	اهل	</item>
-    <item>	ايج	</item>
-    <item>	ايزدخواست	</item>
-    <item>	آباده	</item>
-    <item>	آباده طشك	</item>
-    <item>	باب انار	</item>
-    <item>	بالاده	</item>
-    <item>	بنارويه	</item>
-    <item>	بوانات	</item>
-    <item>	بهمن	</item>
-    <item>	بيرم	</item>
-    <item>	بيضا	</item>
-    <item>	جنت شهر	</item>
-    <item>	جويم	</item>
-    <item>	جهرم	</item>
-    <item>	حاجي آباد 	</item>
-    <item>	حسامي	</item>
-    <item>	حسن آباد  	</item>
-    <item>	خانه زنيان	</item>
-    <item>	خاوران	</item>
-    <item>	خرامه	</item>
-    <item>	خشت	</item>
-    <item>	خنج	</item>
-    <item>	خور 	</item>
-    <item>	خومه زار	</item>
-    <item>	داراب	</item>
-    <item>	داريان	</item>
-    <item>	دبيران	</item>
-    <item>	دژكرد	</item>
-    <item>	دوبرجي	</item>
-    <item>	دوزه	</item>
-    <item>	دهرم	</item>
-    <item>	رامجرد	</item>
-    <item>	رونيز	</item>
-    <item>	زاهدشهر	</item>
-    <item>	زرقان	</item>
-    <item>	سده	</item>
-    <item>	سروستان	</item>
-    <item>	سعادت شهر	</item>
-    <item>	سورمق	</item>
-    <item>	سيدان	</item>
-    <item>	ششده	</item>
-    <item>	شهر جديد صدرا	</item>
-    <item>	شهرپير	</item>
-    <item>	شيراز	</item>
-    <item>	صغاد	</item>
-    <item>	صفاشهر	</item>
-    <item>	علامرودشت	</item>
-    <item>	عمادده	</item>
-    <item>	فدامي	</item>
-    <item>	فراشبند	</item>
-    <item>	فسا	</item>
-    <item>	فيروزآباد	</item>
-    <item>	قادرآباد	</item>
-    <item>	قائميه	</item>
-    <item>	قطب آباد	</item>
-    <item>	قطرويه	</item>
-    <item>	قير	</item>
-    <item>	كارزين	</item>
-    <item>	كازرون	</item>
-    <item>	كامفيروز	</item>
-    <item>	كره اي	</item>
-    <item>	كنارتخته	</item>
-    <item>	كوار	</item>
-    <item>	كوهنجان	</item>
-    <item>	گراش	</item>
-    <item>	گله دار	</item>
-    <item>	لار	</item>
-    <item>	لامرد	</item>
-    <item>	لپوئي	</item>
-    <item>	لطيفي	</item>
-    <item>	مبارك آباد	</item>
-    <item>	مرودشت	</item>
-    <item>	مشكان	</item>
-    <item>	مصيري	</item>
-    <item>	مهر	</item>
-    <item>	ميمند	</item>
-    <item>	نوبندگان	</item>
-    <item>	نوجين	</item>
-    <item>	نودان	</item>
-    <item>	نورآباد	</item>
-    <item>	ني ريز	</item>
-    <item>	وراوي	</item>
-    <item>	هماشهر	</item>
-    <item>	ارداق	</item>
-    <item>	اسفرورين	</item>
-    <item>	اقباليه	</item>
-    <item>	الوند	</item>
-    <item>	آبگرم	</item>
-    <item>	آبيك	</item>
-    <item>	آوج	</item>
-    <item>	بوئين زهرا	</item>
-    <item>	بيدستان	</item>
-    <item>	تاكستان	</item>
-    <item>	خاكعلي	</item>
-    <item>	خرمدشت	</item>
-    <item>	دانسفهان	</item>
-    <item>	رازميان	</item>
-    <item>	سگزآباد	</item>
-    <item>	سيردان	</item>
-    <item>	شال	</item>
-    <item>	شريفيه	</item>
-    <item>	ضياءآباد	</item>
-    <item>	قزوين	</item>
-    <item>	كوهين	</item>
-    <item>	محمديه	</item>
-    <item>	محمودآبادنمونه	</item>
-    <item>	معلم كلايه	</item>
-    <item>	نرجه	</item>
-    <item>	جعفريه	</item>
-    <item>	دستجرد	</item>
-    <item>	سلفچگان	</item>
-    <item>	قم	</item>
-    <item>	قنوات	</item>
-    <item>	كهك	</item>
-    <item>	آرمرده	</item>
-    <item>	بابارشاني	</item>
-    <item>	بانه	</item>
-    <item>	بلبان آباد	</item>
-    <item>	بوئين سفلي	</item>
-    <item>	بيجار	</item>
-    <item>	چناره	</item>
-    <item>	دزج	</item>
-    <item>	دلبران	</item>
-    <item>	دهگلان	</item>
-    <item>	ديواندره	</item>
-    <item>	زرينه	</item>
-    <item>	سروآباد	</item>
-    <item>	سريش آباد	</item>
-    <item>	سقز	</item>
-    <item>	سنندج	</item>
-    <item>	شويشه	</item>
-    <item>	صاحب	</item>
-    <item>	قروه	</item>
-    <item>	كامياران	</item>
-    <item>	كاني دينار	</item>
-    <item>	كاني سور	</item>
-    <item>	مريوان	</item>
-    <item>	موچش	</item>
-    <item>	ياسوكند	</item>
-    <item>	اختيارآباد	</item>
-    <item>	ارزوئيه	</item>
-    <item>	امين شهر	</item>
-    <item>	انار	</item>
-    <item>	اندوهجرد	</item>
-    <item>	باغين	</item>
-    <item>	بافت	</item>
-    <item>	بردسير	</item>
-    <item>	بروات	</item>
-    <item>	بزنجان	</item>
-    <item>	بم	</item>
-    <item>	بهرمان	</item>
-    <item>	پاريز	</item>
-    <item>	جبالبارز	</item>
-    <item>	جوپار	</item>
-    <item>	جوزم	</item>
-    <item>	جيرفت	</item>
-    <item>	چترود	</item>
-    <item>	خاتون آباد	</item>
-    <item>	خانوك	</item>
-    <item>	خورسند	</item>
-    <item>	درب بهشت	</item>
-    <item>	دوساري	</item>
-    <item>	دهج	</item>
-    <item>	رابر	</item>
-    <item>	راور	</item>
-    <item>	راين	</item>
-    <item>	رفسنجان	</item>
-    <item>	رودبار	</item>
-    <item>	ريحان شهر	</item>
-    <item>	زرند	</item>
-    <item>	زنگي آباد	</item>
-    <item>	زيدآباد	</item>
-    <item>	سرچشمه	</item>
-    <item>	سيرجان	</item>
-    <item>	شهداد	</item>
-    <item>	شهربابك	</item>
-    <item>	صفائيه	</item>
-    <item>	عنبرآباد	</item>
-    <item>	فارياب	</item>
-    <item>	فهرج	</item>
-    <item>	قلعه گنج	</item>
-    <item>	كاظم آباد	</item>
-    <item>	كرمان	</item>
-    <item>	كشكوئيه	</item>
-    <item>	كوهبنان	</item>
-    <item>	كهنوج	</item>
-    <item>	كيانشهر	</item>
-    <item>	گلباف	</item>
-    <item>	گلزار	</item>
-    <item>	لاله زار	</item>
-    <item>	ماهان	</item>
-    <item>	محمد آباد 	</item>
-    <item>	محي آباد	</item>
-    <item>	مردهك	</item>
-    <item>	منوجان	</item>
-    <item>	نجف شهر	</item>
-    <item>	نرماشير	</item>
-    <item>	نظام شهر	</item>
-    <item>	نگار	</item>
-    <item>	نودژ	</item>
-    <item>	هجدك	</item>
-    <item>	هماشهر 	</item>
-    <item>	يزدان شهر	</item>
-    <item>	ازگله	</item>
-    <item>	اسلام آبادغرب	</item>
-    <item>	باينگان	</item>
-    <item>	بيستون	</item>
-    <item>	پاوه	</item>
-    <item>	تازه آباد	</item>
-    <item>	جوانرود	</item>
-    <item>	حميل	</item>
-    <item>	رباط	</item>
-    <item>	روانسر	</item>
-    <item>	سرپل ذهاب	</item>
-    <item>	سرمست	</item>
-    <item>	سطر	</item>
-    <item>	سنقر	</item>
-    <item>	سومار	</item>
-    <item>	شاهو	</item>
-    <item>	صحنه	</item>
-    <item>	قصرشيرين	</item>
-    <item>	كرمانشاه	</item>
-    <item>	كرندغرب	</item>
-    <item>	كنگاور	</item>
-    <item>	كوزران	</item>
-    <item>	گهواره	</item>
-    <item>	گيلانغرب	</item>
-    <item>	ميان راهان	</item>
-    <item>	نودشه	</item>
-    <item>	نوسود	</item>
-    <item>	هرسين	</item>
-    <item>	هلشي	</item>
-    <item>	باشت	</item>
-    <item>	پاتاوه	</item>
-    <item>	چرام	</item>
-    <item>	چيتاب	</item>
-    <item>	دوگنبدان	</item>
-    <item>	دهدشت	</item>
-    <item>	ديشموك	</item>
-    <item>	سوق	</item>
-    <item>	سي سخت	</item>
-    <item>	قلعه رئيسي	</item>
-    <item>	گراب سفلي	</item>
-    <item>	لنده	</item>
-    <item>	ليكك	</item>
-    <item>	مادوان	</item>
-    <item>	مارگون	</item>
-    <item>	ياسوج	</item>
-    <item>	انبارآلوم	</item>
-    <item>	اينچه برون	</item>
-    <item>	آزادشهر	</item>
-    <item>	آق قلا	</item>
-    <item>	بندرگز	</item>
-    <item>	تركمن	</item>
-    <item>	جلين	</item>
-    <item>	خان ببين	</item>
-    <item>	دلند	</item>
-    <item>	راميان	</item>
-    <item>	سرخنكلاته	</item>
-    <item>	سيمين شهر	</item>
-    <item>	علي آباد	</item>
-    <item>	فاضل آباد	</item>
-    <item>	كردكوي	</item>
-    <item>	كلاله	</item>
-    <item>	گاليكش	</item>
-    <item>	گرگان	</item>
-    <item>	گميش تپه	</item>
-    <item>	گنبد كاووس	</item>
-    <item>	مراوه تپه	</item>
-    <item>	مينودشت	</item>
-    <item>	نگين شهر	</item>
-    <item>	نوده خاندوز	</item>
-    <item>	نوكنده	</item>
-    <item>	احمدسرگوراب	</item>
-    <item>	اسالم	</item>
-    <item>	اطاقور	</item>
-    <item>	املش	</item>
-    <item>	آستارا	</item>
-    <item>	آستانه اشرفيه	</item>
-    <item>	بازارجمعه	</item>
-    <item>	بره سر	</item>
-    <item>	بندرانزلي	</item>
-    <item>	پره سر	</item>
-    <item>	توتكابن	</item>
-    <item>	جيرنده	</item>
-    <item>	چابكسر	</item>
-    <item>	چاف وچمخاله	</item>
-    <item>	چوبر	</item>
-    <item>	حويق	</item>
-    <item>	خشكبيجار	</item>
-    <item>	خمام	</item>
-    <item>	ديلمان	</item>
-    <item>	رانكوه	</item>
-    <item>	رحيم آباد	</item>
-    <item>	رستم آباد	</item>
-    <item>	رشت	</item>
-    <item>	رضوانشهر 	</item>
-    <item>	رودبار 	</item>
-    <item>	رودبنه	</item>
-    <item>	رودسر	</item>
-    <item>	سنگر	</item>
-    <item>	سياهكل	</item>
-    <item>	شفت	</item>
-    <item>	شلمان	</item>
-    <item>	صومعه سرا	</item>
-    <item>	فومن	</item>
-    <item>	كلاچاي	</item>
-    <item>	كوچصفهان	</item>
-    <item>	كومله	</item>
-    <item>	كياشهر	</item>
-    <item>	گوراب زرميخ	</item>
-    <item>	لاهيجان	</item>
-    <item>	لشت نشاء	</item>
-    <item>	لنگرود	</item>
-    <item>	لوشان	</item>
-    <item>	لولمان	</item>
-    <item>	لوندويل	</item>
-    <item>	ليسار	</item>
-    <item>	ماسال	</item>
-    <item>	ماسوله	</item>
-    <item>	مرجقل	</item>
-    <item>	منجيل	</item>
-    <item>	واجارگاه	</item>
-    <item>	هشتپر	</item>
-    <item>	ازنا	</item>
-    <item>	اشترينان	</item>
-    <item>	الشتر	</item>
-    <item>	اليگودرز	</item>
-    <item>	بروجرد	</item>
-    <item>	پلدختر	</item>
-    <item>	چالانچولان	</item>
-    <item>	چغلوندي	</item>
-    <item>	چقابل	</item>
-    <item>	خرم آباد	</item>
-    <item>	درب گنبد	</item>
-    <item>	دورود	</item>
-    <item>	زاغه	</item>
-    <item>	سپيددشت	</item>
-    <item>	سراب دوره	</item>
-    <item>	شول آباد	</item>
-    <item>	فيروز آباد	</item>
-    <item>	كوناني	</item>
-    <item>	كوهدشت	</item>
-    <item>	گراب	</item>
-    <item>	معمولان	</item>
-    <item>	مؤمن آباد	</item>
-    <item>	نور آباد	</item>
-    <item>	ويسيان	</item>
-    <item>	هفت چشمه	</item>
-    <item>	اميركلا	</item>
-    <item>	ايزدشهر	</item>
-    <item>	آلاشت	</item>
-    <item>	آمل	</item>
-    <item>	بابل	</item>
-    <item>	بابلسر	</item>
-    <item>	بلده	</item>
-    <item>	بهشهر	</item>
-    <item>	بهنمير	</item>
-    <item>	پل سفيد	</item>
-    <item>	پول	</item>
-    <item>	تنكابن	</item>
-    <item>	جويبار	</item>
-    <item>	چالوس	</item>
-    <item>	چمستان	</item>
-    <item>	خرم آباد 	</item>
-    <item>	خليل شهر	</item>
-    <item>	خوش رودپي	</item>
-    <item>	دابودشت	</item>
-    <item>	رامسر	</item>
-    <item>	رستمكلا	</item>
-    <item>	رويان	</item>
-    <item>	رينه	</item>
-    <item>	زرگر محله	</item>
-    <item>	زيرآب	</item>
-    <item>	ساري	</item>
-    <item>	سرخرود	</item>
-    <item>	سلمان شهر	</item>
-    <item>	سورك	</item>
-    <item>	شيرگاه	</item>
-    <item>	شيرود	</item>
-    <item>	عباس آباد	</item>
-    <item>	فريدونكنار	</item>
-    <item>	فريم	</item>
-    <item>	قائم شهر	</item>
-    <item>	كتالم وسادات شهر	</item>
-    <item>	كلارآباد	</item>
-    <item>	كلاردشت	</item>
-    <item>	كله بست	</item>
-    <item>	كوهي خيل	</item>
-    <item>	كياسر	</item>
-    <item>	كياكلا	</item>
-    <item>	گتاب	</item>
-    <item>	گزنك	</item>
-    <item>	گلوگاه	</item>
-    <item>	محمود آباد	</item>
-    <item>	مرزن آباد	</item>
-    <item>	مرزيكلا	</item>
-    <item>	نشتارود	</item>
-    <item>	نكا	</item>
-    <item>	نور	</item>
-    <item>	نوشهر	</item>
-    <item>	اراك	</item>
-    <item>	آستانه	</item>
-    <item>	آشتيان	</item>
-    <item>	پرندك	</item>
-    <item>	تفرش	</item>
-    <item>	توره	</item>
-    <item>	جاورسيان	</item>
-    <item>	خشكرود	</item>
-    <item>	خمين	</item>
-    <item>	خنداب	</item>
-    <item>	داودآباد	</item>
-    <item>	دليجان	</item>
-    <item>	رازقان	</item>
-    <item>	زاويه	</item>
-    <item>	ساروق	</item>
-    <item>	ساوه	</item>
-    <item>	سنجان	</item>
-    <item>	شازند	</item>
-    <item>	شهرجديدمهاجران	</item>
-    <item>	غرق آباد	</item>
-    <item>	فرمهين	</item>
-    <item>	قورچي باشي	</item>
-    <item>	كرهرود	</item>
-    <item>	كميجان	</item>
-    <item>	مأمونيه	</item>
-    <item>	محلات	</item>
-    <item>	ميلاجرد	</item>
-    <item>	نراق	</item>
-    <item>	نوبران	</item>
-    <item>	نيمور	</item>
-    <item>	هندودر	</item>
-    <item>	ابوموسي	</item>
-    <item>	بستك	</item>
-    <item>	بندرجاسك	</item>
-    <item>	بندرچارك	</item>
-    <item>	بندرعباس	</item>
-    <item>	بندرلنگه	</item>
-    <item>	بيكاه	</item>
-    <item>	پارسيان	</item>
-    <item>	تخت	</item>
-    <item>	جناح	</item>
-    <item>	حاجي آباد  	</item>
-    <item>	خمير	</item>
-    <item>	درگهان	</item>
-    <item>	دهبارز	</item>
-    <item>	رويدر	</item>
-    <item>	زيارتعلي	</item>
-    <item>	سردشت بشاگرد	</item>
-    <item>	سرگز	</item>
-    <item>	سندرك	</item>
-    <item>	سوزا	</item>
-    <item>	سيريك	</item>
-    <item>	فارغان	</item>
-    <item>	فين	</item>
-    <item>	قشم	</item>
-    <item>	قلعه قاضي	</item>
-    <item>	كنگ	</item>
-    <item>	كوشكنار	</item>
-    <item>	كيش	</item>
-    <item>	گوهران	</item>
-    <item>	ميناب	</item>
-    <item>	هرمز	</item>
-    <item>	هشتبندي	</item>
-    <item>	ازندريان	</item>
-    <item>	اسدآباد	</item>
-    <item>	برزول	</item>
-    <item>	بهار	</item>
-    <item>	تويسركان	</item>
-    <item>	جورقان	</item>
-    <item>	جوكار	</item>
-    <item>	دمق	</item>
-    <item>	رزن	</item>
-    <item>	زنگنه	</item>
-    <item>	سامن	</item>
-    <item>	سركان	</item>
-    <item>	شيرين سو	</item>
-    <item>	صالح آباد   	</item>
-    <item>	فامنين	</item>
-    <item>	فرسفج	</item>
-    <item>	فيروزان	</item>
-    <item>	قروه در جزين	</item>
-    <item>	قهاوند	</item>
-    <item>	كبودرآهنگ	</item>
-    <item>	گل تپه	</item>
-    <item>	گيان	</item>
-    <item>	لالجين	</item>
-    <item>	مريانج	</item>
-    <item>	ملاير	</item>
-    <item>	نهاوند	</item>
-    <item>	همدان	</item>
-    <item>	ابركوه	</item>
-    <item>	احمدآباد	</item>
-    <item>	اردكان 	</item>
-    <item>	اشكذر	</item>
-    <item>	بافق	</item>
-    <item>	بفروئيه	</item>
-    <item>	بهاباد	</item>
-    <item>	تفت	</item>
-    <item>	حميديا	</item>
-    <item>	خضرآباد	</item>
-    <item>	ديهوك	</item>
-    <item>	زارچ	</item>
-    <item>	شاهديه	</item>
-    <item>	طبس	</item>
-    <item>	عشق آباد 	</item>
-    <item>	عقدا	</item>
-    <item>	مروست	</item>
-    <item>	مهردشت	</item>
-    <item>	مهريز	</item>
-    <item>	ميبد	</item>
-    <item>	ندوشن	</item>
-    <item>	نير 	</item>
-    <item>	هرات	</item>
-    <item>	يزد	</item>
-</string-array>
+        <item>	اردبيل	</item>
+        <item>	اصلاندوز	</item>
+        <item>	آبي بيگلو	</item>
+        <item>	بيله سوار	</item>
+        <item>	پارس آباد	</item>
+        <item>	تازه كند	</item>
+        <item>	تازه كندانگوت	</item>
+        <item>	جعفرآباد	</item>
+        <item>	خلخال	</item>
+        <item>	رضي	</item>
+        <item>	سرعين	</item>
+        <item>	عنبران	</item>
+        <item>	فخرآباد	</item>
+        <item>	كلور	</item>
+        <item>	كوراييم	</item>
+        <item>	گرمي	</item>
+        <item>	گيوي	</item>
+        <item>	لاهرود	</item>
+        <item>	مرادلو	</item>
+        <item>	مشگين شهر	</item>
+        <item>	نمين	</item>
+        <item>	نير	</item>
+        <item>	هشتجين	</item>
+        <item>	هير	</item>
+        <item>	ابريشم	</item>
+        <item>	ابوزيدآباد	</item>
+        <item>	اردستان	</item>
+        <item>	اژيه	</item>
+        <item>	اصفهان	</item>
+        <item>	افوس	</item>
+        <item>	انارك	</item>
+        <item>	ايمانشهر	</item>
+        <item>	آران وبيدگل	</item>
+        <item>	بادرود	</item>
+        <item>	باغ بهادران	</item>
+        <item>	بافران	</item>
+        <item>	برزك	</item>
+        <item>	برف انبار	</item>
+        <item>	بوئين ومياندشت	</item>
+        <item>	بهاران شهر	</item>
+        <item>	بهارستان	</item>
+        <item>	پيربكران	</item>
+        <item>	تودشك	</item>
+        <item>	تيران	</item>
+        <item>	جندق	</item>
+        <item>	جوزدان	</item>
+        <item>	جوشقان وكامو	</item>
+        <item>	چادگان	</item>
+        <item>	چرمهين	</item>
+        <item>	چمگردان	</item>
+        <item>	حبيب آباد	</item>
+        <item>	حسن آباد	</item>
+        <item>	حنا	</item>
+        <item>	خالدآباد	</item>
+        <item>	خميني شهر	</item>
+        <item>	خوانسار	</item>
+        <item>	خور	</item>
+        <item>	خوراسگان	</item>
+        <item>	خورزوق	</item>
+        <item>	داران	</item>
+        <item>	دامنه	</item>
+        <item>	درچه پياز	</item>
+        <item>	دستگرد	</item>
+        <item>	دولت آباد	</item>
+        <item>	دهاقان	</item>
+        <item>	دهق	</item>
+        <item>	ديزيچه	</item>
+        <item>	رزوه	</item>
+        <item>	رضوانشهر	</item>
+        <item>	زاينده رود	</item>
+        <item>	زرين شهر	</item>
+        <item>	زواره	</item>
+        <item>	زيباشهر	</item>
+        <item>	سده لنجان	</item>
+        <item>	سفيدشهر	</item>
+        <item>	سگزي	</item>
+        <item>	سميرم	</item>
+        <item>	شاپورآباد	</item>
+        <item>	شاهين شهر	</item>
+        <item>	شهرضا	</item>
+        <item>	طالخونچه	</item>
+        <item>	عسگران	</item>
+        <item>	علويچه	</item>
+        <item>	فرخي	</item>
+        <item>	فريدونشهر	</item>
+        <item>	فلاورجان	</item>
+        <item>	فولادشهر	</item>
+        <item>	قمصر	</item>
+        <item>	قهجاورستان	</item>
+        <item>	قهدريجان	</item>
+        <item>	كاشان	</item>
+        <item>	كركوند	</item>
+        <item>	كليشادوسودرجان	</item>
+        <item>	كمشچه	</item>
+        <item>	كمه	</item>
+        <item>	كوشك	</item>
+        <item>	كوهپايه	</item>
+        <item>	كهريزسنگ	</item>
+        <item>	گرگاب	</item>
+        <item>	گزبرخوار	</item>
+        <item>	گلپايگان	</item>
+        <item>	گلدشت	</item>
+        <item>	گلشن	</item>
+        <item>	گلشهر	</item>
+        <item>	گوگد	</item>
+        <item>	لاي بيد	</item>
+        <item>	مباركه	</item>
+        <item>	محمدآباد	</item>
+        <item>	مشكات	</item>
+        <item>	منظريه	</item>
+        <item>	مهاباد	</item>
+        <item>	ميمه	</item>
+        <item>	نائين	</item>
+        <item>	نجف آباد	</item>
+        <item>	نصرآباد	</item>
+        <item>	نطنز	</item>
+        <item>	نوش آباد	</item>
+        <item>	نياسر	</item>
+        <item>	نيك آباد	</item>
+        <item>	ورزنه	</item>
+        <item>	ورنامخواست	</item>
+        <item>	وزوان	</item>
+        <item>	ونك	</item>
+        <item>	هرند	</item>
+        <item>	اشتهارد	</item>
+        <item>	آسارا	</item>
+        <item>	تنكمان	</item>
+        <item>	چهارباغ	</item>
+        <item>	سيف آباد	</item>
+        <item>	شهرجديدهشتگرد	</item>
+        <item>	طالقان	</item>
+        <item>	كرج	</item>
+        <item>	كمال شهر	</item>
+        <item>	كوهسار	</item>
+        <item>	گرمدره	</item>
+        <item>	ماهدشت	</item>
+        <item>	محمدشهر	</item>
+        <item>	مشكين دشت	</item>
+        <item>	نظرآباد	</item>
+        <item>	هشتگرد	</item>
+        <item>	اركواز	</item>
+        <item>	ايلام	</item>
+        <item>	ايوان	</item>
+        <item>	آبدانان	</item>
+        <item>	آسمان آباد	</item>
+        <item>	بدره	</item>
+        <item>	پهله	</item>
+        <item>	توحيد	</item>
+        <item>	چوار	</item>
+        <item>	دره شهر	</item>
+        <item>	دلگشا	</item>
+        <item>	دهلران	</item>
+        <item>	زرنه	</item>
+        <item>	سراب باغ	</item>
+        <item>	سرابله	</item>
+        <item>	صالح آباد	</item>
+        <item>	لومار	</item>
+        <item>	مورموري	</item>
+        <item>	موسيان	</item>
+        <item>	مهران	</item>
+        <item>	ميمه 	</item>
+        <item>	اسكو	</item>
+        <item>	اهر	</item>
+        <item>	ايلخچي	</item>
+        <item>	آبش احمد	</item>
+        <item>	آذرشهر	</item>
+        <item>	آقكند	</item>
+        <item>	باسمنج	</item>
+        <item>	بخشايش	</item>
+        <item>	بستان آباد	</item>
+        <item>	بناب	</item>
+        <item>	بناب جديد	</item>
+        <item>	تبريز	</item>
+        <item>	ترك	</item>
+        <item>	تركمانچاي	</item>
+        <item>	تسوج	</item>
+        <item>	تيكمه داش	</item>
+        <item>	جلفا	</item>
+        <item>	خاروانا	</item>
+        <item>	خامنه	</item>
+        <item>	خراجو	</item>
+        <item>	خسروشهر	</item>
+        <item>	خمارلو	</item>
+        <item>	خواجه	</item>
+        <item>	دوزدوزان	</item>
+        <item>	زرنق	</item>
+        <item>	زنوز	</item>
+        <item>	سراب	</item>
+        <item>	سردرود	</item>
+        <item>	سيس	</item>
+        <item>	سيه رود	</item>
+        <item>	شبستر	</item>
+        <item>	شربيان	</item>
+        <item>	شرفخانه	</item>
+        <item>	شندآباد	</item>
+        <item>	شهرجديدسهند	</item>
+        <item>	صوفيان	</item>
+        <item>	عجب شير	</item>
+        <item>	قره آغاج	</item>
+        <item>	كشكسراي	</item>
+        <item>	كلوانق	</item>
+        <item>	كليبر	</item>
+        <item>	كوزه كنان	</item>
+        <item>	گوگان	</item>
+        <item>	ليلان	</item>
+        <item>	مراغه	</item>
+        <item>	مرند	</item>
+        <item>	ملكان	</item>
+        <item>	ممقان	</item>
+        <item>	مهربان	</item>
+        <item>	ميانه	</item>
+        <item>	نظركهريزي	</item>
+        <item>	وايقان	</item>
+        <item>	ورزقان	</item>
+        <item>	هاديشهر	</item>
+        <item>	هريس	</item>
+        <item>	هشترود	</item>
+        <item>	هوراند	</item>
+        <item>	يامچي	</item>
+        <item>	اروميه	</item>
+        <item>	اشنويه	</item>
+        <item>	ايواوغلي	</item>
+        <item>	آواجيق	</item>
+        <item>	باروق	</item>
+        <item>	بازرگان	</item>
+        <item>	بوكان	</item>
+        <item>	پلدشت	</item>
+        <item>	پيرانشهر	</item>
+        <item>	تازه شهر	</item>
+        <item>	تكاب	</item>
+        <item>	چهاربرج	</item>
+        <item>	خليفان	</item>
+        <item>	خوي	</item>
+        <item>	ديزج ديز	</item>
+        <item>	ربط	</item>
+        <item>	سردشت	</item>
+        <item>	سرو	</item>
+        <item>	سلماس	</item>
+        <item>	سيلوانه	</item>
+        <item>	سيمينه	</item>
+        <item>	سيه چشمه	</item>
+        <item>	شاهين دژ	</item>
+        <item>	شوط	</item>
+        <item>	فيرورق	</item>
+        <item>	قره ضياءالدين	</item>
+        <item>	قطور	</item>
+        <item>	قوشچي	</item>
+        <item>	كشاورز	</item>
+        <item>	گردكشانه	</item>
+        <item>	ماكو	</item>
+        <item>	محمديار	</item>
+        <item>	محمودآباد	</item>
+        <item>	مهاباد 	</item>
+        <item>	مياندوآب	</item>
+        <item>	ميرآباد	</item>
+        <item>	نالوس	</item>
+        <item>	نقده	</item>
+        <item>	نوشين	</item>
+        <item>	امام حسن	</item>
+        <item>	انارستان	</item>
+        <item>	اهرم	</item>
+        <item>	آبپخش	</item>
+        <item>	آبدان	</item>
+        <item>	برازجان	</item>
+        <item>	بردخون	</item>
+        <item>	بردستان	</item>
+        <item>	بندردير	</item>
+        <item>	بندرديلم	</item>
+        <item>	بندرريگ	</item>
+        <item>	بندركنگان	</item>
+        <item>	بندرگناوه	</item>
+        <item>	بنك	</item>
+        <item>	بوشهر	</item>
+        <item>	تنگ ارم	</item>
+        <item>	جم	</item>
+        <item>	چغادك	</item>
+        <item>	خارك	</item>
+        <item>	خورموج	</item>
+        <item>	دالكي	</item>
+        <item>	دلوار	</item>
+        <item>	ريز	</item>
+        <item>	سعدآباد	</item>
+        <item>	سيراف	</item>
+        <item>	شبانكاره	</item>
+        <item>	شنبه	</item>
+        <item>	عسلويه	</item>
+        <item>	كاكي	</item>
+        <item>	كلمه	</item>
+        <item>	نخل تقي	</item>
+        <item>	وحدتيه	</item>
+        <item>	ارجمند	</item>
+        <item>	اسلامشهر	</item>
+        <item>	انديشه	</item>
+        <item>	آبسرد	</item>
+        <item>	آبعلي	</item>
+        <item>	باغستان	</item>
+        <item>	باقرشهر	</item>
+        <item>	بومهن	</item>
+        <item>	پاكدشت	</item>
+        <item>	پرديس	</item>
+        <item>	پيشوا	</item>
+        <item>	تجريش	</item>
+        <item>	تهران	</item>
+        <item>	جوادآباد	</item>
+        <item>	چهاردانگه	</item>
+        <item>	حسن آباد 	</item>
+        <item>	دماوند	</item>
+        <item>	رباط كريم	</item>
+        <item>	رودهن	</item>
+        <item>	ري	</item>
+        <item>	شاهدشهر	</item>
+        <item>	شريف آباد	</item>
+        <item>	شهريار	</item>
+        <item>	صالح آباد 	</item>
+        <item>	صباشهر	</item>
+        <item>	صفادشت	</item>
+        <item>	فردوسيه	</item>
+        <item>	فرون آباد	</item>
+        <item>	فشم	</item>
+        <item>	فيروزكوه	</item>
+        <item>	قدس	</item>
+        <item>	قرچك	</item>
+        <item>	كهريزك	</item>
+        <item>	كيلان	</item>
+        <item>	گلستان	</item>
+        <item>	لواسان	</item>
+        <item>	ملارد	</item>
+        <item>	نسيم شهر	</item>
+        <item>	نصيرآباد	</item>
+        <item>	وحيديه	</item>
+        <item>	ورامين	</item>
+        <item>	اردل	</item>
+        <item>	آلوني	</item>
+        <item>	باباحيدر	</item>
+        <item>	بروجن	</item>
+        <item>	بلداجي	</item>
+        <item>	بن	</item>
+        <item>	جونقان	</item>
+        <item>	چلگرد	</item>
+        <item>	سامان	</item>
+        <item>	سفيددشت	</item>
+        <item>	سودجان	</item>
+        <item>	سورشجان	</item>
+        <item>	شلمزار	</item>
+        <item>	شهركرد	</item>
+        <item>	طاقانك	</item>
+        <item>	فارسان	</item>
+        <item>	فرادنبه	</item>
+        <item>	فرخ شهر	</item>
+        <item>	كيان	</item>
+        <item>	گندمان	</item>
+        <item>	گهرو	</item>
+        <item>	لردگان	</item>
+        <item>	مال خليفه	</item>
+        <item>	ناغان	</item>
+        <item>	نافچ	</item>
+        <item>	نقنه	</item>
+        <item>	هفشجان	</item>
+        <item>	ارسك	</item>
+        <item>	اسديه	</item>
+        <item>	اسفدن	</item>
+        <item>	اسلاميه	</item>
+        <item>	آرين شهر	</item>
+        <item>	آيسك	</item>
+        <item>	بشرويه	</item>
+        <item>	بيرجند	</item>
+        <item>	حاجي آباد	</item>
+        <item>	خضري دشت بياض	</item>
+        <item>	خوسف	</item>
+        <item>	زهان	</item>
+        <item>	سرايان	</item>
+        <item>	سربيشه	</item>
+        <item>	سه قلعه	</item>
+        <item>	شوسف	</item>
+        <item>	طبس مسينا	</item>
+        <item>	فردوس	</item>
+        <item>	قائن	</item>
+        <item>	قهستان	</item>
+        <item>	گزيك	</item>
+        <item>	محمد شهر	</item>
+        <item>	مود	</item>
+        <item>	نهبندان	</item>
+        <item>	نيمبلوك	</item>
+        <item>	احمدآبادصولت	</item>
+        <item>	انابد	</item>
+        <item>	باجگيران	</item>
+        <item>	باخرز	</item>
+        <item>	بار	</item>
+        <item>	بايگ	</item>
+        <item>	بجستان	</item>
+        <item>	بردسكن	</item>
+        <item>	بيدخت	</item>
+        <item>	تايباد	</item>
+        <item>	تربت جام	</item>
+        <item>	تربت حيدريه	</item>
+        <item>	جغتاي	</item>
+        <item>	جنگل	</item>
+        <item>	چاپشلو	</item>
+        <item>	چكنه	</item>
+        <item>	چناران	</item>
+        <item>	خرو	</item>
+        <item>	خليل آباد	</item>
+        <item>	خواف	</item>
+        <item>	داورزن	</item>
+        <item>	درگز	</item>
+        <item>	درود	</item>
+        <item>	دولت آباد 	</item>
+        <item>	رباط سنگ	</item>
+        <item>	رشتخوار	</item>
+        <item>	رضويه	</item>
+        <item>	روداب	</item>
+        <item>	ريوش	</item>
+        <item>	سبزوار	</item>
+        <item>	سرخس	</item>
+        <item>	سفيدسنگ	</item>
+        <item>	سلامي	</item>
+        <item>	سلطان آباد	</item>
+        <item>	سنگان	</item>
+        <item>	شادمهر	</item>
+        <item>	شانديز	</item>
+        <item>	ششتمد	</item>
+        <item>	شهرآباد	</item>
+        <item>	شهرزو	</item>
+        <item>	صالح آباد  	</item>
+        <item>	طرقبه	</item>
+        <item>	عشق آباد	</item>
+        <item>	فرهادگرد	</item>
+        <item>	فريمان	</item>
+        <item>	فيروزه	</item>
+        <item>	فيض آباد	</item>
+        <item>	قاسم آباد	</item>
+        <item>	قدمگاه	</item>
+        <item>	قلندرآباد	</item>
+        <item>	قوچان	</item>
+        <item>	كاخك	</item>
+        <item>	كاريز	</item>
+        <item>	كاشمر	</item>
+        <item>	كدكن	</item>
+        <item>	كلات	</item>
+        <item>	كندر	</item>
+        <item>	گلمكان	</item>
+        <item>	گناباد	</item>
+        <item>	لطف آباد	</item>
+        <item>	مزدآوند	</item>
+        <item>	مشهد	</item>
+        <item>	مشهدريزه	</item>
+        <item>	ملك آباد	</item>
+        <item>	نشتيفان	</item>
+        <item>	نصر آباد	</item>
+        <item>	نقاب	</item>
+        <item>	نوخندان	</item>
+        <item>	نيشابور	</item>
+        <item>	نيل شهر	</item>
+        <item>	همت آباد	</item>
+        <item>	يونسي	</item>
+        <item>	اسفراين	</item>
+        <item>	ايور	</item>
+        <item>	آشخانه	</item>
+        <item>	بجنورد	</item>
+        <item>	پيش قلعه	</item>
+        <item>	تيتكانلو	</item>
+        <item>	جاجرم	</item>
+        <item>	حصارگرمخان	</item>
+        <item>	درق	</item>
+        <item>	راز	</item>
+        <item>	سنخواست	</item>
+        <item>	شوقان	</item>
+        <item>	شيروان	</item>
+        <item>	صفي آباد	</item>
+        <item>	فاروج	</item>
+        <item>	قاضي	</item>
+        <item>	گرمه	</item>
+        <item>	لوجلي	</item>
+        <item>	اروندكنار	</item>
+        <item>	الوان	</item>
+        <item>	اميديه	</item>
+        <item>	انديمشك	</item>
+        <item>	اهواز	</item>
+        <item>	ايذه	</item>
+        <item>	آبادان	</item>
+        <item>	آغاجاري	</item>
+        <item>	باغ ملك	</item>
+        <item>	بستان	</item>
+        <item>	بندرامام خميني	</item>
+        <item>	بندرماهشهر	</item>
+        <item>	بهبهان	</item>
+        <item>	تركالكي	</item>
+        <item>	جايزان	</item>
+        <item>	جنت مكان	</item>
+        <item>	چغاميش	</item>
+        <item>	چمران	</item>
+        <item>	چوئبده	</item>
+        <item>	حر	</item>
+        <item>	حسينيه	</item>
+        <item>	حمزه	</item>
+        <item>	حميديه	</item>
+        <item>	خرمشهر	</item>
+        <item>	دارخوين	</item>
+        <item>	دزآب	</item>
+        <item>	دزفول	</item>
+        <item>	دهدز	</item>
+        <item>	رامشير	</item>
+        <item>	رامهرمز	</item>
+        <item>	رفيع	</item>
+        <item>	زهره	</item>
+        <item>	سالند	</item>
+        <item>	سردشت 	</item>
+        <item>	سماله	</item>
+        <item>	سوسنگرد	</item>
+        <item>	شادگان	</item>
+        <item>	شاوور	</item>
+        <item>	شرافت	</item>
+        <item>	شوش	</item>
+        <item>	شوشتر	</item>
+        <item>	شيبان	</item>
+        <item>	صالح شهر	</item>
+        <item>	صالح مشطط	</item>
+        <item>	صفي آباد 	</item>
+        <item>	صيدون	</item>
+        <item>	قلعه تل	</item>
+        <item>	قلعه خواجه	</item>
+        <item>	گتوند	</item>
+        <item>	گوريه	</item>
+        <item>	لالي	</item>
+        <item>	مسجدسليمان	</item>
+        <item>	مشراگه	</item>
+        <item>	مقاومت	</item>
+        <item>	ملاثاني	</item>
+        <item>	ميانرود	</item>
+        <item>	ميداود	</item>
+        <item>	مينوشهر	</item>
+        <item>	ويس	</item>
+        <item>	هفتگل	</item>
+        <item>	هنديجان	</item>
+        <item>	هويزه	</item>
+        <item>	ابهر	</item>
+        <item>	ارمغانخانه	</item>
+        <item>	آب بر	</item>
+        <item>	چورزق	</item>
+        <item>	حلب	</item>
+        <item>	خرمدره	</item>
+        <item>	دندي	</item>
+        <item>	زرين آباد	</item>
+        <item>	زرين رود	</item>
+        <item>	زنجان	</item>
+        <item>	سجاس	</item>
+        <item>	سلطانيه	</item>
+        <item>	سهرورد	</item>
+        <item>	صائين قلعه	</item>
+        <item>	قيدار	</item>
+        <item>	گرماب	</item>
+        <item>	ماه نشان	</item>
+        <item>	هيدج	</item>
+        <item>	اميريه	</item>
+        <item>	ايوانكي	</item>
+        <item>	آرادان	</item>
+        <item>	بسطام	</item>
+        <item>	بيارجمند	</item>
+        <item>	دامغان	</item>
+        <item>	درجزين	</item>
+        <item>	ديباج	</item>
+        <item>	سرخه	</item>
+        <item>	سمنان	</item>
+        <item>	شاهرود	</item>
+        <item>	شهميرزاد	</item>
+        <item>	كلاته خيج	</item>
+        <item>	گرمسار	</item>
+        <item>	مجن	</item>
+        <item>	مهدي شهر	</item>
+        <item>	ميامي	</item>
+        <item>	اديمي	</item>
+        <item>	اسپكه	</item>
+        <item>	ايرانشهر	</item>
+        <item>	بزمان	</item>
+        <item>	بمپور	</item>
+        <item>	بنت	</item>
+        <item>	بنجار	</item>
+        <item>	پيشين	</item>
+        <item>	جالق	</item>
+        <item>	چاه بهار	</item>
+        <item>	خاش	</item>
+        <item>	دوست محمد	</item>
+        <item>	راسك	</item>
+        <item>	زابل	</item>
+        <item>	زابلي	</item>
+        <item>	زاهدان	</item>
+        <item>	زرآباد	</item>
+        <item>	زهك	</item>
+        <item>	سراوان	</item>
+        <item>	سرباز	</item>
+        <item>	سوران	</item>
+        <item>	سيركان	</item>
+        <item>	علي اكبر	</item>
+        <item>	فنوج	</item>
+        <item>	قصرقند	</item>
+        <item>	كنارك	</item>
+        <item>	گشت	</item>
+        <item>	گلمورتي	</item>
+        <item>	محمدان	</item>
+        <item>	محمد آباد	</item>
+        <item>	محمدي	</item>
+        <item>	ميرجاوه	</item>
+        <item>	نصرت آباد	</item>
+        <item>	نگور	</item>
+        <item>	نوك آباد	</item>
+        <item>	نيك شهر	</item>
+        <item>	هيدوج	</item>
+        <item>	اردكان	</item>
+        <item>	ارسنجان	</item>
+        <item>	استهبان	</item>
+        <item>	اسير	</item>
+        <item>	اشكنان	</item>
+        <item>	افزر	</item>
+        <item>	اقليد	</item>
+        <item>	امام شهر	</item>
+        <item>	اوز	</item>
+        <item>	اهل	</item>
+        <item>	ايج	</item>
+        <item>	ايزدخواست	</item>
+        <item>	آباده	</item>
+        <item>	آباده طشك	</item>
+        <item>	باب انار	</item>
+        <item>	بالاده	</item>
+        <item>	بنارويه	</item>
+        <item>	بوانات	</item>
+        <item>	بهمن	</item>
+        <item>	بيرم	</item>
+        <item>	بيضا	</item>
+        <item>	جنت شهر	</item>
+        <item>	جويم	</item>
+        <item>	جهرم	</item>
+        <item>	حاجي آباد 	</item>
+        <item>	حسامي	</item>
+        <item>	حسن آباد  	</item>
+        <item>	خانه زنيان	</item>
+        <item>	خاوران	</item>
+        <item>	خرامه	</item>
+        <item>	خشت	</item>
+        <item>	خنج	</item>
+        <item>	خور 	</item>
+        <item>	خومه زار	</item>
+        <item>	داراب	</item>
+        <item>	داريان	</item>
+        <item>	دبيران	</item>
+        <item>	دژكرد	</item>
+        <item>	دوبرجي	</item>
+        <item>	دوزه	</item>
+        <item>	دهرم	</item>
+        <item>	رامجرد	</item>
+        <item>	رونيز	</item>
+        <item>	زاهدشهر	</item>
+        <item>	زرقان	</item>
+        <item>	سده	</item>
+        <item>	سروستان	</item>
+        <item>	سعادت شهر	</item>
+        <item>	سورمق	</item>
+        <item>	سيدان	</item>
+        <item>	ششده	</item>
+        <item>	شهر جديد صدرا	</item>
+        <item>	شهرپير	</item>
+        <item>	شيراز	</item>
+        <item>	صغاد	</item>
+        <item>	صفاشهر	</item>
+        <item>	علامرودشت	</item>
+        <item>	عمادده	</item>
+        <item>	فدامي	</item>
+        <item>	فراشبند	</item>
+        <item>	فسا	</item>
+        <item>	فيروزآباد	</item>
+        <item>	قادرآباد	</item>
+        <item>	قائميه	</item>
+        <item>	قطب آباد	</item>
+        <item>	قطرويه	</item>
+        <item>	قير	</item>
+        <item>	كارزين	</item>
+        <item>	كازرون	</item>
+        <item>	كامفيروز	</item>
+        <item>	كره اي	</item>
+        <item>	كنارتخته	</item>
+        <item>	كوار	</item>
+        <item>	كوهنجان	</item>
+        <item>	گراش	</item>
+        <item>	گله دار	</item>
+        <item>	لار	</item>
+        <item>	لامرد	</item>
+        <item>	لپوئي	</item>
+        <item>	لطيفي	</item>
+        <item>	مبارك آباد	</item>
+        <item>	مرودشت	</item>
+        <item>	مشكان	</item>
+        <item>	مصيري	</item>
+        <item>	مهر	</item>
+        <item>	ميمند	</item>
+        <item>	نوبندگان	</item>
+        <item>	نوجين	</item>
+        <item>	نودان	</item>
+        <item>	نورآباد	</item>
+        <item>	ني ريز	</item>
+        <item>	وراوي	</item>
+        <item>	هماشهر	</item>
+        <item>	ارداق	</item>
+        <item>	اسفرورين	</item>
+        <item>	اقباليه	</item>
+        <item>	الوند	</item>
+        <item>	آبگرم	</item>
+        <item>	آبيك	</item>
+        <item>	آوج	</item>
+        <item>	بوئين زهرا	</item>
+        <item>	بيدستان	</item>
+        <item>	تاكستان	</item>
+        <item>	خاكعلي	</item>
+        <item>	خرمدشت	</item>
+        <item>	دانسفهان	</item>
+        <item>	رازميان	</item>
+        <item>	سگزآباد	</item>
+        <item>	سيردان	</item>
+        <item>	شال	</item>
+        <item>	شريفيه	</item>
+        <item>	ضياءآباد	</item>
+        <item>	قزوين	</item>
+        <item>	كوهين	</item>
+        <item>	محمديه	</item>
+        <item>	محمودآبادنمونه	</item>
+        <item>	معلم كلايه	</item>
+        <item>	نرجه	</item>
+        <item>	جعفريه	</item>
+        <item>	دستجرد	</item>
+        <item>	سلفچگان	</item>
+        <item>	قم	</item>
+        <item>	قنوات	</item>
+        <item>	كهك	</item>
+        <item>	آرمرده	</item>
+        <item>	بابارشاني	</item>
+        <item>	بانه	</item>
+        <item>	بلبان آباد	</item>
+        <item>	بوئين سفلي	</item>
+        <item>	بيجار	</item>
+        <item>	چناره	</item>
+        <item>	دزج	</item>
+        <item>	دلبران	</item>
+        <item>	دهگلان	</item>
+        <item>	ديواندره	</item>
+        <item>	زرينه	</item>
+        <item>	سروآباد	</item>
+        <item>	سريش آباد	</item>
+        <item>	سقز	</item>
+        <item>	سنندج	</item>
+        <item>	شويشه	</item>
+        <item>	صاحب	</item>
+        <item>	قروه	</item>
+        <item>	كامياران	</item>
+        <item>	كاني دينار	</item>
+        <item>	كاني سور	</item>
+        <item>	مريوان	</item>
+        <item>	موچش	</item>
+        <item>	ياسوكند	</item>
+        <item>	اختيارآباد	</item>
+        <item>	ارزوئيه	</item>
+        <item>	امين شهر	</item>
+        <item>	انار	</item>
+        <item>	اندوهجرد	</item>
+        <item>	باغين	</item>
+        <item>	بافت	</item>
+        <item>	بردسير	</item>
+        <item>	بروات	</item>
+        <item>	بزنجان	</item>
+        <item>	بم	</item>
+        <item>	بهرمان	</item>
+        <item>	پاريز	</item>
+        <item>	جبالبارز	</item>
+        <item>	جوپار	</item>
+        <item>	جوزم	</item>
+        <item>	جيرفت	</item>
+        <item>	چترود	</item>
+        <item>	خاتون آباد	</item>
+        <item>	خانوك	</item>
+        <item>	خورسند	</item>
+        <item>	درب بهشت	</item>
+        <item>	دوساري	</item>
+        <item>	دهج	</item>
+        <item>	رابر	</item>
+        <item>	راور	</item>
+        <item>	راين	</item>
+        <item>	رفسنجان	</item>
+        <item>	رودبار	</item>
+        <item>	ريحان شهر	</item>
+        <item>	زرند	</item>
+        <item>	زنگي آباد	</item>
+        <item>	زيدآباد	</item>
+        <item>	سرچشمه	</item>
+        <item>	سيرجان	</item>
+        <item>	شهداد	</item>
+        <item>	شهربابك	</item>
+        <item>	صفائيه	</item>
+        <item>	عنبرآباد	</item>
+        <item>	فارياب	</item>
+        <item>	فهرج	</item>
+        <item>	قلعه گنج	</item>
+        <item>	كاظم آباد	</item>
+        <item>	كرمان	</item>
+        <item>	كشكوئيه	</item>
+        <item>	كوهبنان	</item>
+        <item>	كهنوج	</item>
+        <item>	كيانشهر	</item>
+        <item>	گلباف	</item>
+        <item>	گلزار	</item>
+        <item>	لاله زار	</item>
+        <item>	ماهان	</item>
+        <item>	محمد آباد 	</item>
+        <item>	محي آباد	</item>
+        <item>	مردهك	</item>
+        <item>	منوجان	</item>
+        <item>	نجف شهر	</item>
+        <item>	نرماشير	</item>
+        <item>	نظام شهر	</item>
+        <item>	نگار	</item>
+        <item>	نودژ	</item>
+        <item>	هجدك	</item>
+        <item>	هماشهر 	</item>
+        <item>	يزدان شهر	</item>
+        <item>	ازگله	</item>
+        <item>	اسلام آبادغرب	</item>
+        <item>	باينگان	</item>
+        <item>	بيستون	</item>
+        <item>	پاوه	</item>
+        <item>	تازه آباد	</item>
+        <item>	جوانرود	</item>
+        <item>	حميل	</item>
+        <item>	رباط	</item>
+        <item>	روانسر	</item>
+        <item>	سرپل ذهاب	</item>
+        <item>	سرمست	</item>
+        <item>	سطر	</item>
+        <item>	سنقر	</item>
+        <item>	سومار	</item>
+        <item>	شاهو	</item>
+        <item>	صحنه	</item>
+        <item>	قصرشيرين	</item>
+        <item>	كرمانشاه	</item>
+        <item>	كرندغرب	</item>
+        <item>	كنگاور	</item>
+        <item>	كوزران	</item>
+        <item>	گهواره	</item>
+        <item>	گيلانغرب	</item>
+        <item>	ميان راهان	</item>
+        <item>	نودشه	</item>
+        <item>	نوسود	</item>
+        <item>	هرسين	</item>
+        <item>	هلشي	</item>
+        <item>	باشت	</item>
+        <item>	پاتاوه	</item>
+        <item>	چرام	</item>
+        <item>	چيتاب	</item>
+        <item>	دوگنبدان	</item>
+        <item>	دهدشت	</item>
+        <item>	ديشموك	</item>
+        <item>	سوق	</item>
+        <item>	سي سخت	</item>
+        <item>	قلعه رئيسي	</item>
+        <item>	گراب سفلي	</item>
+        <item>	لنده	</item>
+        <item>	ليكك	</item>
+        <item>	مادوان	</item>
+        <item>	مارگون	</item>
+        <item>	ياسوج	</item>
+        <item>	انبارآلوم	</item>
+        <item>	اينچه برون	</item>
+        <item>	آزادشهر	</item>
+        <item>	آق قلا	</item>
+        <item>	بندرگز	</item>
+        <item>	تركمن	</item>
+        <item>	جلين	</item>
+        <item>	خان ببين	</item>
+        <item>	دلند	</item>
+        <item>	راميان	</item>
+        <item>	سرخنكلاته	</item>
+        <item>	سيمين شهر	</item>
+        <item>	علي آباد	</item>
+        <item>	فاضل آباد	</item>
+        <item>	كردكوي	</item>
+        <item>	كلاله	</item>
+        <item>	گاليكش	</item>
+        <item>	گرگان	</item>
+        <item>	گميش تپه	</item>
+        <item>	گنبد كاووس	</item>
+        <item>	مراوه تپه	</item>
+        <item>	مينودشت	</item>
+        <item>	نگين شهر	</item>
+        <item>	نوده خاندوز	</item>
+        <item>	نوكنده	</item>
+        <item>	احمدسرگوراب	</item>
+        <item>	اسالم	</item>
+        <item>	اطاقور	</item>
+        <item>	املش	</item>
+        <item>	آستارا	</item>
+        <item>	آستانه اشرفيه	</item>
+        <item>	بازارجمعه	</item>
+        <item>	بره سر	</item>
+        <item>	بندرانزلي	</item>
+        <item>	پره سر	</item>
+        <item>	توتكابن	</item>
+        <item>	جيرنده	</item>
+        <item>	چابكسر	</item>
+        <item>	چاف وچمخاله	</item>
+        <item>	چوبر	</item>
+        <item>	حويق	</item>
+        <item>	خشكبيجار	</item>
+        <item>	خمام	</item>
+        <item>	ديلمان	</item>
+        <item>	رانكوه	</item>
+        <item>	رحيم آباد	</item>
+        <item>	رستم آباد	</item>
+        <item>	رشت	</item>
+        <item>	رضوانشهر 	</item>
+        <item>	رودبار 	</item>
+        <item>	رودبنه	</item>
+        <item>	رودسر	</item>
+        <item>	سنگر	</item>
+        <item>	سياهكل	</item>
+        <item>	شفت	</item>
+        <item>	شلمان	</item>
+        <item>	صومعه سرا	</item>
+        <item>	فومن	</item>
+        <item>	كلاچاي	</item>
+        <item>	كوچصفهان	</item>
+        <item>	كومله	</item>
+        <item>	كياشهر	</item>
+        <item>	گوراب زرميخ	</item>
+        <item>	لاهيجان	</item>
+        <item>	لشت نشاء	</item>
+        <item>	لنگرود	</item>
+        <item>	لوشان	</item>
+        <item>	لولمان	</item>
+        <item>	لوندويل	</item>
+        <item>	ليسار	</item>
+        <item>	ماسال	</item>
+        <item>	ماسوله	</item>
+        <item>	مرجقل	</item>
+        <item>	منجيل	</item>
+        <item>	واجارگاه	</item>
+        <item>	هشتپر	</item>
+        <item>	ازنا	</item>
+        <item>	اشترينان	</item>
+        <item>	الشتر	</item>
+        <item>	اليگودرز	</item>
+        <item>	بروجرد	</item>
+        <item>	پلدختر	</item>
+        <item>	چالانچولان	</item>
+        <item>	چغلوندي	</item>
+        <item>	چقابل	</item>
+        <item>	خرم آباد	</item>
+        <item>	درب گنبد	</item>
+        <item>	دورود	</item>
+        <item>	زاغه	</item>
+        <item>	سپيددشت	</item>
+        <item>	سراب دوره	</item>
+        <item>	شول آباد	</item>
+        <item>	فيروز آباد	</item>
+        <item>	كوناني	</item>
+        <item>	كوهدشت	</item>
+        <item>	گراب	</item>
+        <item>	معمولان	</item>
+        <item>	مؤمن آباد	</item>
+        <item>	نور آباد	</item>
+        <item>	ويسيان	</item>
+        <item>	هفت چشمه	</item>
+        <item>	اميركلا	</item>
+        <item>	ايزدشهر	</item>
+        <item>	آلاشت	</item>
+        <item>	آمل	</item>
+        <item>	بابل	</item>
+        <item>	بابلسر	</item>
+        <item>	بلده	</item>
+        <item>	بهشهر	</item>
+        <item>	بهنمير	</item>
+        <item>	پل سفيد	</item>
+        <item>	پول	</item>
+        <item>	تنكابن	</item>
+        <item>	جويبار	</item>
+        <item>	چالوس	</item>
+        <item>	چمستان	</item>
+        <item>	خرم آباد 	</item>
+        <item>	خليل شهر	</item>
+        <item>	خوش رودپي	</item>
+        <item>	دابودشت	</item>
+        <item>	رامسر	</item>
+        <item>	رستمكلا	</item>
+        <item>	رويان	</item>
+        <item>	رينه	</item>
+        <item>	زرگر محله	</item>
+        <item>	زيرآب	</item>
+        <item>	ساري	</item>
+        <item>	سرخرود	</item>
+        <item>	سلمان شهر	</item>
+        <item>	سورك	</item>
+        <item>	شيرگاه	</item>
+        <item>	شيرود	</item>
+        <item>	عباس آباد	</item>
+        <item>	فريدونكنار	</item>
+        <item>	فريم	</item>
+        <item>	قائم شهر	</item>
+        <item>	كتالم وسادات شهر	</item>
+        <item>	كلارآباد	</item>
+        <item>	كلاردشت	</item>
+        <item>	كله بست	</item>
+        <item>	كوهي خيل	</item>
+        <item>	كياسر	</item>
+        <item>	كياكلا	</item>
+        <item>	گتاب	</item>
+        <item>	گزنك	</item>
+        <item>	گلوگاه	</item>
+        <item>	محمود آباد	</item>
+        <item>	مرزن آباد	</item>
+        <item>	مرزيكلا	</item>
+        <item>	نشتارود	</item>
+        <item>	نكا	</item>
+        <item>	نور	</item>
+        <item>	نوشهر	</item>
+        <item>	اراك	</item>
+        <item>	آستانه	</item>
+        <item>	آشتيان	</item>
+        <item>	پرندك	</item>
+        <item>	تفرش	</item>
+        <item>	توره	</item>
+        <item>	جاورسيان	</item>
+        <item>	خشكرود	</item>
+        <item>	خمين	</item>
+        <item>	خنداب	</item>
+        <item>	داودآباد	</item>
+        <item>	دليجان	</item>
+        <item>	رازقان	</item>
+        <item>	زاويه	</item>
+        <item>	ساروق	</item>
+        <item>	ساوه	</item>
+        <item>	سنجان	</item>
+        <item>	شازند	</item>
+        <item>	شهرجديدمهاجران	</item>
+        <item>	غرق آباد	</item>
+        <item>	فرمهين	</item>
+        <item>	قورچي باشي	</item>
+        <item>	كرهرود	</item>
+        <item>	كميجان	</item>
+        <item>	مأمونيه	</item>
+        <item>	محلات	</item>
+        <item>	ميلاجرد	</item>
+        <item>	نراق	</item>
+        <item>	نوبران	</item>
+        <item>	نيمور	</item>
+        <item>	هندودر	</item>
+        <item>	ابوموسي	</item>
+        <item>	بستك	</item>
+        <item>	بندرجاسك	</item>
+        <item>	بندرچارك	</item>
+        <item>	بندرعباس	</item>
+        <item>	بندرلنگه	</item>
+        <item>	بيكاه	</item>
+        <item>	پارسيان	</item>
+        <item>	تخت	</item>
+        <item>	جناح	</item>
+        <item>	حاجي آباد  	</item>
+        <item>	خمير	</item>
+        <item>	درگهان	</item>
+        <item>	دهبارز	</item>
+        <item>	رويدر	</item>
+        <item>	زيارتعلي	</item>
+        <item>	سردشت بشاگرد	</item>
+        <item>	سرگز	</item>
+        <item>	سندرك	</item>
+        <item>	سوزا	</item>
+        <item>	سيريك	</item>
+        <item>	فارغان	</item>
+        <item>	فين	</item>
+        <item>	قشم	</item>
+        <item>	قلعه قاضي	</item>
+        <item>	كنگ	</item>
+        <item>	كوشكنار	</item>
+        <item>	كيش	</item>
+        <item>	گوهران	</item>
+        <item>	ميناب	</item>
+        <item>	هرمز	</item>
+        <item>	هشتبندي	</item>
+        <item>	ازندريان	</item>
+        <item>	اسدآباد	</item>
+        <item>	برزول	</item>
+        <item>	بهار	</item>
+        <item>	تويسركان	</item>
+        <item>	جورقان	</item>
+        <item>	جوكار	</item>
+        <item>	دمق	</item>
+        <item>	رزن	</item>
+        <item>	زنگنه	</item>
+        <item>	سامن	</item>
+        <item>	سركان	</item>
+        <item>	شيرين سو	</item>
+        <item>	صالح آباد   	</item>
+        <item>	فامنين	</item>
+        <item>	فرسفج	</item>
+        <item>	فيروزان	</item>
+        <item>	قروه در جزين	</item>
+        <item>	قهاوند	</item>
+        <item>	كبودرآهنگ	</item>
+        <item>	گل تپه	</item>
+        <item>	گيان	</item>
+        <item>	لالجين	</item>
+        <item>	مريانج	</item>
+        <item>	ملاير	</item>
+        <item>	نهاوند	</item>
+        <item>	همدان	</item>
+        <item>	ابركوه	</item>
+        <item>	احمدآباد	</item>
+        <item>	اردكان 	</item>
+        <item>	اشكذر	</item>
+        <item>	بافق	</item>
+        <item>	بفروئيه	</item>
+        <item>	بهاباد	</item>
+        <item>	تفت	</item>
+        <item>	حميديا	</item>
+        <item>	خضرآباد	</item>
+        <item>	ديهوك	</item>
+        <item>	زارچ	</item>
+        <item>	شاهديه	</item>
+        <item>	طبس	</item>
+        <item>	عشق آباد 	</item>
+        <item>	عقدا	</item>
+        <item>	مروست	</item>
+        <item>	مهردشت	</item>
+        <item>	مهريز	</item>
+        <item>	ميبد	</item>
+        <item>	ندوشن	</item>
+        <item>	نير 	</item>
+        <item>	هرات	</item>
+        <item>	يزد	</item>
+    </string-array>
 
 
 </resources>

@@ -7,9 +7,11 @@ import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.AuthFailureError;
@@ -38,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.e.sujeyab.Controller.Api;
+import ir.e.sujeyab.Controller.RetrofitProvider;
 import ir.e.sujeyab.CustomClasses.MySingleton;
 import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
 import ir.e.sujeyab.CustomClasses.SharedPrefClass;
@@ -46,6 +49,7 @@ import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
+import ir.e.sujeyab.models.VaziyatModel;
 import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,16 +68,20 @@ public class LoadData {
                                                     CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
 
         //String usernameEncode = UrlEncoderClass.urlEncoder(etUsername.getText().toString());
-        Retrofit retrofit = new Retrofit.Builder()
+        /*Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+          Api api = retrofit.create(Api.class);*/
 
-        Api api = retrofit.create(Api.class);
-        Call<List<SliderModel>> call = api.getSlider();
+        //Api api = new RetrofitProvider().getApi();
+
+        Call<List<SliderModel>> call = new RetrofitProvider().getApi().getSlider("main_slider_pishkhan");
         call.enqueue(new Callback<List<SliderModel>>() {
             @Override
             public void onResponse(Call<List<SliderModel>> call, retrofit2.Response<List<SliderModel>> response) {
+
+                //if (response.isSuccessful()){}
                 List<SliderModel> sliderModels = response.body();
                 if (response.body().toString().length() <= 0){
                     Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
@@ -85,7 +93,6 @@ public class LoadData {
                     mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider"));
                     indicator.setViewPager(mPager);
                 }
-
             }
 
             @Override
@@ -402,11 +409,11 @@ public class LoadData {
                     if (takmilEtelaatModel.getProfile_picture().isEmpty()) {
 
                         Picasso.get()
-                                .load(R.drawable.adamak_icon_for_setting)
+                                .load(R.drawable.suje_icon)
                                 .centerInside()
                                 .fit()
-                                .error(R.drawable.adamak_icon_for_setting)
-                                .placeholder(R.drawable.adamak_icon_for_setting)
+                                .error(R.drawable.suje_icon)
+                                .placeholder(R.drawable.suje_icon)
                                 .into(imgProfileImage);
 
                     }else{
@@ -414,8 +421,8 @@ public class LoadData {
                                 .load(takmilEtelaatModel.getProfile_picture() )
                                 .centerInside()
                                 .fit()
-                                .error(R.drawable.adamak_icon_for_setting)
-                                .placeholder(R.drawable.adamak_icon_for_setting)
+                                .error(R.drawable.suje_icon)
+                                .placeholder(R.drawable.suje_icon)
                                 .into(imgProfileImage);
                     }
                 }
@@ -552,11 +559,11 @@ public class LoadData {
                 if (profile_picture.isEmpty()) {
 
                     Picasso.get()
-                            .load(R.drawable.adamak_icon_for_setting)
+                            .load(R.drawable.suje_icon)
                             .centerInside()
                             .fit()
-                            .error(R.drawable.adamak_icon_for_setting)
-                            .placeholder(R.drawable.adamak_icon_for_setting)
+                            .error(R.drawable.suje_icon)
+                            .placeholder(R.drawable.suje_icon)
                             .into(imgProfileImage);
 
                 }else{
@@ -564,8 +571,8 @@ public class LoadData {
                             .load(profile_picture)
                             .centerInside()
                             .fit()
-                            .error(R.drawable.adamak_icon_for_setting)
-                            .placeholder(R.drawable.adamak_icon_for_setting)
+                            .error(R.drawable.suje_icon)
+                            .placeholder(R.drawable.suje_icon)
                             .into(imgProfileImage);
                 }
 
@@ -601,7 +608,7 @@ public class LoadData {
     }
 
     public static void loadKhadamatVijehSliderBaRetrofit(Context c, final ConstraintLayout clWifi, ViewPager mPager,
-                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
+                                                         CircleIndicator indicator, ArrayList<SliderModel> ImgArray, NestedScrollView nestedScrollView, ProgressBar progressBar) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -618,82 +625,18 @@ public class LoadData {
                     indicator.setViewPager(mPager);
 
                 }
+                nestedScrollView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                clWifi.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
-
-/*        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_khadamat_vijeh";
-        itShouldLoadMore = false;
-        final ProgressDialogClass progressDialog = new ProgressDialogClass();
-        progressDialog.showProgress(c);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-                null, new Response.Listener<JSONArray>() {
-
-            @Override
-            public void onResponse(JSONArray response) {
-
-                clWifi.setVisibility(View.GONE);
-                progressDialog.dismissProgress();
-                itShouldLoadMore = true;
-
-
-                if (response.length() <= 0) {
-                    Toast.makeText(c, "اسلایدی موجود نیست.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                String onvan = null;
-                String mozo = null;
-                String matn_kholase = null;
-
-                for (int i = 0; i < response.length(); i++) {
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-
-                        lastId = jsonObject.getString("id");
-                        onvan = jsonObject.getString("onvan");
-                        mozo = jsonObject.getString("mozo");
-                        matn_kholase = jsonObject.getString("matn_kholase");
-
-                        ImgArray.add(new SliderModel(lastId, onvan,mozo,matn_kholase,""));
-                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh"));
-                        indicator.setViewPager(mPager);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                itShouldLoadMore = true;
-                progressDialog.dismissProgress();
-                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
-                clWifi.setVisibility(View.VISIBLE);
-
-                clWifi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                       *//* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
-                                recyclerView, "", clWifi);*//*
-                    }
-                });
-
-            }
-        });
-
-        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);*/
     }
 
     public static void loadKhadamatVijehSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,
@@ -977,13 +920,44 @@ public class LoadData {
 
     }
 
+    public static void loadVaziyatSujeHa(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <VaziyatModel>> call = api.getVaziyatSujeHa();
+
+        call.enqueue(new Callback<List<VaziyatModel>>() {
+            @Override
+            public void onResponse(Call<List<VaziyatModel>> call, retrofit2.Response<List<VaziyatModel>> response) {
+                List<VaziyatModel> models = response.body();
+                for (VaziyatModel model:models){
+
+                    lastId = model.getId();
+                    rModels.add(new RecyclerModel(lastId, model.getName_vaziyat_suje_ha(),""
+                            ,"",
+                            "",""));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<VaziyatModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+
     public static void loadVaziyatFarakhan(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
 
 
         String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_vaziyat_farakhan";
         itShouldLoadMore = false;
-        final ProgressDialogClass progressDialog = new ProgressDialogClass();
-        progressDialog.showProgress(c);
+       // final ProgressDialogClass progressDialog = new ProgressDialogClass();
+       //progressDialog.showProgress(c);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {
@@ -992,7 +966,7 @@ public class LoadData {
             public void onResponse(JSONArray response) {
 
                 clWifi.setVisibility(View.GONE);
-                progressDialog.dismissProgress();
+                //progressDialog.dismissProgress();
                 itShouldLoadMore = true;
 
 
@@ -1025,7 +999,7 @@ public class LoadData {
             public void onErrorResponse(VolleyError error) {
 
                 itShouldLoadMore = true;
-                progressDialog.dismissProgress();
+                //progressDialog.dismissProgress();
                 Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
                 clWifi.setVisibility(View.VISIBLE);
 

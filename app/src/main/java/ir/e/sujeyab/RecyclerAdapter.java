@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.models.RecyclerModel;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -46,6 +47,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         }else if(rowLayoutType.matches("farakhan_ha")){
             return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_farakhan_ha, parent, false));
 
+        }else if(rowLayoutType.matches("suje_ha")){
+            return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_suje_ha, parent, false));
+
         }
         return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_farakhan_vijeh, parent, false));
     }
@@ -60,19 +64,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         if (rowLayoutType.matches("farakhan_vije")){
 
             holder.txOnvan.setText(rModels.get(position).getOnvan());
-            holder.txModatBaghiMande.setText(rModels.get(position).getModat_baghimande());
+            holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
-            //holder.txTedadComment.setText(rModels.get(position).getMatn_kolase());
-            //holder.txTedadLike.setText(rModels.get(position).getMatn_kolase());
+            holder.txTedadComment.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)));
+            holder.txTedadLike.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)));
             String ax = rModels.get(position).getPicture();
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.alaamt_soal_icon)
+                        .load(R.drawable.suje_icon)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.alaamt_soal_icon)
-                        .placeholder(R.drawable.alaamt_soal_icon)
+                        .error(R.drawable.suje_icon)
+                        .placeholder(R.drawable.suje_icon)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -80,8 +84,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.alaamt_soal_icon)
-                        .placeholder(R.drawable.alaamt_soal_icon)
+                        .error(R.drawable.suje_icon)
+                        .placeholder(R.drawable.suje_icon)
                         .into(holder.imgAxFarakhan);
             }
 
@@ -103,22 +107,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         }else if (rowLayoutType.matches("farakhan_ha")){
             holder.txOnvan.setText(rModels.get(position).getOnvan());
-            holder.txModatBaghiMande.setText(rModels.get(position).getModat_baghimande());
+            holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
             holder.txMotavali.setText(rModels.get(position).getMotavali());
 
-            holder.txTedadSuje.setText( position+1 + " سوژه" );
+            holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)) + " سوژه" );
 
 
             String ax = rModels.get(position).getPicture();
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.alaamt_soal_icon)
+                        .load(R.drawable.suje_icon)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.alaamt_soal_icon)
-                        .placeholder(R.drawable.alaamt_soal_icon)
+                        .error(R.drawable.suje_icon)
+                        .placeholder(R.drawable.suje_icon)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -126,8 +130,48 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.alaamt_soal_icon)
-                        .placeholder(R.drawable.alaamt_soal_icon)
+                        .error(R.drawable.suje_icon)
+                        .placeholder(R.drawable.suje_icon)
+                        .into(holder.imgAxFarakhan);
+            }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }else if (rowLayoutType.matches("suje_ha")){
+            holder.txOnvan.setText(rModels.get(position).getOnvan());
+            //holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
+            holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
+            holder.txMotavali.setText(rModels.get(position).getMotavali());
+            holder.txTedadLike.setText(new EnglishNumberToPersian().convert("1"));
+            holder.txTedadComment.setText(new EnglishNumberToPersian().convert("1"));
+
+
+            //holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)) + " سوژه" );
+
+
+            String ax = rModels.get(position).getPicture();
+            if (ax.isEmpty()) {
+
+                Picasso.get()
+                        .load(R.drawable.suje_icon)
+                        .centerInside()
+                        .fit()
+                        .error(R.drawable.suje_icon)
+                        .placeholder(R.drawable.suje_icon)
+                        .into(holder.imgAxFarakhan);
+
+            }else{
+                Picasso.get()
+                        .load(ax)
+                        .centerInside()
+                        .fit()
+                        .error(R.drawable.suje_icon)
+                        .placeholder(R.drawable.suje_icon)
                         .into(holder.imgAxFarakhan);
             }
 

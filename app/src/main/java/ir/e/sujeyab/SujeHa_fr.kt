@@ -11,7 +11,9 @@ import androidx.viewpager.widget.ViewPager
 import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.models.RecyclerModel
 import ir.e.sujeyab.models.SliderModel
+import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.net_connection.view.*
 import kotlinx.android.synthetic.main.pishkhan_fr.*
 import kotlinx.android.synthetic.main.setting.*
 import me.relex.circleindicator.CircleIndicator
@@ -19,6 +21,9 @@ import me.relex.circleindicator.CircleIndicator
 
 class SujeHa_fr : Fragment() {
     var inflatedview: View? = null
+    private var rAdapter: RecyclerAdapter? = null
+    private var rModels: ArrayList<RecyclerModel>? = null
+    private var rModels2: ArrayList<RecyclerModel>? = null
 
 
     override fun onCreateView(
@@ -27,6 +32,17 @@ class SujeHa_fr : Fragment() {
     ): View? {
 
         inflatedview = inflater.inflate(R.layout.suje_ha_fr, container, false)
+        rModels = ArrayList()
+        rAdapter = RecyclerAdapter("vaziyat_farakhan", activity, rModels, rAdapter)
+        Recyclerview.defineRecyclerViewHorizontal(activity, inflatedview!!.rv1, rAdapter, rModels)
+        LoadData.loadVaziyatSujeHa(activity, inflatedview!!.clWifiState, rModels, rAdapter)
+
+
+        rModels2 = ArrayList()
+        rAdapter = RecyclerAdapter("suje_ha", activity, rModels2, rAdapter)
+        Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv2, rAdapter, rModels2)
+        LoadData.loadFarakhanHaBaRetrofit(activity, inflatedview!!.clWifiState, rModels2, rAdapter)
+
 
         return inflatedview
     }
