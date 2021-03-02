@@ -37,7 +37,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clNameAndFamily2517"
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/iran_sans"
+                    android:fontFamily="@font/iran_sans_bold"
                     android:text="عنوان"
                     android:textColor="#000000"
                     android:textSize="14sp"
@@ -60,7 +60,6 @@
                     android:id="@+id/etOnvan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
@@ -76,9 +75,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clNameAndFamily25156"
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat">
 
@@ -88,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/iran_sans"
+                    android:fontFamily="@font/iran_sans_bold"
                     android:text="موضوع"
                     android:textColor="#000000"
                     android:textSize="14sp"
@@ -99,7 +97,6 @@
                     android:id="@+id/etMozo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
@@ -116,7 +113,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat">
 
@@ -126,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/iran_sans"
+                    android:fontFamily="@font/iran_sans_bold"
                     android:text="توضیحات"
                     android:textColor="#000000"
                     android:textSize="14sp"
@@ -137,8 +133,6 @@
                     android:id="@+id/etTozihat"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="8dp"
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
@@ -154,6 +148,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView25" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="30dp"
+                android:max="100"
+                tools:progress="10" />
+
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="24dp"
+                android:src="@drawable/suje_icon" />
+
+            <Button
+                android:id="@+id/button_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/bg_white_border"
+                android:fontFamily="@font/iran_sans"
+                android:text="بارگزاری تصویر"
+                android:textColor="@color/black" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

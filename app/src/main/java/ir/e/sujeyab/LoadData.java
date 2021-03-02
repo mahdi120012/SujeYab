@@ -1,17 +1,23 @@
 package ir.e.sujeyab;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
+import androidx.loader.content.CursorLoader;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.AuthFailureError;
@@ -24,6 +30,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.conn.ConnectTimeoutException;
@@ -32,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
 import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.SocketException;
@@ -50,7 +59,10 @@ import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.VaziyatModel;
+import ir.e.sujeyab.upload.MyResponse;
 import me.relex.circleindicator.CircleIndicator;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -82,7 +94,7 @@ public class LoadData {
             public void onResponse(Call<List<SliderModel>> call, retrofit2.Response<List<SliderModel>> response) {
 
                 //if (response.isSuccessful()){}
-                List<SliderModel> sliderModels = response.body();
+                /*List<SliderModel> sliderModels = response.body();
                 if (response.body().toString().length() <= 0){
                     Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
                 }
@@ -92,7 +104,7 @@ public class LoadData {
                     ImgArray.add(new SliderModel(lastId, sliderModel.getPicture(),sliderModel.getLink(),sliderModel.getDescription(),""));
                     mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider"));
                     indicator.setViewPager(mPager);
-                }
+                }*/
             }
 
             @Override
@@ -183,6 +195,64 @@ public class LoadData {
         });
 
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+
+/*    public static void uploadFile(Context c, Uri fileUri, String desc) {
+
+
+
+        File file = new File(getRealPathFromURI(c,fileUri));
+
+        //creating request body for file
+        RequestBody requestFile = RequestBody.create(MediaType.parse(c.getContentResolver().getType(fileUri)), file);
+        RequestBody descBody = RequestBody.create(MediaType.parse("text/plain"), desc);
+
+        //The gson builder
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+
+        //creating retrofit object
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.baseUrlForUpload)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        //creating our api
+        Api api = retrofit.create(Api.class);
+
+        //creating a call and calling the upload image method
+        Call<MyResponse> call = api.uploadImage(requestFile, descBody);
+
+        //finally performing the call
+        call.enqueue(new Callback<MyResponse>() {
+            @Override
+            public void onResponse(Call<MyResponse> call, retrofit2.Response<MyResponse> response) {
+                if (response.body().toString().contains("File Uploaded Successfully")) {
+                    Toast.makeText(c, "File Uploaded Successfully...", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(c, "Some error occurred...", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyResponse> call, Throwable t) {
+                Toast.makeText(c, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }*/
+    public static String getRealPathFromURI(Context c, Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(c, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
     }
 
     public static void editMoshakhasatMan(final Context c, final ConstraintLayout clWifi, String username, String nameFamily,String tarikhTavallod,String jensiyat,String vaziyatTaahol,
@@ -815,6 +885,36 @@ public class LoadData {
 
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
+
+
+
+    public static void addSujeJadid(Context c, final ConstraintLayout clWifi,EditText etOnvan,EditText etMozo,EditText etTozihat) {
+
+        Call<List<FarakhanVijehModel>> call = new RetrofitProvider().getApi().addSujeJadid(etOnvan.getText().toString(),etMozo.getText().toString(),etTozihat.getText().toString());
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+                    //lastId = farakhanVijehModel.getId();
+                    /*ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh"));
+                    indicator.setViewPager(mPager);*/
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, "سوژه جدید با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
 
     public static void loadPishkhanSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,

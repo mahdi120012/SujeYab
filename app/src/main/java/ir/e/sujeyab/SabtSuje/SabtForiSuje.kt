@@ -1,7 +1,14 @@
 package ir.e.sujeyab.SabtSuje
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -11,6 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrate
 import ir.e.sujeyab.R
 import ir.e.sujeyab.login.VorodBaNamKarbari_FR
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
+
 
 class SabtForiSuje : AppCompatActivity() {
     private val titles =
@@ -22,6 +30,18 @@ class SabtForiSuje : AppCompatActivity() {
 
         imgBack.setOnClickListener { finish() }
         viewPager.setCurrentItem(3)
+        //line zir baraye ine ke"
+        viewPager.setOffscreenPageLimit(3);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.parse("package:$packageName"))
+            finish()
+            startActivity(intent)
+            return
+        }
 
 
     }
@@ -55,4 +75,6 @@ class SabtForiSuje : AppCompatActivity() {
             return titles.size
         }
     }
+
+
 }

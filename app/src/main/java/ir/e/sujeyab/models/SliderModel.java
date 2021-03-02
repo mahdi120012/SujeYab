@@ -1,7 +1,11 @@
 package ir.e.sujeyab.models;
 
+import android.media.Image;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class SliderModel {
     @SerializedName("id")
@@ -38,4 +42,5 @@ public class SliderModel {
     }
 
     public String getMatn_kholase() {return matn_kholase; }
+
 }
