@@ -16,6 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.R
+import ir.e.sujeyab.SabtSuje.SabtForiSuje
 import ir.e.sujeyab.login.TakmilEtelaat
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login.tabLayout
@@ -49,8 +50,8 @@ class Pishkhan : AppCompatActivity() {
         }
 
         clSabtSuje.setOnClickListener {
-            Toast.makeText(this,"به زودی راه اندازی می شود",Toast.LENGTH_SHORT).show()
-
+            val intent = Intent(this, SabtForiSuje::class.java)
+            startActivity(intent)
         }
 
         clElanat.setOnClickListener {

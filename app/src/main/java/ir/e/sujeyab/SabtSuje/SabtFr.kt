@@ -35,9 +35,9 @@ import java.io.FileOutputStream
     ): View? {
 
         inflatedview = inflater.inflate(R.layout.sabt_fr, container, false)
-        (activity!!.txEdame)!!.setOnClickListener {
+        /*(activity!!.txEdame)!!.setOnClickListener {
             LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
-        }
+        }*/
 
         return inflatedview
     }

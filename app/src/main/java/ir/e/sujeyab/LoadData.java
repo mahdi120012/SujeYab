@@ -94,7 +94,7 @@ public class LoadData {
             public void onResponse(Call<List<SliderModel>> call, retrofit2.Response<List<SliderModel>> response) {
 
                 //if (response.isSuccessful()){}
-                /*List<SliderModel> sliderModels = response.body();
+                List<SliderModel> sliderModels = response.body();
                 if (response.body().toString().length() <= 0){
                     Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
                 }
@@ -104,7 +104,7 @@ public class LoadData {
                     ImgArray.add(new SliderModel(lastId, sliderModel.getPicture(),sliderModel.getLink(),sliderModel.getDescription(),""));
                     mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider"));
                     indicator.setViewPager(mPager);
-                }*/
+                }
             }
 
             @Override

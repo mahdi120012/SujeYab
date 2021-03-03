@@ -30,9 +30,7 @@ class Setting : AppCompatActivity() {
         }
 
         clTansimatAsli.setOnClickListener {
-            val intent = Intent(this, SabtForiSuje::class.java)
-            startActivity(intent)
-            //Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
         }
 
         clElanat.setOnClickListener {

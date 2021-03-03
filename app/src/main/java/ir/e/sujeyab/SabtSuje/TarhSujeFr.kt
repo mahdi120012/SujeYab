@@ -1,20 +1,25 @@
 package ir.e.sujeyab.SabtSuje
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
-import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
+import kotlinx.android.synthetic.main.sabt_fori_suje.clcl
 import kotlinx.android.synthetic.main.tarh_suje_fr.*
-import kotlinx.android.synthetic.main.tarh_suje_fr.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -25,12 +30,8 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class TarhSujeFr : Fragment(), UploadRequestBody.UploadCallback {
+class TarhSujeFr : Fragment() {
     var inflatedview: View? = null
-    private var selectedImageUri: Uri? = null
-    companion object {
-        const val REQUEST_CODE_PICK_IMAGE = 101
-    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -38,21 +39,38 @@ class TarhSujeFr : Fragment(), UploadRequestBody.UploadCallback {
     ): View? {
 
         inflatedview = inflater.inflate(R.layout.tarh_suje_fr, container, false)
-        (activity!!.txEdame)!!.setText("ارسال")
-        (activity!!.txEdame)!!.setOnClickListener {
-            LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
-        }
-        inflatedview!!.image_view.setOnClickListener {
-            openImageChooser()
+
+        (activity!!.txEdame)!!.setText("ادامه")
+        (activity!!.clEdame)!!.setOnClickListener {
+            if (activity!!.viewPager.currentItem == 3){
+                if (etOnvan.text.toString() == "" || etMozo.text.toString() == "" || etTozihat.text.toString() == ""){
+                    clcl.snackbar("لطفا همه فیلد ها را تکمیل نمایید")
+                }else{
+                activity!!.viewPager.setCurrentItem(2)
+                }
+                //LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
+            }else if (activity!!.viewPager.currentItem == 2){
+                activity!!.viewPager.setCurrentItem(1)
+                activity!!.txEdame.setText("ثبت سوژه")
+            }else if (activity!!.viewPager.currentItem == 1){
+                activity!!.viewPager.setCurrentItem(0)
+            }
         }
 
-        inflatedview!!.button_upload.setOnClickListener {
-            uploadImage()
-            /*val i = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(i, 100)*/
-
-            //SelectImage()
+        (activity!!.clBazgasht)!!.setOnClickListener {
+            if (activity!!.viewPager.currentItem == 0){
+                activity!!.viewPager.setCurrentItem(1)
+                //LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
+            }else if (activity!!.viewPager.currentItem == 1){
+                activity!!.viewPager.setCurrentItem(2)
+            }else if (activity!!.viewPager.currentItem == 2){
+                activity!!.viewPager.setCurrentItem(3)
+            }
         }
+
+
+
+
 
         return inflatedview
     }
@@ -107,77 +125,6 @@ class TarhSujeFr : Fragment(), UploadRequestBody.UploadCallback {
             var user:RequestBody = RequestBody.create(MediaType.parse("text/plain"),"GrayMind")
 
     }
-
-
-
-    private fun openImageChooser() {
-        Intent(Intent.ACTION_PICK).also {
-            it.type = "image/*"
-            val mimeTypes = arrayOf("image/jpeg", "image/png")
-            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                REQUEST_CODE_PICK_IMAGE -> {
-                    selectedImageUri = data?.data
-                    image_view.setImageURI(selectedImageUri)
-                }
-            }
-        }
-    }
-
-    private fun uploadImage() {
-        if (selectedImageUri == null) {
-            inflatedview!!.clcl.snackbar("Select an Image First")
-            return
-        }
-
-        val parcelFileDescriptor =
-                activity!!.contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
-
-        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        val file = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(selectedImageUri!!))
-        val outputStream = FileOutputStream(file)
-        inputStream.copyTo(outputStream)
-
-        progress_bar.progress = 0
-        val body = UploadRequestBody(file, "image", this)
-        ApiForUpload().uploadImage(
-                MultipartBody.Part.createFormData(
-                        "image",
-                        file.name,
-                        body
-                ),
-                RequestBody.create(MediaType.parse("multipart/form-data"), "json")
-        ).enqueue(object : Callback<UploadResponse> {
-            override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                inflatedview!!.clcl.snackbar(t.message!!)
-                progress_bar.progress = 0
-            }
-
-            override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-            ) {
-                response.body()?.let {
-                    inflatedview!!.clcl.snackbar(it.message)
-                    progress_bar.progress = 100
-                }
-            }
-        })
-
-    }
-
-     override fun onProgressUpdate(percentage: Int) {
-        progress_bar.progress = percentage
-    }
-
-
 
 
 }

@@ -1,5 +1,7 @@
 package ir.e.sujeyab.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RecyclerModel {
     private String id;
     private String picture;
