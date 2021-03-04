@@ -1,5 +1,6 @@
 package ir.e.sujeyab.Controller
 
+import android.util.Xml
 import ir.e.sujeyab.SabtSuje.UploadResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -14,10 +15,9 @@ interface ApiForUpload {
 
     @Multipart
     @POST("Api.php?apicall=upload")
-    fun uploadImage(
-            @Part image: MultipartBody.Part,
-            @Part("desc") desc: RequestBody
-    ): Call<UploadResponse>
+    fun uploadImage(@Part image: MultipartBody.Part,
+                    @Part("desc") desc: RequestBody,
+                    @Part("onvan") onvan: RequestBody): Call<UploadResponse>
 
     companion object {
         operator fun invoke(): ApiForUpload {

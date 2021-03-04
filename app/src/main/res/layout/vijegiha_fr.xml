@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTasvirSuje"
         android:layout_width="0dp"
-        android:layout_height="130dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@drawable/bg_round_white_2"
         android:visibility="invisible"
@@ -25,30 +25,29 @@
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="110dp"
             android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:scaleType="fitXY"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:scaleType="center"
             android:src="@drawable/suje_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView332"
+            app:layout_constraintBottom_toTopOf="@+id/progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView332" />
 
         <TextView
             android:id="@+id/textView332"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/iran_sans"
             android:text="تصویر سوژه شما"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_view" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/progress_bar"

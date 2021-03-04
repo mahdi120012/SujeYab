@@ -30,7 +30,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/constraintLayout4"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
@@ -62,11 +63,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/iran_sans_bold"
         android:text="عنوان فراخوان"
         android:textColor="#000000"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/cl1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl1" />
 
     <TextView
@@ -75,9 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:fontFamily="@font/iran_sans_bold"
-        android:text="16 روز"
-        android:textColor="#000000"
-        android:textSize="14sp"
+        android:text="۱۶ روز"
+        android:textColor="#FF0000"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView31"
         app:layout_constraintEnd_toStartOf="@+id/textView31"
         app:layout_constraintTop_toTopOf="@+id/textView31" />
@@ -105,9 +107,10 @@
         android:inputType="textMultiLine"
         android:lines="3"
         android:maxLines="3"
-        android:text="متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه"
+        android:text="متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن  متن خلاصه متن   خلاصه"
         android:textColor="#000000"
         android:textSize="14sp"
+        android:justificationMode="inter_word"
         app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
@@ -134,9 +137,9 @@
         android:text="0"
         android:textColor="#677079"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
-        app:layout_constraintStart_toEndOf="@+id/imageView14"
-        app:layout_constraintTop_toTopOf="@+id/imageView14" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgLike"
+        app:layout_constraintStart_toEndOf="@+id/imgLike"
+        app:layout_constraintTop_toTopOf="@+id/imgLike" />
 
     <View
         android:id="@+id/view2"
@@ -148,7 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
     <ImageView
-        android:id="@+id/imageView14"
+        android:id="@+id/imgLike"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="24dp"
@@ -163,9 +166,9 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+        app:layout_constraintBottom_toBottomOf="@+id/imgLike"
         app:layout_constraintStart_toEndOf="@+id/txTedadLike"
-        app:layout_constraintTop_toTopOf="@+id/imageView14"
+        app:layout_constraintTop_toTopOf="@+id/imgLike"
         app:srcCompat="@drawable/comment" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

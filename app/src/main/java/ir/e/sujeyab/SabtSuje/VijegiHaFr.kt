@@ -1,25 +1,16 @@
 package ir.e.sujeyab.SabtSuje
 
-import android.R.attr.radius
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Xml
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.ShapeAppearanceModel
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.R
-import kotlinx.android.synthetic.main.sabt_fori_suje.*
-import kotlinx.android.synthetic.main.sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.clcl
@@ -121,14 +112,11 @@ class VijegiHaFr : Fragment(), UploadRequestBody.UploadCallback {
 
         progress_bar.progress = 0
         val body = UploadRequestBody(file, "image", this)
-        ApiForUpload().uploadImage(
-                MultipartBody.Part.createFormData(
-                        "image",
-                        file.name,
-                        body
-                ),
-                RequestBody.create(MediaType.parse("multipart/form-data"), "json")
-        ).enqueue(object : Callback<UploadResponse> {
+        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("image",file.name, body),
+                                   RequestBody.create(MediaType.parse("multipart/form-data"), "json"),
+                                   RequestBody.create(MediaType.parse("multipart/form-data"), "متن تست"))
+            .enqueue(object : Callback<UploadResponse> {
+
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
                 inflatedview!!.clcl.snackbar(t.message!!)
                 progress_bar.progress = 0

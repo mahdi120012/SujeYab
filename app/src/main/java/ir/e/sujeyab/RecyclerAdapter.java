@@ -6,7 +6,9 @@ import android.content.Context;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.text.LineBreaker;
 import android.os.Build;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +68,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.txOnvan.setText(rModels.get(position).getOnvan());
             holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                holder.txMatnKholase.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+            }*/
             holder.txTedadComment.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)));
             holder.txTedadLike.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)));
+            if (Integer.parseInt((String) holder.txTedadLike.getText()) > 0){
+
+            }else {
+                holder.imgLike.setBackgroundResource(R.drawable.like_red);
+            }
             String ax = rModels.get(position).getPicture();
             if (ax.isEmpty()) {
 
@@ -199,11 +209,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txOnvan,txModatBaghiMande,txMatnKholase,txTedadComment,txTedadLike,txOnvan2,txMotavali,txTedadSuje;
-        ImageView imgAxFarakhan;
+        ImageView imgAxFarakhan,imgLike;
 
         MyViewHolder(View view) {
             super(view);
-
+            imgLike = itemView.findViewById(R.id.imgLike);
             txTedadSuje = itemView.findViewById(R.id.txTedadSuje);
             txMotavali = itemView.findViewById(R.id.txMotavali);
 

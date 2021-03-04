@@ -44,10 +44,11 @@ class VorodFr : Fragment() {
         }*/
 
         var username = SharedPrefClass.getUserId(activity,"user")
+        var name = SharedPrefClass.getUserId(activity,"name")
         if (username == ""){
-            inflatedview!!.txPhoneNumber.setText("09397310149")
+            inflatedview!!.txPhoneNumber.setText(name + " "+ "09397310149")
         }else{
-            inflatedview!!.txPhoneNumber.setText(username)
+            inflatedview!!.txPhoneNumber.setText(name + " "+ username)
         }
 
 
