@@ -4,6 +4,8 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 
 import ir.e.sujeyab.LoadData;
 import ir.e.sujeyab.RecyclerAdapter;
+import ir.e.sujeyab.SabtSuje.SabtForiSuje;
+import ir.e.sujeyab.SabtSuje.SabtFr;
 import ir.e.sujeyab.models.RecyclerModel;
 
 public class Recyclerview {

@@ -4,19 +4,22 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Xml
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.R
+import kotlinx.android.synthetic.main.tarh_suje_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
-import kotlinx.android.synthetic.main.vijegiha_fr.view.clcl
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,12 +28,16 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 
-class VijegiHaFr : Fragment(), UploadRequestBody.UploadCallback {
+class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     var inflatedview: View? = null
     private var selectedImageUri: Uri? = null
+
     companion object {
         const val REQUEST_CODE_PICK_IMAGE = 101
     }
+
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +50,11 @@ class VijegiHaFr : Fragment(), UploadRequestBody.UploadCallback {
         t.setOnClickListener {
             activity!!.viewPager.setCurrentItem(1)
             //LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
+
+
         }*/
+
+
 
         inflatedview!!.clEntakhabTasvirSuje.setOnClickListener {
             //کد زیر برای دسترسی دادن به حافظست
@@ -111,10 +122,11 @@ class VijegiHaFr : Fragment(), UploadRequestBody.UploadCallback {
         inputStream.copyTo(outputStream)
 
         progress_bar.progress = 0
+        TarhSujeFr().etOnvan
         val body = UploadRequestBody(file, "image", this)
         ApiForUpload().uploadImage(MultipartBody.Part.createFormData("image",file.name, body),
                                    RequestBody.create(MediaType.parse("multipart/form-data"), "json"),
-                                   RequestBody.create(MediaType.parse("multipart/form-data"), "متن تست"))
+                                   RequestBody.create(MediaType.parse("multipart/form-data"), "11"))
             .enqueue(object : Callback<UploadResponse> {
 
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -137,5 +149,20 @@ class VijegiHaFr : Fragment(), UploadRequestBody.UploadCallback {
 
     override fun onProgressUpdate(percentage: Int) {
         progress_bar.progress = percentage
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: MessageEvent) {
+        Toast.makeText(activity, event.etOnvan.text.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+        EventBus.getDefault().register(this)
+        super.onStart()
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().register(this)
+        super.onStop()
     }
 }

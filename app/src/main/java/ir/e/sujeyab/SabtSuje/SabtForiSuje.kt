@@ -1,7 +1,6 @@
 package ir.e.sujeyab.SabtSuje
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -13,7 +12,7 @@ import ir.e.sujeyab.R
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 
 
-class SabtForiSuje : AppCompatActivity() {
+class SabtForiSuje : AppCompatActivity() { 
     private val titles =
         arrayOf("ثبت", "ورود", "ویژگی ها", "طرح سوژه")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class SabtForiSuje : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             when (position) {
-                0 -> return SabtFr()
+                0 ->return SabtFr()
                 1 -> return VorodFr()
                 2 -> return VijegiHaFr()
                 3 -> return TarhSujeFr()
@@ -64,6 +63,7 @@ class SabtForiSuje : AppCompatActivity() {
             return titles.size
         }
     }
+
 
 
 }

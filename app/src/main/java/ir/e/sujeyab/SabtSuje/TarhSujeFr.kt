@@ -1,34 +1,21 @@
 package ir.e.sujeyab.SabtSuje
 
-import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import ir.e.sujeyab.Controller.ApiForUpload
-import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.clcl
 import kotlinx.android.synthetic.main.tarh_suje_fr.*
+import kotlinx.android.synthetic.main.tarh_suje_fr.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.greenrobot.eventbus.EventBus
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+
 
 class TarhSujeFr : Fragment() {
     var inflatedview: View? = null
@@ -38,13 +25,21 @@ class TarhSujeFr : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
+
+
         inflatedview = inflater.inflate(R.layout.tarh_suje_fr, container, false)
+
+        val event = ir.e.sujeyab.SabtSuje.MessageEvent()
+        event.etOnvan = inflatedview!!.etOnvan
+        EventBus.getDefault().post(event)
+
 
         (activity!!.txEdame)!!.setText("ادامه")
         (activity!!.clEdame)!!.setOnClickListener {
             if (activity!!.viewPager.currentItem == 3){
                 if (etOnvan.text.toString() == "" || etMozo.text.toString() == "" || etTozihat.text.toString() == ""){
                     clcl.snackbar("لطفا همه فیلد ها را تکمیل نمایید")
+
                 }else{
                 activity!!.viewPager.setCurrentItem(2)
                 }
@@ -125,6 +120,7 @@ class TarhSujeFr : Fragment() {
             var user:RequestBody = RequestBody.create(MediaType.parse("text/plain"),"GrayMind")
 
     }
+
 
 
 }
