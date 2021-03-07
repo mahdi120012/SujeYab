@@ -1,11 +1,16 @@
 package ir.e.sujeyab.SabtSuje
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.R
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.clcl
 import kotlinx.android.synthetic.main.tarh_suje_fr.*
@@ -24,17 +29,31 @@ class TarhSujeFr : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-
-
-
         inflatedview = inflater.inflate(R.layout.tarh_suje_fr, container, false)
 
         val event = ir.e.sujeyab.SabtSuje.MessageEvent()
         event.etOnvan = inflatedview!!.etOnvan
+        event.etMozo = inflatedview!!.etMozo
+        event.etTozihat = inflatedview!!.etTozihat
         EventBus.getDefault().post(event)
 
+        inflatedview!!.clEdame.setOnClickListener {
+            if (inflatedview!!.etOnvan.text.toString() == "" || inflatedview!!.etMozo.text.toString() == "" || inflatedview!!.etTozihat.text.toString() == ""){
+                clcl.snackbar("لطفا همه فیلد ها را تکمیل نمایید")
 
-        (activity!!.txEdame)!!.setText("ادامه")
+            }else{
+                activity!!.viewPager.setCurrentItem(2)
+            }
+        }
+
+        inflatedview!!.clBazgasht.visibility = View.GONE
+
+
+
+        //((activity)!!.tabLayout.getTabAt(1)!!.view as LinearLayout).visibility = View.GONE
+
+
+/*        (activity!!.txEdame)!!.setText("ادامه")
         (activity!!.clEdame)!!.setOnClickListener {
             if (activity!!.viewPager.currentItem == 3){
                 if (etOnvan.text.toString() == "" || etMozo.text.toString() == "" || etTozihat.text.toString() == ""){
@@ -46,11 +65,12 @@ class TarhSujeFr : Fragment() {
                 //LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
             }else if (activity!!.viewPager.currentItem == 2){
                 activity!!.viewPager.setCurrentItem(1)
-                activity!!.txEdame.setText("ثبت سوژه")
             }else if (activity!!.viewPager.currentItem == 1){
                 activity!!.viewPager.setCurrentItem(0)
             }
         }
+
+
 
         (activity!!.clBazgasht)!!.setOnClickListener {
             if (activity!!.viewPager.currentItem == 0){
@@ -61,11 +81,7 @@ class TarhSujeFr : Fragment() {
             }else if (activity!!.viewPager.currentItem == 2){
                 activity!!.viewPager.setCurrentItem(3)
             }
-        }
-
-
-
-
+        }*/
 
         return inflatedview
     }
@@ -118,7 +134,6 @@ class TarhSujeFr : Fragment() {
             var requestBody:RequestBody =  RequestBody.create(MediaType.get("image/*"),image)
             var image:MultipartBody.Part = MultipartBody.Part.createFormData("img",image.name,requestBody)
             var user:RequestBody = RequestBody.create(MediaType.parse("text/plain"),"GrayMind")
-
     }
 
 

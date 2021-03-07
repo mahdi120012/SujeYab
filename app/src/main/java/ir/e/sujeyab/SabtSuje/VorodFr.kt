@@ -7,11 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.tarh_suje_fr.*
@@ -38,10 +41,7 @@ class VorodFr : Fragment() {
     ): View? {
 
         inflatedview = inflater.inflate(R.layout.vorod_fr, container, false)
-        /*(activity!!.txEdame)!!.setText("ثبت سوژه")
-        (activity!!.txEdame)!!.setOnClickListener {
-            activity!!.viewPager.setCurrentItem(0)
-        }*/
+        //(activity!!.txEdame)!!.setText("ثبت سوژه")
 
         var username = SharedPrefClass.getUserId(activity,"user")
         var name = SharedPrefClass.getUserId(activity,"name")
@@ -51,6 +51,13 @@ class VorodFr : Fragment() {
             inflatedview!!.txPhoneNumber.setText(name + " "+ username)
         }
 
+        inflatedview!!.clEdame.setOnClickListener {
+            activity!!.viewPager.setCurrentItem(0)
+        }
+
+        inflatedview!!.clBazgasht.setOnClickListener {
+            activity!!.viewPager.setCurrentItem(2)
+        }
 
         return inflatedview
     }

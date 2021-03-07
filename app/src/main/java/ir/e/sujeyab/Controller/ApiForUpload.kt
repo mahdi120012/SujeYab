@@ -17,7 +17,10 @@ interface ApiForUpload {
     @POST("Api.php?apicall=upload")
     fun uploadImage(@Part image: MultipartBody.Part,
                     @Part("desc") desc: RequestBody,
-                    @Part("onvan") onvan: RequestBody): Call<UploadResponse>
+                    @Part("onvan") onvan: RequestBody,
+                    @Part("mozo") mozo: RequestBody,
+                    @Part("tozihat") tozihat: RequestBody,
+                    @Part("type") type: RequestBody): Call<UploadResponse>
 
     companion object {
         operator fun invoke(): ApiForUpload {

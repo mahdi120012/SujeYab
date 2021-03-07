@@ -1,19 +1,33 @@
 package ir.e.sujeyab.SabtSuje
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import ir.e.sujeyab.Controller.ApiForUpload
+import ir.e.sujeyab.Controller.RetrofitProvider
+import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
-import kotlinx.android.synthetic.main.tarh_suje_fr.*
+import ir.e.sujeyab.ViewPagerAdapterForSlider
+import ir.e.sujeyab.models.SliderModel
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
+import kotlinx.android.synthetic.main.login.view.*
+import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
+import kotlinx.android.synthetic.main.vijegiha_fr.view.clcl
+import me.relex.circleindicator.CircleIndicator
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -26,18 +40,19 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.util.*
 
 
 class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     var inflatedview: View? = null
     private var selectedImageUri: Uri? = null
+    var etOnvanP:EditText? = null
+    var etMozoP:EditText? = null
+    var etTozihatP:EditText? = null
 
     companion object {
         const val REQUEST_CODE_PICK_IMAGE = 101
     }
-
-
-
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +68,21 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
         }*/
+        (activity!!.txEdame)!!.setText("ثبت سوژه")
 
+        inflatedview!!.clEdame.setOnClickListener {
 
+           if(((activity)!!.tabLayout.getTabAt(1)!!.view as LinearLayout).visibility == View.GONE){
+               activity!!.viewPager.setCurrentItem(0)
+           }else{
+               activity!!.viewPager.setCurrentItem(1)
+           }
+
+        }
+
+        inflatedview!!.clBazgasht.setOnClickListener {
+            activity!!.viewPager.setCurrentItem(3)
+        }
 
         inflatedview!!.clEntakhabTasvirSuje.setOnClickListener {
             //کد زیر برای دسترسی دادن به حافظست
@@ -106,8 +134,40 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             }
         }
     }
+    fun LoadPishkhanSliderByRetrofit(c: Context?, clWifi: ConstraintLayout?, mPager: ViewPager,
+                                     indicator: CircleIndicator, ImgArray: ArrayList<SliderModel?>) {
 
-    private fun uploadImage() {
+        //String usernameEncode = UrlEncoderClass.urlEncoder(etUsername.getText().toString());
+        /*Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+          Api api = retrofit.create(Api.class);*/
+
+        //Api api = new RetrofitProvider().getApi();
+        val call = RetrofitProvider().api.getSlider("main_slider_pishkhan")
+        call.enqueue(object : Callback<List<SliderModel>> {
+            override fun onResponse(call: Call<List<SliderModel>>, response: Response<List<SliderModel>>) {
+
+                //if (response.isSuccessful()){}
+                val sliderModels = response.body()!!
+                if (response.body().toString().length <= 0) {
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show()
+                }
+                for (sliderModel in sliderModels) {
+                    LoadData.lastId = sliderModel.id
+                    ImgArray.add(SliderModel(LoadData.lastId, sliderModel.picture, sliderModel.link, sliderModel.description, ""))
+                    mPager.adapter = ViewPagerAdapterForSlider(c, ImgArray, "slider")
+                    indicator.setViewPager(mPager)
+                }
+            }
+
+            override fun onFailure(call: Call<List<SliderModel>>, t: Throwable) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+     fun uploadImage() {
         if (selectedImageUri == null) {
             inflatedview!!.clcl.snackbar("Select an Image First")
             return
@@ -122,11 +182,13 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         inputStream.copyTo(outputStream)
 
         progress_bar.progress = 0
-        TarhSujeFr().etOnvan
         val body = UploadRequestBody(file, "image", this)
         ApiForUpload().uploadImage(MultipartBody.Part.createFormData("image",file.name, body),
                                    RequestBody.create(MediaType.parse("multipart/form-data"), "json"),
-                                   RequestBody.create(MediaType.parse("multipart/form-data"), "11"))
+                                   RequestBody.create(MediaType.parse("multipart/form-data"), etOnvanP!!.text.toString()),
+                                   RequestBody.create(MediaType.get("multipart/form-data"),etMozoP!!.text.toString()),
+                                   RequestBody.create(MediaType.get("multipart/form-data"), etTozihatP!!.text.toString()),
+                                   RequestBody.create(MediaType.get("multipard/form-data"),"سوژه ها"))
             .enqueue(object : Callback<UploadResponse> {
 
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -141,6 +203,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                 response.body()?.let {
                     inflatedview!!.clcl.snackbar(it.message)
                     progress_bar.progress = 100
+                    activity!!.viewPager.setCurrentItem(0)
                 }
             }
         })
@@ -153,7 +216,10 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: MessageEvent) {
-        Toast.makeText(activity, event.etOnvan.text.toString(), Toast.LENGTH_SHORT).show()
+        this.etOnvanP = event.etOnvan
+        this.etMozoP = event.etMozo
+        this.etTozihatP = event.etTozihat
+        //Toast.makeText(activity, event.etOnvan.text.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {
@@ -162,7 +228,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     }
 
     override fun onStop() {
-        EventBus.getDefault().register(this)
+        EventBus.getDefault().unregister(this)
         super.onStop()
     }
 }
