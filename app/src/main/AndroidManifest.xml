@@ -21,6 +21,7 @@
         android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
         <activity android:name=".SabtSuje.SabtForiSuje"></activity>
+        <activity android:name=".SujeClick.SujeClick"></activity>
         <activity android:name=".Pishkhan" />
         <activity android:name=".Setting" />
         <activity android:name=".login.Login" />

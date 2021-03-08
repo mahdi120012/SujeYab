@@ -6,9 +6,8 @@ import android.content.Context;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.graphics.text.LineBreaker;
+import android.content.Intent;
 import android.os.Build;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import java.util.ArrayList;
 
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.models.RecyclerModel;
+import ir.e.sujeyab.SujeClick.SujeClick;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
@@ -82,11 +82,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.suje_icon)
+                        .load(R.drawable.logo)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.suje_icon)
-                        .placeholder(R.drawable.suje_icon)
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -94,8 +94,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.suje_icon)
-                        .placeholder(R.drawable.suje_icon)
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
             }
 
@@ -128,11 +128,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.suje_icon)
+                        .load(R.drawable.logo)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.suje_icon)
-                        .placeholder(R.drawable.suje_icon)
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -140,8 +140,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.suje_icon)
-                        .placeholder(R.drawable.suje_icon)
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
             }
 
@@ -168,11 +168,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.suje_icon)
+                        .load(R.drawable.logo)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.suje_icon)
-                        .placeholder(R.drawable.suje_icon)
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -180,15 +180,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.suje_icon)
-                        .placeholder(R.drawable.suje_icon)
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
             }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent =new Intent(c, SujeClick.class);
+                    intent.putExtra("onvan",rModels.get(position).getOnvan());
+                    intent.putExtra("matn",rModels.get(position).getMatn_kolase());
+                    intent.putExtra("picture",rModels.get(position).getPicture());
+                    intent.putExtra("motavali",rModels.get(position).getMotavali());
+                    intent.putExtra("modat_baghi_mande",rModels.get(position).getModat_baghimande());
+                    c.startActivity(intent);
+
+                    //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
                 }
             });
 

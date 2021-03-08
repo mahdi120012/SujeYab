@@ -73,7 +73,11 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         inflatedview!!.clEdame.setOnClickListener {
 
            if(((activity)!!.tabLayout.getTabAt(1)!!.view as LinearLayout).visibility == View.GONE){
-               activity!!.viewPager.setCurrentItem(0)
+               inflatedview!!.clProgressBar!!.visibility = View.VISIBLE
+               imgPreview.setImageURI(selectedImageUri)
+               //inflatedview!!.progress_bar.visibility = View.VISIBLE
+               uploadImage()
+               //activity!!.viewPager.setCurrentItem(0)
            }else{
                activity!!.viewPager.setCurrentItem(1)
            }
@@ -102,10 +106,10 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             openImageChooser()
         }
 
-        inflatedview!!.button_upload.setOnClickListener {
-            inflatedview!!.progress_bar.visibility = View.VISIBLE
-            uploadImage()
-        }
+       /* inflatedview!!.button_upload.setOnClickListener {
+           *//* inflatedview!!.progress_bar.visibility = View.VISIBLE
+            uploadImage()*//*
+        }*/
 
 
         return inflatedview
@@ -125,7 +129,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             inflatedview!!.clTasvirSuje.visibility = View.VISIBLE
-            inflatedview!!. button_upload.visibility = View.VISIBLE
+            //inflatedview!!. button_upload.visibility = View.VISIBLE
             when (requestCode) {
                 REQUEST_CODE_PICK_IMAGE -> {
                     selectedImageUri = data?.data

@@ -10,6 +10,46 @@
     android:textDirection="rtl">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layoutDirection="ltr"
+        android:textDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clEdame"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_orange_ba_hashiye"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txEdame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iran_sans"
+                android:text="ادامه"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="68dp"
@@ -40,19 +80,6 @@
             app:layout_constraintEnd_toStartOf="@+id/imgBack"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txEdame2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/iran_sans_bold"
-            android:text="ادامه"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/imgBack"
             android:layout_width="22dp"
@@ -68,9 +95,10 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -190,6 +218,9 @@
                     android:layout_marginStart="16dp"
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
+                    android:textDirection="ltr"
+                    android:layoutDirection="ltr"
+                    android:gravity="right"
                     android:fontFamily="@font/iran_sans"
                     android:inputType="textPersonName"
                     android:padding="6dp"
@@ -712,6 +743,7 @@
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
+                    android:gravity="left"
                     android:inputType="textEmailAddress|textNoSuggestions"
                     android:padding="6dp"
                     android:textSize="12sp"
@@ -755,8 +787,8 @@
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
                     android:inputType="number|textNoSuggestions"
-                    android:padding="6dp"
                     android:maxLength="11"
+                    android:padding="6dp"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView233"
                     app:layout_constraintStart_toStartOf="parent"
@@ -1137,8 +1169,8 @@
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
                     android:inputType="number|textNoSuggestions"
-                    android:padding="6dp"
                     android:maxLength="11"
+                    android:padding="6dp"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView212"
                     app:layout_constraintStart_toStartOf="parent"
@@ -1183,9 +1215,9 @@
                     android:gravity="clip_vertical"
                     android:inputType="textMultiLine|textNoSuggestions"
                     android:maxLines="3"
-                    android:singleLine="true"
                     android:padding="6dp"
                     android:scrollbars="none"
+                    android:singleLine="true"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView25"

@@ -19,6 +19,7 @@ import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.takmil_etelaat.*
 import java.lang.reflect.Array.newInstance
@@ -51,8 +52,6 @@ class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerD
 
         val viewPager = (activity as Login).viewPager
         viewPager.setUserInputEnabled(false);
-
-        val txEdame2 = inflatedview!!.findViewById<View>(R.id.txEdame2) as TextView
 
 
         val spinner_jensiyat: Spinner = inflatedview!!.findViewById(R.id.spinner_jensiyat)
@@ -351,7 +350,7 @@ class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerD
         LoadData.loadMoshakhasatBaRetrofit(activity, clWifiState, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
                 etKeshvar, etOstan, etShahrestan, etShahr, etRosta, etNeshani, etMoaref, etTelephoneTamasMoaref, etTozihat,imgProfileImage)
 
-        txEdame2.setOnClickListener {
+        inflatedview!!.clEdame.setOnClickListener {
             //Toast.makeText(activity, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
             var nameFamily = etNameFamily.text.toString()
             var tarikhTavallod = etTarikhTavalod.text.toString()
