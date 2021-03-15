@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
+import ir.e.sujeyab.SujeClick.SujeClick2;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.SujeClick.SujeClick;
 
@@ -160,6 +161,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.txTedadLike.setText(new EnglishNumberToPersian().convert("1"));
             holder.txTedadComment.setText(new EnglishNumberToPersian().convert("1"));
 
+            holder.txName.setText(rModels.get(position).getName_family());
+            holder.txSematShoghli.setText(rModels.get(position).getSemat_shoghli());
 
             //holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)) + " سوژه" );
 
@@ -189,12 +192,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, SujeClick.class);
+                    Intent intent =new Intent(c, SujeClick2.class);
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kolase());
                     intent.putExtra("picture",rModels.get(position).getPicture());
                     intent.putExtra("motavali",rModels.get(position).getMotavali());
                     intent.putExtra("modat_baghi_mande",rModels.get(position).getModat_baghimande());
+                    intent.putExtra("date_create",rModels.get(position).getDate_create());
+                    intent.putExtra("name",rModels.get(position).getName_family());
+                    intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
                     c.startActivity(intent);
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
@@ -217,11 +223,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txOnvan,txModatBaghiMande,txMatnKholase,txTedadComment,txTedadLike,txOnvan2,txMotavali,txTedadSuje;
+        TextView txOnvan,txModatBaghiMande,txMatnKholase,txTedadComment,txTedadLike,txOnvan2,txMotavali,txTedadSuje,txName,txSematShoghli;
         ImageView imgAxFarakhan,imgLike;
 
         MyViewHolder(View view) {
             super(view);
+            txName = itemView.findViewById(R.id.txFerestande2);
+            txSematShoghli = itemView.findViewById(R.id.txSemat2);
+
             imgLike = itemView.findViewById(R.id.imgLike);
             txTedadSuje = itemView.findViewById(R.id.txTedadSuje);
             txMotavali = itemView.findViewById(R.id.txMotavali);

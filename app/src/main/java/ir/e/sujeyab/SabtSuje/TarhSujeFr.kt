@@ -38,12 +38,15 @@ class TarhSujeFr : Fragment() {
         EventBus.getDefault().post(event)
 
         inflatedview!!.clEdame.setOnClickListener {
+
             if (inflatedview!!.etOnvan.text.toString() == "" || inflatedview!!.etMozo.text.toString() == "" || inflatedview!!.etTozihat.text.toString() == ""){
+
                 clcl.snackbar("لطفا همه فیلد ها را تکمیل نمایید")
 
             }else{
                 activity!!.viewPager.setCurrentItem(2)
             }
+
         }
 
         inflatedview!!.clBazgasht.visibility = View.GONE
@@ -130,11 +133,6 @@ class TarhSujeFr : Fragment() {
     }*/
 
 
-    private fun uploadImage1(image: File) {
-            var requestBody:RequestBody =  RequestBody.create(MediaType.get("image/*"),image)
-            var image:MultipartBody.Part = MultipartBody.Part.createFormData("img",image.name,requestBody)
-            var user:RequestBody = RequestBody.create(MediaType.parse("text/plain"),"GrayMind")
-    }
 
 
 

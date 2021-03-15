@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
+import ir.e.sujeyab.pishkhan.Pishkhan
 
 class Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +21,24 @@ class Splash : AppCompatActivity() {
             window.setStatusBarColor(Color.parseColor("#FFFFFF"))
         }
 
+ /*       animation_view.playAnimation();
+        //animation_view.cancelAnimation();
+        animation_view.setRepeatCount(3);// for 3 loops
+        val animationSpec = remember { LottieAnimationSpec.RawRes(R.raw.loading) }
+        // You can control isPlaying/progress/repeat/etc. with this.
+        val animationState = rememberLottieAnimationState(autoPlay = true, repeatCount = Integer.MAX_VALUE)
+
+        LottieAnimation(
+                animationSpec,
+                animationState,
+                modifier = Modifier.preferredSize(100.dp)
+        )*/
+
 
         Handler().postDelayed(Runnable {
             val intent = Intent(this, Pishkhan::class.java)
             this.startActivity(intent)
             this.finish()
-        }, 1000)
+        }, 1000)}}
 
-    }
 
-}

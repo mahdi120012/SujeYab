@@ -1,4 +1,4 @@
-package ir.e.sujeyab
+package ir.e.sujeyab.pishkhan
 
 import android.content.Intent
 import android.graphics.Color
@@ -14,14 +14,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
-import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.SabtForiSuje
-import ir.e.sujeyab.login.TakmilEtelaat
-import kotlinx.android.synthetic.main.login.*
+import ir.e.sujeyab.Setting
 import kotlinx.android.synthetic.main.login.tabLayout
 import kotlinx.android.synthetic.main.login.viewPager
-import kotlinx.android.synthetic.main.pishkhan.*
 import kotlinx.android.synthetic.main.toolbar_button.*
 
 class Pishkhan : AppCompatActivity() {
@@ -42,7 +39,9 @@ class Pishkhan : AppCompatActivity() {
         }
         viewPager.setCurrentItem(2)
 
-        imgHome.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.home_zard));
+        imgHome.setImageDrawable(ContextCompat.getDrawable(this,
+            R.drawable.home_zard
+        ));
         txHome.setTextColor(Color.BLACK)
 
         clSujeHa.setOnClickListener {

@@ -29,6 +29,8 @@ import kotlinx.android.synthetic.main.vijegiha_fr.view.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.clcl
 import me.relex.circleindicator.CircleIndicator
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.greenrobot.eventbus.EventBus
@@ -188,11 +190,11 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         progress_bar.progress = 0
         val body = UploadRequestBody(file, "image", this)
         ApiForUpload().uploadImage(MultipartBody.Part.createFormData("image",file.name, body),
-                                   RequestBody.create(MediaType.parse("multipart/form-data"), "json"),
-                                   RequestBody.create(MediaType.parse("multipart/form-data"), etOnvanP!!.text.toString()),
-                                   RequestBody.create(MediaType.get("multipart/form-data"),etMozoP!!.text.toString()),
-                                   RequestBody.create(MediaType.get("multipart/form-data"), etTozihatP!!.text.toString()),
-                                   RequestBody.create(MediaType.get("multipard/form-data"),"سوژه ها"))
+                                   RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
+                                   RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
+                                   RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
+                                   RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
+                                   RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"))
             .enqueue(object : Callback<UploadResponse> {
 
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {

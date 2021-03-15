@@ -479,11 +479,11 @@ public class LoadData {
                     if (takmilEtelaatModel.getProfile_picture().isEmpty()) {
 
                         Picasso.get()
-                                .load(R.drawable.suje_icon)
+                                .load(R.drawable.logo)
                                 .centerInside()
                                 .fit()
-                                .error(R.drawable.suje_icon)
-                                .placeholder(R.drawable.suje_icon)
+                                .error(R.drawable.logo)
+                                .placeholder(R.drawable.logo)
                                 .into(imgProfileImage);
 
                     }else{
@@ -491,8 +491,8 @@ public class LoadData {
                                 .load(takmilEtelaatModel.getProfile_picture() )
                                 .centerInside()
                                 .fit()
-                                .error(R.drawable.suje_icon)
-                                .placeholder(R.drawable.suje_icon)
+                                .error(R.drawable.logo)
+                                .placeholder(R.drawable.logo)
                                 .into(imgProfileImage);
                     }
                 }
@@ -990,7 +990,7 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-    public static void loadFarakhanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+   public static void loadFarakhanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -1005,7 +1005,37 @@ public class LoadData {
                     lastId = farakhanVijehModel.getId();
                     rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
                             ,farakhanVijehModel.getModat_baghimande(),
-                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali()));
+                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),"",""));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    public static void loadSujeHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <FarakhanVijehModel>> call = api.getSujeHa();
+
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
+                    lastId = farakhanVijehModel.getId();
+                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
+                            ,farakhanVijehModel.getModat_baghimande(),
+                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getName_family(), " ( " + farakhanVijehModel.getSemat_shoghli() + " ) "));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1035,7 +1065,7 @@ public class LoadData {
                     lastId = model.getId();
                     rModels.add(new RecyclerModel(lastId, model.getName_vaziyat_suje_ha(),""
                             ,"",
-                            "",""));
+                            "","","","",""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1084,7 +1114,7 @@ public class LoadData {
                         lastId = jsonObject.getString("id");
                         name_vaziyat_farakhan = jsonObject.getString("name_vaziyat_farakhan");
 
-                        rModels.add(new RecyclerModel(lastId, name_vaziyat_farakhan,"","","",""));
+                        rModels.add(new RecyclerModel(lastId, name_vaziyat_farakhan,"","","","","","",""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1139,7 +1169,7 @@ public class LoadData {
 
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
                     lastId = farakhanVijehModel.getId();
-                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),""));
+                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),"","","",""));
                     rAdapter.notifyDataSetChanged();
                 }
 
@@ -1192,7 +1222,7 @@ public class LoadData {
                         onvan = jsonObject.getString("onvan");
                         modat_baghimande = jsonObject.getString("modat_baghimande");
                         matn_kholase = jsonObject.getString("matn_kholase");
-                        rModels.add(new RecyclerModel(lastId, picture,onvan,modat_baghimande,matn_kholase,""));
+                        rModels.add(new RecyclerModel(lastId, picture,onvan,modat_baghimande,matn_kholase,"","","",""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

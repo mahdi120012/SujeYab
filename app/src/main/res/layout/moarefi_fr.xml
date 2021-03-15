@@ -29,10 +29,10 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgPicture"
                     android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_height="185dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/bg_round_imageview"
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,6 @@
                     android:id="@+id/txOnvan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/iran_sans_bold"
                     android:justificationMode="inter_word"
@@ -53,14 +52,13 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/imgPicture"
-                    app:layout_constraintStart_toEndOf="@+id/txTarikh"
+                    app:layout_constraintStart_toStartOf="@+id/txTarikh"
                     app:layout_constraintTop_toBottomOf="@+id/imgPicture" />
 
                 <TextView
                     android:id="@+id/txMatn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="24dp"
                     android:fontFamily="@font/iran_sans"
                     android:justificationMode="inter_word"
@@ -70,7 +68,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/imgPicture"
                     app:layout_constraintStart_toStartOf="@+id/txTarikh"
-                    app:layout_constraintTop_toBottomOf="@+id/txOnvan" />
+                    app:layout_constraintTop_toBottomOf="@+id/txTarikh" />
 
                 <TextView
                     android:id="@+id/txTarikh"
@@ -79,11 +77,10 @@
                     android:fontFamily="@font/iran_sans"
                     android:justificationMode="inter_word"
                     android:text="####/##/##"
-                    android:textColor="@color/black"
+                    android:textColor="#676767"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/txOnvan"
                     app:layout_constraintStart_toStartOf="@+id/imgPicture"
-                    app:layout_constraintTop_toTopOf="@+id/txOnvan" />
+                    app:layout_constraintTop_toBottomOf="@+id/txOnvan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,7 +93,7 @@
                     android:id="@+id/imageView14"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="24dp"
                     app:layout_constraintBottom_toBottomOf="@+id/txTedadLike"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/txTedadLike"
@@ -172,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="24dp"
                     android:numStars="1"
                     android:progressTint="@color/systemColor"
                     android:rating="5"
@@ -194,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/iran_sans_bold"
                     android:text="وضعیت سوژه:"
@@ -270,7 +267,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="24dp"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -284,14 +281,14 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="32dp"
                 android:background="#FFFFFF"
-                android:visibility="visible">
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/textView391"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="24dp"
                     android:fontFamily="@font/iran_sans_bold"
                     android:text="معرفی کامل:"
                     android:textColor="@color/black"

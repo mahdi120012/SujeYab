@@ -40,6 +40,9 @@ public interface Api {
     @GET("load_farakhan_ha")
     Call<List<FarakhanVijehModel>> getFarakhanHa();
 
+    @GET("load_suje_ha")
+    Call<List<FarakhanVijehModel>> getSujeHa();
+
     @GET("load_vaziyat_suje_ha")
     Call<List<VaziyatModel>> getVaziyatSujeHa();
 

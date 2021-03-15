@@ -10,12 +10,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
+
         applicationId "ir.e.sujeyab"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -64,4 +65,6 @@ dependencies {
     implementation 'com.github.nguyenhoanglam:ImagePicker:1.4.3'
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation 'com.airbnb.android:lottie:3.6.1'
+    implementation 'ir.map:map-sdk:4.0.2'
 }

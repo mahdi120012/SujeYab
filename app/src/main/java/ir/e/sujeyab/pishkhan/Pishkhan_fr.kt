@@ -1,6 +1,5 @@
-package ir.e.sujeyab
+package ir.e.sujeyab.pishkhan
 
-import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -9,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import ir.e.sujeyab.CustomClasses.Recyclerview
+import ir.e.sujeyab.LoadData
+import ir.e.sujeyab.R
+import ir.e.sujeyab.RecyclerAdapter
 import ir.e.sujeyab.models.RecyclerModel
 import ir.e.sujeyab.models.SliderModel
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.net_connection.view.*
-import kotlinx.android.synthetic.main.pishkhan_fr.*
 import kotlinx.android.synthetic.main.pishkhan_fr.view.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -47,25 +48,55 @@ class Pishkhan_fr : Fragment() {
         //val clVorodBaNamKarbari = inflatedview!!.findViewById<View>(R.id.clVorodBaNamKarbari) as ConstraintLayout
         //val etUsername = inflatedview!!.findViewById<View>(R.id.etUsername) as EditText
 
-        LoadData.LoadPishkhanSliderByRetrofit(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
+        LoadData.LoadPishkhanSliderByRetrofit(
+            activity,
+            inflatedview!!.clWifiState,
+            inflatedview!!.pager,
+            inflatedview!!.indicator,
+            ImgArray
+        )
         init()
 
 
         //LoadData.loadPishkhanSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
 
-        LoadData.loadSujeHayeVijehSliderBaRetrofit(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
+        LoadData.loadSujeHayeVijehSliderBaRetrofit(
+            activity,
+            inflatedview!!.clWifiState,
+            inflatedview!!.pagerSujeHayeVijeh,
+            inflatedview!!.indicatorSujeHayeVijeh,
+            ImgArraySujeHayeVijeh
+        )
         //LoadData.loadSujeHayeVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
 
         //LoadData.loadKhadamatVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
-        LoadData.loadKhadamatVijehSliderBaRetrofit(activity, (activity as Pishkhan).clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh, inflatedview!!.nestedScrollView, inflatedview!!.progressBar)
+        LoadData.loadKhadamatVijehSliderBaRetrofit(
+            activity,
+            (activity as Pishkhan).clWifiState,
+            inflatedview!!.pagerKhedmatHayeVijeh,
+            inflatedview!!.indicatorkhedmatHayeVijeh,
+            ImgArrayKhedmatHayeVijeh,
+            inflatedview!!.nestedScrollView,
+            inflatedview!!.progressBar
+        )
 
 
 
         rModels = ArrayList()
-        rAdapter = RecyclerAdapter("farakhan_vije", activity, rModels, rAdapter)
+        rAdapter = RecyclerAdapter(
+            "farakhan_vije",
+            activity,
+            rModels,
+            rAdapter
+        )
         Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv1, rAdapter, rModels)
         //LoadData.loadFarakhanVijeh(activity, inflatedview!!.clWifiState, rModels, rAdapter)
-        LoadData.loadFarakhanVijehBaRetrofit(activity, inflatedview!!.clWifiState, rModels, rAdapter)
+        LoadData.loadFarakhanVijehBaRetrofit(
+            activity,
+            inflatedview!!.clWifiState,
+            rModels,
+            rAdapter
+        )
 
 
 

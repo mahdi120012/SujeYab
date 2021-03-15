@@ -76,7 +76,6 @@
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
                     android:inputType="textPersonName|textNoSuggestions"
-                    android:maxLength="11"
                     android:padding="6dp"
                     android:text="عنوان تست"
                     android:textSize="12sp"

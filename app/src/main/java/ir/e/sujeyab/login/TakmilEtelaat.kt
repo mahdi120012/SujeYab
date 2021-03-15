@@ -1,8 +1,12 @@
 package ir.e.sujeyab.login
 
+
 import android.annotation.SuppressLint
-import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -11,7 +15,18 @@ import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import com.mapbox.android.core.location.*
+import com.mapbox.android.core.permissions.PermissionsListener
+import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
+import com.mapbox.mapboxsdk.location.LocationComponentOptions
+import com.mapbox.mapboxsdk.location.modes.CameraMode
+import com.mapbox.mapboxsdk.location.modes.RenderMode
+import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
+import com.mapbox.mapboxsdk.maps.Style
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
@@ -19,13 +34,15 @@ import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
-import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
+import ir.map.sdk_map.MapirStyle
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.clEdame
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.takmil_etelaat.*
-import java.lang.reflect.Array.newInstance
+import kotlinx.android.synthetic.main.takmil_etelaat.view.*
+import java.lang.ref.WeakReference
 
 
-class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     var inflatedview: View? = null
 
     var jensiyatSp:String = ""
@@ -37,6 +54,111 @@ class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerD
     var shahrestanSp:String = ""
     var shahrSp:String = ""
     lateinit var etTarikhTavalod2: EditText
+
+    var map: MapboxMap? = null
+    var mapStyle: Style? = null
+    //var mapView: ir.map.sdk_map.maps.MapView? = null
+    var lastKnowLatLng: LatLng? = null
+
+    // This is an object to manage location update
+    private var locationEngine: LocationEngine? = null
+
+    // These are two number to handle interval of location update and its delay
+    private val DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L
+    private val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
+
+    // Declare an object with CustomLocationCallBack class type
+    private val callback = MyLocationCallback(this)
+
+    // This is a custom Class to manage last known location
+    private class MyLocationCallback internal constructor(activity: TakmilEtelaat) : LocationEngineCallback<LocationEngineResult> {
+        private val activityWeakReference: WeakReference<TakmilEtelaat>
+
+        /**
+         * The LocationEngineCallback interface's method which fires when the device's location has changed.
+         *
+         * @param result the LocationEngineResult object which has the last known location within it.
+         */
+        override fun onSuccess(result: LocationEngineResult) {
+            val activity = activityWeakReference.get()
+            if (activity != null) {
+                val location = result.lastLocation ?: return
+                // Here you access last know location
+                activity.lastKnowLatLng = LatLng(location.latitude, location.longitude)
+                //Toast.makeText(this, activity.lastKnowLatLng!!.latitude.toString() + ", " + activity.lastKnowLatLng!!.longitude, Toast.LENGTH_SHORT).show()
+                // Pass the new location to the Mapir SDK's LocationComponent
+                if (activity.map != null && result.lastLocation != null) activity.map!!.locationComponent.forceLocationUpdate(result.lastLocation)
+            }
+        }
+
+        /**
+         * The LocationEngineCallback interface's method which fires when the device's location can not be captured
+         *
+         * @param exception the exception message
+         */
+        override fun onFailure(exception: Exception) {
+            Log.d("LocationChangeActivity", exception.localizedMessage)
+            val activity = activityWeakReference.get()
+            //if (activity != null) Toast.makeText(activity, "exception.localizedMessage.toString()", Toast.LENGTH_SHORT).show()
+        }
+
+        init {
+            activityWeakReference = WeakReference(activity)
+        }
+    }
+
+
+    // Call this method to enable location update and see it in map
+    @SuppressLint("MissingPermission")
+    private fun enableLocationComponent() {
+        // Check if permissions are enabled and if not request
+        if (PermissionsManager.areLocationPermissionsGranted(activity)) {
+            // Create and customize the LocationComponent's options
+            val customLocationComponentOptions = LocationComponentOptions.builder(this!!.activity!!)
+                    .elevation(5f)
+                    .accuracyAlpha(.6f)
+                    .accuracyColor(Color.RED)
+                    .build()
+            // Get an instance of the component
+            val locationComponent = map!!.locationComponent
+            val locationComponentActivationOptions = LocationComponentActivationOptions.builder(this!!.activity!!, mapStyle!!)
+                    .useDefaultLocationEngine(false) // This line is necessary
+                    .locationComponentOptions(customLocationComponentOptions)
+                    .build()
+            // Activate with options
+            locationComponent.activateLocationComponent(locationComponentActivationOptions)
+            // Enable to make component visible
+            locationComponent.isLocationComponentEnabled = true
+            // Set the component's camera mode
+            locationComponent.cameraMode = CameraMode.TRACKING
+            // Set the component's render mode
+            locationComponent.renderMode = RenderMode.COMPASS
+            initLocationEngine()
+            // Add the location icon click listener
+            locationComponent.addOnLocationClickListener { }
+        } else {
+            val permissionsManager = PermissionsManager(object : PermissionsListener {
+                override fun onExplanationNeeded(permissionsToExplain: List<String>) {}
+                override fun onPermissionResult(granted: Boolean) {
+                    if (granted) enableLocationComponent() else Toast.makeText(activity, "Permission Denied", Toast.LENGTH_LONG).show()
+                }
+            })
+            permissionsManager.requestLocationPermissions(activity)
+        }
+    }
+
+    /**
+     * Set up the LocationEngine and the parameters for querying the device's location
+     */
+    @SuppressLint("MissingPermission")
+    private fun initLocationEngine() {
+        locationEngine = LocationEngineProvider.getBestLocationEngine(this!!.activity!!)
+        val request = LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
+                .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+                .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build()
+        locationEngine!!.requestLocationUpdates(request, callback, Looper.getMainLooper())
+        locationEngine!!.getLastLocation(callback)
+    }
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -56,6 +178,23 @@ class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerD
 
         val spinner_jensiyat: Spinner = inflatedview!!.findViewById(R.id.spinner_jensiyat)
         etTarikhTavalod2 = inflatedview!!.findViewById(R.id.etTarikhTavalod)
+
+
+        inflatedview!!.map_view.onCreate(savedInstanceState);
+        inflatedview!!.map_view!!.getMapAsync(object : OnMapReadyCallback {
+            override fun onMapReady(mapboxMap: MapboxMap) {
+                map = mapboxMap
+                map!!.setStyle(
+                    Style.Builder().fromUri(MapirStyle.MAIN_MOBILE_VECTOR_STYLE),
+                    object : Style.OnStyleLoaded {
+                        override fun onStyleLoaded(style: Style) {
+                            mapStyle = style
+                            enableLocationComponent()
+                            // TODO; جهت انجام هرکاری با شیٔ نقشه، از اینجا به بعد می توانید اقدام کنید
+                        }
+                    })
+            }
+        })
 
 
 
@@ -405,6 +544,42 @@ class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerD
 
     override fun onTimeSet(view: RadialPickerLayout?, hourOfDay: Int, minute: Int) {
         TODO("Not yet implemented")
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        map_view!!.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        map_view!!.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        map_view!!.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        map_view!!.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        map_view!!.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        map_view!!.onDestroy()
+    }
+
+     override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+         map_view!!.onSaveInstanceState(outState)
     }
 
 

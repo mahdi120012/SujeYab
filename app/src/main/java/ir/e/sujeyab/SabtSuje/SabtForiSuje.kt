@@ -77,7 +77,4 @@ class SabtForiSuje : AppCompatActivity() {
             return titles.size
         }
     }
-
-
-
 }

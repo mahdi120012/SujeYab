@@ -8,21 +8,27 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.flash" />
+
     <application
+        android:name=".AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SujeYab"
-        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SabtSuje.SabtForiSuje"></activity>
-        <activity android:name=".SujeClick.SujeClick"></activity>
-        <activity android:name=".Pishkhan" />
+        <activity android:name=".login.TestLocation"></activity>
+        <activity android:name=".SujeClick.SujeClick2" />
+        <activity android:name=".SabtSuje.SabtForiSuje" />
+        <activity android:name=".SujeClick.SujeClick" />
+        <activity android:name=".pishkhan.Pishkhan" />
         <activity android:name=".Setting" />
         <activity android:name=".login.Login" />
         <activity android:name=".Splash">
