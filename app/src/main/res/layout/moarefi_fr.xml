@@ -79,6 +79,8 @@
                     android:text="####/##/##"
                     android:textColor="#676767"
                     android:textSize="14sp"
+                    android:layoutDirection="ltr"
+                    android:textDirection="ltr"
                     app:layout_constraintStart_toStartOf="@+id/imgPicture"
                     app:layout_constraintTop_toBottomOf="@+id/txOnvan" />
             </androidx.constraintlayout.widget.ConstraintLayout>

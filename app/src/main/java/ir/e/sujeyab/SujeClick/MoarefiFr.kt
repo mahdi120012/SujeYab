@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
+import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.R
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
@@ -46,7 +47,9 @@ class MoarefiFr : Fragment() {
         var semat_shoghli:String = activity!!.intent.extras!!.getString("semat_shoghli").toString()
         inflatedview!!.txOnvan.setText(onvan)
         inflatedview!!.txMatn.setText(matn)
-        inflatedview!!.txTarikh.setText(dateCreate)
+
+        //Toast.makeText(activity,dateCreate,Toast.LENGTH_SHORT).show()
+        inflatedview!!.txTarikh.setText(TimeKononi().changeGregorianToPersian(dateCreate))
         inflatedview!!.txNameFerestande.setText(name)
         inflatedview!!.txTakhasosFerestande.setText(semat_shoghli)
 

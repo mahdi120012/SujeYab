@@ -64,12 +64,12 @@
         android:fontFamily="@font/iran_sans"
         android:text="(سمت شغلی)"
         android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="@+id/txFerestande2"
-        app:layout_constraintEnd_toStartOf="@+id/txFerestande2"
-        app:layout_constraintTop_toTopOf="@+id/txFerestande2" />
+        app:layout_constraintBottom_toBottomOf="@+id/txFerestande"
+        app:layout_constraintEnd_toStartOf="@+id/txFerestande"
+        app:layout_constraintTop_toTopOf="@+id/txFerestande" />
 
     <TextView
-        android:id="@+id/txFerestande2"
+        android:id="@+id/txFerestande"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/iran_sans"
@@ -80,7 +80,7 @@
         app:layout_constraintEnd_toEndOf="@+id/txOnvan" />
 
     <TextView
-        android:id="@+id/txMotavali"
+        android:id="@+id/txVaziyat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgAxFarakhan"
+            android:id="@+id/imgPicture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_round_imageview"
@@ -218,7 +218,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView32"
+            android:id="@+id/txVijehFarakhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"

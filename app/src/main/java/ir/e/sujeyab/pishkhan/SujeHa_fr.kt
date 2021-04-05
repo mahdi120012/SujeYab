@@ -9,6 +9,8 @@ import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.RecyclerAdapter
+import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa
+import ir.e.sujeyab.models.FarakhanVijehModel
 import ir.e.sujeyab.models.RecyclerModel
 import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.view.*
@@ -18,8 +20,8 @@ class SujeHa_fr : Fragment() {
     var inflatedview: View? = null
     private var rAdapter: RecyclerAdapter? = null
     private var rModels: ArrayList<RecyclerModel>? = null
-    private var rModels2: ArrayList<RecyclerModel>? = null
-
+    private var rModels2: ArrayList<FarakhanVijehModel>? = null
+    private var rAdapterSujeHa: RecyclerAdapterSujeHa? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -44,14 +46,13 @@ class SujeHa_fr : Fragment() {
 
 
         rModels2 = ArrayList()
-        rAdapter =
-        RecyclerAdapter("suje_ha", activity, rModels2, rAdapter)
-        Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv2, rAdapter, rModels2)
+        rAdapterSujeHa = RecyclerAdapterSujeHa("suje_ha", activity, rModels2, rAdapterSujeHa)
+        Recyclerview.defineRecyclerViewVertical2(activity, inflatedview!!.rv2, rAdapterSujeHa, rModels2)
         LoadData.loadSujeHaBaRetrofit(
             activity,
             inflatedview!!.clWifiState,
             rModels2,
-            rAdapter
+            rAdapterSujeHa
         )
 
 

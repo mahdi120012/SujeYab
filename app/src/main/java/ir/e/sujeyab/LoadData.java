@@ -54,6 +54,7 @@ import ir.e.sujeyab.CustomClasses.MySingleton;
 import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
 import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
+import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.SliderModel;
@@ -1020,7 +1021,7 @@ public class LoadData {
 
     }
 
-    public static void loadSujeHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+    public static void loadSujeHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterSujeHa rAdapter) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -1033,9 +1034,11 @@ public class LoadData {
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
 
                     lastId = farakhanVijehModel.getId();
-                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
-                            ,farakhanVijehModel.getModat_baghimande(),
-                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getName_family(), " ( " + farakhanVijehModel.getSemat_shoghli() + " ) "));
+                    rModels.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
+                            farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
+                            farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
+                            farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
+                            farakhanVijehModel.getDate_create()));
                     rAdapter.notifyDataSetChanged();
 
                 }

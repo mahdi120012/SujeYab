@@ -20,7 +20,10 @@ interface ApiForUpload {
                     @Part("onvan") onvan: RequestBody,
                     @Part("mozo") mozo: RequestBody,
                     @Part("tozihat") tozihat: RequestBody,
-                    @Part("type") type: RequestBody): Call<UploadResponse>
+                    @Part("id_ferestande") idFerestande: RequestBody,
+                    @Part("type") type: RequestBody,
+                    @Part("shenase_rahgiri") shenase_rahgiri: RequestBody)
+            : Call<UploadResponse>
 
     companion object {
         operator fun invoke(): ApiForUpload {

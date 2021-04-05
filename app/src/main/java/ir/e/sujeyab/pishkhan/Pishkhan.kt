@@ -3,6 +3,7 @@ package ir.e.sujeyab.pishkhan
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Display
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -11,14 +12,15 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.github.javiersantos.appupdater.AppUpdater
+import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.SabtForiSuje
 import ir.e.sujeyab.Setting
-import kotlinx.android.synthetic.main.login.tabLayout
-import kotlinx.android.synthetic.main.login.viewPager
+import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.toolbar_button.*
 
 class Pishkhan : AppCompatActivity() {
@@ -31,6 +33,12 @@ class Pishkhan : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //binding = ActivityFragmentViewPagerBinding.inflate(layoutInflater)
         setContentView(R.layout.pishkhan)
+
+        val appUpdater = AppUpdater(this).setUpdateFrom(UpdateFrom.JSON).
+        setUpdateJSON("http://robika.ir/ultitled/practice/sujeyab/sujeyab_update_checker.json").
+        setTitleOnUpdateAvailable("بروزرسانی جدید موجوده!").setButtonUpdate("بروزرسانی").
+        setButtonDismiss("فعلا نه").setButtonDoNotShowAgain("")
+        appUpdater.start()
         init()
 
         val imgSearch = findViewById<View>(R.id.imgSearch) as ImageView

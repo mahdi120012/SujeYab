@@ -157,11 +157,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.txOnvan.setText(rModels.get(position).getOnvan());
             //holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
-            holder.txMotavali.setText(rModels.get(position).getMotavali());
-            holder.txTedadLike.setText(new EnglishNumberToPersian().convert("1"));
-            holder.txTedadComment.setText(new EnglishNumberToPersian().convert("1"));
+            holder.txVaziyat.setText(rModels.get(position).getMotavali());
+            holder.txTedadLike.setText(new EnglishNumberToPersian().convert("0"));
+            holder.txTedadComment.setText(new EnglishNumberToPersian().convert("0"));
 
-            holder.txName.setText(rModels.get(position).getName_family());
+            holder.txFerestande.setText(rModels.get(position).getName_family());
             holder.txSematShoghli.setText(rModels.get(position).getSemat_shoghli());
 
             //holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)) + " سوژه" );
@@ -223,12 +223,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txOnvan,txModatBaghiMande,txMatnKholase,txTedadComment,txTedadLike,txOnvan2,txMotavali,txTedadSuje,txName,txSematShoghli;
+        TextView txOnvan,txModatBaghiMande,txMatnKholase,txTedadComment,txTedadLike,txOnvan2,txMotavali,txTedadSuje,txFerestande,txSematShoghli
+                ,txVaziyat;
         ImageView imgAxFarakhan,imgLike;
 
         MyViewHolder(View view) {
             super(view);
-            txName = itemView.findViewById(R.id.txFerestande2);
+            txFerestande = itemView.findViewById(R.id.txFerestande);
+            txVaziyat = itemView.findViewById(R.id.txVaziyat);
             txSematShoghli = itemView.findViewById(R.id.txSemat2);
 
             imgLike = itemView.findViewById(R.id.imgLike);

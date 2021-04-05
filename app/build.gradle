@@ -67,4 +67,8 @@ dependencies {
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
     implementation 'com.airbnb.android:lottie:3.6.1'
     implementation 'ir.map:map-sdk:4.0.2'
+    implementation 'com.github.javiersantos:AppUpdater:2.7'
+    implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
+
+
 }

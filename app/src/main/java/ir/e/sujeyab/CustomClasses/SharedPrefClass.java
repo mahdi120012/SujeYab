@@ -19,6 +19,13 @@ public class SharedPrefClass {
         sharedPreferences.edit().putString("pass", "").commit();
         sharedPreferences.edit().putString("name", "").commit();
         sharedPreferences.edit().putString("noe", "").commit();
+        sharedPreferences.edit().putString("shenase_rahgiri", "").commit();
     }
+
+    public static void clearShenaseRahgiri(Context c){
+        sharedPreferences = c.getSharedPreferences("file", c.MODE_PRIVATE);
+        sharedPreferences.edit().putString("shenase_rahgiri", "").commit();
+    }
+
 
 }

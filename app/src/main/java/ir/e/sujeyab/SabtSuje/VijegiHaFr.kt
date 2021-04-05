@@ -3,6 +3,7 @@ package ir.e.sujeyab.SabtSuje
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,19 +17,17 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.Controller.RetrofitProvider
+import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.ViewPagerAdapterForSlider
 import ir.e.sujeyab.models.SliderModel
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
-import kotlinx.android.synthetic.main.login.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
-import kotlinx.android.synthetic.main.vijegiha_fr.view.clcl
 import me.relex.circleindicator.CircleIndicator
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -187,6 +186,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         val outputStream = FileOutputStream(file)
         inputStream.copyTo(outputStream)
 
+         val r = Random()
+         val randomNumber = r.nextInt(9999999)
+
         progress_bar.progress = 0
         val body = UploadRequestBody(file, "image", this)
         ApiForUpload().uploadImage(MultipartBody.Part.createFormData("image",file.name, body),
@@ -194,7 +196,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                                    RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
                                    RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
                                    RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-                                   RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"))
+                                   RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
+                                   RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
+                                   RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
             override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -209,7 +213,15 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                 response.body()?.let {
                     inflatedview!!.clcl.snackbar(it.message)
                     progress_bar.progress = 100
+
+                    SharedPrefClass.clearShenaseRahgiri(activity)
+                    val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("shenase_rahgiri", randomNumber.toString())
+                    editor.commit()
+
                     activity!!.viewPager.setCurrentItem(0)
+
                 }
             }
         })
