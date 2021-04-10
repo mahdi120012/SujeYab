@@ -28,13 +28,8 @@ class SabtFr : Fragment() {
         /*(activity!!.txEdame)!!.setOnClickListener {
             LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
         }*/
-
-        inflatedview!!.txShenaseRahgiri.setText(
-            SharedPrefClass.getUserId(
-                activity,
-                "shenase_rahgiri"
-            )
-        )
+        ;
+        //inflatedview!!.txShenaseRahgiri.setText(getActivity()!!.getIntent().getExtras()!!.getString("shenase_rahgiri"))
         inflatedview!!.txBazgashtBePishkhan.setOnClickListener {
 
             activity!!.finish()

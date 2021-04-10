@@ -13,6 +13,9 @@ import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrate
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.R
 import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.login.tabLayout
+import kotlinx.android.synthetic.main.login.viewPager
+import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.setting.*
 
 
@@ -38,6 +41,8 @@ class Login : AppCompatActivity() {
             val myFragment: Fragment = TakmilEtelaat()
             supportFragmentManager.beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit()
         }
+
+        viewPager.setCurrentItem(1)
     }
 
 
@@ -58,8 +63,8 @@ class Login : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             when (position) {
-                0 -> return KarbarHaghighi()
-                1 -> return KarbarHoghoghi()
+                0 -> return KarbarHoghoghi()
+                1 -> return KarbarHaghighi()
             }
             return KarbarHaghighi()
         }

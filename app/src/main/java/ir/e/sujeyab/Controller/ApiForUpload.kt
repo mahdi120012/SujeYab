@@ -15,14 +15,25 @@ interface ApiForUpload {
 
     @Multipart
     @POST("Api.php?apicall=upload")
-    fun uploadImage(@Part image: MultipartBody.Part,
+    fun uploadImage(@Part p1: MultipartBody.Part,
+                    @Part p2: MultipartBody.Part,
+                    @Part p3: MultipartBody.Part,
+                    @Part p4: MultipartBody.Part,
+                    @Part p5: MultipartBody.Part,
+                    @Part p6: MultipartBody.Part,
+                    @Part p7: MultipartBody.Part,
+                    @Part p8: MultipartBody.Part,
+                    @Part p9: MultipartBody.Part,
+                    @Part p10: MultipartBody.Part,
                     @Part("desc") desc: RequestBody,
                     @Part("onvan") onvan: RequestBody,
                     @Part("mozo") mozo: RequestBody,
                     @Part("tozihat") tozihat: RequestBody,
                     @Part("id_ferestande") idFerestande: RequestBody,
                     @Part("type") type: RequestBody,
-                    @Part("shenase_rahgiri") shenase_rahgiri: RequestBody)
+                    @Part("shenase_rahgiri") shenase_rahgiri: RequestBody,
+                    @Part("link_video") linkVideo: RequestBody,
+                    @Part("tozih_video") tozihVideo: RequestBody)
             : Call<UploadResponse>
 
     companion object {

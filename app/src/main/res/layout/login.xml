@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/iran_sans"
-            android:text="ورود (عضویت)"
+            android:text="ورود"
             android:textColor="#000000"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:textDirection="rtl"
+    android:id="@+id/clcl"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/iran_sans_bold"
-            android:text="ورود (عضویت) با نام کاربری"
+            android:text="عضویت با شماره تلفن همراه"
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -146,6 +146,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="یا"
+        android:textColor="#2F3337"
+        android:fontFamily="@font/iran_sans"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />

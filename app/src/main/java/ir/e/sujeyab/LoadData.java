@@ -2,6 +2,7 @@ package ir.e.sujeyab;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
@@ -17,7 +18,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.AuthFailureError;
@@ -30,6 +33,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
@@ -54,11 +59,17 @@ import ir.e.sujeyab.CustomClasses.MySingleton;
 import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
 import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
+import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
+import ir.e.sujeyab.adapters.TasavirSujeAdapter;
+import ir.e.sujeyab.login.Login;
+import ir.e.sujeyab.login.TakmilEtelaat;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
+import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
+import ir.e.sujeyab.models.TasavirSujeModel;
 import ir.e.sujeyab.models.VaziyatModel;
 import ir.e.sujeyab.upload.MyResponse;
 import me.relex.circleindicator.CircleIndicator;
@@ -75,6 +86,36 @@ public class LoadData {
     public static final int LOAD_LIMIT = 60;
     public static String lastId = "0";
     public static boolean itShouldLoadMore = true;
+
+
+    public static void LoadTasavirSujeBaRetrofit(final Context c, final ConstraintLayout clWifi,
+                                                 final String sujeId, final ViewPager mPager, final CircleIndicator indicator, final ArrayList<TasavirSujeModel> ImgArray) {
+
+        Call<List<TasavirSujeModel>> call = new RetrofitProvider().getApi().getTasavirSuje(sujeId);
+        call.enqueue(new Callback<List<TasavirSujeModel>>() {
+            @Override
+            public void onResponse(Call<List<TasavirSujeModel>> call, retrofit2.Response<List<TasavirSujeModel>> response) {
+
+                //if (response.isSuccessful()){}
+                List<TasavirSujeModel> tasavirSujeModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (TasavirSujeModel tasavirSujeModel:tasavirSujeModels){
+                    ImgArray.add(new TasavirSujeModel(tasavirSujeModel.getP1()));
+                    mPager.setAdapter(new TasavirSujeAdapter(c,ImgArray,"slider"));
+                    indicator.setViewPager(mPager);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TasavirSujeModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
 
     public static void LoadPishkhanSliderByRetrofit(Context c, final ConstraintLayout clWifi, ViewPager mPager,
@@ -434,14 +475,16 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-    public static void loadMoshakhasatBaRetrofit(final Context c, final ConstraintLayout clWifi, EditText etNameFamily, EditText etTarikhTavalod
+    public static void loadMoshakhasatBaRetrofit(final Context c, final ConstraintLayout clWifi, String username, EditText etNameFamily, EditText etTarikhTavalod
             , EditText etJensiyat, EditText etVaziyatTaahol, EditText etVaziyatNezamVazife, EditText etAkharinMadrakTahsili, EditText etMoadelMadrakTahsili
             , EditText etReshteTahsili, EditText etZamineMoredAlaghaHamkari, EditText etMizanSabegheKarMortabet, EditText etSematShoghli, EditText etCodePerseneli
             , EditText etEmail, EditText etShomaeTelephoneTamas, EditText etKeshvar, EditText etOstan, EditText etShahrestan
             , EditText etShahr, EditText etRosta, EditText etNeshani, EditText etMoaref, EditText etTelephoneTamasMoaref, EditText etTozihat, ImageView imgProfileImage) {
+
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
-        Call<List<TakmilEtelaatModel>> call = api.getTakmilEtelaat();
+        Call<List<TakmilEtelaatModel>> call = api.getTakmilEtelaat(username);
         call.enqueue(new Callback<List<TakmilEtelaatModel>>() {
             @Override
             public void onResponse(Call<List<TakmilEtelaatModel>> call, retrofit2.Response<List<TakmilEtelaatModel>> response) {
@@ -1015,6 +1058,70 @@ public class LoadData {
             @Override
             public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    public static void registerBaRetrifit(Context c, final ConstraintLayout clcl,  final ConstraintLayout clWifi, String username, String password) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<UploadResponse> call = api.registerUser(username, password);
+
+        call.enqueue(new Callback<UploadResponse>() {
+
+
+            @Override
+            public void onResponse(Call<UploadResponse> call, retrofit2.Response<UploadResponse> response) {
+
+
+                Snackbar snackbar = Snackbar.make(clcl, response.body().getMessage(), Snackbar.LENGTH_LONG);
+                snackbar.show();
+
+                if (response.body().getError() == false){
+
+                    SharedPreferences sharedPreferences = c.getSharedPreferences("file", c.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("user", username);
+                    editor.commit();
+
+                    AppCompatActivity activity = (AppCompatActivity) c;
+                    Fragment myFragment = new TakmilEtelaat();
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();
+
+
+                    /*Intent intent = new Intent(c, Login.class);
+                    c.startActivity(intent);
+
+                    Activity activity = (Activity)c;
+                    activity.finish();*/
+                }
+
+
+
+
+
+                //List<RegisterModel> registerModels = response.body();
+
+
+                /*for (RegisterModel registerModel:registerModels){
+
+                    lastId = registerModel.get();
+                    rModels.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
+                            farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
+                            farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
+                            farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
+                            farakhanVijehModel.getDate_create()));
+                    rAdapter.notifyDataSetChanged();
+
+                }*/
+            }
+
+            @Override
+            public void onFailure(Call<UploadResponse> call, Throwable t) {
+                Toast.makeText(c, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

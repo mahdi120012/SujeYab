@@ -10,6 +10,14 @@
     android:background="#eaf0f6"
     >
 
+    <include
+        layout="@layout/net_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,6 +27,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="282dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clcl">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clcl">
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/viewPager1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                app:ci_drawable="@drawable/bg_orange_ba_hashiye"
+                app:ci_drawable_unselected="@drawable/bg_green_ba_hashiye"
+                app:layout_constraintEnd_toEndOf="@+id/clViewPager"
+                app:layout_constraintStart_toStartOf="@+id/clViewPager"
+                app:layout_constraintTop_toBottomOf="@+id/clViewPager" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

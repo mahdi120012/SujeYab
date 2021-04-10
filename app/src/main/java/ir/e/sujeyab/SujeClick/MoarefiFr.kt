@@ -1,34 +1,26 @@
  package ir.e.sujeyab.SujeClick
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
 import ir.e.sujeyab.CustomClasses.TimeKononi
+import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
-import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
-import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
-import kotlinx.android.synthetic.main.moarefi_fr.*
+import ir.e.sujeyab.adapters.TasavirSujeAdapter
+import ir.e.sujeyab.models.TasavirSujeModel
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
-import kotlinx.android.synthetic.main.sabt_fori_suje.*
-import kotlinx.android.synthetic.main.sabt_fori_suje.clcl
-import kotlinx.android.synthetic.main.tarh_suje_fr.*
-import kotlinx.android.synthetic.main.tarh_suje_fr.view.*
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.greenrobot.eventbus.EventBus
-import java.io.File
+import kotlinx.android.synthetic.main.net_connection.*
 
 
-class MoarefiFr : Fragment() {
+ class MoarefiFr : Fragment() {
     var inflatedview: View? = null
+
+    private val ImgArray = ArrayList<TasavirSujeModel>()
+    //private lateinit var tasavirSujeAdapter:TasavirSujeAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +28,7 @@ class MoarefiFr : Fragment() {
     ): View? {
         inflatedview = inflater.inflate(R.layout.moarefi_fr, container, false)
 
+        var sujeId:String = activity!!.intent.extras!!.getString("id").toString()
         var onvan:String = activity!!.intent.extras!!.getString("onvan").toString()
         var matn:String = activity!!.intent.extras!!.getString("matn").toString()
         var picture:String = activity!!.intent.extras!!.getString("picture").toString()
@@ -57,6 +50,10 @@ class MoarefiFr : Fragment() {
 
         loadImage(inflatedview!!.imgPicture,picture)
         loadImage(inflatedview!!.imgAxFerestande,axFerestande)
+
+        //line zir baraye load tasavir safhe mahsole
+        LoadData.LoadTasavirSujeBaRetrofit(activity, clWifiState,
+            sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
 
         return inflatedview
 }

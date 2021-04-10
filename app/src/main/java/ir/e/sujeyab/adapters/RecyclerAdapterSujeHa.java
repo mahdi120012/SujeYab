@@ -60,7 +60,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
             holder.txTedadLike.setText(new EnglishNumberToPersian().convert("0"));
             holder.txTedadComment.setText(new EnglishNumberToPersian().convert("0"));
             holder.txFerestande.setText(rModels.get(position).getName_family());
-            holder.txSematShoghli.setText(rModels.get(position).getSemat_shoghli());
+            holder.txSematShoghli.setText("( " + rModels.get(position).getSemat_shoghli() + " )" );
 
 
             String ax = rModels.get(position).getPicture();
@@ -89,6 +89,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                 public void onClick(View v) {
 
                     Intent intent =new Intent(c, SujeClick2.class);
+                    intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kholase());
                     intent.putExtra("picture",rModels.get(position).getPicture());

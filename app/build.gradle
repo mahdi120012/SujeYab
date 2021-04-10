@@ -69,6 +69,7 @@ dependencies {
     implementation 'ir.map:map-sdk:4.0.2'
     implementation 'com.github.javiersantos:AppUpdater:2.7'
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
-
-
+    //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'
+    implementation 'com.github.halilozercan:BetterVideoPlayer:kotlin-SNAPSHOT'
+    implementation 'me.relex:circleindicator:2.1.6'
 }

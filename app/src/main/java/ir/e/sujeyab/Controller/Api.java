@@ -3,9 +3,12 @@ package ir.e.sujeyab.Controller;
 import java.util.List;
 
 import ir.e.sujeyab.SabtSuje.UploadImage;
+import ir.e.sujeyab.SabtSuje.UploadResponse;
+import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.SliderModel;
+import ir.e.sujeyab.models.TasavirSujeModel;
 import ir.e.sujeyab.models.VaziyatModel;
 import ir.e.sujeyab.upload.MyResponse;
 import okhttp3.MultipartBody;
@@ -35,7 +38,7 @@ public interface Api {
     Call<List<FarakhanVijehModel>> getSujeHayeVijeh();
 
     @GET("load_moshakhasat_user")
-    Call<List<TakmilEtelaatModel>> getTakmilEtelaat();
+    Call<List<TakmilEtelaatModel>> getTakmilEtelaat(@Query("username") String username);
 
     @GET("load_farakhan_ha")
     Call<List<FarakhanVijehModel>> getFarakhanHa();
@@ -56,5 +59,12 @@ public interface Api {
     /*@Multipart
     @POST("Api.php?apicall=upload")
     Call<MyResponse> uploadImage(@Part("image\"; filename=\"myfile.jpg\" ") RequestBody file, @Part("desc") RequestBody desc);*/
+
+    @POST("register")
+    Call<UploadResponse> registerUser(@Query("username") String username, @Query("password") String password);
+
+    @GET("load_tasavir_suje")
+    Call<List<TasavirSujeModel>> getTasavirSuje(@Query("suje_id") String suje_id);
+
 
 }

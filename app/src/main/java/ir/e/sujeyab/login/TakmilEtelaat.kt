@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.mapbox.android.core.location.*
@@ -485,8 +486,8 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         var etTelephoneTamasMoaref = inflatedview!!.findViewById<View>(R.id.etTelephoneTamasMoaref) as EditText
         var etTozihat = inflatedview!!.findViewById<View>(R.id.etTozihat) as EditText
 
-
-        LoadData.loadMoshakhasatBaRetrofit(activity, clWifiState, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
+        var username:String = SharedPrefClass.getUserId(activity,"user");
+        LoadData.loadMoshakhasatBaRetrofit(activity, clWifiState,username, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
                 etKeshvar, etOstan, etShahrestan, etShahr, etRosta, etNeshani, etMoaref, etTelephoneTamasMoaref, etTozihat,imgProfileImage)
 
         inflatedview!!.clEdame.setOnClickListener {
@@ -515,8 +516,26 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var telephoneTamasMoaref = etTelephoneTamasMoaref.text.toString()
             var tozihat = etTozihat.text.toString()
 
-            LoadData.editMoshakhasatMan(activity, clWifiState, SharedPrefClass.getUserId(activity, "user"), nameFamily, tarikhTavallod, jensiyat, vaziyatTaahol, vaziyatNezamVazife, akharinMadrakTahsili, moadelMadrakTahsili, reshteTahsili, zaminehMoredAlagheHamkari, mizanSabegheKarMortabet, sematShoghli, codePerseneli, email, shomaeTelephoneTamas, keshvar, ostan, shahrestan, shahr, rosta, neshani, moaref, telephoneTamasMoaref, tozihat, jensiyatSp, vaziyatTaaholSp, vaziyatNezamVazifeSp, akharinMadrakTahsiliSp)
+            LoadData.editMoshakhasatMan(activity, clWifiState, username, nameFamily, tarikhTavallod, jensiyat, vaziyatTaahol, vaziyatNezamVazife, akharinMadrakTahsili, moadelMadrakTahsili, reshteTahsili, zaminehMoredAlagheHamkari, mizanSabegheKarMortabet, sematShoghli, codePerseneli, email, shomaeTelephoneTamas, keshvar, ostan, shahrestan, shahr, rosta, neshani, moaref, telephoneTamasMoaref, tozihat, jensiyatSp, vaziyatTaaholSp, vaziyatNezamVazifeSp, akharinMadrakTahsiliSp)
         }
+
+
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(this, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    //Log.d(TAG, "Fragment back pressed invoked")
+                    activity!!.finish()
+
+                    // if you want onBackPressed() to be called as normal afterwards
+                    if (isEnabled) {
+                        isEnabled = false
+                        requireActivity().onBackPressed()
+                    }
+                }
+            }
+            )
 
 
 
@@ -572,11 +591,11 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         map_view!!.onLowMemory()
     }
 
-    override fun onDestroy() {
+   /* override fun onDestroy() {
         super.onDestroy()
         map_view!!.onDestroy()
     }
-
+*/
      override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
          map_view!!.onSaveInstanceState(outState)
