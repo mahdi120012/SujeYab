@@ -1,10 +1,13 @@
 package ir.e.sujeyab.pishkhan
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import android.widget.Toast
+import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
+import ir.e.sujeyab.CustomClasses.OnSwipeListener
 import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
@@ -16,12 +19,23 @@ import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.view.*
 
 
-class SujeHa_fr : Fragment() {
+class SujeHa_fr : Fragment(), View.OnTouchListener {
+
+
+    private lateinit var gestureDetector: GestureDetector
+
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        Log.d(TAG, "onTouch: ");
+        gestureDetector.onTouchEvent(event);
+        return true
+    }
+
     var inflatedview: View? = null
     private var rAdapter: RecyclerAdapter? = null
     private var rModels: ArrayList<RecyclerModel>? = null
     private var rModels2: ArrayList<FarakhanVijehModel>? = null
     private var rAdapterSujeHa: RecyclerAdapterSujeHa? = null
+    //var GestureDetector: GestureDetector? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +43,10 @@ class SujeHa_fr : Fragment() {
     ): View? {
 
         inflatedview = inflater.inflate(R.layout.suje_ha_fr, container, false)
+
+
+
+
         rModels = ArrayList()
         rAdapter = RecyclerAdapter(
             "vaziyat_farakhan",
@@ -55,8 +73,47 @@ class SujeHa_fr : Fragment() {
             rAdapterSujeHa
         )
 
+        gestureDetector = GestureDetector(activity, object : OnSwipeListener() {
+
+            override fun onSwipe(direction: Direction): Boolean {
+
+                when(direction){
+                    Direction.up ->
+                    {
+                        Toast.makeText(activity,"asfafas",Toast.LENGTH_SHORT).show()
+                        //Log.d(TAG, "onSwipe: up")
+                        //sendCommand("UP")
+                        return true
+                    }
+                    Direction.down ->{
+                        Toast.makeText(activity,"asfafas",Toast.LENGTH_SHORT).show()
+                        return true
+                    }
+
+                    Direction.left ->
+                    {
+                        Toast.makeText(activity,"asfafas",Toast.LENGTH_SHORT).show()
+                        return true
+
+                    }
+                    Direction.right ->{
+                        Toast.makeText(activity,"asfafas",Toast.LENGTH_SHORT).show()
+                        return true
+
+                    }
+                    else -> {
+                    }
+                }
+                return true
+            }
+
+
+        })
+        inflatedview!!.setOnTouchListener(this)
 
         return inflatedview
     }
 
 }
+
+

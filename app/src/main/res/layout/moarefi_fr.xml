@@ -28,50 +28,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/clViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="282dp"
-                android:background="#FFFFFF"
-                android:orientation="vertical"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="0dp"
-                app:cardPreventCornerOverlap="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clcl">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/clcl">
-
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/viewPager1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentTop="true" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/indicator"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                app:ci_drawable="@drawable/bg_orange_ba_hashiye"
-                app:ci_drawable_unselected="@drawable/bg_green_ba_hashiye"
-                app:layout_constraintEnd_toEndOf="@+id/clViewPager"
-                app:layout_constraintStart_toStartOf="@+id/clViewPager"
-                app:layout_constraintTop_toBottomOf="@+id/clViewPager" />
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -79,34 +35,70 @@
                 android:layout_marginTop="16dp"
                 android:background="#ffffff">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imgPicture"
-                    android:layout_width="0dp"
-                    android:layout_height="185dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:background="@drawable/bg_round_imageview"
-                    android:scaleType="fitXY"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/clViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="282dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp"
+                    app:cardPreventCornerOverlap="false"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/bg_orange_ba_hashiye" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#FFFFFF"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/clcl">
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/viewPager1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    app:ci_drawable="@drawable/bg_orange_ba_hashiye"
+                    app:ci_drawable_unselected="@drawable/bg_green_ba_hashiye"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clViewPager" />
 
                 <TextView
                     android:id="@+id/txOnvan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
                     android:fontFamily="@font/iran_sans_bold"
                     android:justificationMode="inter_word"
                     android:text="onvan"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/imgPicture"
-                    app:layout_constraintStart_toStartOf="@+id/txTarikh"
-                    app:layout_constraintTop_toBottomOf="@+id/imgPicture" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/indicator" />
 
                 <TextView
                     android:id="@+id/txMatn"
@@ -119,8 +111,8 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/imgPicture"
-                    app:layout_constraintStart_toStartOf="@+id/txTarikh"
+                    app:layout_constraintEnd_toEndOf="@+id/txOnvan"
+                    app:layout_constraintStart_toStartOf="@+id/txOnvan"
                     app:layout_constraintTop_toBottomOf="@+id/txTarikh" />
 
                 <TextView
@@ -129,12 +121,12 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iran_sans"
                     android:justificationMode="inter_word"
+                    android:layoutDirection="ltr"
                     android:text="####/##/##"
                     android:textColor="#676767"
-                    android:textSize="14sp"
-                    android:layoutDirection="ltr"
                     android:textDirection="ltr"
-                    app:layout_constraintStart_toStartOf="@+id/imgPicture"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/txOnvan"
                     app:layout_constraintTop_toBottomOf="@+id/txOnvan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,7 @@
  package ir.e.sujeyab.SujeClick
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,11 @@ import ir.e.sujeyab.R
 import ir.e.sujeyab.adapters.TasavirSujeAdapter
 import ir.e.sujeyab.models.TasavirSujeModel
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
+import kotlinx.android.synthetic.main.moarefi_fr.view.indicator
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.pishkhan_fr.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
  class MoarefiFr : Fragment() {
@@ -21,7 +26,7 @@ import kotlinx.android.synthetic.main.net_connection.*
 
     private val ImgArray = ArrayList<TasavirSujeModel>()
     //private lateinit var tasavirSujeAdapter:TasavirSujeAdapter
-
+    private var currentPage = 0
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -48,12 +53,16 @@ import kotlinx.android.synthetic.main.net_connection.*
 
         //inflatedview!!.txMatnKamel.setText(matn)
 
-        loadImage(inflatedview!!.imgPicture,picture)
+        //loadImage(inflatedview!!.imgPicture,picture)
         loadImage(inflatedview!!.imgAxFerestande,axFerestande)
 
         //line zir baraye load tasavir safhe mahsole
         LoadData.LoadTasavirSujeBaRetrofit(activity, clWifiState,
             sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
+
+        //init()
+
+
 
         return inflatedview
 }
@@ -82,4 +91,21 @@ import kotlinx.android.synthetic.main.net_connection.*
      }
 
  }
+
+     private fun init() {
+         val handler = Handler()
+         val Update = Runnable {
+             if (currentPage === 9) {
+                 currentPage = 0
+             }
+             inflatedview!!.viewPager1.setCurrentItem(currentPage++, true)
+         }
+         //Auto start
+         val swipeTimer = Timer()
+         swipeTimer.schedule(object : TimerTask() {
+             override fun run() {
+                 handler.post(Update)
+             }
+         }, 3500, 3500)
+     }
 }

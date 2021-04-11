@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.squareup.picasso.Picasso;
 
@@ -29,13 +30,14 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
     String method;
+    ViewPager viewPager;
 
-
-    public ViewPagerAdapterForSlider(Context context, ArrayList<SliderModel> images,String method){
+    public ViewPagerAdapterForSlider(Context context, ArrayList<SliderModel> images, String method, ViewPager viewPager){
         this.context = context;
         this.images = images;
         inflater = LayoutInflater.from(context);
         this.method = method;
+        this.viewPager = viewPager;
     }
     @Override
     public void destroyItem(ViewGroup container, int position, Object object){
@@ -63,6 +65,8 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
 
         if (method.matches("slider")){
             final ImageView myImage = (ImageView) myImageLayout.findViewById(R.id.image);
+            final ImageView imgLeft = (ImageView) myImageLayout.findViewById(R.id.imgLeft);
+            final ImageView imgRight = (ImageView) myImageLayout.findViewById(R.id.imgRight);
 
             if(images.get(position).getPicture().isEmpty()){
                 Picasso.get()
@@ -77,6 +81,8 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
                         .error(R.drawable.adamak_icon)
                         .into(myImage);
             }
+
+
             myImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,9 +95,25 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
                         defaultBrowser.setData(Uri.parse(data));
                         context.startActivity(defaultBrowser);
                     }
-
                 }
             });
+
+            imgRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+                }
+            });
+
+            imgLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+                }
+            });
+
 
             view.addView(myImageLayout, 0);
             return myImageLayout;

@@ -212,7 +212,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                 for (sliderModel in sliderModels) {
                     LoadData.lastId = sliderModel.id
                     ImgArray.add(SliderModel(LoadData.lastId, sliderModel.picture, sliderModel.link, sliderModel.description, ""))
-                    mPager.adapter = ViewPagerAdapterForSlider(c, ImgArray, "slider")
+                    mPager.adapter = ViewPagerAdapterForSlider(c, ImgArray, "slider", mPager)
                     indicator.setViewPager(mPager)
                 }
             }

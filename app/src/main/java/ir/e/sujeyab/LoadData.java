@@ -104,7 +104,7 @@ public class LoadData {
 
                 for (TasavirSujeModel tasavirSujeModel:tasavirSujeModels){
                     ImgArray.add(new TasavirSujeModel(tasavirSujeModel.getP1()));
-                    mPager.setAdapter(new TasavirSujeAdapter(c,ImgArray,"slider"));
+                    mPager.setAdapter(new TasavirSujeAdapter(c,ImgArray,"slider",mPager));
                     indicator.setViewPager(mPager);
                 }
             }
@@ -144,7 +144,7 @@ public class LoadData {
                 for (SliderModel sliderModel:sliderModels){
                     lastId = sliderModel.getId();
                     ImgArray.add(new SliderModel(lastId, sliderModel.getPicture(),sliderModel.getLink(),sliderModel.getDescription(),""));
-                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider"));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider", mPager));
                     indicator.setViewPager(mPager);
                 }
             }
@@ -735,7 +735,7 @@ public class LoadData {
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
                     lastId = farakhanVijehModel.getId();
                     ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getMozo(),farakhanVijehModel.getMatn_kholase(),""));
-                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh"));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh", mPager));
                     indicator.setViewPager(mPager);
 
                 }
@@ -792,7 +792,7 @@ public class LoadData {
                         matn_kholase = jsonObject.getString("matn_kholase");
 
                         ImgArray.add(new SliderModel(lastId, onvan,mozo,matn_kholase,""));
-                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh"));
+                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_khadamat_vijeh", mPager));
                         indicator.setViewPager(mPager);
 
                     } catch (JSONException e) {
@@ -843,7 +843,7 @@ public class LoadData {
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
                     lastId = farakhanVijehModel.getId();
                     ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
-                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh"));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager));
                     indicator.setViewPager(mPager);
                 }
             }
@@ -896,7 +896,7 @@ public class LoadData {
                         matn_kholase = jsonObject.getString("matn_kholase");
 
                         ImgArray.add(new SliderModel(lastId, onvan,name_family,"(" + semat_shoghli + ")",matn_kholase));
-                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh"));
+                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager));
                         indicator.setViewPager(mPager);
 
                     } catch (JSONException e) {
@@ -1000,7 +1000,7 @@ public class LoadData {
                         description = jsonObject.getString("description");
 
                         ImgArray.add(new SliderModel(lastId, picture,link,description,""));
-                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider"));
+                        mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider", mPager));
                         indicator.setViewPager(mPager);
 
                     } catch (JSONException e) {

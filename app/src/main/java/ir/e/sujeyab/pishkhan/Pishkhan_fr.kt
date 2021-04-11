@@ -142,7 +142,7 @@ class Pishkhan_fr : Fragment() {
             override fun run() {
                 handler.post(Update)
             }
-        }, 3500, 3500)
+        }, 5500, 5500)
     }
 
 /*    private fun init() {

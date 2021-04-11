@@ -95,7 +95,9 @@
 
                 <me.relex.circleindicator.CircleIndicator
                     android:id="@+id/indicator"
-                    android:layout_width="80dp"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"
+                    android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_alignParentBottom="true"
                     app:ci_drawable="@drawable/bg_orange_ba_hashiye"

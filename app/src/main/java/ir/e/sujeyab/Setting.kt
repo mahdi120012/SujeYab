@@ -3,6 +3,7 @@ package ir.e.sujeyab
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
@@ -18,6 +19,12 @@ class Setting : AppCompatActivity() {
         //val typeface = ResourcesCompat.getFont(applicationContext, R.font.fa_regular)
         //txMoshakhasatManIcon.setTypeface(typeface);
         //txMoshakhasatManIcon.setText("\uf5d0");
+
+        var username:String = SharedPrefClass.getUserId(this,"user")
+
+        if (username == ""){
+            clExit.visibility = View.GONE
+        }
 
         imgBack.setOnClickListener {
             finish()
