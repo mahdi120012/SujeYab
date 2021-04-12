@@ -1,5 +1,6 @@
 package ir.e.sujeyab.SabtSuje
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.R
+import ir.e.sujeyab.pishkhan.Pishkhan
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.view.*
@@ -32,7 +32,9 @@ class SabtFr : Fragment() {
         //inflatedview!!.txShenaseRahgiri.setText(getActivity()!!.getIntent().getExtras()!!.getString("shenase_rahgiri"))
         inflatedview!!.txBazgashtBePishkhan.setOnClickListener {
 
-            activity!!.finish()
+            val intent = Intent(activity, Pishkhan::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
 
         }
 

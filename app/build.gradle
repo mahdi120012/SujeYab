@@ -74,4 +74,6 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation 'com.github.pwittchen:swipe-rx2:0.3.0'
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
+
 }

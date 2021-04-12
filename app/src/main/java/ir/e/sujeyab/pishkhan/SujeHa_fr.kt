@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.core.view.GestureDetectorCompat
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.CustomClasses.OnSwipeListener
 import ir.e.sujeyab.CustomClasses.Recyclerview
@@ -109,7 +108,15 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
 
 
         })
-        inflatedview!!.setOnTouchListener(this)
+
+
+        inflatedview!!.setOnTouchListener(object : View.OnTouchListener {
+            @Override
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+               gestureDetector.onTouchEvent(event)
+                return true
+            }
+        })
 
         return inflatedview
     }

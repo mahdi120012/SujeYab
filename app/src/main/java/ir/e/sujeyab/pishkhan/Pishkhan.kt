@@ -27,7 +27,7 @@ class Pishkhan : AppCompatActivity() {
 
     // tab titles
     private val titles =
-        arrayOf("سوژه ها", "فراخوان ها", "پیشخوان")
+        arrayOf("TV","سوژه ها", "فراخوان ها", "پیشخوان")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,7 @@ class Pishkhan : AppCompatActivity() {
         imgSearch.setOnClickListener {
 
         }
-        viewPager.setCurrentItem(2)
+        viewPager.setCurrentItem(3)
 
         imgHome.setImageDrawable(ContextCompat.getDrawable(this,
             R.drawable.home_zard
@@ -94,9 +94,10 @@ class Pishkhan : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             when (position) {
-                0 -> return SujeHa_fr()
-                1 -> return FarakhanHa_fr()
-                2 -> return Pishkhan_fr()
+                0 -> return Tv_fr()
+                1 -> return SujeHa_fr()
+                2 -> return FarakhanHa_fr()
+                3 -> return Pishkhan_fr()
             }
             return Pishkhan_fr()
         }
