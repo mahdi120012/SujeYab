@@ -24,6 +24,7 @@ class Setting : AppCompatActivity() {
 
         if (username == ""){
             clExit.visibility = View.GONE
+            txMoshakhasatMan.setText("ورود به حساب کاربری")
         }
 
         imgBack.setOnClickListener {

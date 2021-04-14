@@ -2,8 +2,10 @@ package ir.e.sujeyab.login
 
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -16,6 +18,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -31,21 +34,36 @@ import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
+import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import ir.e.sujeyab.SabtSuje.*
 import ir.map.sdk_map.MapirStyle
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.clEdame
-import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.login.tabLayout
+import kotlinx.android.synthetic.main.login.viewPager
 import kotlinx.android.synthetic.main.takmil_etelaat.*
+import kotlinx.android.synthetic.main.takmil_etelaat.progress_bar
 import kotlinx.android.synthetic.main.takmil_etelaat.view.*
+import kotlinx.android.synthetic.main.vijegiha_fr.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.lang.ref.WeakReference
+import java.util.*
 
 
-open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, UploadRequestBody.UploadCallback {
     var inflatedview: View? = null
-
+    private var arrayList: ArrayList<Uri>? = null
     var jensiyatSp:String = ""
     var vaziyatTaaholSp :String = ""
     var vaziyatNezamVazifeSp :String = ""
@@ -169,6 +187,19 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     ): View? {
         // Inflate the layout for this fragment
         inflatedview = inflater.inflate(ir.e.sujeyab.R.layout.takmil_etelaat, container, false)
+
+
+        inflatedview!!.imgProfileImage.setOnClickListener {
+            Intent(Intent.ACTION_PICK).also {
+                it.type = "image/*"
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+                it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                startActivityForResult(it, VijegiHaFr.REQUEST_CODE_PICK_IMAGE)
+            }
+        }
+
+        arrayList = ArrayList()
 
         val tabLayout = (activity as Login).tabLayout
         tabLayout.visibility = View.GONE
@@ -601,5 +632,76 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
          map_view!!.onSaveInstanceState(outState)
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            //inflatedview!!.clTasvirSuje.visibility = View.VISIBLE
+
+            var count:Int = data!!.getClipData()!!.itemCount
+            var currentItem:Int = 0;
+            if (count > 10) {
+                Toast.makeText(activity,"حداکثر 10 تصویر انتخاب کنید",Toast.LENGTH_SHORT).show()
+            }else{
+
+                while (currentItem < count) {
+                    var imageUri: Uri  = data!!.getClipData()!!.getItemAt(currentItem).getUri();
+                    currentItem = currentItem + 1;
+
+                    arrayList!!.add(imageUri)
+                    uploadImage()
+                    progress_bar.setVisibility(View.VISIBLE)
+                }
+            }
+        }
+    }
+
+
+    fun uploadImage() {
+
+        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
+
+        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
+
+        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
+
+        val outputStream0 = FileOutputStream(file0)
+
+        inputStream0.copyTo(outputStream0)
+
+        progress_bar.progress = 0
+        val body0 = UploadRequestBody(file0, "image", this)
+
+        ApiForUpload().uploadImageProfile(
+            MultipartBody.Part.createFormData("p1",file0.name, body0),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), SharedPrefClass.getUserId(activity,"user")))
+            .enqueue(object : Callback<UploadResponse> {
+
+                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                    inflatedview!!.clcl.snackbar(t.message!!)
+
+                    progress_bar.progress = 0
+                }
+
+                override fun onResponse(
+                    call: Call<UploadResponse>,
+                    response: Response<UploadResponse>
+                ) {
+                    response.body()?.let {
+                        inflatedview!!.clcl.snackbar(it.message)
+                        progress_bar.progress = 100
+                        progress_bar.visibility = View.GONE
+                        imgProfileImage.setImageURI(arrayList!!.get(0))
+
+
+                    }
+                }
+            })
+
+    }
+
+    override fun onProgressUpdate(percentage: Int) {
+        inflatedview!!.progress_bar.progress = percentage
+    }
 
 }

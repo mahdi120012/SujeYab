@@ -17,9 +17,11 @@ import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
+import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.SabtForiSuje
 import ir.e.sujeyab.Setting
+import ir.e.sujeyab.login.Login
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.toolbar_button.*
 
@@ -57,8 +59,17 @@ class Pishkhan : AppCompatActivity() {
         }
 
         clSabtSuje.setOnClickListener {
-            val intent = Intent(this, SabtForiSuje::class.java)
-            startActivity(intent)
+
+            var username = SharedPrefClass.getUserId(this,"user")
+
+            if (username == ""){
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+            }else{
+
+                val intent = Intent(this, SabtForiSuje::class.java)
+                startActivity(intent)
+            }
         }
 
         clElanat.setOnClickListener {

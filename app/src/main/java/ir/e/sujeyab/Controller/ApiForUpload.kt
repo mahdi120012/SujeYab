@@ -35,6 +35,13 @@ interface ApiForUpload {
                     @Part("tozih_video") tozihVideo: RequestBody)
             : Call<UploadResponse>
 
+
+    @Multipart
+    @POST("Api.php?apicall=upload_image_profile")
+    fun uploadImageProfile(@Part p1: MultipartBody.Part,@Part("username1") desc: RequestBody)
+            : Call<UploadResponse>
+
+
     companion object {
         operator fun invoke(): ApiForUpload {
             return Retrofit.Builder()
