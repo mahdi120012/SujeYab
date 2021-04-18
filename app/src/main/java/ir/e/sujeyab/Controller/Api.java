@@ -4,6 +4,7 @@ import java.util.List;
 
 import ir.e.sujeyab.SabtSuje.UploadImage;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
+import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
@@ -45,6 +46,21 @@ public interface Api {
 
     @GET("load_suje_ha")
     Call<List<FarakhanVijehModel>> getSujeHa();
+
+    @GET("load_ostan")
+    Call<List<CitysModel>> load_ostan();
+
+    @GET("load_shahrestan_by_ostan_code")
+    Call<List<CitysModel>> load_shahrestan_by_ostan_code(@Query("ostan_id") String ostan_id);
+
+    @GET("load_shahr_by_shahrestan_code")
+    Call<List<CitysModel>> load_shahr_by_shahrestan_code(@Query("shahrestan_id") String shahrestan_id);
+
+    @GET("load_abadi_by_shahrestan_code")
+    Call<List<CitysModel>> load_abadi_by_shahrestan_code(@Query("shahrestan_id") String shahrestan_id);
+
+    @GET("load_tv")
+    Call<List<FarakhanVijehModel>> getTv();
 
     @GET("load_vaziyat_suje_ha")
     Call<List<VaziyatModel>> getVaziyatSujeHa();

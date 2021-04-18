@@ -34,7 +34,6 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
     private var rModels: ArrayList<RecyclerModel>? = null
     private var rModels2: ArrayList<FarakhanVijehModel>? = null
     private var rAdapterSujeHa: RecyclerAdapterSujeHa? = null
-    //var GestureDetector: GestureDetector? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,

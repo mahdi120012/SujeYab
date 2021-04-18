@@ -925,21 +925,15 @@
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
-                    android:inputType="textPersonName"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:editable="false"
                     android:padding="6dp"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView2112"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2112" />
 
-                <Spinner
-                    android:id="@+id/spinnerOstan"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/etOstan"
-                    app:layout_constraintEnd_toEndOf="@+id/etOstan"
-                    app:layout_constraintStart_toStartOf="@+id/etOstan"
-                    app:layout_constraintTop_toTopOf="@+id/etOstan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -976,21 +970,15 @@
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
-                    android:inputType="textPersonName"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:editable="false"
                     android:padding="6dp"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView20"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
-                <Spinner
-                    android:id="@+id/spinnerShahrestan"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/etShahrestan"
-                    app:layout_constraintEnd_toEndOf="@+id/etShahrestan"
-                    app:layout_constraintStart_toStartOf="@+id/etShahrestan"
-                    app:layout_constraintTop_toTopOf="@+id/etShahrestan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -1027,21 +1015,15 @@
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
-                    android:inputType="textPersonName"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:editable="false"
                     android:padding="6dp"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView29"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
-                <Spinner
-                    android:id="@+id/spinnerSahr"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/etShahr"
-                    app:layout_constraintEnd_toEndOf="@+id/etShahr"
-                    app:layout_constraintStart_toStartOf="@+id/etShahr"
-                    app:layout_constraintTop_toTopOf="@+id/etShahr" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -1078,7 +1060,9 @@
                     android:background="@drawable/bg_white_border"
                     android:ems="10"
                     android:fontFamily="@font/iran_sans"
-                    android:inputType="textPersonName"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:editable="false"
                     android:padding="6dp"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView28"
@@ -1275,7 +1259,8 @@
                 android:layout_height="500dp"
                 android:layout_margin="20dp"
                 mapbox:mapbox_cameraZoomMax="20"
-                mapbox:mapbox_cameraZoomMin="1" />
+                mapbox:mapbox_cameraZoomMin="1"
+                tools:visibility="gone" />
 
             <TextView
                 android:id="@+id/textView22"

@@ -80,9 +80,17 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         inflatedview!!.clEdame.setOnClickListener {
 
            if(((activity)!!.tabLayout.getTabAt(1)!!.view as LinearLayout).visibility == View.GONE){
+
+
+               if (arrayList!!.size == 0){
+                   inflatedview!!.clcl.snackbar("حداقل یک تصویر انتخاب کنید")
+               }else{
+
+
                inflatedview!!.clProgressBar!!.visibility = View.VISIBLE
                imgPreview.setImageURI(selectedImageUri)
                //inflatedview!!.progress_bar.visibility = View.VISIBLE
+
                if (arrayList!!.size == 1){
                    uploadImage1()
                }else if (arrayList!!.size == 2){
@@ -101,8 +109,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                    uploadImage8()
                }else if (arrayList!!.size == 9){
                    uploadImage9()
-               }else {
+               }else if  (arrayList!!.size == 10) {
                    uploadImage10()
+               }
                }
 
                //activity!!.viewPager.setCurrentItem(0)

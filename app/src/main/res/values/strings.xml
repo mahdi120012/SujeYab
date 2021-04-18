@@ -45,8 +45,9 @@
 
 
     <string-array name="keshvar">
-        <item>	ایران	</item>
-        <item>	افغانستان	</item>
+        <item></item>
+        <item>ایران</item>
+<!--        <item>	افغانستان	</item>
         <item>	اتریش	</item>
         <item>	اتیوپی	</item>
         <item>	اردن	</item>
@@ -288,7 +289,7 @@
         <item>	ونزوئلا	</item>
         <item>	ویتنام	</item>
         <item>	یمن	</item>
-        <item>	یونان	</item>
+        <item>	یونان	</item>-->
 
     </string-array>
 

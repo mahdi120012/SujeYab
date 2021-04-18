@@ -82,7 +82,7 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                         .into(holder.imgPicture);
             }
 
-            /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -100,7 +100,7 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
                 }
-            });*/
+            });
 
         }
     }

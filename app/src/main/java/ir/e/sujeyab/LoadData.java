@@ -60,11 +60,13 @@ import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
 import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
+import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.adapters.RecyclerAdapterTv;
 import ir.e.sujeyab.adapters.TasavirSujeAdapter;
 import ir.e.sujeyab.login.Login;
 import ir.e.sujeyab.login.TakmilEtelaat;
+import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.RegisterModel;
@@ -1134,7 +1136,7 @@ public class LoadData {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
-        Call<List <FarakhanVijehModel>> call = api.getSujeHa();
+        Call<List <FarakhanVijehModel>> call = api.getTv();
 
         call.enqueue(new Callback<List<FarakhanVijehModel>>() {
             @Override
@@ -1159,6 +1161,118 @@ public class LoadData {
             }
         });
 
+
+    }
+
+
+    public static void loadOstanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CitysModel> rModels, RecyclerAdapterCitys rAdapter) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CitysModel>> call = api.load_ostan();
+
+        call.enqueue(new Callback<List<CitysModel>>() {
+            @Override
+            public void onResponse(Call<List<CitysModel>> call, retrofit2.Response<List<CitysModel>> response) {
+                List<CitysModel> citysModels = response.body();
+                for (CitysModel citysModel:citysModels){
+
+                    lastId = citysModel.getId();
+                    rModels.add(new CitysModel(lastId, citysModel.getName()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CitysModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+    public static void loadShahrestanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CitysModel> rModels, RecyclerAdapterCitys rAdapter,String ostan_id) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CitysModel>> call = api.load_shahrestan_by_ostan_code(ostan_id);
+
+        call.enqueue(new Callback<List<CitysModel>>() {
+            @Override
+            public void onResponse(Call<List<CitysModel>> call, retrofit2.Response<List<CitysModel>> response) {
+                List<CitysModel> citysModels = response.body();
+                for (CitysModel citysModel:citysModels){
+
+                    lastId = citysModel.getId();
+                    rModels.add(new CitysModel(lastId, citysModel.getName()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CitysModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+    public static void loadShahrHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CitysModel> rModels, RecyclerAdapterCitys rAdapter,String shahrestan_id) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CitysModel>> call = api.load_shahr_by_shahrestan_code(shahrestan_id);
+
+        call.enqueue(new Callback<List<CitysModel>>() {
+            @Override
+            public void onResponse(Call<List<CitysModel>> call, retrofit2.Response<List<CitysModel>> response) {
+                List<CitysModel> citysModels = response.body();
+                for (CitysModel citysModel:citysModels){
+
+                    lastId = citysModel.getId();
+                    rModels.add(new CitysModel(lastId, citysModel.getName()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CitysModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+    public static void loadAbadiHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CitysModel> rModels, RecyclerAdapterCitys rAdapter,String shahrestan_id) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CitysModel>> call = api.load_abadi_by_shahrestan_code(shahrestan_id);
+
+        call.enqueue(new Callback<List<CitysModel>>() {
+            @Override
+            public void onResponse(Call<List<CitysModel>> call, retrofit2.Response<List<CitysModel>> response) {
+                List<CitysModel> citysModels = response.body();
+                for (CitysModel citysModel:citysModels){
+
+                    lastId = citysModel.getId();
+                    rModels.add(new CitysModel(lastId, citysModel.getName()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CitysModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

@@ -3,22 +3,21 @@ package ir.e.sujeyab.login
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.github.dhaval2404.imagepicker.ImagePicker
+import androidx.recyclerview.widget.RecyclerView
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -36,18 +35,22 @@ import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
+import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.*
+import ir.e.sujeyab.adapters.RecyclerAdapterCitys
+import ir.e.sujeyab.models.CitysModel
+import ir.e.sujeyab.models.RecyclerModel
 import ir.map.sdk_map.MapirStyle
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.clEdame
-import kotlinx.android.synthetic.main.login.tabLayout
-import kotlinx.android.synthetic.main.login.viewPager
+import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
+import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.net_connection.view.*
 import kotlinx.android.synthetic.main.takmil_etelaat.*
-import kotlinx.android.synthetic.main.takmil_etelaat.progress_bar
 import kotlinx.android.synthetic.main.takmil_etelaat.view.*
-import kotlinx.android.synthetic.main.vijegiha_fr.*
+import kotlinx.android.synthetic.main.takmil_etelaat.view.clcl
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -74,7 +77,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     var shahrSp:String = ""
     lateinit var etTarikhTavalod2: EditText
 
-    var map: MapboxMap? = null
+/*    var map: MapboxMap? = null
     var mapStyle: Style? = null
     //var mapView: ir.map.sdk_map.maps.MapView? = null
     var lastKnowLatLng: LatLng? = null
@@ -93,11 +96,11 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     private class MyLocationCallback internal constructor(activity: TakmilEtelaat) : LocationEngineCallback<LocationEngineResult> {
         private val activityWeakReference: WeakReference<TakmilEtelaat>
 
-        /**
+        *//**
          * The LocationEngineCallback interface's method which fires when the device's location has changed.
          *
          * @param result the LocationEngineResult object which has the last known location within it.
-         */
+         *//*
         override fun onSuccess(result: LocationEngineResult) {
             val activity = activityWeakReference.get()
             if (activity != null) {
@@ -110,11 +113,11 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             }
         }
 
-        /**
+        *//**
          * The LocationEngineCallback interface's method which fires when the device's location can not be captured
          *
          * @param exception the exception message
-         */
+         *//*
         override fun onFailure(exception: Exception) {
             Log.d("LocationChangeActivity", exception.localizedMessage)
             val activity = activityWeakReference.get()
@@ -166,9 +169,9 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         }
     }
 
-    /**
+    *//**
      * Set up the LocationEngine and the parameters for querying the device's location
-     */
+     *//*
     @SuppressLint("MissingPermission")
     private fun initLocationEngine() {
         locationEngine = LocationEngineProvider.getBestLocationEngine(this!!.activity!!)
@@ -178,15 +181,14 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         locationEngine!!.requestLocationUpdates(request, callback, Looper.getMainLooper())
         locationEngine!!.getLastLocation(callback)
     }
-
-
     @SuppressLint("ClickableViewAccessibility")
+    */
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        inflatedview = inflater.inflate(ir.e.sujeyab.R.layout.takmil_etelaat, container, false)
+        inflatedview = inflater.inflate(R.layout.takmil_etelaat, container, false)
 
 
         inflatedview!!.imgProfileImage.setOnClickListener {
@@ -207,12 +209,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         val viewPager = (activity as Login).viewPager
         viewPager.setUserInputEnabled(false);
 
-
-        val spinner_jensiyat: Spinner = inflatedview!!.findViewById(R.id.spinner_jensiyat)
-        etTarikhTavalod2 = inflatedview!!.findViewById(R.id.etTarikhTavalod)
-
-
-        inflatedview!!.map_view.onCreate(savedInstanceState);
+        /*inflatedview!!.map_view.onCreate(savedInstanceState);
         inflatedview!!.map_view!!.getMapAsync(object : OnMapReadyCallback {
             override fun onMapReady(mapboxMap: MapboxMap) {
                 map = mapboxMap
@@ -226,11 +223,11 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
                         }
                     })
             }
-        })
+        })*/
 
 
 
-        etTarikhTavalod2.setOnTouchListener(View.OnTouchListener { v, event ->
+        inflatedview!!.etTarikhTavalod.setOnTouchListener(View.OnTouchListener { v, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 val persianCalendar = PersianCalendar()
                 val datePickerDialog = DatePickerDialog.newInstance(
@@ -259,16 +256,16 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.custom_spinner_item)
             // Apply the adapter to the spinner
-            spinner_jensiyat.adapter = adapter
+            inflatedview!!.spinner_jensiyat.adapter = adapter
 
-            spinner_jensiyat.setOnItemSelectedListener(object : OnItemSelectedListener {
+            inflatedview!!.spinner_jensiyat.setOnItemSelectedListener(object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     jensiyatSp = adapter.getItem(position).toString()
                     if (jensiyatSp == ""){
 
                     }else{
                         etJensiyat.setText(adapter.getItem(position).toString())
-                        (spinner_jensiyat.getSelectedView() as TextView).setText("")
+                        (inflatedview!!.spinner_jensiyat.getSelectedView() as TextView).setText("")
                     }
 
 
@@ -371,36 +368,45 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             })
         }
 
-        val spinnerOstan: Spinner = inflatedview!!.findViewById(R.id.spinnerOstan)
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-                activity as Login,
-                R.array.ostan,
-                android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.custom_spinner_item)
-            // Apply the adapter to the spinner
-            spinnerOstan.adapter = adapter
 
-            spinnerOstan.setOnItemSelectedListener(object : OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    ostanSp = adapter.getItem(position).toString()
-                    if (ostanSp == ""){
+        inflatedview!!.etOstan.setOnClickListener {
+            dialogCityList(activity as Login,"ostan")
 
-                    }else{
-                        etOstan.setText(adapter.getItem(position).toString())
-                        (spinnerOstan.getSelectedView() as TextView).setText("")
-                    }
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            })
         }
 
 
-        val spinnerShahrestan: Spinner = inflatedview!!.findViewById(R.id.spinnerShahrestan)
+        inflatedview!!.etShahrestan.setOnClickListener {
+
+            if (inflatedview!!.etOstan.text.toString() == ""){
+                inflatedview!!.clcl.snackbar("ابتدا استان را انتخاب فرمایید")
+            }else{
+                dialogCityList(activity as Login,"shahrestan")
+            }
+
+        }
+
+        inflatedview!!.etShahr.setOnClickListener {
+
+            if (inflatedview!!.etShahrestan.text.toString() == ""){
+                inflatedview!!.clcl.snackbar("ابتدا شهرستان را انتخاب فرمایید")
+            }else{
+                dialogCityList(activity as Login,"shahr")
+            }
+
+        }
+
+        inflatedview!!.etRosta.setOnClickListener {
+
+            if (inflatedview!!.etShahr.text.toString() == ""){
+                inflatedview!!.clcl.snackbar("ابتدا شهر را انتخاب فرمایید")
+            }else{
+                dialogCityList(activity as Login,"abadi")
+            }
+
+        }
+
+
+        /*val spinnerShahrestan: Spinner = inflatedview!!.findViewById(R.id.spinnerShahrestan)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
                 activity as Login,
@@ -426,38 +432,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             })
-        }
-
-
-        val spinnerShahr: Spinner = inflatedview!!.findViewById(R.id.spinnerSahr)
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-                activity as Login,
-                R.array.shahr,
-                android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.custom_spinner_item)
-            // Apply the adapter to the spinner
-            spinnerShahr.adapter = adapter
-
-            spinnerShahr.setOnItemSelectedListener(object : OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    shahrSp = adapter.getItem(position).toString()
-                    if (shahrSp == ""){
-
-                    }else{
-                        etShahr.setText(adapter.getItem(position).toString())
-                        (spinnerShahr.getSelectedView() as TextView).setText("")
-                    }
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            })
-        }
-
-
+        }*/
 
 
 
@@ -597,7 +572,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     }
 
 
-    override fun onStart() {
+/*    override fun onStart() {
         super.onStart()
         map_view!!.onStart()
     }
@@ -620,7 +595,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     override fun onLowMemory() {
         super.onLowMemory()
         map_view!!.onLowMemory()
-    }
+    }*/
 
    /* override fun onDestroy() {
         super.onDestroy()
@@ -703,5 +678,94 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     override fun onProgressUpdate(percentage: Int) {
         inflatedview!!.progress_bar.progress = percentage
     }
+
+    open fun dialogCityList(
+        context: Context,
+        method: String?) {
+        val dialog = Dialog(context, R.style.customDialogKar)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val inflater =
+            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view: View = inflater.inflate(R.layout.citys, null, false)
+        val rv1: RecyclerView = view.findViewById(R.id.rv1)
+        val clWifiState: ConstraintLayout = view.findViewById(R.id.clWifiState)
+        val imgBack: ImageView = view.findViewById(R.id.imgBack)
+        imgBack.setOnClickListener { dialog.dismiss() }
+
+
+        if(method == "ostan"){
+
+            var rModelsCitysModel: ArrayList<CitysModel>? = null
+            var recyclerAdapterCitys: RecyclerAdapterCitys? = null
+
+            rModelsCitysModel = ArrayList()
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etOstan,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
+            LoadData.loadOstanHaBaRetrofit(
+                activity,
+                clWifiState,
+                rModelsCitysModel,
+                recyclerAdapterCitys
+            )
+
+        }else if(method == "shahrestan"){
+
+            var rModelsCitysModel: ArrayList<CitysModel>? = null
+            var recyclerAdapterCitys: RecyclerAdapterCitys? = null
+
+            rModelsCitysModel = ArrayList()
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etShahrestan,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
+            LoadData.loadShahrestanHaBaRetrofit(
+                activity,
+                clWifiState,
+                rModelsCitysModel,
+                recyclerAdapterCitys,inflatedview!!.etOstan.hint.toString())
+        }else if(method == "shahr"){
+
+            var rModelsCitysModel: ArrayList<CitysModel>? = null
+            var recyclerAdapterCitys: RecyclerAdapterCitys? = null
+
+            rModelsCitysModel = ArrayList()
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etShahr,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
+            LoadData.loadShahrHaBaRetrofit(
+                activity,
+                clWifiState,
+                rModelsCitysModel,
+                recyclerAdapterCitys,inflatedview!!.etShahrestan.hint.toString())
+
+
+        }else if(method == "abadi"){
+
+            var rModelsCitysModel: ArrayList<CitysModel>? = null
+            var recyclerAdapterCitys: RecyclerAdapterCitys? = null
+
+            rModelsCitysModel = ArrayList()
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etRosta,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
+            LoadData.loadAbadiHaBaRetrofit(
+                activity,
+                clWifiState,
+                rModelsCitysModel,
+                recyclerAdapterCitys,inflatedview!!.etShahrestan.hint.toString())
+        }
+
+        //Toast.makeText(activity, inflatedview!!.etRosta.hint.toString(), Toast.LENGTH_SHORT).show();
+
+        (context as Activity).window
+            .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        dialog.setContentView(view)
+        val window: Window = dialog.getWindow()!!
+        window.setLayout(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        window.setGravity(Gravity.CENTER)
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.show()
+    }
+
 
 }
