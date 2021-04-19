@@ -19,7 +19,7 @@ public class RecyclerModel {
         this.modat_baghimande = modat_baghimande;
         this.matn_kolase = matn_kolase;
         this.motavali = motavali;
-        this.motavali = date_create;
+        this.date_create = date_create;
         this.name_family = name_family;
         this.semat_shoghli = semat_shoghli;
     }

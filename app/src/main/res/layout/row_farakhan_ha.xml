@@ -137,7 +137,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txMatnKholase">
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/txMoshahede"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/iran_sans"

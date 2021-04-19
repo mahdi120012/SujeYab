@@ -47,8 +47,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_farakhan_vijeh, parent, false));
         }else if(rowLayoutType.matches("vaziyat_farakhan")){
             return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_vaziyat_farakhan, parent, false));
-        }else if(rowLayoutType.matches("farakhan_ha")){
+        }else if(rowLayoutType.matches("farakhan_ha")) {
             return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_farakhan_ha, parent, false));
+
+        }else if(rowLayoutType.matches("entekhab_farakhan_suje")){
+                return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_farakhan_ha, parent, false));
 
         }else if(rowLayoutType.matches("suje_ha")){
             return new RecyclerAdapter.MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.row_suje_ha, parent, false));
@@ -153,6 +156,45 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
+        }else if (rowLayoutType.matches("entekhab_farakhan_suje")){
+
+            holder.txMoshahede.setText("انتخاب");
+            holder.txOnvan.setText(rModels.get(position).getOnvan());
+            holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
+            holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
+            holder.txMotavali.setText(rModels.get(position).getMotavali());
+
+            holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)) + " سوژه" );
+
+
+            String ax = rModels.get(position).getPicture();
+            if (ax.isEmpty()) {
+
+                Picasso.get()
+                        .load(R.drawable.logo)
+                        .centerInside()
+                        .fit()
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
+                        .into(holder.imgAxFarakhan);
+
+            }else{
+                Picasso.get()
+                        .load(ax)
+                        .centerInside()
+                        .fit()
+                        .error(R.drawable.logo)
+                        .placeholder(R.drawable.logo)
+                        .into(holder.imgAxFarakhan);
+            }
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(c, "انتخاب شد", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }else if (rowLayoutType.matches("suje_ha")){
             holder.txOnvan.setText(rModels.get(position).getOnvan());
             //holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(rModels.get(position).getModat_baghimande())));
@@ -224,11 +266,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txOnvan,txModatBaghiMande,txMatnKholase,txTedadComment,txTedadLike,txOnvan2,txMotavali,txTedadSuje,txFerestande,txSematShoghli
-                ,txVaziyat;
+                ,txVaziyat,txMoshahede;
         ImageView imgAxFarakhan,imgLike;
 
         MyViewHolder(View view) {
             super(view);
+            txMoshahede = itemView.findViewById(R.id.txMoshahede);
+
             txFerestande = itemView.findViewById(R.id.txFerestande);
             txVaziyat = itemView.findViewById(R.id.txVaziyat);
             txSematShoghli = itemView.findViewById(R.id.txSemat2);
