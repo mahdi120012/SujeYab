@@ -137,7 +137,7 @@
                 android:background="#FFFFFF">
 
                 <ImageView
-                    android:id="@+id/imageView14"
+                    android:id="@+id/imgLike"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
                     android:layout_marginStart="24dp"
@@ -181,7 +181,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txTedadRate"
-                    app:layout_constraintStart_toEndOf="@+id/imageView14"
+                    app:layout_constraintStart_toEndOf="@+id/imgLike"
                     app:layout_constraintTop_toTopOf="@+id/txTedadRate" />
 
                 <TextView

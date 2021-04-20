@@ -82,5 +82,6 @@ public interface Api {
     @GET("load_tasavir_suje")
     Call<List<TasavirSujeModel>> getTasavirSuje(@Query("suje_id") String suje_id);
 
-
+    @GET("like_post")
+    Call<Boolean> likePost(@Query("username1") String username,@Query("post_id") String post_id);
 }

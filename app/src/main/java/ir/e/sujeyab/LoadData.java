@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
@@ -89,6 +90,32 @@ public class LoadData {
     public static final int LOAD_LIMIT = 60;
     public static String lastId = "0";
     public static boolean itShouldLoadMore = true;
+
+
+    public static void LikePost(final Context c, final ConstraintLayout clWifi, String username,
+                                final String sujeId, ImageView imgLike) {
+
+        Call<Boolean> call = new RetrofitProvider().getApi().likePost(username,sujeId);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, retrofit2.Response<Boolean> response) {
+
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
+
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
 
     public static void LoadTasavirSujeBaRetrofit(final Context c, final ConstraintLayout clWifi,

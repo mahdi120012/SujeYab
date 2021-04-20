@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
+import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
@@ -32,6 +33,7 @@ import kotlin.collections.ArrayList
             savedInstanceState: Bundle?
     ): View? {
         inflatedview = inflater.inflate(R.layout.moarefi_fr, container, false)
+
 
         var sujeId:String = activity!!.intent.extras!!.getString("id").toString()
         var onvan:String = activity!!.intent.extras!!.getString("onvan").toString()
@@ -61,6 +63,13 @@ import kotlin.collections.ArrayList
             sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
 
         //init()
+
+        var username = SharedPrefClass.getUserId(activity,"user")
+
+        inflatedview!!.imgLike.setOnClickListener {
+            LoadData.LikePost(activity, clWifiState,username,
+                sujeId, inflatedview!!.imgLike)
+        }
 
 
 
