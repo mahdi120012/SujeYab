@@ -12,8 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -57,14 +59,21 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
             holder.txOnvan.setText(rModels.get(position).getOnvan());
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kholase());
             holder.txVaziyat.setText(rModels.get(position).getMotavali());
-            holder.txTedadLike.setText(new EnglishNumberToPersian().convert("0"));
+            holder.txTedadLike.setText(new EnglishNumberToPersian().convert(rModels.get(position).getTedad_like()));
             holder.txTedadComment.setText(new EnglishNumberToPersian().convert("0"));
             holder.txFerestande.setText(rModels.get(position).getName_family());
-            holder.txSematShoghli.setText(" " + rModels.get(position).getSemat_shoghli() +" )" );
+            holder.txSematShoghli.setText("(" + rModels.get(position).getSemat_shoghli() +")" );
+
+
+            if (rModels.get(position).getVaziyat_like().matches("0")){
+                holder.imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like));
+            }else {
+                holder.imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
+            }
 
 
             String ax = rModels.get(position).getPicture();
-            if (ax.isEmpty()) {
+/*            if (ax.isEmpty()) {
 
                 Picasso.get()
                         .load(R.drawable.logo)
@@ -82,7 +91,12 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                         .error(R.drawable.logo)
                         .placeholder(R.drawable.logo)
                         .into(holder.imgPicture);
-            }
+            }*/
+
+            Glide.with(c).load("empty")
+                    .thumbnail(Glide.with(c).load(rModels.get(position).getLink_video()))
+                    .into(holder.imgPicture);
+
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -98,6 +112,8 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                     intent.putExtra("date_create",rModels.get(position).getDate_create());
                     intent.putExtra("name",rModels.get(position).getName_family());
                     intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
+                    intent.putExtra("tedad_like",rModels.get(position).getTedad_like());
+                    intent.putExtra("vaziyat_like",rModels.get(position).getVaziyat_like());
                     c.startActivity(intent);
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
@@ -121,10 +137,12 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView txOnvan,txMatnKholase,txTedadComment,txTedadLike,txFerestande,txSematShoghli,txVaziyat;
-        ImageView imgPicture;
+        ImageView imgPicture,imgLike;
 
         MyViewHolder(View view) {
             super(view);
+            imgLike = itemView.findViewById(R.id.imgLike);
+
             txOnvan = itemView.findViewById(R.id.txOnvan);
 
             txFerestande = itemView.findViewById(R.id.txFerestande);

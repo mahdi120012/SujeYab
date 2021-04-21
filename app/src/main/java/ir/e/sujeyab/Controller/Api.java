@@ -1,5 +1,7 @@
 package ir.e.sujeyab.Controller;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import ir.e.sujeyab.SabtSuje.UploadImage;
@@ -83,5 +85,5 @@ public interface Api {
     Call<List<TasavirSujeModel>> getTasavirSuje(@Query("suje_id") String suje_id);
 
     @GET("like_post")
-    Call<Boolean> likePost(@Query("username1") String username,@Query("post_id") String post_id);
+    Call<JsonObject> likePost(@Query("username1") String username, @Query("post_id") String post_id);
 }

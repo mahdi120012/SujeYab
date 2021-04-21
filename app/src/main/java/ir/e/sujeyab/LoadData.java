@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.apache.http.conn.ConnectTimeoutException;
@@ -93,24 +95,45 @@ public class LoadData {
 
 
     public static void LikePost(final Context c, final ConstraintLayout clWifi, String username,
-                                final String sujeId, ImageView imgLike) {
+                                final String sujeId, ImageView imgLike, TextView txTedadLike) {
 
-        Call<Boolean> call = new RetrofitProvider().getApi().likePost(username,sujeId);
-        call.enqueue(new Callback<Boolean>() {
+        Call<JsonObject> call = new RetrofitProvider().getApi().likePost(username,sujeId);
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<Boolean> call, retrofit2.Response<Boolean> response) {
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
 
+                String message = null;
                 if (response.body().toString().length() <= 0){
                     Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        message = jsonObject.getString("message");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
-                Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
-                imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
+                if (message.matches("like shod")){
+                    Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                    imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
+                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    txTedadLike.setText(String.valueOf(tedad_like+1));
+                }else {
+                    Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                    imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like));
+                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    txTedadLike.setText(String.valueOf(tedad_like-1));
+                }
+
 
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
             }
         });
@@ -428,7 +451,7 @@ public class LoadData {
                         e.printStackTrace();
                     }
                 }
-                Toast.makeText(c, "با موفقیت ویرایش شد", Toast.LENGTH_SHORT).show();
+                Toast.makeText(c, "مشخصات شما با موفقیت ویرایش شد", Toast.LENGTH_SHORT).show();
 
                /* AppCompatActivity activity = (AppCompatActivity) c;
                 Fragment myFragment = new TaeidShomareTelepohe();
@@ -1176,7 +1199,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1321,7 +1344,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
                     rAdapter.notifyDataSetChanged();
 
                 }

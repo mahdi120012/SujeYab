@@ -11,7 +11,7 @@
     android:textDirection="rtl">
 
     <ImageView
-        android:id="@+id/imageView18"
+        android:id="@+id/imgLike"
         android:layout_width="24dp"
         android:layout_height="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/txTedadLike"
@@ -29,7 +29,7 @@
         android:textColor="#677079"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
-        app:layout_constraintStart_toEndOf="@+id/imageView18"
+        app:layout_constraintStart_toEndOf="@+id/imgLike"
         app:layout_constraintTop_toTopOf="@+id/imageView17"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -101,17 +101,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgPicture"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_round_imageview"
-            android:scaleType="centerCrop"
+            android:layout_height="0dp"
+            app:cardCornerRadius="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/bg_orange_ba_hashiye" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgPicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_round_imageview"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/bg_orange_ba_hashiye" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
