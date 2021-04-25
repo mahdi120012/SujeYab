@@ -7,6 +7,7 @@ import java.util.List;
 import ir.e.sujeyab.SabtSuje.UploadImage;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.models.CitysModel;
+import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
@@ -48,6 +49,12 @@ public interface Api {
 
     @GET("load_suje_ha")
     Call<List<FarakhanVijehModel>> getSujeHa();
+
+    @GET("load_comments")
+    Call<List<CommentsModel>> getComments(@Query("post_id") String postId);
+
+    @GET("send_comment")
+    Call<List<CommentsModel>> sendComments(@Query("username1") String username, @Query("post_id") String postId, @Query("comment") String comment);
 
     @GET("load_ostan")
     Call<List<CitysModel>> load_ostan();

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
@@ -13,10 +14,12 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import ir.e.sujeyab.login.Login
 import ir.e.sujeyab.models.TasavirSujeModel
+import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.*
-import kotlinx.android.synthetic.main.row_suje_ha.*
+import kotlinx.android.synthetic.main.suje_click2.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -46,6 +49,7 @@ import kotlin.collections.ArrayList
         var semat_shoghli:String = activity!!.intent.extras!!.getString("semat_shoghli").toString()
         var tedad_like:String = activity!!.intent.extras!!.getString("tedad_like").toString()
         var vaziyat_like:String = activity!!.intent.extras!!.getString("vaziyat_like").toString()
+
 
         inflatedview!!.txTedadLike.setText(tedad_like)
 

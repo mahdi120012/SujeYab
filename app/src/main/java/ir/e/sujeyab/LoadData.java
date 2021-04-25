@@ -1,4 +1,4 @@
-package ir.e.sujeyab;
+ package ir.e.sujeyab;
 
 import android.app.Activity;
 import android.content.Context;
@@ -64,12 +64,14 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
+import ir.e.sujeyab.adapters.RecyclerAdapterComments;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.adapters.RecyclerAdapterTv;
 import ir.e.sujeyab.adapters.TasavirSujeAdapter;
 import ir.e.sujeyab.login.Login;
 import ir.e.sujeyab.login.TakmilEtelaat;
 import ir.e.sujeyab.models.CitysModel;
+import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.RegisterModel;
@@ -1323,6 +1325,68 @@ public class LoadData {
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    public static void sendCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
+                                              RecyclerAdapterComments rAdapter,String username ,String postId, String comment) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CommentsModel>> call = api.sendComments(username, postId, comment);
+
+        call.enqueue(new Callback<List<CommentsModel>>() {
+            @Override
+            public void onResponse(Call<List<CommentsModel>> call, retrofit2.Response<List<CommentsModel>> response) {
+                List<CommentsModel> commentsModels = response.body();
+                for (CommentsModel commentsModel:commentsModels){
+
+                    /*lastId = commentsModel.getId();
+                    rModels.add(new CommentsModel(lastId, commentsModel.getUsername(),commentsModel.getPostId(),
+                            commentsModel.getComment(),commentsModel.getDate_create(),commentsModel.getName(),
+                            commentsModel.getProfile_picture()));
+                    rAdapter.notifyDataSetChanged();*/
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CommentsModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    public static void loadCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
+                                              RecyclerAdapterComments rAdapter,String postId) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CommentsModel>> call = api.getComments(postId);
+
+        call.enqueue(new Callback<List<CommentsModel>>() {
+            @Override
+            public void onResponse(Call<List<CommentsModel>> call, retrofit2.Response<List<CommentsModel>> response) {
+                List<CommentsModel> commentsModels = response.body();
+                for (CommentsModel commentsModel:commentsModels){
+
+                    lastId = commentsModel.getId();
+                    rModels.add(new CommentsModel(lastId, commentsModel.getUsername(),commentsModel.getPostId(),
+                            commentsModel.getComment(),commentsModel.getDate_create(),commentsModel.getName(),
+                            commentsModel.getProfile_picture()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CommentsModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 

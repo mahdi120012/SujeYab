@@ -38,6 +38,15 @@
             app:layout_constraintBottom_toBottomOf="@+id/imgBack"
             app:layout_constraintEnd_toStartOf="@+id/imgBack"
             app:layout_constraintTop_toTopOf="@+id/imgBack" />
+
+        <TextView
+            android:id="@+id/txSujeId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/textView34"
+            app:layout_constraintEnd_toStartOf="@+id/textView34"
+            app:layout_constraintTop_toTopOf="@+id/textView34" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
