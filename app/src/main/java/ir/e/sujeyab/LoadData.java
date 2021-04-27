@@ -55,12 +55,15 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import ir.e.sujeyab.Controller.Api;
 import ir.e.sujeyab.Controller.RetrofitProvider;
 import ir.e.sujeyab.CustomClasses.MySingleton;
 import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
+import ir.e.sujeyab.CustomClasses.Recyclerview;
 import ir.e.sujeyab.CustomClasses.SharedPrefClass;
+import ir.e.sujeyab.CustomClasses.TimeKononi;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
@@ -73,6 +76,7 @@ import ir.e.sujeyab.login.TakmilEtelaat;
 import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
+import ir.e.sujeyab.models.RatesModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.SliderModel;
@@ -82,6 +86,7 @@ import ir.e.sujeyab.models.VaziyatModel;
 import ir.e.sujeyab.upload.MyResponse;
 import me.relex.circleindicator.CircleIndicator;
 import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,6 +103,8 @@ public class LoadData {
 
     public static void LikePost(final Context c, final ConstraintLayout clWifi, String username,
                                 final String sujeId, ImageView imgLike, TextView txTedadLike) {
+
+
 
         Call<JsonObject> call = new RetrofitProvider().getApi().likePost(username,sujeId);
         call.enqueue(new Callback<JsonObject>() {
@@ -1328,30 +1335,108 @@ public class LoadData {
 
     }
 
-    public static void sendCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
-                                              RecyclerAdapterComments rAdapter,String username ,String postId, String comment) {
+    public static void sendRateBaRetrofit(Context c, final ConstraintLayout clWifi,String username ,String postId, String rate) {
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS).build();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).client(client).build();
         Api api = retrofit.create(Api.class);
-        Call<List <CommentsModel>> call = api.sendComments(username, postId, comment);
+        Call<JsonObject> call = api.sendRate(username, postId, rate);
 
-        call.enqueue(new Callback<List<CommentsModel>>() {
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<List<CommentsModel>> call, retrofit2.Response<List<CommentsModel>> response) {
-                List<CommentsModel> commentsModels = response.body();
-                for (CommentsModel commentsModel:commentsModels){
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
 
-                    /*lastId = commentsModel.getId();
-                    rModels.add(new CommentsModel(lastId, commentsModel.getUsername(),commentsModel.getPostId(),
-                            commentsModel.getComment(),commentsModel.getDate_create(),commentsModel.getName(),
-                            commentsModel.getProfile_picture()));
-                    rAdapter.notifyDataSetChanged();*/
+                String message = null;
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        message = jsonObject.getString("message");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (message.matches("rate ersal shod")){
+                    Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+
+                }else if (message.matches("rate update shod")){
+                    Toast.makeText(c, "ویرایش شد", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
 
                 }
+
             }
 
             @Override
-            public void onFailure(Call<List<CommentsModel>> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+    public static void sendCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
+                                              RecyclerAdapterComments rAdapter,String username ,String postId, EditText etComment,
+                                              RecyclerView rv1) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<JsonObject> call = api.sendComments(username, postId, etComment.getText().toString());
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+
+                String message = null;
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        message = jsonObject.getString("message");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (message.matches("comment ersal shod")){
+                    Toast.makeText(c, "ارسال شد", Toast.LENGTH_LONG).show();
+                    etComment.setText("");
+
+                    ArrayList<CommentsModel> rModels = null;
+                    RecyclerAdapterComments rAdapter = null;
+                    //rv1.setAdapter(null);
+
+                    rModels = new ArrayList<>();
+                    rAdapter = new RecyclerAdapterComments("comments", c, rModels, rAdapter);
+                    Recyclerview.defineRecyclerViewVerticalComment(c, rv1, rAdapter, rModels);
+                    LoadData.loadCommentsBaRetrofit(c,clWifi,rModels,rAdapter, postId);
+
+                }else {
+                    Toast.makeText(c, "ارسال نشد", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -1383,6 +1468,38 @@ public class LoadData {
 
             @Override
             public void onFailure(Call<List<CommentsModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+    public static void loadTotalRateAndRateAvgBaRetrofit(Context c, final ConstraintLayout clWifi, String postId,
+                                                         TextView txTedadRate,TextView txRateAvg) {
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS).build();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).client(client).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <RatesModel>> call = api.getTotalRateAndRateAVG(postId);
+
+        call.enqueue(new Callback<List<RatesModel>>() {
+            @Override
+            public void onResponse(Call<List<RatesModel>> call, retrofit2.Response<List<RatesModel>> response) {
+                List<RatesModel> ratesModels = response.body();
+                for (RatesModel ratesModel:ratesModels){
+                    txTedadRate.setText(ratesModel.getTedad_rate());
+                    txRateAvg.setText(ratesModel.getMiyangin_rate());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<RatesModel>> call, Throwable t) {
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

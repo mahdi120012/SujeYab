@@ -1,11 +1,13 @@
  package ir.e.sujeyab.SujeClick
 
+import android.R.attr.rating
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -14,12 +16,10 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
-import ir.e.sujeyab.login.Login
 import ir.e.sujeyab.models.TasavirSujeModel
-import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.*
-import kotlinx.android.synthetic.main.suje_click2.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -86,6 +86,12 @@ import kotlin.collections.ArrayList
                 sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
         }
 
+        inflatedview!!.ratingBar.setOnRatingBarChangeListener(OnRatingBarChangeListener { arg0, rateValue, arg2 ->
+            //Toast.makeText(activity,rateValue.toString(),Toast.LENGTH_LONG).show()
+            LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
+        })
+
+        LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId,inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)
 
 
         return inflatedview

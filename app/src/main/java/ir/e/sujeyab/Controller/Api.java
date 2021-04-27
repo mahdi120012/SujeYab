@@ -8,6 +8,7 @@ import ir.e.sujeyab.SabtSuje.UploadImage;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.CommentsModel;
+import ir.e.sujeyab.models.RatesModel;
 import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
@@ -54,7 +55,13 @@ public interface Api {
     Call<List<CommentsModel>> getComments(@Query("post_id") String postId);
 
     @GET("send_comment")
-    Call<List<CommentsModel>> sendComments(@Query("username1") String username, @Query("post_id") String postId, @Query("comment") String comment);
+    Call<JsonObject> sendComments(@Query("username1") String username, @Query("post_id") String postId, @Query("comment") String comment);
+
+    @GET("send_rate")
+    Call<JsonObject> sendRate(@Query("username1") String username, @Query("post_id") String postId, @Query("rate") String rate);
+
+    @GET("load_total_rate_and_rate_avg")
+    Call<List<RatesModel>> getTotalRateAndRateAVG(@Query("post_id") String postId);
 
     @GET("load_ostan")
     Call<List<CitysModel>> load_ostan();

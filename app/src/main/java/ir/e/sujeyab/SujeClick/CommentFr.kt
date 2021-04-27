@@ -36,11 +36,12 @@ import kotlinx.android.synthetic.main.net_connection.view.*
         Recyclerview.defineRecyclerViewVerticalComment(activity, inflatedview!!.rv1, rAdapter, rModels)
         LoadData.loadCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, post_id)
         var username = SharedPrefClass.getUserId(activity,"user")
-        inflatedview!!.setOnClickListener {
+
+        inflatedview!!.llsend.setOnClickListener {
             if (etMatnComment.text.toString() == ""){
                 inflatedview!!.clcl.snackbar("طول کامنت خیلی کوتاه است")
             }else{
-                LoadData.sendCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, username, post_id, etMatnComment.text.toString())
+                LoadData.sendCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, username, post_id, etMatnComment, inflatedview!!.rv1)
             }
 
         }
