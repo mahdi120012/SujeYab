@@ -51,6 +51,9 @@ public interface Api {
     @GET("load_suje_ha")
     Call<List<FarakhanVijehModel>> getSujeHa();
 
+    @GET("load_search_result")
+    Call<List<FarakhanVijehModel>> getSearchResult(@Query("onvan") String onvan);
+
     @GET("load_comments")
     Call<List<CommentsModel>> getComments(@Query("post_id") String postId);
 

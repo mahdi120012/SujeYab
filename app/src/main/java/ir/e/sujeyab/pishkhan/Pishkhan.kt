@@ -3,7 +3,6 @@ package ir.e.sujeyab.pishkhan
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Display
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -11,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.github.javiersantos.appupdater.AppUpdater
 import com.github.javiersantos.appupdater.enums.UpdateFrom
@@ -22,8 +22,9 @@ import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.SabtForiSuje
 import ir.e.sujeyab.Setting
 import ir.e.sujeyab.login.Login
-import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.pishkhan.*
 import kotlinx.android.synthetic.main.toolbar_button.*
+
 
 class Pishkhan : AppCompatActivity() {
 
@@ -44,9 +45,7 @@ class Pishkhan : AppCompatActivity() {
         init()
 
         val imgSearch = findViewById<View>(R.id.imgSearch) as ImageView
-        imgSearch.setOnClickListener {
 
-        }
         viewPager.setCurrentItem(3)
 
         imgHome.setImageDrawable(ContextCompat.getDrawable(this,
@@ -82,7 +81,11 @@ class Pishkhan : AppCompatActivity() {
         }
 
         imgSearch.setOnClickListener {
-            Toast.makeText(this,"به زودی راه اندازی می شود",Toast.LENGTH_SHORT).show()
+            var mFragment: Fragment? = null
+            mFragment = Search_fr()
+            val fragmentManager: FragmentManager = supportFragmentManager
+            fragmentManager.beginTransaction()
+                .replace(R.id.clcl, mFragment).commit()
         }
 
     }

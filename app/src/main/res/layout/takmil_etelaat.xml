@@ -1257,15 +1257,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <ir.map.sdk_map.maps.MapView
-                android:id="@+id/map_view"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_margin="20dp"
-                mapbox:mapbox_cameraZoomMax="20"
-                mapbox:mapbox_cameraZoomMin="1"
-                tools:visibility="gone" />
-
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"

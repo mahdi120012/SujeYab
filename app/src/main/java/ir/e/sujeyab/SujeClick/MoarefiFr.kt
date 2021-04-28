@@ -16,6 +16,7 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.models.TasavirSujeModel
 import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
@@ -81,10 +82,22 @@ import kotlin.collections.ArrayList
 
         var username = SharedPrefClass.getUserId(activity,"user")
 
-        inflatedview!!.imgLike.setOnClickListener {
-            LoadData.LikePost(activity, clWifiState,username,
-                sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
-        }
+
+
+
+            inflatedview!!.imgLike.setOnClickListener {
+
+                if (username == "" || username == null){
+                    Toast.makeText(activity,"ابتدا وارد شوید",Toast.LENGTH_SHORT).show()
+                }else{
+                    LoadData.LikePost(activity, clWifiState,username,
+                        sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
+                }
+
+
+            }
+
+
 
         inflatedview!!.ratingBar.setOnRatingBarChangeListener(OnRatingBarChangeListener { arg0, rateValue, arg2 ->
             //Toast.makeText(activity,rateValue.toString(),Toast.LENGTH_LONG).show()
