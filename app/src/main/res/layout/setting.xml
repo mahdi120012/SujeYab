@@ -80,14 +80,10 @@
 
                 <ImageView
                     android:id="@+id/imgBale"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/bale_icon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/gap"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imgTelegram"
@@ -95,12 +91,11 @@
 
                 <ImageView
                     android:id="@+id/imgTelegram"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:src="@drawable/telegram_icon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/igap"
                     android:textSize="36dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgBale"
-                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/imgBale"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imgInstagram"
@@ -108,12 +103,11 @@
 
                 <ImageView
                     android:id="@+id/imgInstagram"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:src="@drawable/instagram_icon"
                     android:textSize="36dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgTelegram"
-                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/imgTelegram"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imgTwitter"
@@ -121,12 +115,11 @@
 
                 <ImageView
                     android:id="@+id/imgTwitter"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:src="@drawable/twitter_icon"
                     android:textSize="36dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgInstagram"
-                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toStartOf="@+id/imgInstagram"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imgFacebook"
@@ -134,17 +127,26 @@
 
                 <ImageView
                     android:id="@+id/imgFacebook"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="32dp"
-                    android:src="@drawable/facebook_icon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/aparat"
                     android:textSize="36dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgTwitter"
-                    app:layout_constraintDimensionRatio="h,1:1"
                     app:layout_constraintEnd_toStartOf="@+id/imgTwitter"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView14"
                     app:layout_constraintTop_toTopOf="@+id/imgTwitter" />
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgFacebook"
+                    app:layout_constraintEnd_toStartOf="@+id/imgFacebook"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imgFacebook"
+                    app:srcCompat="@drawable/eitta" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -285,7 +287,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/iran_sans"
-                    android:text="معرفی سوژه"
+                    android:text="معرفی ثمرقند"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView8"
@@ -319,7 +321,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/iran_sans"
-                    android:text="دوستان من در سوژه"
+                    android:text="دوستان من در ثمرقند"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView9"

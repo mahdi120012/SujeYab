@@ -523,6 +523,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var tozihat = etTozihat.text.toString()
 
             LoadData.editMoshakhasatMan(activity, clWifiState, username, nameFamily, tarikhTavallod, jensiyat, vaziyatTaahol, vaziyatNezamVazife, akharinMadrakTahsili, moadelMadrakTahsili, reshteTahsili, zaminehMoredAlagheHamkari, mizanSabegheKarMortabet, sematShoghli, codePerseneli, email, shomaeTelephoneTamas, keshvar, ostan, shahrestan, shahr, rosta, neshani, moaref, telephoneTamasMoaref, tozihat, jensiyatSp, vaziyatTaaholSp, vaziyatNezamVazifeSp, akharinMadrakTahsiliSp)
+
         }
 
 
@@ -602,10 +603,10 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         map_view!!.onDestroy()
     }
 */
-     override fun onSaveInstanceState(outState: Bundle) {
+   /*  override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
          map_view!!.onSaveInstanceState(outState)
-    }
+    }*/
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
