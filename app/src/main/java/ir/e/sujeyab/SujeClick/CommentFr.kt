@@ -38,12 +38,17 @@ import kotlinx.android.synthetic.main.net_connection.view.*
         var username = SharedPrefClass.getUserId(activity,"user")
 
         inflatedview!!.llsend.setOnClickListener {
-            if (etMatnComment.text.toString() == ""){
-                inflatedview!!.clcl.snackbar("طول کامنت خیلی کوتاه است")
-            }else{
-                LoadData.sendCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, username, post_id, etMatnComment, inflatedview!!.rv1)
-            }
 
+            if (username == "" || username == null){
+                inflatedview!!.clcl.snackbar("برای ارسال نظر ابتدا وارد شوید")
+            }else{
+
+                if (etMatnComment.text.toString() == ""){
+                    inflatedview!!.clcl.snackbar("طول نظر خیلی کوتاه است")
+                }else{
+                    LoadData.sendCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, username, post_id, etMatnComment, inflatedview!!.rv1)
+                }
+            }
         }
 
         return inflatedview

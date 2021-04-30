@@ -7,9 +7,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
-import ir.e.sujeyab.SabtSuje.SabtForiSuje
-import ir.e.sujeyab.SabtSuje.TarhSujeFr
 import ir.e.sujeyab.login.Login
+import ir.e.sujeyab.upload.Poshtibani
 import kotlinx.android.synthetic.main.setting.*
 
 class Setting : AppCompatActivity() {
@@ -57,7 +56,10 @@ class Setting : AppCompatActivity() {
 
 
         clPoshtibani.setOnClickListener {
-            Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Poshtibani::class.java)
+            //myIntent.putExtra("key", value) //Optional parameters
+            startActivity(intent)
+
         }
 
         clMoarefiBeDostan.setOnClickListener {

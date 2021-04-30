@@ -100,6 +100,8 @@ class Pishkhan_fr : Fragment() {
 
 
 
+
+
         //val txEdame = (activity as Login).txEdame
 
         /*txEdame.setOnClickListener {

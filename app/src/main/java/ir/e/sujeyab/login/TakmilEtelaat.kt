@@ -75,7 +75,6 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     var ostanSp:String = ""
     var shahrestanSp:String = ""
     var shahrSp:String = ""
-    lateinit var etTarikhTavalod2: EditText
 
 /*    var map: MapboxMap? = null
     var mapStyle: Style? = null
@@ -564,7 +563,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         val date = "$year/$fm/$fd"
 
         if (view.toString().contains("TarikhShoro")){
-            etTarikhTavalod2.setText(EnglishNumberToPersian().convert(date))
+            inflatedview!!.etTarikhTavalod.setText(EnglishNumberToPersian().convert(date))
         }
     }
 

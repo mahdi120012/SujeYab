@@ -18,8 +18,8 @@
 
     <string-array name="vaziyat_nezam_vazife">
         <item></item>
-        <item>مشمول به خدمت</item>
-        <item>معاف از خدمت</item>
+        <item>مشمول</item>
+        <item>معاف</item>
         <item>پایان خدمت</item>
     </string-array>
 

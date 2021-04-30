@@ -46,7 +46,7 @@ class RegisterFr : Fragment() {
 
             if (username == ""){
                 Toast.makeText(activity,"شماره تلفن همراه خود را وارد کنید",Toast.LENGTH_SHORT).show()
-            }else if (username.length < 11) {
+            }else if (username.length < 10) {
                 Toast.makeText(activity,"شماره تلفن همراه خود را به درستی وارد کنید",Toast.LENGTH_SHORT).show()
             }else if (password.length < 6){
                 Toast.makeText(activity,"رمز عبور می بایست حداقل 6 حرف باشد",Toast.LENGTH_SHORT).show()
@@ -61,7 +61,7 @@ class RegisterFr : Fragment() {
                 fragmentTransaction.replace(ir.e.sujeyab.R.id.clcl, fr)
                 fragmentTransaction.commit()*/
 
-                LoadData.registerBaRetrifit(activity,clcl,clWifiState,username,password)
+                LoadData.registerBaRetrifit(activity,clcl,clWifiState,"0"+username,password)
 
             }
 

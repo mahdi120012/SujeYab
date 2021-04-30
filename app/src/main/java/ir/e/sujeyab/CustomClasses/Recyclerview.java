@@ -20,11 +20,13 @@ import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.adapters.RecyclerAdapterTv;
+import ir.e.sujeyab.adapters.RecyclerAdapterVaziyatSujeha;
 import ir.e.sujeyab.adapters.SelectedImageAdapter;
 import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
+import ir.e.sujeyab.models.VaziyatSujehaModel;
 
 public class Recyclerview {
 
@@ -232,6 +234,44 @@ public class Recyclerview {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(selectedImageAdapter);
 
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            // for this tutorial, this is the ONLY method that we need, ignore the rest
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    // Recycle view scrolling downwards...
+                    // this if statement detects when user reaches the end of recyclerView, this is only time we should load more
+                    if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
+                        // remember "!" is the same as "== false"
+                        // here we are now allowed to load more, but we need to be careful
+                        // we must check if itShouldLoadMore variable is true [unlocked]
+                        if (LoadData.itShouldLoadMore) {
+                            //LoadData.loadMore(c,recyclerAdapter,recyclerModels,progressBar);
+                        }
+                    }
+
+                }
+            }
+        });
+
+    }
+
+    public static void defineRecyclerViewHorizontalVaziyat(final Context c, RecyclerView recyclerView,
+                                                    final RecyclerAdapterVaziyatSujeha recyclerAdapter,
+                                                    final ArrayList<VaziyatSujehaModel> recyclerModels){
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        recyclerView.setNestedScrollingEnabled(false);
+        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        mLayoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(recyclerAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 

@@ -15,6 +15,7 @@ import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TasavirSujeModel;
 import ir.e.sujeyab.models.VaziyatModel;
+import ir.e.sujeyab.models.VaziyatSujehaModel;
 import ir.e.sujeyab.upload.MyResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -30,6 +31,7 @@ import retrofit2.http.Query;
 public interface Api {
     String baseUrl = "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/";
     String baseUrlForUpload = "http://robika.ir/ultitled/practice/sujeyab/upload_test/";
+
     @GET("load_pishkhan_slider")
     Call<List<SliderModel>> getSlider(@Query("type") String type);
 
@@ -50,6 +52,12 @@ public interface Api {
 
     @GET("load_suje_ha")
     Call<List<FarakhanVijehModel>> getSujeHa();
+
+    @GET("load_suje_ha_bar_asas_vaziyat")
+    Call<List<FarakhanVijehModel>> getSujeHaBarAsasVaziyat(@Query("vaziyat") String vaziyat);
+
+    @GET("load_farakhan_ha_bar_asas_vaziyat")
+    Call<List<FarakhanVijehModel>> getFarakhanHaBarAsasVaziyat(@Query("vaziyat") String vaziyat);
 
     @GET("load_search_result")
     Call<List<FarakhanVijehModel>> getSearchResult(@Query("onvan") String onvan);

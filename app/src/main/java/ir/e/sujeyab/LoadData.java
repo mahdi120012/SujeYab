@@ -70,6 +70,7 @@ import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.adapters.RecyclerAdapterTv;
+import ir.e.sujeyab.adapters.RecyclerAdapterVaziyatSujeha;
 import ir.e.sujeyab.adapters.TasavirSujeAdapter;
 import ir.e.sujeyab.login.Login;
 import ir.e.sujeyab.login.TakmilEtelaat;
@@ -83,6 +84,7 @@ import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.TasavirSujeModel;
 import ir.e.sujeyab.models.VaziyatModel;
+import ir.e.sujeyab.models.VaziyatSujehaModel;
 import ir.e.sujeyab.upload.MyResponse;
 import me.relex.circleindicator.CircleIndicator;
 import okhttp3.MediaType;
@@ -222,7 +224,7 @@ public class LoadData {
 
     public static void checUsernameExsist(final Context c, final ConstraintLayout clWifi, EditText etUsername) {
 
-        String usernameEncode = UrlEncoderClass.urlEncoder(etUsername.getText().toString());
+        String usernameEncode = UrlEncoderClass.urlEncoder("0"+etUsername.getText().toString());
 
         String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=check_username_exist&username1=" + usernameEncode;
         itShouldLoadMore = false;
@@ -1507,6 +1509,75 @@ public class LoadData {
     }
 
 
+    public static void loadFarakhanHaBarAsasVaziyat(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter,String vaziyat) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <FarakhanVijehModel>> call = api.getFarakhanHaBarAsasVaziyat(vaziyat);
+
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
+                    lastId = farakhanVijehModel.getId();
+                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
+                            ,farakhanVijehModel.getModat_baghimande(),
+                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),"",""));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+    public static void loadSujeHaBarAsasVaziyat(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterSujeHa rAdapter, String vaziyat) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <FarakhanVijehModel>> call = api.getSujeHaBarAsasVaziyat(vaziyat);
+
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+
+                if (response.body() == null){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }else {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
+                    lastId = farakhanVijehModel.getId();
+                    rModels.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
+                            farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
+                            farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
+                            farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
     public static void loadSujeHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterSujeHa rAdapter) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
@@ -1580,6 +1651,40 @@ public class LoadData {
 
 
     }
+
+  /*  public static void loadVaziyatSujeHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<VaziyatSujehaModel> rModels, RecyclerAdapterVaziyatSujeha rAdapter) {
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<VaziyatSujehaModel>> call = api.getVaziyatSujeHa();
+        call.enqueue(new Callback<List<VaziyatSujehaModel>>() {
+            @Override
+            public void onResponse(Call<List<VaziyatSujehaModel>> call, retrofit2.Response<List<VaziyatSujehaModel>> response) {
+                List<VaziyatSujehaModel> vaziyatSujehaModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (VaziyatSujehaModel vaziyatSujehaModel:vaziyatSujehaModels){
+                    lastId = vaziyatSujehaModel.getId();
+                    rModels.add(new VaziyatSujehaModel(lastId, vaziyatSujehaModel.getName_vaziyat_suje_ha()));
+                    rAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<VaziyatSujehaModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }*/
 
 
     public static void loadVaziyatSujeHa(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {

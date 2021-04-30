@@ -18,8 +18,10 @@ import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.models.TasavirSujeModel
+import kotlinx.android.synthetic.main.comment_fr.view.*
 import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
+import kotlinx.android.synthetic.main.moarefi_fr.view.clcl
 import kotlinx.android.synthetic.main.net_connection.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -82,26 +84,27 @@ import kotlin.collections.ArrayList
 
         var username = SharedPrefClass.getUserId(activity,"user")
 
-
-
-
             inflatedview!!.imgLike.setOnClickListener {
 
                 if (username == "" || username == null){
-                    Toast.makeText(activity,"ابتدا وارد شوید",Toast.LENGTH_SHORT).show()
+
+                    inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
+
                 }else{
                     LoadData.LikePost(activity, clWifiState,username,
                         sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
                 }
 
-
             }
 
 
-
         inflatedview!!.ratingBar.setOnRatingBarChangeListener(OnRatingBarChangeListener { arg0, rateValue, arg2 ->
-            //Toast.makeText(activity,rateValue.toString(),Toast.LENGTH_LONG).show()
-            LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
+
+            if (username == "" || username == null){
+                inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
+            }else{
+                LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
+            }
         })
 
         LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId,inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)

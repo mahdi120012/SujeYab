@@ -5,12 +5,20 @@
     android:layout_width="fill_parent"
     android:layout_height="180dp">
 
-    <VideoView
+    <com.universalvideoview.UniversalVideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         tools:visibility="gone" />
+
+    <com.universalvideoview.UniversalMediaController
+        android:id="@+id/media_controller"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:uvv_scalable="true"
+        android:visibility="gone"
+        />
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image"
@@ -21,19 +29,21 @@
         android:scaleType="fitCenter"
         android:src="@drawable/logo" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgLeft"
-        android:layout_width="34dp"
-        android:layout_height="match_parent"
+        android:layout_width="26dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_vertical"
-        android:background="#51AFA1A1"
+        android:background="#51C5B9B9"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRightCorner"
         app:srcCompat="@drawable/left_icon" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgRight"
-        android:layout_width="34dp"
-        android:layout_height="match_parent"
+        android:layout_width="26dp"
+        android:layout_height="100dp"
         android:layout_gravity="right|center_vertical"
-        android:background="#51AFA1A1"
+        android:background="#51C5B9B9"
+        app:shapeAppearanceOverlay="@style/roundedImageViewLeftCorner"
         app:srcCompat="@drawable/right_icon" />
 </FrameLayout>

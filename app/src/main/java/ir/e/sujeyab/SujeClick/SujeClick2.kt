@@ -11,14 +11,14 @@ import ir.e.sujeyab.SabtSuje.SabtFr
 import kotlinx.android.synthetic.main.suje_click2.*
 
 class SujeClick2 : AppCompatActivity() {
-    private val titles = arrayOf("نظرات","مستندات","مشخصات","معرفی")
+    private val titles = arrayOf("نظرات","معرفی")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.suje_click2)
 
         init()
         imgBack.setOnClickListener { finish() }
-        viewPager.setCurrentItem(3)
+        viewPager.setCurrentItem(1)
 
     }
     private fun init(){
@@ -27,10 +27,10 @@ class SujeClick2 : AppCompatActivity() {
             tab.text = titles[position]
         }).attach()
 
-        tabLayout.clearOnTabSelectedListeners()
+       /* tabLayout.clearOnTabSelectedListeners()
         for (v in tabLayout.touchables){
             v.setEnabled(false)
-        }
+        }*/
     }
 
 
@@ -40,8 +40,6 @@ class SujeClick2 : AppCompatActivity() {
             when(position){
                 0-> return CommentFr()
                 1-> return MoarefiFr()
-                2-> return MoarefiFr()
-                3-> return MoarefiFr()
             }
             return MoarefiFr()
 

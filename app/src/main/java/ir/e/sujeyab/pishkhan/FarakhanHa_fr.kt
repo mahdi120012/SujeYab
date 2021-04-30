@@ -48,7 +48,7 @@ class FarakhanHa_fr : Fragment() {
             "farakhan_ha",
             activity,
             rModels2,
-            rAdapter
+            rAdapter,rModels2,rAdapter, inflatedview!!.rv2, inflatedview!!.clWifiState,""
         )
         Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv2, rAdapter, rModels2)
         LoadData.loadFarakhanHaBaRetrofit(

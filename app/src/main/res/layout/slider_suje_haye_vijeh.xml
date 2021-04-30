@@ -75,7 +75,6 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="12dp"
                 android:fontFamily="@font/iran_sans"
-                android:inputType="textMultiLine"
                 android:lines="2"
                 android:maxLines="2"
                 android:text="متن خلاصه اصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه متن خلاصه "

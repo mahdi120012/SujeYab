@@ -161,7 +161,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/iran_sans"
-        android:inputType="textMultiLine"
         android:lines="3"
         android:maxLines="3"
         android:justificationMode="inter_word"

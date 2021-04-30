@@ -25,13 +25,14 @@
         android:theme="@style/Theme.SujeYab"
         android:usesCleartextTraffic="true">
         <activity android:name=".login.TestLocation"></activity>
+        <activity android:name=".upload.Poshtibani" />
         <activity android:name=".SujeClick.SujeClick2" />
         <activity android:name=".SabtSuje.SabtForiSuje" />
         <activity android:name=".SujeClick.SujeClick" />
-        <activity android:name=".pishkhan.Pishkhan" />
+        <activity android:name=".Splash" />
         <activity android:name=".Setting" />
         <activity android:name=".login.Login" />
-        <activity android:name=".Splash">
+        <activity android:name=".pishkhan.Pishkhan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

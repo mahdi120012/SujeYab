@@ -2,6 +2,7 @@ package ir.e.sujeyab.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,17 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.jarvanmo.exoplayerview.media.SimpleMediaSource;
+import com.jarvanmo.exoplayerview.ui.ExoVideoPlaybackControlView;
+import com.jarvanmo.exoplayerview.ui.ExoVideoView;
 import com.squareup.picasso.Picasso;
+import com.universalvideoview.UniversalMediaController;
+import com.universalvideoview.UniversalVideoView;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 import ir.e.sujeyab.R;
 import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TasavirSujeModel;
@@ -63,7 +71,7 @@ public class TasavirSujeAdapter extends PagerAdapter {
             final ImageView myImage = (ImageView) myImageLayout.findViewById(R.id.image);
             final ImageView imgLeft = (ImageView) myImageLayout.findViewById(R.id.imgLeft);
             final ImageView imgRight = (ImageView) myImageLayout.findViewById(R.id.imgRight);
-            final VideoView videoView = (VideoView) myImageLayout.findViewById(R.id.videoView);
+            final UniversalVideoView videoView = (UniversalVideoView) myImageLayout.findViewById(R.id.videoView);
 
             if (images.get(position).getP1().isEmpty()) {
                 Picasso.get()
@@ -83,13 +91,85 @@ public class TasavirSujeAdapter extends PagerAdapter {
                 }else {
                     myImage.setVisibility(View.GONE);
                     videoView.setVisibility(View.VISIBLE);
-                    videoView.setVideoURI(Uri.parse(images.get(position).getP1()));
+                   /* videoView.setVideoURI(Uri.parse(images.get(position).getP1()));
                     videoView.start();
+*/
+                   /* SimpleMediaSource mediaSource = new SimpleMediaSource(images.get(position).getP1());//uri also supported
+                    videoView.play(mediaSource);
+                    videoView.play(mediaSource,true);//play from a particular position*/
+
+
+                    View mBottomLayout = null;
+                    View mVideoLayout = null;
+                    UniversalMediaController mMediaController;
+
+                    mMediaController = (UniversalMediaController) myImageLayout.findViewById(R.id.media_controller);
+                    mMediaController.setVisibility(View.VISIBLE);
+
+
+                    videoView.setMediaController(mMediaController);
+                    videoView.setVideoURI(Uri.parse(images.get(position).getP1()));
+
+                    videoView.start();
+                    mMediaController.hideLoading();
+
+
+           /*         videoView.setVideoViewCallback(new UniversalVideoView.VideoViewCallback() {
+                        @Override
+                        public void onScaleChange(boolean isFullscreen) {
+                            *//*this.isFullscreen = isFullscreen;
+                            if (isFullscreen) {
+                                ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+                                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                                mVideoLayout.setLayoutParams(layoutParams);
+                                //GONE the unconcerned views to leave room for video and controller
+                                mBottomLayout.setVisibility(View.GONE);
+                            } else {
+                                ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+                                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                layoutParams.height = this.cachedHeight;
+                                mVideoLayout.setLayoutParams(layoutParams);
+                                mBottomLayout.setVisibility(View.VISIBLE);
+                            }*//*
+                        }
+
+                        @Override
+                        public void onPause(MediaPlayer mediaPlayer) { // Video pause
+                            //Log.d(TAG, "onPause UniversalVideoView callback");
+                        }
+
+                        @Override
+                        public void onStart(MediaPlayer mediaPlayer) { // Video start/resume to play
+                            videoView.setVideoURI(Uri.parse(images.get(position).getP1()));
+
+                        }
+
+                        @Override
+                        public void onBufferingStart(MediaPlayer mediaPlayer) {// steam start loading
+                            videoView.setVideoURI(Uri.parse(images.get(position).getP1()));
+                        }
+
+                        @Override
+                        public void onBufferingEnd(MediaPlayer mediaPlayer) {// steam end loading
+                            //Log.d(TAG, "onBufferingEnd UniversalVideoView callback");
+                        }
+
+                    });*/
+
+
                 }
 
 
             }
 
+           /* if (viewPager.getCurrentItem() == images.indexOf(0)){
+                imgRight.setVisibility(View.GONE);
+                imgLeft.setVisibility(View.VISIBLE);
+            }else {
+                imgRight.setVisibility(View.VISIBLE);
+                imgLeft.setVisibility(View.VISIBLE);
+            }*/
 
             imgRight.setOnClickListener(new View.OnClickListener() {
                 @Override

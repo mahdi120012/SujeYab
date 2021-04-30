@@ -12,10 +12,13 @@ import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.RecyclerAdapter
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa
+import ir.e.sujeyab.adapters.RecyclerAdapterVaziyatSujeha
 import ir.e.sujeyab.models.FarakhanVijehModel
 import ir.e.sujeyab.models.RecyclerModel
 import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
+import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.net_connection.view.*
+import kotlinx.android.synthetic.main.suje_ha_fr.*
 
 
 class SujeHa_fr : Fragment(), View.OnTouchListener {
@@ -43,15 +46,27 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
         inflatedview = inflater.inflate(R.layout.suje_ha_fr, container, false)
 
 
-
+//        rModels = ArrayList()
+//        rAdapter = RecyclerAdapterVaziyatSujeha(
+//            "vaziyat_suje_ha",
+//            activity,
+//            rModels,
+//            rAdapter
+//        )
+//        Recyclerview.defineRecyclerViewHorizontalVaziyat(activity, inflatedview!!.rv1, rAdapter, rModels)
+//        LoadData.loadVaziyatSujeHaBaRetrofit(
+//            activity,
+//            inflatedview!!.clWifiState,
+//            rModels,
+//            rAdapter
+//        )
 
         rModels = ArrayList()
         rAdapter = RecyclerAdapter(
-            "vaziyat_farakhan",
+            "vaziyat_suje_ha",
             activity,
             rModels,
-            rAdapter
-        )
+            rAdapter,rModels2,rAdapterSujeHa, inflatedview!!.rv2 , inflatedview!!.clWifiState)
         Recyclerview.defineRecyclerViewHorizontal(activity, inflatedview!!.rv1, rAdapter, rModels)
         LoadData.loadVaziyatSujeHa(
             activity,

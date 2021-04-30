@@ -102,15 +102,30 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+                    if (viewPager.getCurrentItem() == 0){
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+                    }else {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+                    }
+
+
                 }
             });
 
             imgLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (viewPager.getCurrentItem() == 0 ){
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
 
-                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+
+                    }else {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+
+
+                    }
+
+                   // viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
                 }
             });
 
