@@ -20,10 +20,11 @@ public class FarakhanVijehModel {
     private String vaziyat_like;
     private String tedad_like;
     private String link_video;
+    private String miyangin_rate;
 
     public FarakhanVijehModel(String id, String picture, String onvan, String modat_baghimande, String matn_kholase, String mozo, String id_ferestande,
                               String motavali, String type, String type_vaziyat_farakhan, String name_family, String semat_shoghli, String date_create,
-                              String vaziyat_like, String tedad_like, String link_video) {
+                              String vaziyat_like, String tedad_like, String link_video, String miyangin_rate) {
         this.id = id;
         this.picture = picture;
         this.onvan = onvan;
@@ -40,6 +41,7 @@ public class FarakhanVijehModel {
         this.vaziyat_like = vaziyat_like;
         this.tedad_like = tedad_like;
         this.link_video = link_video;
+        this.miyangin_rate = miyangin_rate;
     }
 
     public String getId() {
@@ -104,5 +106,9 @@ public class FarakhanVijehModel {
 
     public String getLink_video() {
         return link_video;
+    }
+
+    public String getMiyangin_rate() {
+        return miyangin_rate;
     }
 }

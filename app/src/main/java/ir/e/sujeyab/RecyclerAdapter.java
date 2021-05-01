@@ -4,18 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,11 +24,11 @@ import java.util.ArrayList;
 
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.CustomClasses.Recyclerview;
-import ir.e.sujeyab.SujeClick.SujeClick2;
+import ir.e.sujeyab.SujeClick.MainActFarakhan;
+import ir.e.sujeyab.SujeClick.MainActSuje;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RecyclerModel;
-import ir.e.sujeyab.SujeClick.SujeClick;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     private static int lastClickedPosition = -1;
@@ -282,7 +278,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
+
+
+                    Intent intent =new Intent(c, MainActFarakhan.class);
+                    intent.putExtra("onvan",rModels.get(position).getOnvan());
+                    intent.putExtra("matn",rModels.get(position).getMatn_kolase());
+                    intent.putExtra("picture",rModels.get(position).getPicture());
+                    intent.putExtra("motavali",rModels.get(position).getMotavali());
+                    intent.putExtra("modat_baghi_mande",rModels.get(position).getModat_baghimande());
+                    intent.putExtra("date_create",rModels.get(position).getDate_create());
+                    intent.putExtra("name",rModels.get(position).getName_family());
+                    intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
+                    c.startActivity(intent);
+
+                    //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -364,7 +373,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, SujeClick2.class);
+                    Intent intent =new Intent(c, MainActSuje.class);
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kolase());
                     intent.putExtra("picture",rModels.get(position).getPicture());

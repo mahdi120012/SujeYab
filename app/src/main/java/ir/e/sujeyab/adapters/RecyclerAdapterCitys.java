@@ -3,27 +3,20 @@ package ir.e.sujeyab.adapters;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 import ir.e.sujeyab.R;
-import ir.e.sujeyab.SujeClick.SujeClick2;
 import ir.e.sujeyab.models.CitysModel;
-import ir.e.sujeyab.models.FarakhanVijehModel;
 
 public class RecyclerAdapterCitys extends RecyclerView.Adapter<RecyclerAdapterCitys.MyViewHolder> {
 

@@ -890,7 +890,7 @@ public class LoadData {
     }
 
     public static void loadSujeHayeVijehSliderBaRetrofit(Context c, final ConstraintLayout clWifi, ViewPager mPager,
-                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
+                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray,ArrayList<FarakhanVijehModel> sujeModel) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -904,9 +904,16 @@ public class LoadData {
                 }
 
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
                     lastId = farakhanVijehModel.getId();
+                    sujeModel.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
+                            farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
+                            farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
+                            farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate()));
+
                     ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
-                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager,sujeModel));
                     indicator.setViewPager(mPager);
                 }
             }
@@ -1209,7 +1216,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1561,7 +1568,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1595,7 +1602,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1632,7 +1639,7 @@ public class LoadData {
                                 farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                                 farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                                 farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video()));
+                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),""));
                         rAdapter.notifyDataSetChanged();
 
                 }
@@ -1786,7 +1793,8 @@ public class LoadData {
     }
 
 
-    public static void loadFarakhanVijehBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+    public static void loadFarakhanVijehBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter
+            , NestedScrollView nestedScrollView, ProgressBar progressBar) {
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -1809,11 +1817,15 @@ public class LoadData {
                     rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),"","","",""));
                     rAdapter.notifyDataSetChanged();
                 }
+                nestedScrollView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
 
             }
 
             @Override
             public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                clWifi.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
             }
         });

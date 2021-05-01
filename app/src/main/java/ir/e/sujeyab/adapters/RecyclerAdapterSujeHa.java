@@ -9,22 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.R;
-import ir.e.sujeyab.SujeClick.SujeClick2;
+import ir.e.sujeyab.SujeClick.MainActFarakhan;
 import ir.e.sujeyab.models.FarakhanVijehModel;
-import ir.e.sujeyab.models.RecyclerModel;
 
 public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterSujeHa.MyViewHolder> {
 
@@ -102,7 +99,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, SujeClick2.class);
+                    Intent intent =new Intent(c, MainActFarakhan.class);
                     intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kholase());

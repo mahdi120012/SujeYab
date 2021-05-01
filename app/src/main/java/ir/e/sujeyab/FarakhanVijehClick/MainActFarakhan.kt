@@ -7,18 +7,18 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import ir.e.sujeyab.R
-import ir.e.sujeyab.SabtSuje.SabtFr
-import kotlinx.android.synthetic.main.suje_click2.*
+import ir.e.sujeyab.pishkhan.SujeHa_fr
+import kotlinx.android.synthetic.main.farakhan_main_act.*
 
-class SujeClick2 : AppCompatActivity() {
-    private val titles = arrayOf("نظرات","معرفی")
+class MainActFarakhan : AppCompatActivity() {
+    private val titles = arrayOf("نظرات","سوژه ها","معرفی")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.suje_click2)
+        setContentView(R.layout.farakhan_main_act)
 
         init()
         imgBack.setOnClickListener { finish() }
-        viewPager.setCurrentItem(1)
+        viewPager.setCurrentItem(2)
 
     }
     private fun init(){
@@ -38,10 +38,11 @@ class SujeClick2 : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             when(position){
-                0-> return CommentFr()
-                1-> return MoarefiFr()
+                0-> return CommentFarakhanFr()
+                1-> return SujeHa_fr()
+                2-> return MoarefiFarakhanFr()
             }
-            return MoarefiFr()
+            return MoarefiFarakhanFr()
 
         }
 

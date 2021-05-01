@@ -11,16 +11,22 @@ import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.RecyclerAdapter
+import ir.e.sujeyab.models.FarakhanVijehModel
 import ir.e.sujeyab.models.RecyclerModel
 import ir.e.sujeyab.models.SliderModel
+import kotlinx.android.synthetic.main.moarefi_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.net_connection.view.*
+import kotlinx.android.synthetic.main.pishkhan_fr.*
 import kotlinx.android.synthetic.main.pishkhan_fr.view.*
+import kotlinx.android.synthetic.main.pishkhan_fr.view.indicator
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class Pishkhan_fr : Fragment() {
+    private var rModels2: ArrayList<FarakhanVijehModel>? = null
+
     var inflatedview: View? = null
     private var mPager: ViewPager? = null
     private val ImgArray = ArrayList<SliderModel>()
@@ -57,20 +63,23 @@ class Pishkhan_fr : Fragment() {
         )
         init()
 
-
         //LoadData.loadPishkhanSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
-
+        rModels2 = ArrayList()
         LoadData.loadSujeHayeVijehSliderBaRetrofit(
             activity,
             inflatedview!!.clWifiState,
             inflatedview!!.pagerSujeHayeVijeh,
             inflatedview!!.indicatorSujeHayeVijeh,
-            ImgArraySujeHayeVijeh
+            ImgArraySujeHayeVijeh,rModels2
         )
+
+
         //LoadData.loadSujeHayeVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerSujeHayeVijeh, inflatedview!!.indicatorSujeHayeVijeh, ImgArraySujeHayeVijeh)
 
         //LoadData.loadKhadamatVijehSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pagerKhedmatHayeVijeh, inflatedview!!.indicatorkhedmatHayeVijeh, ImgArrayKhedmatHayeVijeh)
-        LoadData.loadKhadamatVijehSliderBaRetrofit(
+
+        //khedmat haye vijeh felan hidden shod. dar noskhe haye badi ezafe mishe:
+        /*LoadData.loadKhadamatVijehSliderBaRetrofit(
             activity,
             (activity as Pishkhan).clWifiState,
             inflatedview!!.pagerKhedmatHayeVijeh,
@@ -78,8 +87,9 @@ class Pishkhan_fr : Fragment() {
             ImgArrayKhedmatHayeVijeh,
             inflatedview!!.nestedScrollView,
             inflatedview!!.progressBar
-        )
+        )*/
 
+        inflatedview!!.clMainKhadamatVijeh.visibility = View.GONE
 
 
         rModels = ArrayList()
@@ -95,7 +105,8 @@ class Pishkhan_fr : Fragment() {
             activity,
             inflatedview!!.clWifiState,
             rModels,
-            rAdapter
+            rAdapter,inflatedview!!.nestedScrollView,
+            inflatedview!!.progressBar
         )
 
 

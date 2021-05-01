@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import ir.e.sujeyab.R;
-import ir.e.sujeyab.SujeClick.SujeClick2;
+import ir.e.sujeyab.SujeClick.MainActFarakhan;
 import ir.e.sujeyab.models.VaziyatSujehaModel;
 
 public class RecyclerAdapterVaziyatSujeha extends RecyclerView.Adapter<RecyclerAdapterVaziyatSujeha.MyViewHolder> {
@@ -55,7 +55,7 @@ public class RecyclerAdapterVaziyatSujeha extends RecyclerView.Adapter<RecyclerA
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, SujeClick2.class);
+                    Intent intent =new Intent(c, MainActFarakhan.class);
                     intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getName_vaziyat_suje_ha());
 

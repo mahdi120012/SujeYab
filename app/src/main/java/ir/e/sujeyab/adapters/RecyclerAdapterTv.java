@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.R;
-import ir.e.sujeyab.SujeClick.SujeClick2;
+import ir.e.sujeyab.SujeClick.MainActFarakhan;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 
 public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.MyViewHolder> {
@@ -86,7 +84,7 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, SujeClick2.class);
+                    Intent intent =new Intent(c, MainActFarakhan.class);
                     intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kholase());

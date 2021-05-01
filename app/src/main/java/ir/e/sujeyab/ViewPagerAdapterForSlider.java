@@ -8,24 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
+import ir.e.sujeyab.SujeClick.MainActFarakhan;
+import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.SliderModel;
 
 public class ViewPagerAdapterForSlider extends PagerAdapter {
-
+    private ArrayList<FarakhanVijehModel> sujeModel;
     private ArrayList<SliderModel> images;
     private LayoutInflater inflater;
     private Context context;
@@ -39,6 +35,17 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
         this.method = method;
         this.viewPager = viewPager;
     }
+
+    public ViewPagerAdapterForSlider(Context context, ArrayList<SliderModel> images, String method, ViewPager viewPager,
+                                     ArrayList<FarakhanVijehModel> sujeModel){
+        this.context = context;
+        this.images = images;
+        inflater = LayoutInflater.from(context);
+        this.method = method;
+        this.viewPager = viewPager;
+        this.sujeModel = sujeModel;
+    }
+
     @Override
     public void destroyItem(ViewGroup container, int position, Object object){
         container.removeView((View)object);
@@ -139,13 +146,39 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
             final TextView txNameFerestande = (TextView) myImageLayout.findViewById(R.id.txFerestande);
             final TextView txSemat = (TextView) myImageLayout.findViewById(R.id.txSemat);
             final TextView txMatnKholase = (TextView) myImageLayout.findViewById(R.id.txMatnKholase);
+            final TextView txRateAvg = (TextView) myImageLayout.findViewById(R.id.txRateAvg);
 
             txOnvan.setText(images.get(position).getPicture());
             txNameFerestande.setText(images.get(position).getLink());
             txSemat.setText(images.get(position).getDescription());
             txMatnKholase.setText(images.get(position).getMatn_kholase());
+            txRateAvg.setText(sujeModel.get(position).getMiyangin_rate());
+
             view.addView(myImageLayout, 0);
+            myImageLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                            Intent intent =new Intent(context, MainActFarakhan.class);
+                            intent.putExtra("id",sujeModel.get(position).getId());
+                            intent.putExtra("onvan",sujeModel.get(position).getOnvan());
+                            intent.putExtra("matn",sujeModel.get(position).getMatn_kholase());
+                            intent.putExtra("picture",sujeModel.get(position).getPicture());
+                            intent.putExtra("motavali",sujeModel.get(position).getMotavali());
+                            intent.putExtra("modat_baghi_mande",sujeModel.get(position).getModat_baghimande());
+                            intent.putExtra("date_create",sujeModel.get(position).getDate_create());
+                            intent.putExtra("name",sujeModel.get(position).getName_family());
+                            intent.putExtra("semat_shoghli",sujeModel.get(position).getSemat_shoghli());
+                            intent.putExtra("tedad_like",sujeModel.get(position).getTedad_like());
+                            intent.putExtra("vaziyat_like",sujeModel.get(position).getVaziyat_like());
+                            context.startActivity(intent);
+
+                    //Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
+                }
+            });
             return myImageLayout;
+
+
 
         }else if (method.matches("slider_khadamat_vijeh")){
 
