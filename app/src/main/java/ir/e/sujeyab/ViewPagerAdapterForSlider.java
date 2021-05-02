@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ir.e.sujeyab.SujeClick.MainActFarakhan;
+import ir.e.sujeyab.SujeClick.MainActSuje;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.SliderModel;
 
@@ -159,7 +160,7 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
                 @Override
                 public void onClick(View v) {
 
-                            Intent intent =new Intent(context, MainActFarakhan.class);
+                            Intent intent =new Intent(context, MainActSuje.class);
                             intent.putExtra("id",sujeModel.get(position).getId());
                             intent.putExtra("onvan",sujeModel.get(position).getOnvan());
                             intent.putExtra("matn",sujeModel.get(position).getMatn_kholase());

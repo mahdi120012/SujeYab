@@ -1,6 +1,6 @@
  package ir.e.sujeyab.SujeClick
 
-import android.R.attr.rating
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -8,21 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar.OnRatingBarChangeListener
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
+import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import ir.e.sujeyab.SabtSuje.SabtForiSuje
 import ir.e.sujeyab.SabtSuje.snackbar
+import ir.e.sujeyab.login.Login
 import ir.e.sujeyab.models.TasavirSujeModel
-import kotlinx.android.synthetic.main.comment_fr.view.*
-import kotlinx.android.synthetic.main.moarefi_fr.*
-import kotlinx.android.synthetic.main.moarefi_fr.view.*
+import kotlinx.android.synthetic.main.moarefi_farakhan_fr.view.*
+import kotlinx.android.synthetic.main.moarefi_farakhan_fr.view.txTimeRemain
 import kotlinx.android.synthetic.main.moarefi_fr.view.clcl
+import kotlinx.android.synthetic.main.moarefi_fr.view.imgAxFerestande
+import kotlinx.android.synthetic.main.moarefi_fr.view.imgLike
+import kotlinx.android.synthetic.main.moarefi_fr.view.indicator
+import kotlinx.android.synthetic.main.moarefi_fr.view.ratingBar
+import kotlinx.android.synthetic.main.moarefi_fr.view.txMatn
+import kotlinx.android.synthetic.main.moarefi_fr.view.txOnvan
+import kotlinx.android.synthetic.main.moarefi_fr.view.txRateAvg
+import kotlinx.android.synthetic.main.moarefi_fr.view.txTedadLike
+import kotlinx.android.synthetic.main.moarefi_fr.view.txTedadRate
+import kotlinx.android.synthetic.main.moarefi_fr.view.viewPager1
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.row_farakhan_vijeh.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -52,8 +64,19 @@ import kotlin.collections.ArrayList
         var semat_shoghli:String = activity!!.intent.extras!!.getString("semat_shoghli").toString()
         var tedad_like:String = activity!!.intent.extras!!.getString("tedad_like").toString()
         var vaziyat_like:String = activity!!.intent.extras!!.getString("vaziyat_like").toString()
+        var tedad_comment:String = activity!!.intent.extras!!.getString("tedad_comment").toString()
 
 
+
+
+        if (modat_baghi_mande.contains("-")) {
+            val modatBaghimande: String = modat_baghi_mande.replace("-", "")
+            inflatedview!!.txTimeRemain.setText(EnglishNumberToPersian().convert(modatBaghimande) + " روز گذشته")
+        } else {
+            inflatedview!!.txTimeRemain.setText(EnglishNumberToPersian().convert(modat_baghi_mande) + " روز باقی مانده")
+        }
+
+        inflatedview!!.txMotavali.setText(motavali)
         inflatedview!!.txTedadLike.setText(tedad_like)
 
         if (vaziyat_like.equals("0")) {
@@ -68,8 +91,19 @@ import kotlin.collections.ArrayList
 
         //Toast.makeText(activity,dateCreate,Toast.LENGTH_SHORT).show()
         inflatedview!!.txTarikh.setText(TimeKononi().changeGregorianToPersian(dateCreate))
-        inflatedview!!.txNameFerestande.setText(name)
-        inflatedview!!.txTakhasosFerestande.setText(semat_shoghli)
+        //inflatedview!!.txNameFerestande.setText(name)
+        inflatedview!!.clAddSuje.setOnClickListener {
+            var username = SharedPrefClass.getUserId(activity,"user")
+
+            if (username == ""){
+                val intent = Intent(activity, Login::class.java)
+                startActivity(intent)
+            }else{
+
+                val intent = Intent(activity, SabtForiSuje::class.java)
+                startActivity(intent)
+            }
+        }
 
         //inflatedview!!.txMatnKamel.setText(matn)
 
@@ -106,6 +140,8 @@ import kotlin.collections.ArrayList
                 LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
             }
         })
+
+
 
         LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId,inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)
 

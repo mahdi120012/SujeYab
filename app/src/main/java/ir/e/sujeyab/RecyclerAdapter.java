@@ -126,13 +126,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 holder.txMatnKholase.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
             }*/
-            holder.txTedadComment.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)));
-            holder.txTedadLike.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)));
-            if (Integer.parseInt((String) holder.txTedadLike.getText()) > 0){
+            holder.txTedadComment.setText(new EnglishNumberToPersian().convert(rModels.get(position).getSemat_shoghli()));
+            holder.txTedadLike.setText(new EnglishNumberToPersian().convert(rModels.get(position).getName_family()));
+           /* if (Integer.parseInt((String) holder.txTedadLike.getText()) > 0){
 
             }else {
                 holder.imgLike.setBackgroundResource(R.drawable.like_red);
-            }
+            }*/
             String ax = rModels.get(position).getPicture();
             if (ax.isEmpty()) {
 
@@ -160,7 +160,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
+
+
+                    Intent intent =new Intent(c, MainActFarakhan.class);
+                    intent.putExtra("id",rModels.get(position).getId());
+                    intent.putExtra("onvan",rModels.get(position).getOnvan());
+                    intent.putExtra("matn",rModels.get(position).getMatn_kolase());
+                    intent.putExtra("picture",rModels.get(position).getPicture());
+                    intent.putExtra("motavali",rModels.get(position).getMotavali());
+                    intent.putExtra("modat_baghi_mande",rModels.get(position).getModat_baghimande());
+                    intent.putExtra("date_create",rModels.get(position).getDate_create());
+                    intent.putExtra("name",rModels.get(position).getName_family());
+                    intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
+                    intent.putExtra("tedad_like",rModels.get(position).getName_family());
+                    intent.putExtra("tedad_comment",rModels.get(position).getSemat_shoghli());
+                    c.startActivity(intent);
+
+                    //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
                 }
             });
 

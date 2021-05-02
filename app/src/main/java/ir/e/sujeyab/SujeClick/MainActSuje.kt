@@ -38,9 +38,9 @@ class MainActSuje : AppCompatActivity() {
         override fun createFragment(position: Int): Fragment {
             when(position){
                 0-> return CommentFr()
-                1-> return MoarefiFarakhanFr()
+                1-> return MoarefiFr()
             }
-            return MoarefiFarakhanFr()
+            return MoarefiFr()
 
         }
 

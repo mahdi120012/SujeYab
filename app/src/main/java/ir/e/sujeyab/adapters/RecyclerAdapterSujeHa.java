@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.R;
 import ir.e.sujeyab.SujeClick.MainActFarakhan;
+import ir.e.sujeyab.SujeClick.MainActSuje;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 
 public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterSujeHa.MyViewHolder> {
@@ -99,7 +100,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, MainActFarakhan.class);
+                    Intent intent =new Intent(c, MainActSuje.class);
                     intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kholase());
