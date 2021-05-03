@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.LoadData
+import ir.e.sujeyab.SabtSuje.snackbar
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login.clcl
 import kotlinx.android.synthetic.main.login.tabLayout
@@ -45,11 +46,14 @@ class RegisterFr : Fragment() {
             var password = etPassword.text.toString()
 
             if (username == ""){
-                Toast.makeText(activity,"شماره تلفن همراه خود را وارد کنید",Toast.LENGTH_SHORT).show()
+                clcl.snackbar("شماره تلفن همراه خود را وارد کنید")
+
             }else if (username.length < 10) {
-                Toast.makeText(activity,"شماره تلفن همراه خود را به درستی وارد کنید",Toast.LENGTH_SHORT).show()
+                clcl.snackbar("شماره تلفن همراه خود را به درستی وارد کنید")
+
             }else if (password.length < 6){
-                Toast.makeText(activity,"رمز عبور می بایست حداقل 6 حرف باشد",Toast.LENGTH_SHORT).show()
+                clcl.snackbar("رمز عبور می بایست حداقل ۶ حرف باشد")
+
             }else{
 
 

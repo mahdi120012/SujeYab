@@ -11,15 +11,63 @@
 
 
     <EditText
-        android:id="@+id/etUsername4"
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_round_white_2"
+        android:ems="10"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="center"
+        android:hint="کلمه عبور"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/etUsername"
+        app:layout_constraintStart_toStartOf="@+id/etUsername"
+        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_round_white_2"
+        android:ems="10"
+        android:fontFamily="@font/iran_sans"
+        android:gravity="center"
+        android:hint="***919251"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+    <View
+        android:id="@+id/view9"
+        android:layout_width="0.5dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:background="#D1CDCD"
+        app:layout_constraintBottom_toBottomOf="@+id/etUsername"
+        app:layout_constraintStart_toEndOf="@+id/etIranCode"
+        app:layout_constraintTop_toTopOf="@+id/etUsername" />
+
+    <EditText
+        android:id="@+id/etIranCode"
         android:layout_width="40dp"
         android:layout_height="50dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:background="#ffffff"
         android:editable="false"
         android:ems="10"
         android:focusable="false"
+        android:fontFamily="@font/iran_sans"
         android:gravity="center"
         android:hint="***0919251"
         android:inputType="number"
@@ -27,7 +75,8 @@
         android:maxLength="10"
         android:text="+98"
         android:textDirection="ltr"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/etUsername"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
@@ -48,13 +97,13 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:fontFamily="@font/iran_sans"
         android:text="کدفعالسازی به شماره موبایل شما ارسال خواهد شد"
         android:textColor="#2F3337"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <TextView
         android:id="@+id/textView4"
@@ -68,34 +117,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="#ffffff"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="***919251"
-        android:inputType="number"
-        android:maxLength="10"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etUsername4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clVorodBaNamKarbari"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
         android:background="@drawable/bg_yellow_for_vorod"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintStart_toStartOf="@+id/etPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword">
 
         <ImageView
             android:id="@+id/imgAdamak2"
@@ -115,7 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/iran_sans_bold"
-            android:text="عضویت با شماره تلفن همراه"
+            android:text="عضویت "
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -131,6 +161,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/bg_blue_for_vorod"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clVorodBaNamKarbari">
@@ -166,10 +197,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/iran_sans"
         android:text="یا"
         android:textColor="#2F3337"
-        android:fontFamily="@font/iran_sans"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        android:visibility="gone"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

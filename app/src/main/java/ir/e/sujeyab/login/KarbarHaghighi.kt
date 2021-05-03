@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import ir.e.sujeyab.SabtSuje.snackbar
+import kotlinx.android.synthetic.main.karbar_haghighi.*
+import kotlinx.android.synthetic.main.karbar_haghighi.clcl
 import kotlinx.android.synthetic.main.karbar_hoghoghi.view.*
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.net_connection.*
@@ -37,14 +41,24 @@ class KarbarHaghighi : Fragment() {
 
         txEdame.setOnClickListener {
             //Toast.makeText(activity,"کاربر حقیقی",Toast.LENGTH_SHORT).show()
-            val fr: Fragment = TaeidShomareTelepohe()
+            /*val fr: Fragment = TaeidShomareTelepohe()
             //fr.arguments = args
             val fm = fragmentManager
             val fragmentTransaction =
                     fm!!.beginTransaction()
             fragmentTransaction.replace(R.id.clcl, fr)
-            fragmentTransaction.commit()
-            LoadData.checUsernameExsist(activity,(activity as Login).clWifiState,etUsername)
+            fragmentTransaction.commit()*/
+            if (etUsername.text.toString().length<10 || etUsername.text.toString().length == 0){
+                clcl.snackbar("شماره تلفن همراه یا رمز عبور خود را به درستی وارد فرمایید")
+            }else {
+                if (etUsername.text.toString().length<10){
+                    clcl.snackbar("شماره تلفن همراه خود را به درستی وارد فرمایید")
+                }else if (etPassword.text.toString().length == 0){
+                    clcl.snackbar("رمز عبور خود را به درستی وارد فرمایید")
+                }else{
+                    LoadData.checUsernameExsist(activity,(activity as Login).clWifiState,etUsername, inflatedview!!.etPassword)
+                }
+            }
 
         }
 

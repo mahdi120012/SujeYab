@@ -67,6 +67,7 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.TimeKononi;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
+import ir.e.sujeyab.adapters.RadapterVaziyatFarakhan;
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
@@ -223,11 +224,12 @@ public class LoadData {
     }
 
 
-    public static void checUsernameExsist(final Context c, final ConstraintLayout clWifi, EditText etUsername) {
+    public static void checUsernameExsist(final Context c, final ConstraintLayout clWifi, EditText etUsername, EditText etPassword) {
 
         String usernameEncode = UrlEncoderClass.urlEncoder("0"+etUsername.getText().toString());
+        String passwordEncode = UrlEncoderClass.urlEncoder(etPassword.getText().toString());
 
-        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=check_username_exist&username1=" + usernameEncode;
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=check_username_exist&username1=" + usernameEncode + "&password1=" + passwordEncode;
         itShouldLoadMore = false;
         final ProgressDialogClass progressDialog = new ProgressDialogClass();
         progressDialog.showProgress(c);
@@ -248,7 +250,7 @@ public class LoadData {
                 }*/
 
                 if (response.length() <= 0) {
-                    Toast.makeText(c, "شماره تلفن خود را صحیح وارد کنید.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c, "شماره تلفن یا کلمه عبور خود را صحیح وارد کنید.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -272,6 +274,11 @@ public class LoadData {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("user", username);
                 editor.commit();
+
+
+                AppCompatActivity activity = (AppCompatActivity) c;
+                Fragment myFragment = new TakmilEtelaat();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();
 
 
                 /*AppCompatActivity activity = (AppCompatActivity) c;
@@ -1528,16 +1535,24 @@ public class LoadData {
         call.enqueue(new Callback<List<FarakhanVijehModel>>() {
             @Override
             public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
-                List<FarakhanVijehModel> farakhanVijehModels = response.body();
-                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
 
-                    lastId = farakhanVijehModel.getId();
-                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
-                            ,farakhanVijehModel.getModat_baghimande(),
-                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),"",""));
-                    rAdapter.notifyDataSetChanged();
+                if (response.body() == null){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
 
+                }else {
+
+                    List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                    for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
+                        lastId = farakhanVijehModel.getId();
+                        rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
+                                ,farakhanVijehModel.getModat_baghimande(),
+                                farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like()));
+                        rAdapter.notifyDataSetChanged();
+
+                    }
                 }
+
             }
 
             @Override
@@ -1728,7 +1743,7 @@ public class LoadData {
 
 
 
-    public static void loadVaziyatFarakhan(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+    public static void loadVaziyatFarakhan(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels, RadapterVaziyatFarakhan rAdapter) {
 
 
         String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_vaziyat_farakhan";

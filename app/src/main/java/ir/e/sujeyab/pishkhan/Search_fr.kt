@@ -64,6 +64,8 @@ class Search_fr : Fragment(), View.OnTouchListener {
             }
         })
 
+        inflatedview!!.searchView.setIconified(false);
+
         return inflatedview
     }
 

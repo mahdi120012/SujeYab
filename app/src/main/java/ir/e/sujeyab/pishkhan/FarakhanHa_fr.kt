@@ -9,6 +9,7 @@ import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.RecyclerAdapter
+import ir.e.sujeyab.adapters.RadapterVaziyatFarakhan
 import ir.e.sujeyab.models.RecyclerModel
 import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.view.*
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.net_connection.view.*
 class FarakhanHa_fr : Fragment() {
     var inflatedview: View? = null
     private var rAdapter: RecyclerAdapter? = null
+    private var rAdapterVaziyatFarakhan: RadapterVaziyatFarakhan? = null
     private var rModels: ArrayList<RecyclerModel>? = null
     private var rModels2: ArrayList<RecyclerModel>? = null
     override fun onCreateView(
@@ -28,19 +30,16 @@ class FarakhanHa_fr : Fragment() {
 
 
         rModels = ArrayList()
-        rAdapter = RecyclerAdapter(
-            "vaziyat_farakhan",
-            activity,
-            rModels,
-            rAdapter
-        )
-        Recyclerview.defineRecyclerViewHorizontal(activity, inflatedview!!.rv1, rAdapter, rModels)
+        rAdapterVaziyatFarakhan = RadapterVaziyatFarakhan("vaziyat_farakhan",activity,rModels,rAdapterVaziyatFarakhan,
+        rModels2,rAdapter,inflatedview!!.rv2,inflatedview!!.clWifiState)
+
+        Recyclerview.defineRecyclerViewHorizontalVaziyatFarakhan(activity, inflatedview!!.rv1, rAdapterVaziyatFarakhan, rModels)
         LoadData.loadVaziyatFarakhan(
             activity,
             inflatedview!!.clWifiState,
             rModels,
-            rAdapter
-        )
+                rAdapterVaziyatFarakhan)
+
 
 
         rModels2 = ArrayList()
@@ -48,8 +47,7 @@ class FarakhanHa_fr : Fragment() {
             "farakhan_ha",
             activity,
             rModels2,
-            rAdapter,rModels2,rAdapter, inflatedview!!.rv2, inflatedview!!.clWifiState,""
-        )
+            rAdapter)
         Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv2, rAdapter, rModels2)
         LoadData.loadFarakhanHaBaRetrofit(
             activity,

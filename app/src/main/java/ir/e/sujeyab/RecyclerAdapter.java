@@ -303,8 +303,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     intent.putExtra("motavali",rModels.get(position).getMotavali());
                     intent.putExtra("modat_baghi_mande",rModels.get(position).getModat_baghimande());
                     intent.putExtra("date_create",rModels.get(position).getDate_create());
-                    intent.putExtra("name",rModels.get(position).getName_family());
-                    intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
+                    //intent.putExtra("name",rModels.get(position).getName_family());
+                    //intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
+                    intent.putExtra("vaziyat_like",rModels.get(position).getName_family());
+                    intent.putExtra("tedad_like",rModels.get(position).getSemat_shoghli());
                     c.startActivity(intent);
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();
@@ -438,7 +440,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             txTedadSuje = itemView.findViewById(R.id.txTedadSuje);
             txMotavali = itemView.findViewById(R.id.txMotavali);
 
-            txOnvan2 = itemView.findViewById(R.id.txOnvan2);
+            txOnvan2 = itemView.findViewById(R.id.txOnvan);
 
             txOnvan = itemView.findViewById(R.id.txOnvan);
             txModatBaghiMande = itemView.findViewById(R.id.txTimeRemain);

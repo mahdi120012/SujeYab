@@ -11,26 +11,6 @@
     >
 
 
-    <EditText
-        android:id="@+id/etUsername3"
-        android:layout_width="40dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:background="#ffffff"
-        android:editable="false"
-        android:ems="10"
-        android:focusable="false"
-        android:gravity="center"
-        android:hint="***0919251"
-        android:inputType="number"
-        android:layoutDirection="ltr"
-        android:maxLength="10"
-        android:text="+98"
-        android:textDirection="ltr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -50,6 +30,7 @@
         android:fontFamily="@font/iran_sans"
         android:text="کدفعالسازی به شماره موبایل شما ارسال خواهد شد"
         android:textColor="#2F3337"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUsername" />
@@ -70,29 +51,79 @@
         android:id="@+id/etUsername"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:background="#ffffff"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_round_white_2"
         android:ems="10"
         android:gravity="center"
         android:hint="***919251"
+        android:fontFamily="@font/iran_sans"
+        android:textSize="14dp"
         android:inputType="number"
         android:maxLength="10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etUsername3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+    <EditText
+        android:id="@+id/etIranCode"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:background="#ffffff"
+        android:editable="false"
+        android:ems="10"
+        android:fontFamily="@font/iran_sans"
+        android:textSize="14sp"
+        android:focusable="false"
+        android:gravity="center"
+        android:hint="***0919251"
+        android:inputType="number"
+        android:layoutDirection="ltr"
+        android:maxLength="10"
+        android:text="+98"
+        android:textDirection="ltr"
+        app:layout_constraintStart_toStartOf="@+id/etUsername"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_round_white_2"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="کلمه عبور"
+        android:textSize="14dp"
+        android:fontFamily="@font/iran_sans"
+        android:inputType="number"
+        android:maxLength="10"
+        app:layout_constraintEnd_toEndOf="@+id/etUsername"
+        app:layout_constraintStart_toStartOf="@+id/etUsername"
+        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+
+    <View
+        android:id="@+id/view8"
+        android:layout_width="0.5dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:background="#D1CDCD"
+        app:layout_constraintBottom_toBottomOf="@+id/etIranCode"
+        app:layout_constraintStart_toEndOf="@+id/etIranCode"
+        app:layout_constraintTop_toTopOf="@+id/etIranCode" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clVorodBaNamKarbari"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
         android:background="@drawable/bg_yellow_for_vorod"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/etPassword"
+        app:layout_constraintStart_toStartOf="@+id/etPassword"
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <TextView
@@ -101,7 +132,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/iran_sans_bold"
-            android:text="عضویت با شماره تلفن همراه"
+            android:text="عضویت"
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -129,6 +160,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/bg_blue_for_vorod"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clVorodBaNamKarbari">
@@ -164,10 +196,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/iran_sans"
         android:text="یا"
         android:textColor="#2F3337"
-        android:fontFamily="@font/iran_sans"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>
