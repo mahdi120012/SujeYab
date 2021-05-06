@@ -61,7 +61,7 @@ class Pishkhan_fr : Fragment() {
             inflatedview!!.indicator,
             ImgArray
         )
-        init()
+        //init()
 
         //LoadData.loadPishkhanSlider(activity, inflatedview!!.clWifiState, inflatedview!!.pager, inflatedview!!.indicator, ImgArray)
         rModels2 = ArrayList()

@@ -105,7 +105,92 @@ public class LoadData {
     public static boolean itShouldLoadMore = true;
 
 
+
+
+
     public static void LikePost(final Context c, final ConstraintLayout clWifi, String username,
+                                 final String sujeId, ImageView imgLike, TextView txTedadLike) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String sujeIdEncode = UrlEncoderClass.urlEncoder(sujeId);
+/*
+                    "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/like_post?username1=124124&post_id=242"
+*/
+        String url= "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/like_post?username1=" + usernameEncode + "&post_id=" + sujeIdEncode;
+        //itShouldLoadMore = false;
+        /*final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        progressDialog.showProgress(c);*/
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //clWifi.setVisibility(View.GONE);
+                //progressDialog.dismissProgress();
+                //itShouldLoadMore = true;
+
+                String message = null;
+                if (response.length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            message = jsonObject.getString("message");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                if (message.matches("like shod")){
+                    Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                    imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
+                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    txTedadLike.setText(String.valueOf(tedad_like+1));
+                }else {
+                    Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                    imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like));
+                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    txTedadLike.setText(String.valueOf(tedad_like-1));
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(c, (error.networkResponse.statusCode), Toast.LENGTH_LONG).show();
+
+                //itShouldLoadMore = true;
+                //progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       /* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*/
+                    }
+                });
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+
+    public static void LikePost3(final Context c, final ConstraintLayout clWifi, String username,
                                 final String sujeId, ImageView imgLike, TextView txTedadLike) {
 
 
@@ -373,7 +458,8 @@ public class LoadData {
                                 String vaziyatNezamVazife,String akharinMadrakTahsili,String moadelMadrakTahsili,String reshteTahsili,String zaminehMoredAlagheHamkari,
                                 String mizanSabegheKarMortabet,String sematShoghli,String codePerseneli, String email,String shomaeTelephoneTamas,String keshvar,
                                 String ostan,String shahrestan,String shahr,String rosta, String neshani,String moaref,String telephoneTamasMoaref,String tozihat,
-                                String jensiyatSp,String vaziyatTaaholSp,String vaziyatNezamVazifeSp,String akharinMadrakTahsiliSp) {
+                                String jensiyatSp,String vaziyatTaaholSp,String vaziyatNezamVazifeSp,String akharinMadrakTahsiliSp,
+                                ConstraintLayout clcl) {
 
         String jensiyatSpEncode = UrlEncoderClass.urlEncoder(jensiyatSp);
         String vaziyatTaaholSpEncode = UrlEncoderClass.urlEncoder(vaziyatTaaholSp);
@@ -471,6 +557,13 @@ public class LoadData {
                     }
                 }
                 Toast.makeText(c, "مشخصات شما با موفقیت ویرایش شد", Toast.LENGTH_SHORT).show();
+                /*Snackbar snackbar = Snackbar.make(clcl, "مشخصات شما با موفقیت ویرایش شد", Snackbar.LENGTH_LONG);
+                snackbar.show();*/
+                AppCompatActivity activity = (AppCompatActivity) c;
+                activity.finish();
+
+
+
                /* AppCompatActivity activity = (AppCompatActivity) c;
                 Fragment myFragment = new TaeidShomareTelepohe();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();*/

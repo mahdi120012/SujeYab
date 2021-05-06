@@ -1,6 +1,5 @@
  package ir.e.sujeyab.SujeClick
 
-import android.R.attr.rating
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.squareup.picasso.Picasso
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
@@ -23,6 +23,8 @@ import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.clcl
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.slider_ba_hashiye.*
+import kotlinx.android.synthetic.main.slider_ba_hashiye.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -73,16 +75,22 @@ import kotlin.collections.ArrayList
 
         //inflatedview!!.txMatnKamel.setText(matn)
 
-        //loadImage(inflatedview!!.imgPicture,picture)
-        loadImage(inflatedview!!.imgAxFerestande,axFerestande)
+        //loadImage(inflatedview!!.imgPicture,picture)3
+        loadImage(inflatedview!!.imgAxFerestande, axFerestande)
 
         //line zir baraye load tasavir safhe mahsole
         LoadData.LoadTasavirSujeBaRetrofit(activity, clWifiState,
-            sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
+                sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
+
+
+
+
+
+
 
         //init()
 
-        var username = SharedPrefClass.getUserId(activity,"user")
+        var username = SharedPrefClass.getUserId(activity, "user")
 
             inflatedview!!.imgLike.setOnClickListener {
 
@@ -91,8 +99,8 @@ import kotlin.collections.ArrayList
                     inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
 
                 }else{
-                    LoadData.LikePost(activity, clWifiState,username,
-                        sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
+                    LoadData.LikePost(activity, clWifiState, username,
+                            sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
                 }
 
             }
@@ -100,20 +108,20 @@ import kotlin.collections.ArrayList
 
         inflatedview!!.ratingBar.setOnRatingBarChangeListener(OnRatingBarChangeListener { arg0, rateValue, arg2 ->
 
-            if (username == "" || username == null){
+            if (username == "" || username == null) {
                 inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
-            }else{
+            } else {
                 LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
             }
         })
 
-        LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId,inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)
+        LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId, inflatedview!!.txTedadRate, inflatedview!!.txRateAvg)
 
 
         return inflatedview
 }
 
- fun loadImage(img: ImageView, pictureLink:String){
+ fun loadImage(img: ImageView, pictureLink: String){
 
      //line zir baraye circle kardane imageView ee
      //.transform(CropCircleTransformation())

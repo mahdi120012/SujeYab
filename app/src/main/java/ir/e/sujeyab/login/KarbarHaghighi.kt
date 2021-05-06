@@ -1,6 +1,7 @@
 package ir.e.sujeyab.login
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import ir.e.sujeyab.CustomClasses.InputFilterMinMax
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.snackbar
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.karbar_haghighi.clcl
 import kotlinx.android.synthetic.main.karbar_hoghoghi.view.*
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.net_connection.*
+import kotlinx.android.synthetic.main.takmil_etelaat.view.*
 
 
 class KarbarHaghighi : Fragment() {
@@ -61,6 +64,8 @@ class KarbarHaghighi : Fragment() {
             }
 
         }
+        //inflatedview!!.etUsername.setFilters(arrayOf<InputFilter>(InputFilterMinMax(1, 9)))
+
 
         clVorodBaNamKarbari.setOnClickListener {
             val fr: Fragment = RegisterFr()

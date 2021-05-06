@@ -137,11 +137,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.logo)
+                        .load(R.drawable.logo_bg)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
+                        .placeholder(R.drawable.logo_bg)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -149,8 +149,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
+                        .placeholder(R.drawable.logo_bg)
                         .into(holder.imgAxFarakhan);
             }
 
@@ -274,11 +274,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.logo)
+                        .load(R.drawable.logo_bg)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
+                        .placeholder(R.drawable.logo_bg)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -286,8 +286,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
+                        .placeholder(R.drawable.logo_bg)
                         .into(holder.imgAxFarakhan);
             }
 
@@ -328,10 +328,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.logo)
+                        .load(R.drawable.logo_bg)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
                         .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
 
@@ -340,7 +340,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
                         .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
             }
@@ -370,11 +370,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.logo)
+                        .load(R.drawable.logo_bg)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
+                        .placeholder(R.drawable.logo_bg)
                         .into(holder.imgAxFarakhan);
 
             }else{
@@ -382,7 +382,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
+                        .error(R.drawable.logo_bg)
                         .placeholder(R.drawable.logo)
                         .into(holder.imgAxFarakhan);
             }

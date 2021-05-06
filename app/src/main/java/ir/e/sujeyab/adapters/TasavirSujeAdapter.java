@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -109,8 +110,9 @@ public class TasavirSujeAdapter extends PagerAdapter {
 
                     videoView.setMediaController(mMediaController);
                     videoView.setVideoURI(Uri.parse(images.get(position).getP1()));
-
                     videoView.start();
+
+
                     mMediaController.hideLoading();
 
 
@@ -158,6 +160,29 @@ public class TasavirSujeAdapter extends PagerAdapter {
                     });*/
 
 
+
+                    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageScrolled(int position, float
+                                positionOffset, int positionOffsetPixels) {
+
+                        }
+
+                        @Override
+                        public void onPageSelected(int position) {
+
+                            if(position == 1){
+                                videoView.pause();
+                                //Toast.makeText(context, "true", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int state) {
+
+                        }
+                    });
                 }
 
 

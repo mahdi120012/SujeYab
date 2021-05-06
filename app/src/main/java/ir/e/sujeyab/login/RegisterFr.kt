@@ -1,22 +1,18 @@
 package ir.e.sujeyab.login
 
-import android.R
-import android.content.Context
-import android.content.SharedPreferences
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.SabtSuje.snackbar
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login.clcl
-import kotlinx.android.synthetic.main.login.tabLayout
-import kotlinx.android.synthetic.main.login.viewPager
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.register.*
+import kotlinx.android.synthetic.main.register.view.*
 
 
 class RegisterFr : Fragment() {
@@ -71,6 +67,16 @@ class RegisterFr : Fragment() {
 
 
 
+
+        }
+
+
+        inflatedview!!.clVorodBaNamKarbari.setOnClickListener {
+
+            val i = Intent(activity, Login::class.java)
+            /*i.putExtra("PersonID", personID)*/
+            startActivity(i)
+            activity!!.finish()
 
         }
 

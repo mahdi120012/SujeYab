@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
+import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.login.Login
 import ir.e.sujeyab.upload.Poshtibani
 import kotlinx.android.synthetic.main.setting.*
@@ -71,36 +72,43 @@ class Setting : AppCompatActivity() {
             finish()
         }
 
-        imgFacebook.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.facebook.com")
+        imgAparat.setOnClickListener {
+            val uri: Uri = Uri.parse("https://www.aparat.com/samarqand")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
 
         imgTwitter.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.twitter.com")
+            clcl.snackbar("به زودی راه اندازی می شود")
+            /*val uri: Uri = Uri.parse("https://www.twitter.com")
             val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
+            startActivity(intent)*/
         }
 
         imgInstagram.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.instagram.com")
+            val uri: Uri = Uri.parse("https://www.instagram.com/coronado.ir")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
 
-        imgTelegram.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.telegram.com")
+        imgEitta.setOnClickListener {
+            val uri: Uri = Uri.parse("https://eitaa.com/samarqand")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
 
-        imgBale.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.bale.ai")
+        imgGap.setOnClickListener {
+            val uri: Uri = Uri.parse("https://gap.im/samarqand")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
 
+
+        imgIgap.setOnClickListener {
+            val uri: Uri = Uri.parse("https://igap.net/samarqand")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
 
     }
 }

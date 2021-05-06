@@ -24,7 +24,7 @@ class Login : AppCompatActivity() {
 
     // tab titles
     private val titles =
-        arrayOf("کاربر حقوقی", "کاربر حقیقی")
+        arrayOf("کاربر حقیقی")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class Login : AppCompatActivity() {
             supportFragmentManager.beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit()
         }
 
-        viewPager.setCurrentItem(1)
+        viewPager.setCurrentItem(0)
     }
 
 
@@ -63,8 +63,8 @@ class Login : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             when (position) {
-                0 -> return KarbarHoghoghi()
-                1 -> return KarbarHaghighi()
+                /*0 -> return KarbarHoghoghi()*/
+                0 -> return KarbarHaghighi()
             }
             return KarbarHaghighi()
         }

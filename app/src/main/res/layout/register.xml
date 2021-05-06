@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/iran_sans"
-        android:text="رمز عبور می بایست حداقل 6 حرف باشد."
+        android:text="رمز عبور می بایست حداقل ۶ حرف باشد."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

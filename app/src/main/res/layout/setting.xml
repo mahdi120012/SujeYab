@@ -62,107 +62,13 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:layout_constraintVertical_bias="1.0">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#ebf0f6"
+            android:orientation="vertical"
             tools:layout_editor_absoluteX="282dp"
             tools:layout_editor_absoluteY="115dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <ImageView
-                    android:id="@+id/imgBale"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/gap"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imgTelegram"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imgTelegram"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/igap"
-                    android:textSize="36dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgBale"
-                    app:layout_constraintEnd_toStartOf="@+id/imgBale"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imgInstagram"
-                    app:layout_constraintTop_toTopOf="@+id/imgBale" />
-
-                <ImageView
-                    android:id="@+id/imgInstagram"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/instagram_icon"
-                    android:textSize="36dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgTelegram"
-                    app:layout_constraintEnd_toStartOf="@+id/imgTelegram"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imgTwitter"
-                    app:layout_constraintTop_toTopOf="@+id/imgTelegram" />
-
-                <ImageView
-                    android:id="@+id/imgTwitter"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/twitter_icon"
-                    android:textSize="36dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgInstagram"
-                    app:layout_constraintEnd_toStartOf="@+id/imgInstagram"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imgFacebook"
-                    app:layout_constraintTop_toTopOf="@+id/imgInstagram" />
-
-                <ImageView
-                    android:id="@+id/imgFacebook"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/aparat"
-                    android:textSize="36dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgTwitter"
-                    app:layout_constraintEnd_toStartOf="@+id/imgTwitter"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/imageView14"
-                    app:layout_constraintTop_toTopOf="@+id/imgTwitter" />
-
-                <ImageView
-                    android:id="@+id/imageView14"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imgFacebook"
-                    app:layout_constraintEnd_toStartOf="@+id/imgFacebook"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imgFacebook"
-                    app:srcCompat="@drawable/eitta" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="46dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/iran_sans"
-                android:text="ثمرقند را در شبکه های زیر دنبال کنید"
-                android:textSize="16sp"
-                android:textColor="#000100"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clExit" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clMoshakhasatMan"
@@ -204,10 +110,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clTansimatAsli"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/clMoshakhasatMan"
                 app:layout_constraintStart_toStartOf="@+id/clMoshakhasatMan"
                 app:layout_constraintTop_toBottomOf="@+id/clMoshakhasatMan">
@@ -238,10 +147,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clElanat"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/clTansimatAsli"
                 app:layout_constraintStart_toStartOf="@+id/clTansimatAsli"
                 app:layout_constraintTop_toBottomOf="@+id/clTansimatAsli">
@@ -272,9 +184,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clMoarefiSuje"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
                 app:layout_constraintEnd_toEndOf="@+id/clElanat"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -307,10 +221,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clDostanManDarSuje"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/clMoarefiSuje"
                 app:layout_constraintStart_toStartOf="@+id/clMoarefiSuje"
                 app:layout_constraintTop_toBottomOf="@+id/clMoarefiSuje">
@@ -341,9 +258,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clPoshtibani"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
                 app:layout_constraintEnd_toEndOf="@+id/clDostanManDarSuje"
                 app:layout_constraintStart_toStartOf="@+id/clDostanManDarSuje"
@@ -375,9 +294,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clMoarefiBeDostan"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
                 app:layout_constraintEnd_toEndOf="@+id/clPoshtibani"
                 app:layout_constraintStart_toStartOf="@+id/clPoshtibani"
@@ -409,9 +330,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clExit"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/bg_white_for_takmil_etelaat"
                 app:layout_constraintEnd_toEndOf="@+id/clMoarefiBeDostan"
                 app:layout_constraintStart_toStartOf="@+id/clMoarefiBeDostan"
@@ -442,7 +365,111 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="46dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/iran_sans"
+                android:text="ثمرقند را در شبکه های زیر دنبال کنید"
+                android:textColor="#000100"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clExit" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgGap"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/gap"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgIgap"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgIgap"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:src="@drawable/igap"
+                    android:textSize="36dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgGap"
+                    app:layout_constraintEnd_toStartOf="@+id/imgGap"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgEitta"
+                    app:layout_constraintTop_toTopOf="@+id/imgGap" />
+
+                <ImageView
+                    android:id="@+id/imgInstagram"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/instagram_icon"
+                    android:textSize="36dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgEitta"
+                    app:layout_constraintEnd_toStartOf="@+id/imgEitta"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgAparat"
+                    app:layout_constraintTop_toTopOf="@+id/imgEitta" />
+
+                <ImageView
+                    android:id="@+id/imgTwitter"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/twitter_icon"
+                    android:textSize="36dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgAparat"
+                    app:layout_constraintEnd_toStartOf="@+id/imgAparat"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imgAparat" />
+
+                <ImageView
+                    android:id="@+id/imgAparat"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/aparat"
+                    android:textSize="36dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgInstagram"
+                    app:layout_constraintEnd_toStartOf="@+id/imgInstagram"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgTwitter"
+                    app:layout_constraintTop_toTopOf="@+id/imgInstagram" />
+
+                <ImageView
+                    android:id="@+id/imgEitta"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgIgap"
+                    app:layout_constraintEnd_toStartOf="@+id/imgIgap"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imgInstagram"
+                    app:layout_constraintTop_toTopOf="@+id/imgIgap"
+                    app:srcCompat="@drawable/eitta" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 

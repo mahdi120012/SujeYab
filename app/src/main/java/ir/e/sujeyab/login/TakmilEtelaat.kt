@@ -1,16 +1,15 @@
 package ir.e.sujeyab.login
 
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.view.*
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
@@ -19,22 +18,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.mapbox.android.core.location.*
-import com.mapbox.android.core.permissions.PermissionsListener
-import com.mapbox.android.core.permissions.PermissionsManager
-import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
-import com.mapbox.mapboxsdk.location.LocationComponentOptions
-import com.mapbox.mapboxsdk.location.modes.CameraMode
-import com.mapbox.mapboxsdk.location.modes.RenderMode
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
-import com.mapbox.mapboxsdk.maps.Style
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
+import ir.e.sujeyab.CustomClasses.InputFilterMinMax
 import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
@@ -42,8 +32,6 @@ import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.*
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys
 import ir.e.sujeyab.models.CitysModel
-import ir.e.sujeyab.models.RecyclerModel
-import ir.map.sdk_map.MapirStyle
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.clEdame
 import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
 import kotlinx.android.synthetic.main.login.*
@@ -60,7 +48,6 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.lang.ref.WeakReference
 import java.util.*
 
 
@@ -260,9 +247,9 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             inflatedview!!.spinner_jensiyat.setOnItemSelectedListener(object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     jensiyatSp = adapter.getItem(position).toString()
-                    if (jensiyatSp == ""){
+                    if (jensiyatSp == "") {
 
-                    }else{
+                    } else {
                         etJensiyat.setText(adapter.getItem(position).toString())
                         (inflatedview!!.spinner_jensiyat.getSelectedView() as TextView).setText("")
                     }
@@ -293,9 +280,9 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             spinnerVaziyatTaahol.setOnItemSelectedListener(object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     vaziyatTaaholSp = adapter.getItem(position).toString()
-                    if (vaziyatTaaholSp == ""){
+                    if (vaziyatTaaholSp == "") {
 
-                    }else{
+                    } else {
                         etVaziyatTaahol.setText(adapter.getItem(position).toString())
                         (spinnerVaziyatTaahol.getSelectedView() as TextView).setText("")
                     }
@@ -325,9 +312,9 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             spinnerVaziyatNezamVazife.setOnItemSelectedListener(object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     vaziyatNezamVazifeSp = adapter.getItem(position).toString()
-                    if (vaziyatNezamVazifeSp == ""){
+                    if (vaziyatNezamVazifeSp == "") {
 
-                    }else{
+                    } else {
                         etVaziyatNezamVazife.setText(adapter.getItem(position).toString())
                         (spinnerVaziyatNezamVazife.getSelectedView() as TextView).setText("")
                     }
@@ -354,9 +341,9 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             spinnerKeshvar.setOnItemSelectedListener(object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     keshvarSp = adapter.getItem(position).toString()
-                    if (keshvarSp == ""){
+                    if (keshvarSp == "") {
 
-                    }else{
+                    } else {
                         etKeshvar.setText(adapter.getItem(position).toString())
                         (spinnerKeshvar.getSelectedView() as TextView).setText("")
                     }
@@ -369,7 +356,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
 
 
         inflatedview!!.etOstan.setOnClickListener {
-            dialogCityList(activity as Login,"ostan")
+            dialogCityList(activity as Login, "ostan")
 
         }
 
@@ -379,7 +366,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             if (inflatedview!!.etOstan.text.toString() == ""){
                 inflatedview!!.clcl.snackbar("ابتدا استان را انتخاب فرمایید")
             }else{
-                dialogCityList(activity as Login,"shahrestan")
+                dialogCityList(activity as Login, "shahrestan")
             }
 
         }
@@ -389,7 +376,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             if (inflatedview!!.etShahrestan.text.toString() == ""){
                 inflatedview!!.clcl.snackbar("ابتدا شهرستان را انتخاب فرمایید")
             }else{
-                dialogCityList(activity as Login,"shahr")
+                dialogCityList(activity as Login, "shahr")
             }
 
         }
@@ -399,7 +386,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             if (inflatedview!!.etShahr.text.toString() == ""){
                 inflatedview!!.clcl.snackbar("ابتدا شهر را انتخاب فرمایید")
             }else{
-                dialogCityList(activity as Login,"abadi")
+                dialogCityList(activity as Login, "abadi")
             }
 
         }
@@ -450,9 +437,9 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             spinnerAkharinMadrakTahsili.setOnItemSelectedListener(object : OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     akharinMadrakTahsiliSp = adapter.getItem(position).toString()
-                    if (akharinMadrakTahsiliSp == ""){
+                    if (akharinMadrakTahsiliSp == "") {
 
-                    }else{
+                    } else {
                         etAkharinMadrakTahsili.setText(adapter.getItem(position).toString())
                         (spinnerAkharinMadrakTahsili.getSelectedView() as TextView).setText("")
                     }
@@ -463,37 +450,37 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             })
         }
-
+        inflatedview!!.etMoadelMadrakTahsili.setFilters(arrayOf<InputFilter>(InputFilterMinMax(1, 20)))
 
         val clWifiState = inflatedview!!.findViewById<View>(R.id.clWifiState) as ConstraintLayout
-        var imgProfileImage = inflatedview!!.findViewById<View>(R.id.imgProfileImage) as ImageView
-        var etNameFamily = inflatedview!!.findViewById<View>(R.id.etNameFamily) as EditText
-        var etTarikhTavalod = inflatedview!!.findViewById<View>(R.id.etTarikhTavalod) as EditText
-        var etJensiyat =inflatedview!!.findViewById<View>(R.id.etJensiyat) as EditText
-        var etVaziyatTaahol = inflatedview!!.findViewById<View>(R.id.etVaziyatTaahol) as EditText
-        var etVaziyatNezamVazife =inflatedview!!.findViewById<View>(R.id.etVaziyatNezamVazife) as EditText
-        var etAkharinMadrakTahsili = inflatedview!!.findViewById<View>(R.id.etAkharinMadrakTahsili) as EditText
-        var etMoadelMadrakTahsili =inflatedview!!.findViewById<View>(R.id.etMoadelMadrakTahsili) as EditText
-        var etReshteTahsili = inflatedview!!.findViewById<View>(R.id.etReshteTahsili) as EditText
-        var etZamineMoredAlaghaHamkari = inflatedview!!.findViewById<View>(R.id.etZamineMoredAlaghaHamkari) as EditText
-        var etMizanSabegheKarMortabet = inflatedview!!.findViewById<View>(R.id.etMizanSabegheKarMortabet) as EditText
-        var etSematShoghli = inflatedview!!.findViewById<View>(R.id.etSematShoghli) as EditText
-        var etCodePerseneli = inflatedview!!.findViewById<View>(R.id.etCodePerseneli) as EditText
-        var etEmail = inflatedview!!.findViewById<View>(R.id.etEmail) as EditText
-        var etShomaeTelephoneTamas =inflatedview!!.findViewById<View>(R.id.etShomaeTelephoneTamas) as EditText
-        var etKeshvar = inflatedview!!.findViewById<View>(R.id.etKeshvar) as EditText
-        var etOstan = inflatedview!!.findViewById<View>(R.id.etOstan) as EditText
-        var etShahrestan = inflatedview!!.findViewById<View>(R.id.etShahrestan) as EditText
-        var etShahr = inflatedview!!.findViewById<View>(R.id.etShahr) as EditText
-        var etRosta =inflatedview!!.findViewById<View>(R.id.etRosta) as EditText
-        var etNeshani = inflatedview!!.findViewById<View>(R.id.etNeshani) as EditText
-        var etMoaref = inflatedview!!.findViewById<View>(R.id.etMoaref) as EditText
-        var etTelephoneTamasMoaref = inflatedview!!.findViewById<View>(R.id.etTelephoneTamasMoaref) as EditText
-        var etTozihat = inflatedview!!.findViewById<View>(R.id.etTozihat) as EditText
+        var imgProfileImage = inflatedview!!.imgProfileImage
+        var etNameFamily = inflatedview!!.etNameFamily
+        var etTarikhTavalod = inflatedview!!.etTarikhTavalod
+        var etJensiyat =inflatedview!!.etJensiyat
+        var etVaziyatTaahol = inflatedview!!.etVaziyatTaahol
+        var etVaziyatNezamVazife =inflatedview!!.etVaziyatNezamVazife
+        var etAkharinMadrakTahsili = inflatedview!!.etAkharinMadrakTahsili
+        var etMoadelMadrakTahsili =inflatedview!!.etMoadelMadrakTahsili
+        var etReshteTahsili = inflatedview!!.etReshteTahsili
+        var etZamineMoredAlaghaHamkari = inflatedview!!.etZamineMoredAlaghaHamkari
+        var etMizanSabegheKarMortabet = inflatedview!!.etMizanSabegheKarMortabet
+        var etSematShoghli = inflatedview!!.etSematShoghli
+        var etCodePerseneli = inflatedview!!.etCodePerseneli
+        var etEmail = inflatedview!!.etEmail
+        var etShomaeTelephoneTamas =inflatedview!!.etShomaeTelephoneTamas
+        var etKeshvar = inflatedview!!.etKeshvar
+        var etOstan = inflatedview!!.etOstan
+        var etShahrestan = inflatedview!!.etShahrestan
+        var etShahr = inflatedview!!.etShahr
+        var etRosta =inflatedview!!.etRosta
+        var etNeshani = inflatedview!!.etNeshani
+        var etMoaref = inflatedview!!.etMoaref
+        var etTelephoneTamasMoaref = inflatedview!!.etTelephoneTamasMoaref
+        var etTozihat = inflatedview!!.etTozihat
 
-        var username:String = SharedPrefClass.getUserId(activity,"user");
-        LoadData.loadMoshakhasatBaRetrofit(activity, clWifiState,username, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
-                etKeshvar, etOstan, etShahrestan, etShahr, etRosta, etNeshani, etMoaref, etTelephoneTamasMoaref, etTozihat,imgProfileImage)
+        var username:String = SharedPrefClass.getUserId(activity, "user");
+        LoadData.loadMoshakhasatBaRetrofit(activity, clWifiState, username, etNameFamily, etTarikhTavalod, etJensiyat, etVaziyatTaahol, etVaziyatNezamVazife, etAkharinMadrakTahsili, etMoadelMadrakTahsili, etReshteTahsili, etZamineMoredAlaghaHamkari, etMizanSabegheKarMortabet, etSematShoghli, etCodePerseneli, etEmail, etShomaeTelephoneTamas,
+                etKeshvar, etOstan, etShahrestan, etShahr, etRosta, etNeshani, etMoaref, etTelephoneTamasMoaref, etTozihat, imgProfileImage)
 
         inflatedview!!.clEdame.setOnClickListener {
             //Toast.makeText(activity, "تغییری ایجاد نشده", Toast.LENGTH_SHORT).show()
@@ -521,9 +508,116 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var telephoneTamasMoaref = etTelephoneTamasMoaref.text.toString()
             var tozihat = etTozihat.text.toString()
 
-            LoadData.editMoshakhasatMan(activity, clWifiState, username, nameFamily, tarikhTavallod, jensiyat, vaziyatTaahol, vaziyatNezamVazife, akharinMadrakTahsili, moadelMadrakTahsili, reshteTahsili, zaminehMoredAlagheHamkari, mizanSabegheKarMortabet, sematShoghli, codePerseneli, email, shomaeTelephoneTamas, keshvar, ostan, shahrestan, shahr, rosta, neshani, moaref, telephoneTamasMoaref, tozihat, jensiyatSp, vaziyatTaaholSp, vaziyatNezamVazifeSp, akharinMadrakTahsiliSp)
+            LoadData.editMoshakhasatMan(activity, clWifiState, username, nameFamily, tarikhTavallod, jensiyat, vaziyatTaahol, vaziyatNezamVazife, akharinMadrakTahsili, moadelMadrakTahsili, reshteTahsili, zaminehMoredAlagheHamkari, mizanSabegheKarMortabet, sematShoghli, codePerseneli, email, shomaeTelephoneTamas, keshvar, ostan, shahrestan, shahr, rosta, neshani, moaref, telephoneTamasMoaref, tozihat, jensiyatSp, vaziyatTaaholSp, vaziyatNezamVazifeSp, akharinMadrakTahsiliSp,inflatedview!!.clcl)
 
         }
+
+        inflatedview!!.etTelephoneTamasMoaref.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.length == 0){
+                    inflatedview!!.txTelephoneTamasMoaref.setText("اینجا بنویسید")
+
+                }else{
+                    inflatedview!!.txTelephoneTamasMoaref.setText("")
+
+                }
+            }
+        })
+
+
+        inflatedview!!.etNameFamily.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {}
+
+            override fun afterTextChanged(s: Editable) {
+
+                 inflatedview!!.txTedadCharNameFamily.setText(s.length.toString())
+
+            }
+        })
+
+        inflatedview!!.etShomaeTelephoneTamas.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.length == 0){
+                    inflatedview!!.txShomaeTelephoneTamas.setText("اینجا بنویسید")
+
+                }else{
+                    inflatedview!!.txShomaeTelephoneTamas.setText("")
+
+                }
+            }
+        })
+
+        inflatedview!!.etEmail.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.length == 0){
+                    inflatedview!!.txEmail.setText("اینجا بنویسید")
+
+                }else{
+                    inflatedview!!.txEmail.setText("")
+
+                }
+            }
+        })
+
+        inflatedview!!.etCodePerseneli.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.length == 0){
+                    inflatedview!!.txCodePerseneli.setText("اینجا بنویسید")
+
+                }else{
+                    inflatedview!!.txCodePerseneli.setText("")
+
+                }
+            }
+        })
+
+
+        inflatedview!!.etMizanSabegheKarMortabet.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int, count: Int,
+                after: Int
+            ) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.length == 0){
+                    inflatedview!!.txMizanSabegheKarMortabet.setText("اینجا بنویسید")
+
+                }else{
+                    inflatedview!!.txMizanSabegheKarMortabet.setText("")
+
+                }
+            }
+        })
+
 
 
 
@@ -616,7 +710,7 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var count:Int = data!!.getClipData()!!.itemCount
             var currentItem:Int = 0;
             if (count > 10) {
-                Toast.makeText(activity,"حداکثر 10 تصویر انتخاب کنید",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "حداکثر 10 تصویر انتخاب کنید", Toast.LENGTH_SHORT).show()
             }else{
 
                 while (currentItem < count) {
@@ -648,8 +742,8 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         val body0 = UploadRequestBody(file0, "image", this)
 
         ApiForUpload().uploadImageProfile(
-            MultipartBody.Part.createFormData("p1",file0.name, body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), SharedPrefClass.getUserId(activity,"user")))
+                MultipartBody.Part.createFormData("p1", file0.name, body0),
+                RequestBody.create("multipart/form-data".toMediaTypeOrNull(), SharedPrefClass.getUserId(activity, "user")))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -659,8 +753,8 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
                 }
 
                 override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
+                        call: Call<UploadResponse>,
+                        response: Response<UploadResponse>
                 ) {
                     response.body()?.let {
                         inflatedview!!.clcl.snackbar(it.message)
@@ -680,8 +774,8 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
     }
 
     open fun dialogCityList(
-        context: Context,
-        method: String?) {
+            context: Context,
+            method: String?) {
         val dialog = Dialog(context, R.style.customDialogKar)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val inflater =
@@ -699,13 +793,13 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var recyclerAdapterCitys: RecyclerAdapterCitys? = null
 
             rModelsCitysModel = ArrayList()
-            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etOstan,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys, inflatedview!!.etOstan, dialog, inflatedview!!.etOstan, inflatedview!!.etShahrestan, inflatedview!!.etShahr, inflatedview!!.etRosta)
             Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
             LoadData.loadOstanHaBaRetrofit(
-                activity,
-                clWifiState,
-                rModelsCitysModel,
-                recyclerAdapterCitys
+                    activity,
+                    clWifiState,
+                    rModelsCitysModel,
+                    recyclerAdapterCitys
             )
 
         }else if(method == "shahrestan"){
@@ -714,26 +808,26 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var recyclerAdapterCitys: RecyclerAdapterCitys? = null
 
             rModelsCitysModel = ArrayList()
-            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etShahrestan,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys, inflatedview!!.etShahrestan, dialog, inflatedview!!.etOstan, inflatedview!!.etShahrestan, inflatedview!!.etShahr, inflatedview!!.etRosta)
             Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
             LoadData.loadShahrestanHaBaRetrofit(
-                activity,
-                clWifiState,
-                rModelsCitysModel,
-                recyclerAdapterCitys,inflatedview!!.etOstan.hint.toString())
+                    activity,
+                    clWifiState,
+                    rModelsCitysModel,
+                    recyclerAdapterCitys, inflatedview!!.etOstan.hint.toString())
         }else if(method == "shahr"){
 
             var rModelsCitysModel: ArrayList<CitysModel>? = null
             var recyclerAdapterCitys: RecyclerAdapterCitys? = null
 
             rModelsCitysModel = ArrayList()
-            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etShahr,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys, inflatedview!!.etShahr, dialog, inflatedview!!.etOstan, inflatedview!!.etShahrestan, inflatedview!!.etShahr, inflatedview!!.etRosta)
             Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
             LoadData.loadShahrHaBaRetrofit(
-                activity,
-                clWifiState,
-                rModelsCitysModel,
-                recyclerAdapterCitys,inflatedview!!.etShahrestan.hint.toString())
+                    activity,
+                    clWifiState,
+                    rModelsCitysModel,
+                    recyclerAdapterCitys, inflatedview!!.etShahrestan.hint.toString())
 
 
         }else if(method == "abadi"){
@@ -742,13 +836,13 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
             var recyclerAdapterCitys: RecyclerAdapterCitys? = null
 
             rModelsCitysModel = ArrayList()
-            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys,inflatedview!!.etRosta,dialog,inflatedview!!.etOstan,inflatedview!!.etShahrestan,inflatedview!!.etShahr,inflatedview!!.etRosta)
+            recyclerAdapterCitys = RecyclerAdapterCitys("citys", activity, rModelsCitysModel, recyclerAdapterCitys, inflatedview!!.etRosta, dialog, inflatedview!!.etOstan, inflatedview!!.etShahrestan, inflatedview!!.etShahr, inflatedview!!.etRosta)
             Recyclerview.defineRecyclerViewVerticalForCitys(activity, rv1, recyclerAdapterCitys, rModelsCitysModel)
             LoadData.loadAbadiHaBaRetrofit(
-                activity,
-                clWifiState,
-                rModelsCitysModel,
-                recyclerAdapterCitys,inflatedview!!.etShahrestan.hint.toString())
+                    activity,
+                    clWifiState,
+                    rModelsCitysModel,
+                    recyclerAdapterCitys, inflatedview!!.etShahrestan.hint.toString())
         }
 
         //Toast.makeText(activity, inflatedview!!.etRosta.hint.toString(), Toast.LENGTH_SHORT).show();
@@ -758,8 +852,8 @@ open class TakmilEtelaat : Fragment(),TimePickerDialog.OnTimeSetListener, DatePi
         dialog.setContentView(view)
         val window: Window = dialog.getWindow()!!
         window.setLayout(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
         )
         window.setGravity(Gravity.CENTER)
         //line zir baraye transparent kardan hashiye haye cardview ee:
