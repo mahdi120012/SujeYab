@@ -24,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SujeYab"
         android:usesCleartextTraffic="true">
-        <!--<activity android:name=".login.TestLocation"></activity>-->
+        <activity android:name=".bank_suje.MainCat0"></activity>
+        <!-- <activity android:name=".login.TestLocation"></activity> -->
         <activity android:name=".upload.Poshtibani" />
         <activity android:name=".SujeClick.MainActFarakhan" />
         <activity android:name=".SabtSuje.SabtForiSuje" />
