@@ -67,6 +67,7 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.TimeKononi;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
+import ir.e.sujeyab.adapters.CatAdapter;
 import ir.e.sujeyab.adapters.RadapterVaziyatFarakhan;
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
@@ -76,6 +77,7 @@ import ir.e.sujeyab.adapters.RecyclerAdapterVaziyatSujeha;
 import ir.e.sujeyab.adapters.TasavirSujeAdapter;
 import ir.e.sujeyab.login.Login;
 import ir.e.sujeyab.login.TakmilEtelaat;
+import ir.e.sujeyab.models.CatModel;
 import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
@@ -1903,6 +1905,85 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+
+    public static void loadCat_0(Context c, final ConstraintLayout clWifi, ArrayList<CatModel> rModels, CatAdapter rAdapter
+            , NestedScrollView nestedScrollView, ProgressBar progressBar) {
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<CatModel>> call = api.getCat_0();
+        call.enqueue(new Callback<List<CatModel>>() {
+            @Override
+            public void onResponse(Call<List<CatModel>> call, retrofit2.Response<List<CatModel>> response) {
+                List<CatModel> catModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (CatModel catModel:catModels){
+                    lastId = catModel.getId();
+                    rModels.add(new CatModel(lastId, catModel.getCat(),catModel.getMain_cat(),catModel.getPicture(),catModel.getTedad_mataleb()));
+                    rAdapter.notifyDataSetChanged();
+                }
+                nestedScrollView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<CatModel>> call, Throwable t) {
+                clWifi.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+
+    public static void loadCat_1(Context c, final ConstraintLayout clWifi, ArrayList<CatModel> rModels, CatAdapter rAdapter
+            , NestedScrollView nestedScrollView, ProgressBar progressBar,String mainCat) {
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Api api = retrofit.create(Api.class);
+        Call<List<CatModel>> call = api.getCat_1(mainCat);
+        call.enqueue(new Callback<List<CatModel>>() {
+            @Override
+            public void onResponse(Call<List<CatModel>> call, retrofit2.Response<List<CatModel>> response) {
+                List<CatModel> catModels = response.body();
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+                }
+
+                for (CatModel catModel:catModels){
+                    lastId = catModel.getId();
+                    rModels.add(new CatModel(lastId, catModel.getCat(),catModel.getMain_cat(),catModel.getPicture(),catModel.getTedad_mataleb()));
+                    rAdapter.notifyDataSetChanged();
+                }
+                nestedScrollView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<CatModel>> call, Throwable t) {
+                clWifi.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
+                Toast.makeText(c, t.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     public static void loadFarakhanVijehBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter
             , NestedScrollView nestedScrollView, ProgressBar progressBar) {
