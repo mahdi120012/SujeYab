@@ -1726,6 +1726,38 @@ public class LoadData {
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    public static void loadSujeHaBaMozo1Retrofit(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels,
+                                                 RecyclerAdapterSujeHa rAdapter,String mozoName) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <FarakhanVijehModel>> call = api.getSujeHaBaMozo1(mozoName);
+
+        call.enqueue(new Callback<List<FarakhanVijehModel>>() {
+            @Override
+            public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+                List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+
+                    lastId = farakhanVijehModel.getId();
+                    rModels.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
+                            farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
+                            farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
+                            farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",""));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }

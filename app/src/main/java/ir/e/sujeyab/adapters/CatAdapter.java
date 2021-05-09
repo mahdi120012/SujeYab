@@ -34,6 +34,7 @@ import ir.e.sujeyab.CustomClasses.Recyclerview;
 import ir.e.sujeyab.LoadData;
 import ir.e.sujeyab.R;
 import ir.e.sujeyab.bank_suje.Main_Cat_1;
+import ir.e.sujeyab.bank_suje.SujeHaBaCat_fr;
 import ir.e.sujeyab.login.TakmilEtelaat;
 import ir.e.sujeyab.models.CatModel;
 import ir.e.sujeyab.models.CitysModel;
@@ -148,7 +149,7 @@ public class CatAdapter extends RecyclerView.Adapter<CatAdapter.MyViewHolder> {
                     Bundle bundle = new Bundle();
                     bundle.putString("cat",rModels.get(position).getCat());
                     AppCompatActivity activity = (AppCompatActivity) c;
-                    Fragment myFragment = new Main_Cat_1();
+                    Fragment myFragment = new SujeHaBaCat_fr();
                     myFragment.setArguments(bundle);
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();
 

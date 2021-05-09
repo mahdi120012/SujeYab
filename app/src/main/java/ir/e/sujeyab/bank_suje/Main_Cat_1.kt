@@ -10,8 +10,13 @@ import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.adapters.CatAdapter
 import ir.e.sujeyab.models.CatModel
+import kotlinx.android.synthetic.main.main_cat1.*
+import kotlinx.android.synthetic.main.main_cat1.view.*
 import kotlinx.android.synthetic.main.net_connection.view.*
 import kotlinx.android.synthetic.main.pishkhan_fr.view.*
+import kotlinx.android.synthetic.main.pishkhan_fr.view.nestedScrollView
+import kotlinx.android.synthetic.main.pishkhan_fr.view.progressBar
+import kotlinx.android.synthetic.main.pishkhan_fr.view.rv1
 
 
 class Main_Cat_1 : Fragment() {
@@ -26,10 +31,12 @@ class Main_Cat_1 : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        inflatedview = inflater.inflate(R.layout.main_cat0, container, false)
+        inflatedview = inflater.inflate(R.layout.main_cat1, container, false)
         inflatedview!!.nestedScrollView.visibility = View.GONE
         val bundle = this.arguments
         val cat: String? = bundle!!.getString("cat")
+
+        inflatedview!!.txNameDasteBandi.setText(cat)
 
         rModels = ArrayList()
         rAdapter = CatAdapter("cat_1",activity,rModels,rAdapter)
