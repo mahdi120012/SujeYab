@@ -56,8 +56,8 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="22dp"
+                    android:id="@+id/imgBack"
+                    android:layout_width="21dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -88,14 +88,14 @@
                     android:id="@+id/txNameDasteBandi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="نام دسته بندی"
+                    android:layout_marginEnd="24dp"
                     android:fontFamily="@font/iran_sans_bold"
-                    android:textSize="14sp"
+                    android:text="نام دسته بندی"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+                    app:layout_constraintEnd_toStartOf="@+id/imgBack"
+                    app:layout_constraintTop_toTopOf="@+id/imgBack" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView

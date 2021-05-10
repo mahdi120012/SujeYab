@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import ir.e.sujeyab.R;
 import ir.e.sujeyab.SujeClick.MainActFarakhan;
+import ir.e.sujeyab.SujeClick.MainActSuje;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 
 public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.MyViewHolder> {
@@ -84,7 +85,7 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                 @Override
                 public void onClick(View v) {
 
-                    Intent intent =new Intent(c, MainActFarakhan.class);
+                    Intent intent =new Intent(c, MainActSuje.class);
                     intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kholase());
@@ -94,6 +95,10 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                     intent.putExtra("date_create",rModels.get(position).getDate_create());
                     intent.putExtra("name",rModels.get(position).getName_family());
                     intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
+                    intent.putExtra("vaziyat_like",rModels.get(position).getVaziyat_like());
+                    intent.putExtra("tedad_like",rModels.get(position).getTedad_like());
+
+
                     c.startActivity(intent);
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();

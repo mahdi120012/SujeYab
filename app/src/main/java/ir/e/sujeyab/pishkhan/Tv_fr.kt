@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.CustomClasses.Recyclerview
+import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
 import ir.e.sujeyab.RecyclerAdapter
@@ -29,17 +30,12 @@ class Tv_fr : Fragment() {
 
         inflatedview = inflater.inflate(R.layout.tv_fr, container, false)
 
+        var username = SharedPrefClass.getUserId(activity,"user")
         rModels2 = ArrayList()
         rAdapterSujeHa = RecyclerAdapterTv("tv", activity, rModels2, rAdapterSujeHa)
-
         Recyclerview.defineRecyclerViewHorizontal2(activity, inflatedview!!.rv1, rAdapterSujeHa, rModels2)
-        LoadData.loadTvBaRetrofit(
-            activity,
-            inflatedview!!.clWifiState,
-            rModels2,
-            rAdapterSujeHa
-        )
 
+        LoadData.loadTvBaRetrofit(activity,inflatedview!!.clWifiState,rModels2,rAdapterSujeHa,username)
 
         return inflatedview
     }

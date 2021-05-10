@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
+import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.adapters.CatAdapter
 import ir.e.sujeyab.models.CatModel
 import kotlinx.android.synthetic.main.main_cat1.*
 import kotlinx.android.synthetic.main.main_cat1.view.*
 import kotlinx.android.synthetic.main.net_connection.view.*
-import kotlinx.android.synthetic.main.pishkhan_fr.view.*
 import kotlinx.android.synthetic.main.pishkhan_fr.view.nestedScrollView
 import kotlinx.android.synthetic.main.pishkhan_fr.view.progressBar
 import kotlinx.android.synthetic.main.pishkhan_fr.view.rv1
@@ -33,6 +33,16 @@ class Main_Cat_1 : Fragment() {
 
         inflatedview = inflater.inflate(R.layout.main_cat1, container, false)
         inflatedview!!.nestedScrollView.visibility = View.GONE
+
+        inflatedview!!.imgBack.setOnClickListener {
+            activity!!.onBackPressed()
+        }
+
+
+        inflatedview!!.imgSearch.setOnClickListener {
+            clcl.snackbar("بزودی راه اندازی می شود")
+        }
+
         val bundle = this.arguments
         val cat: String? = bundle!!.getString("cat")
 

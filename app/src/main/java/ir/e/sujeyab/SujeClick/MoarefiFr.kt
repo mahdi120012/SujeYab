@@ -57,8 +57,7 @@ import kotlin.collections.ArrayList
 
 
         inflatedview!!.txTedadLike.setText(tedad_like)
-
-        if (vaziyat_like.equals("0")) {
+        if (vaziyat_like.contains("0")) {
             inflatedview!!.imgLike.setImageDrawable(ContextCompat.getDrawable(activity!!, R.drawable.like))
         } else {
             inflatedview!!.imgLike.setImageDrawable(ContextCompat.getDrawable(activity!!, R.drawable.like_red))
@@ -79,7 +78,7 @@ import kotlin.collections.ArrayList
         loadImage(inflatedview!!.imgAxFerestande, axFerestande)
 
         //line zir baraye load tasavir safhe mahsole
-        LoadData.LoadTasavirSujeBaRetrofit(activity, clWifiState,
+        LoadData.LoadTasavirSujeBaVolley(activity, clWifiState,
                 sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
 
 

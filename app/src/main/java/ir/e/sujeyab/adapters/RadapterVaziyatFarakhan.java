@@ -100,7 +100,7 @@ public class RadapterVaziyatFarakhan extends RecyclerView.Adapter<RadapterVaziya
                             rModels2,
                             rAdapter);
                     Recyclerview.defineRecyclerViewVertical(c, rv2, rAdapter, rModels2);
-                    LoadData.loadFarakhanHaBarAsasVaziyat(c, clwifi, rModels2, rAdapter, rModels.get(position).getPicture());
+                    LoadData.loadFarakhanHaBarAsasVaziyatBaVolley(c, clwifi, rModels2, rAdapter, rModels.get(position).getPicture());
 
 
 /*                    rModels = new ArrayList();

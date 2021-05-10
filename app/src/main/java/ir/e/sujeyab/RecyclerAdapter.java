@@ -202,7 +202,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     farakhanVijehModel = new ArrayList();
                     recyclerAdapterSujeHa = new RecyclerAdapterSujeHa("suje_ha", c, farakhanVijehModel, recyclerAdapterSujeHa);
                     Recyclerview.defineRecyclerViewVertical2(c, rv1, recyclerAdapterSujeHa, farakhanVijehModel);
-                    LoadData.loadSujeHaBarAsasVaziyat(
+                    LoadData.loadSujeHaBarAsasVaziyatBaVolley(
                             c,
                             clwifi,
                             farakhanVijehModel,

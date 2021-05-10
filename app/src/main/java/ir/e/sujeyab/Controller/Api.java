@@ -99,7 +99,7 @@ public interface Api {
     Call<List<CitysModel>> load_abadi_by_shahrestan_code(@Query("shahrestan_id") String shahrestan_id);
 
     @GET("load_tv")
-    Call<List<FarakhanVijehModel>> getTv();
+    Call<List<FarakhanVijehModel>> getTv(@Query("user1") String username1);
 
     @GET("load_vaziyat_suje_ha")
     Call<List<VaziyatModel>> getVaziyatSujeHa();
