@@ -210,10 +210,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_white_border"
         app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txMatnKholase"
         app:layout_constraintTop_toBottomOf="@+id/txMatnKholase">
 
@@ -221,7 +222,9 @@
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
             android:fontFamily="@font/iran_sans_bold"
             android:text="ویژه فراخوان:"
             android:textColor="#000000"
@@ -231,16 +234,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txVijehFarakhan"
-            android:layout_width="wrap_content"
+            android:id="@+id/txOnvanFarakhan"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
             android:fontFamily="@font/iran_sans"
+            android:justificationMode="inter_word"
+            android:maxLines="3"
             android:text="عنوان فراخوان"
             android:textColor="#000000"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView30"
             app:layout_constraintEnd_toStartOf="@+id/textView30"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView30" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

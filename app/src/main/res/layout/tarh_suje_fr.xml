@@ -220,6 +220,15 @@
                     app:layout_constraintEnd_toEndOf="@+id/textView25aa"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView25aa" />
+
+                <TextView
+                    android:id="@+id/txIdFarakhan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/etEntekhabFarakhan"
+                    app:layout_constraintStart_toEndOf="@+id/etEntekhabFarakhan"
+                    app:layout_constraintTop_toTopOf="@+id/etEntekhabFarakhan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

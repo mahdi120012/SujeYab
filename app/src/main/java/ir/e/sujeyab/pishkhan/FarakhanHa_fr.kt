@@ -34,31 +34,14 @@ class FarakhanHa_fr : Fragment() {
         rModels2,rAdapter,inflatedview!!.rv2,inflatedview!!.clWifiState)
 
         Recyclerview.defineRecyclerViewHorizontalVaziyatFarakhan(activity, inflatedview!!.rv1, rAdapterVaziyatFarakhan, rModels)
-        LoadData.loadVaziyatFarakhan(
-            activity,
-            inflatedview!!.clWifiState,
-            rModels,
-                rAdapterVaziyatFarakhan)
-
+        LoadData.loadVaziyatFarakhan(activity,inflatedview!!.clWifiState,rModels,rAdapterVaziyatFarakhan)
 
 
         rModels2 = ArrayList()
-        rAdapter = RecyclerAdapter(
-            "farakhan_ha",
-            activity,
-            rModels2,
-            rAdapter)
+        rAdapter = RecyclerAdapter("farakhan_ha",activity,rModels2,rAdapter)
         Recyclerview.defineRecyclerViewVertical(activity, inflatedview!!.rv2, rAdapter, rModels2)
-        LoadData.loadFarakhanHaBaRetrofit(
-            activity,
-            inflatedview!!.clWifiState,
-            rModels2,
-            rAdapter
-        )
-
-
+        LoadData.loadFarakhanHaBaRetrofit(activity,inflatedview!!.clWifiState,rModels2,rAdapter)
 
         return inflatedview
     }
-
 }

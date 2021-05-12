@@ -1080,7 +1080,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate(),""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate(),"","",""));
 
                     ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
                     mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager,sujeModel));
@@ -1289,7 +1289,7 @@ public class LoadData {
                     lastId = farakhanVijehModel.getId();
                     rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
                             ,farakhanVijehModel.getModat_baghimande(),
-                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),"",""));
+                            farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),"","",farakhanVijehModel.getTedad_suje()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1387,7 +1387,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","",""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1731,6 +1731,7 @@ public class LoadData {
                         String date_create = jsonObject.getString("date_create");
                         String vaziyat_like = jsonObject.getString("vaziyat_like");
                         String tedad_like = jsonObject.getString("tedad_like");
+                        String tedad_suje = jsonObject.getString("tedad_suje");
                         //String link_video = jsonObject.getString("link_video");
                         /*String miyangin_rate = jsonObject.getString("miyangin_rate");
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
@@ -1738,7 +1739,7 @@ public class LoadData {
 
                          rModels.add(new RecyclerModel(lastId, picture,onvan
                                     ,modat_baghimande,
-                                 matn_kholase,motavali,date_create,vaziyat_like,tedad_like));
+                                 matn_kholase,motavali,date_create,vaziyat_like,tedad_like,tedad_suje));
                          rAdapter.notifyDataSetChanged();
 
 
@@ -1796,7 +1797,7 @@ public class LoadData {
                         lastId = farakhanVijehModel.getId();
                         rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan()
                                 ,farakhanVijehModel.getModat_baghimande(),
-                                farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like()));
+                                farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getTedad_suje()));
                         rAdapter.notifyDataSetChanged();
 
                     }
@@ -1857,12 +1858,13 @@ public class LoadData {
                         String vaziyat_like = jsonObject.getString("vaziyat_like");
                         String tedad_like = jsonObject.getString("tedad_like");
                         String link_video = jsonObject.getString("link_video");
+                        String onvan_farakhan = jsonObject.getString("onvan_farakhan");
                         /*String miyangin_rate = jsonObject.getString("miyangin_rate");
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
 
                         rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
                                 "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
-                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,link_video,"",""));
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,link_video,"","",onvan_farakhan,""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1917,7 +1919,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","",""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1951,7 +1953,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","",farakhanVijehModel.getOnvan_farakhan(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1983,7 +1985,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","",farakhanVijehModel.getOnvan_farakhan(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2020,7 +2022,7 @@ public class LoadData {
                                 farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                                 farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                                 farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",""));
+                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","",""));
                         rAdapter.notifyDataSetChanged();
 
                 }
@@ -2090,7 +2092,7 @@ public class LoadData {
                     lastId = model.getId();
                     rModels.add(new RecyclerModel(lastId, model.getName_vaziyat_suje_ha(),""
                             ,"",
-                            "","","","",""));
+                            "","","","","",""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2139,7 +2141,7 @@ public class LoadData {
                         lastId = jsonObject.getString("id");
                         name_vaziyat_farakhan = jsonObject.getString("name_vaziyat_farakhan");
 
-                        rModels.add(new RecyclerModel(lastId, name_vaziyat_farakhan,"","","","","","",""));
+                        rModels.add(new RecyclerModel(lastId, name_vaziyat_farakhan,"","","","","","","",""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -2274,7 +2276,7 @@ public class LoadData {
 
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
                     lastId = farakhanVijehModel.getId();
-                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getTedad_comment()));
+                    rModels.add(new RecyclerModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getDate_create(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getTedad_comment(),""));
                     rAdapter.notifyDataSetChanged();
                 }
                 nestedScrollView.setVisibility(View.VISIBLE);
@@ -2331,7 +2333,7 @@ public class LoadData {
                         onvan = jsonObject.getString("onvan");
                         modat_baghimande = jsonObject.getString("modat_baghimande");
                         matn_kholase = jsonObject.getString("matn_kholase");
-                        rModels.add(new RecyclerModel(lastId, picture,onvan,modat_baghimande,matn_kholase,"","","",""));
+                        rModels.add(new RecyclerModel(lastId, picture,onvan,modat_baghimande,matn_kholase,"","","","",""));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {

@@ -50,6 +50,8 @@ import java.util.ArrayList
         event.etOnvan = inflatedview!!.etOnvan
         event.etMozo = inflatedview!!.etMozo
         event.etTozihat = inflatedview!!.etTozihat
+        event.etTozihat = inflatedview!!.etTozihat
+        event.txIdFarakhan = inflatedview!!.txIdFarakhan
         EventBus.getDefault().post(event)
 
         inflatedview!!.clEdame.setOnClickListener {
@@ -172,7 +174,7 @@ import java.util.ArrayList
                 "entekhab_farakhan_suje",
                 activity,
                 rModels2,
-                rAdapter
+                rAdapter,dialog,etEntekhabFarakhan,txIdFarakhan
             )
             Recyclerview.defineRecyclerViewVertical(activity, rv1, rAdapter, rModels2)
             LoadData.loadFarakhanHaBaRetrofit(

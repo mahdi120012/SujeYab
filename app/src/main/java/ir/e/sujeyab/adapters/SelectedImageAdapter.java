@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,6 +61,8 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
 //                        .into(holder.imgPicture);
 //
 //            }else{
+
+            if (arrayList.get(position).toString().contains("jpg") || arrayList.get(position).toString().contains("png")) {
                 Picasso.get()
                         .load(arrayList.get(position))
                         .centerCrop()
@@ -67,8 +70,11 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
                         .error(R.drawable.logo)
                         .placeholder(R.drawable.logo)
                         .into(holder.imgPicture);
-
-
+            }else {
+                Glide.with(c).load("empty")
+                        .thumbnail(Glide.with(c).load(arrayList.get(position)))
+                        .into(holder.imgPicture);
+            }
 
         }
     }

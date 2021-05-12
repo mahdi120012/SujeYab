@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.*
 import kotlinx.android.synthetic.main.takmil_etelaat.*
+import kotlinx.android.synthetic.main.tarh_suje_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.progress_bar
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
@@ -55,6 +57,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     var etOnvanP:EditText? = null
     var etMozoP:EditText? = null
     var etTozihatP:EditText? = null
+    var txIdFarakhan:TextView? = null
     private var arrayList: ArrayList<Uri>? = null
     var rAdapter: SelectedImageAdapter? = null
     companion object {
@@ -151,17 +154,17 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
         inflatedview!!.clEntakhabFilmSuje.setOnClickListener {
             openVideoChooser()
-            inflatedview!!.clAfzodanFilmBaLinkMostaghim.visibility = View.VISIBLE
+            //inflatedview!!.clAfzodanFilmBaLinkMostaghim.visibility = View.VISIBLE
         }
 
 
-        inflatedview!!.imgShowPreview.setOnClickListener {
+     /*   inflatedview!!.imgShowPreview.setOnClickListener {
             inflatedview!!.clPishnamayeshFilm.visibility = View.VISIBLE
             var videoLink = inflatedview!!.etLinkVideo.text.toString()
             inflatedview!!.videoView.setSource(Uri.parse(videoLink))
             inflatedview!!.videoView.enableControls()
             inflatedview!!.videoView.start()
-        }
+        }*/
 
         arrayList = ArrayList()
         rAdapter = SelectedImageAdapter("selected_image",activity,arrayList,rAdapter)
@@ -1297,6 +1300,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         this.etOnvanP = event.etOnvan
         this.etMozoP = event.etMozo
         this.etTozihatP = event.etTozihat
+        this.txIdFarakhan = event.txIdFarakhan
         //Toast.makeText(activity, event.etOnvan.text.toString(), Toast.LENGTH_SHORT).show()
     }
 

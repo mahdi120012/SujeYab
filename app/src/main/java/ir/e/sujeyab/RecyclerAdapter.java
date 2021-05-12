@@ -1,6 +1,7 @@
 package ir.e.sujeyab;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 
 import androidx.annotation.RequiresApi;
@@ -14,6 +15,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     RecyclerView rv1, rv2;
     ConstraintLayout clwifi;
+    Dialog dialog;
+    EditText etOnvanFarakhan;
+    TextView txIdFarakhan;
     public RecyclerAdapter(String rowLayoutType, Context c, ArrayList<RecyclerModel> recyclerModels,
                            RecyclerAdapter recyclerAdapterYouHaveKnow, ArrayList<FarakhanVijehModel> farakhanVijehModel,
                            RecyclerAdapterSujeHa recyclerAdapterSujeHa, RecyclerView rv1, ConstraintLayout clwifi) {
@@ -64,6 +69,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         this.rowLayoutType = rowLayoutType;
         this.c = c;
         this.rAdapter = recyclerAdapterYouHaveKnow;
+    }
+
+    public RecyclerAdapter(String rowLayoutType, Context c, ArrayList<RecyclerModel> recyclerModels,
+                           RecyclerAdapter recyclerAdapterYouHaveKnow, Dialog dialog, EditText etOnvanFarakhan, TextView txIdFarakhan) {
+        this.rModels = recyclerModels;
+        this.rowLayoutType = rowLayoutType;
+        this.c = c;
+        this.rAdapter = recyclerAdapterYouHaveKnow;
+        this.dialog = dialog;
+        this.etOnvanFarakhan = etOnvanFarakhan;
+        this.txIdFarakhan = txIdFarakhan;
     }
 
 
@@ -267,7 +283,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kolase());
             holder.txMotavali.setText(rModels.get(position).getMotavali());
 
-            holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(String.valueOf(position+1)) + " سوژه" );
+            holder.txTedadSuje.setText(new EnglishNumberToPersian().convert(rModels.get(position).getTedad_suje()) + " سوژه" );
 
 
             String ax = rModels.get(position).getPicture();
@@ -348,7 +364,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Toast.makeText(c, "انتخاب شد", Toast.LENGTH_SHORT).show();
+                    txIdFarakhan.setText(rModels.get(position).getId());
+                    etOnvanFarakhan.setText(rModels.get(position).getOnvan());
+                    dialog.dismiss();
+
                 }
             });
 

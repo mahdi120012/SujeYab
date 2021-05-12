@@ -12,7 +12,8 @@ public class RecyclerModel {
     private String date_create;
     private String name_family;
     private String semat_shoghli;
-    public RecyclerModel(String id, String picture, String onvan , String modat_baghimande, String matn_kolase, String motavali, String date_create, String name_family, String semat_shoghli) {
+    private String tedad_suje;
+    public RecyclerModel(String id, String picture, String onvan , String modat_baghimande, String matn_kolase, String motavali, String date_create, String name_family, String semat_shoghli,String tedad_suje) {
         this.id = id;
         this.picture = picture;
         this.onvan = onvan;
@@ -22,6 +23,7 @@ public class RecyclerModel {
         this.date_create = date_create;
         this.name_family = name_family;
         this.semat_shoghli = semat_shoghli;
+        this.tedad_suje = tedad_suje;
     }
 
     public String getId() {
@@ -58,5 +60,9 @@ public class RecyclerModel {
 
     public String getSemat_shoghli() {
         return semat_shoghli;
+    }
+
+    public String getTedad_suje() {
+        return tedad_suje;
     }
 }

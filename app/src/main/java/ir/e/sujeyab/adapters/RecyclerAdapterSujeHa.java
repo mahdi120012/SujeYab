@@ -61,7 +61,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
             holder.txTedadComment.setText(new EnglishNumberToPersian().convert("0"));
             holder.txFerestande.setText(rModels.get(position).getName_family());
             holder.txSematShoghli.setText("(" + rModels.get(position).getSemat_shoghli() +")" );
-
+            holder.txOnvanFarakhan.setText(rModels.get(position).getOnvan_farakhan());
 
             if (rModels.get(position).getVaziyat_like().matches("0")){
                 holder.imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like));
@@ -90,9 +90,8 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                         .placeholder(R.drawable.logo)
                         .into(holder.imgPicture);
             }*/
-
             Glide.with(c).load("empty")
-                    .thumbnail(Glide.with(c).load(rModels.get(position).getLink_video()))
+                    .thumbnail(Glide.with(c).load(rModels.get(position).getPicture()))
                     .into(holder.imgPicture);
 
 
@@ -134,7 +133,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txOnvan,txMatnKholase,txTedadComment,txTedadLike,txFerestande,txSematShoghli,txVaziyat;
+        TextView txOnvan,txMatnKholase,txTedadComment,txTedadLike,txFerestande,txSematShoghli,txVaziyat,txOnvanFarakhan;
         ImageView imgPicture,imgLike;
 
         MyViewHolder(View view) {
@@ -153,7 +152,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
             txTedadComment = itemView.findViewById(R.id.txTedadComment);
 
             txMatnKholase = itemView.findViewById(R.id.txMatnKholase);
-
+            txOnvanFarakhan = itemView.findViewById(R.id.txOnvanFarakhan);
             imgPicture = itemView.findViewById(R.id.imgPicture);
 
 
