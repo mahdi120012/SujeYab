@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -177,14 +178,21 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
     private fun openVideoChooser() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 30)
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        //intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, MAX_VIDEO_RECORDING_TIME_IN_SEC)
+        intent.type = "video/*"
+        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
 
-        Intent(Intent.ACTION_PICK).also {
-            it.type = "video/*"
-            val mimeTypes = arrayOf("video/*")
-            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
-        }
+
+        //Intent(Intent.ACTION_PICK).also {
+        //    it.type = "video/*"
+        //    val mimeTypes = arrayOf("video/*")
+        //    it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+        //    it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        //    startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
+        //}
     }
 
 

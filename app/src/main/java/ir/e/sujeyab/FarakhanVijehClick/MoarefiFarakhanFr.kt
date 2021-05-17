@@ -103,6 +103,8 @@ import kotlin.collections.ArrayList
             }else{
 
                 val intent = Intent(activity, SabtForiSuje::class.java)
+                intent.putExtra("id_farakhan",sujeId)
+                intent.putExtra("onvan_farakhan",onvan)
                 startActivity(intent)
             }
         }

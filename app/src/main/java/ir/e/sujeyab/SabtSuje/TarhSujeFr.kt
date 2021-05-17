@@ -39,12 +39,21 @@ import java.util.ArrayList
 
  class TarhSujeFr : Fragment() {
     var inflatedview: View? = null
+     lateinit var idFarakhan: String;
+     lateinit var onvanFarakhan: String;
 
-    override fun onCreateView(
+     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         inflatedview = inflater.inflate(R.layout.tarh_suje_fr, container, false)
+        if(activity!!.intent.extras != null) {
+             idFarakhan = activity!!.intent.extras!!.getString("id_farakhan").toString()
+             onvanFarakhan = activity!!.intent.extras!!.getString("onvan_farakhan").toString()
+
+             inflatedview!!.txIdFarakhan.setText(idFarakhan)
+             inflatedview!!.etEntekhabFarakhan.setText(onvanFarakhan)
+        }
 
         val event = ir.e.sujeyab.SabtSuje.MessageEvent()
         event.etOnvan = inflatedview!!.etOnvan
