@@ -56,9 +56,9 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
         if (rowLayoutType.matches("suje_ha")){
             holder.txOnvan.setText(rModels.get(position).getOnvan());
             holder.txMatnKholase.setText(rModels.get(position).getMatn_kholase());
-            holder.txVaziyat.setText(rModels.get(position).getMotavali());
+            holder.txVaziyat.setText(rModels.get(position).getVaziyat_suje());
             holder.txTedadLike.setText(new EnglishNumberToPersian().convert(rModels.get(position).getTedad_like()));
-            holder.txTedadComment.setText(new EnglishNumberToPersian().convert("0"));
+            holder.txTedadComment.setText(new EnglishNumberToPersian().convert(rModels.get(position).getTedad_comment()));
             holder.txFerestande.setText(rModels.get(position).getName_family());
             holder.txSematShoghli.setText("(" + rModels.get(position).getSemat_shoghli() +")" );
             holder.txOnvanFarakhan.setText(rModels.get(position).getOnvan_farakhan());

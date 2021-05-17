@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar.OnRatingBarChangeListener
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
@@ -78,6 +79,7 @@ import kotlin.collections.ArrayList
 
         inflatedview!!.txMotavali.setText(motavali)
         inflatedview!!.txTedadLike.setText(tedad_like)
+        //Toast.makeText(activity,tedad_like,Toast.LENGTH_SHORT).show()
 
         if (vaziyat_like.equals("0")) {
             inflatedview!!.imgLike.setImageDrawable(ContextCompat.getDrawable(activity!!, R.drawable.like))
@@ -137,13 +139,13 @@ import kotlin.collections.ArrayList
             if (username == "" || username == null){
                 inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
             }else{
-                LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
+                LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString(), inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)
             }
         })
 
 
-
-        LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId,inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)
+        //Toast.makeText(activity,sujeId,Toast.LENGTH_SHORT).show()
+        LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId, inflatedview!!.txTedadRate,inflatedview!!.txRateAvg)
 
 
         return inflatedview

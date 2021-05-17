@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.login.Login
+import ir.e.sujeyab.upload.MoarefiSamarqand
 import ir.e.sujeyab.upload.Poshtibani
 import kotlinx.android.synthetic.main.setting.*
+import kotlinx.android.synthetic.main.setting.clElanat
+import kotlinx.android.synthetic.main.setting.clcl
+import kotlinx.android.synthetic.main.toolbar_button.*
 
 class Setting : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +52,9 @@ class Setting : AppCompatActivity() {
 
 
         clMoarefiSuje.setOnClickListener {
-            Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MoarefiSamarqand::class.java)
+            //myIntent.putExtra("key", value) //Optional parameters
+            startActivity(intent)
         }
 
 
@@ -64,7 +71,12 @@ class Setting : AppCompatActivity() {
         }
 
         clMoarefiBeDostan.setOnClickListener {
-            Toast.makeText(this, "بزودی راه اندازی می شود", Toast.LENGTH_SHORT).show()
+           ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setChooserTitle("اشتراک گذاری با دوستان")
+                .setText("سلام من از ثمرقند استفاده میکنم. میتونید از لینک زیر دانلودش کنید" + " " + "https://samarqand.ir/dl")
+                .startChooser();
+
         }
 
         clExit.setOnClickListener {

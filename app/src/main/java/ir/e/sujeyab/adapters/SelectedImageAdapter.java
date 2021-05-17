@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,6 +77,14 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
                         .into(holder.imgPicture);
             }
 
+            holder.txRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    arrayList.remove(position);
+                    notifyDataSetChanged();
+                }
+            });
+
         }
     }
 
@@ -92,14 +101,14 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        //TextView txOnvan;
+        TextView txRemove;
         ImageView imgPicture;
 
         MyViewHolder(View view) {
             super(view);
 
             imgPicture = itemView.findViewById(R.id.imgPicture);
-
+            txRemove = itemView.findViewById(R.id.txRemove);
 
 
         }

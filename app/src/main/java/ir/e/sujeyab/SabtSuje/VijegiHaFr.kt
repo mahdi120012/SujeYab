@@ -78,7 +78,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
         }*/
-        (activity!!.txEdame)!!.setText("ثبت سوژه")
+        //(activity!!.txEdame)!!.setText("ثبت سوژه")
 
         inflatedview!!.clEdame.setOnClickListener {
 
@@ -327,7 +327,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -398,7 +399,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -484,7 +486,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -576,7 +579,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -674,7 +678,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -777,7 +782,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -887,7 +893,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -1002,7 +1009,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -1122,7 +1130,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -1255,7 +1264,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
             RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
             RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()))
+            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -1301,7 +1311,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         this.etMozoP = event.etMozo
         this.etTozihatP = event.etTozihat
         this.txIdFarakhan = event.txIdFarakhan
-        //Toast.makeText(activity, event.etOnvan.text.toString(), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(activity, event.txIdFarakhan.text.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {

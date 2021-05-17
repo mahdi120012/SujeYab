@@ -61,6 +61,9 @@ public interface Api {
     @GET("load_suje_ha")
     Call<List<FarakhanVijehModel>> getSujeHa();
 
+    @GET("load_suje_ha_dar_farakhan")
+    Call<List<FarakhanVijehModel>> getSujeHaDarFarakhan(@Query("post_id") String postId);
+
     @GET("load_suje_ha_ba_mozo_1")
     Call<List<FarakhanVijehModel>> getSujeHaBaMozo1(@Query("mozo_name") String mozoName);
 

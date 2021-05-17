@@ -51,6 +51,7 @@
                         android:id="@+id/txMatn2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp"
                         android:fontFamily="@font/iran_sans_bold"
                         android:justificationMode="inter_word"
                         android:text="افزودن سوژه"
@@ -66,10 +67,11 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/txMatn2"
+                        android:padding="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/txMatn2"
-                        app:layout_constraintTop_toTopOf="@+id/txMatn2"
-                        app:srcCompat="@drawable/plus_khakestari" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/plus_white" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

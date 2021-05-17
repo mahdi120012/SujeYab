@@ -110,7 +110,7 @@ import kotlin.collections.ArrayList
             if (username == "" || username == null) {
                 inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
             } else {
-                LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString())
+                LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString(), inflatedview!!.txTedadRate, inflatedview!!.txRateAvg)
             }
         })
 

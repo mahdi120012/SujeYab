@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.R
 import ir.e.sujeyab.pishkhan.Pishkhan
+import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
+import kotlinx.android.synthetic.main.main_cat1.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.view.*
 
@@ -38,17 +41,33 @@ class SabtFr : Fragment() {
 
         }
 
+        inflatedview!!.clBazgasht.visibility = View.GONE
+
+
 
         inflatedview!!.clEdame.setOnClickListener {
-            /*if (inflatedview!!.etOnvan.text.toString() == "" || inflatedview!!.etMozo.text.toString() == "" || inflatedview!!.etTozihat.text.toString() == ""){
-                clcl.snackbar("لطفا همه فیلد ها را تکمیل نمایید")
+            val intent = Intent(activity, Pishkhan::class.java)
+            activity!!.startActivity(intent)
 
-            }else{
-                activity!!.viewPager.setCurrentItem(2)
-            }*/
-
-            Toast.makeText(activity, "ثبت", Toast.LENGTH_LONG).show()
+            val activity = activity as AppCompatActivity
+            activity.finish()
         }
+
+        //(activity!!.txEdame)!!.setText("بازگشت به پیشخوان")
+        inflatedview!!.txEdame.setText("بازگشت به پیشخوان")
+
+        (activity!!.imgBack).setOnClickListener {
+            /*Snackbar snackbar = Snackbar.make(clcl, "مشخصات شما با موفقیت ویرایش شد", Snackbar.LENGTH_LONG);
+                snackbar.show();*/
+            val intent = Intent(activity, Pishkhan::class.java)
+            activity!!.startActivity(intent)
+
+            val activity = activity as AppCompatActivity
+            activity.finish()
+        }
+
+
+
 
 
         inflatedview!!.clBazgasht.setOnClickListener {

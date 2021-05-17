@@ -32,7 +32,8 @@ interface ApiForUpload {
                     @Part("type") type: RequestBody,
                     @Part("shenase_rahgiri") shenase_rahgiri: RequestBody,
                     @Part("link_video") linkVideo: RequestBody,
-                    @Part("tozih_video") tozihVideo: RequestBody)
+                    @Part("tozih_video") tozihVideo: RequestBody,
+                    @Part("id_farakhan") id_farakhan: RequestBody)
             : Call<UploadResponse>
 
 

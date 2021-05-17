@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import ir.e.sujeyab.FarakhanVijehClick.SujeHaDarFarakhanFr
 import ir.e.sujeyab.R
 import ir.e.sujeyab.pishkhan.SujeHa_fr
 import kotlinx.android.synthetic.main.farakhan_main_act.*
@@ -39,7 +40,7 @@ class MainActFarakhan : AppCompatActivity() {
         override fun createFragment(position: Int): Fragment {
             when(position){
                 0-> return CommentFarakhanFr()
-                1-> return SujeHa_fr()
+                1-> return SujeHaDarFarakhanFr()
                 2-> return MoarefiFarakhanFr()
             }
             return MoarefiFarakhanFr()

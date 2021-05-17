@@ -269,8 +269,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         }else if (rowLayoutType.matches("farakhan_ha")){
             holder.txOnvan.setText(rModels.get(position).getOnvan());
 
-
-
             if (rModels.get(position).getModat_baghimande().contains("-")){
                 String modatBaghimande = rModels.get(position).getModat_baghimande().replace("-","");
                 holder.txModatBaghiMande.setText(new EnglishNumberToPersian().convert(String.valueOf(modatBaghimande)) + " روز گذشته");
@@ -313,6 +311,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
 
                     Intent intent =new Intent(c, MainActFarakhan.class);
+                    intent.putExtra("id",rModels.get(position).getId());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kolase());
                     intent.putExtra("picture",rModels.get(position).getPicture());
