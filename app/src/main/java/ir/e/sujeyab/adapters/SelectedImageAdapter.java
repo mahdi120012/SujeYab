@@ -7,6 +7,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,13 +23,15 @@ import ir.e.sujeyab.R;
 
 public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdapter.MyViewHolder> {
     private ArrayList<Uri> arrayList;
+    private ArrayList<Uri> arrayListTozihat;
     Context c;
     String rowLayoutType;
     SelectedImageAdapter rAdapter;
 
-    public SelectedImageAdapter(String rowLayoutType, Context c, ArrayList<Uri> arrayList,
+    public SelectedImageAdapter(String rowLayoutType, Context c, ArrayList<Uri> arrayList,ArrayList<Uri> arrayListTozihat,
                                 SelectedImageAdapter selectedImageAdapter) {
         this.arrayList = arrayList;
+        this.arrayListTozihat = arrayListTozihat;
         this.rowLayoutType = rowLayoutType;
         this.c = c;
         this.rAdapter = selectedImageAdapter;
@@ -85,6 +88,16 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
                 }
             });
 
+            holder.txAfzodanTozih.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    arrayListTozihat.add(Uri.parse(holder.etTozih.getText().toString()));
+                }
+            });
+
+
+
+
         }
     }
 
@@ -101,16 +114,16 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txRemove;
+        TextView txRemove,txAfzodanTozih;
         ImageView imgPicture;
-
+        EditText etTozih;
         MyViewHolder(View view) {
             super(view);
 
             imgPicture = itemView.findViewById(R.id.imgPicture);
             txRemove = itemView.findViewById(R.id.txRemove);
-
-
+            txAfzodanTozih = itemView.findViewById(R.id.txAfzodanTozih);
+            etTozih = itemView.findViewById(R.id.etTozih);
         }
     }
 

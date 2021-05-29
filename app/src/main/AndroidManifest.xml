@@ -24,6 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SujeYab"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Profile.MainActProfile"></activity>
         <activity android:name=".upload.MoarefiSamarqand"></activity>
         <!-- <activity android:name=".login.TestLocation"></activity> -->
         <activity android:name=".upload.Poshtibani" />

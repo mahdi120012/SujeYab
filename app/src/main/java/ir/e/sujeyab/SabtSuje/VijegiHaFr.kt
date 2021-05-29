@@ -69,6 +69,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     var etTozihatP:EditText? = null
     var txIdFarakhan:TextView? = null
     private var arrayList: ArrayList<Uri>? = null
+    private var arrayListTozihat: ArrayList<Uri>? = null
+
     private val REQUEST_CODE_PERMISSIONS = 1
     private val REQUEST_CODE_READ_STORAGE = 2
     var rAdapter: SelectedImageAdapter? = null
@@ -92,7 +94,11 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                inflatedview!!.clProgressBar!!.visibility = View.VISIBLE
                imgPreview.setImageURI(selectedImageUri)
                //inflatedview!!.progress_bar.visibility = View.VISIBLE
-                   uploadImagesToServer()
+                   //uploadImagesToServer()
+
+
+                       uploadImagesToServer()
+
                    //uploadImage1()
 
                    /*// Display the file chooser dialog
@@ -130,7 +136,13 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             }else{
                 openImageChooser()
             }*/
-            openImageChooser()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                askForPermission()
+            } else {
+                openImageChooser()
+            }
+
+            //openImageChooser()
         }
 
        /* inflatedview!!.button_upload.setOnClickListener {
@@ -140,6 +152,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
         inflatedview!!.clEntakhabFilmSuje.setOnClickListener {
+
             openVideoChooser()
             //inflatedview!!.clAfzodanFilmBaLinkMostaghim.visibility = View.VISIBLE
         }
@@ -154,7 +167,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         }*/
 
         arrayList = ArrayList()
-        rAdapter = SelectedImageAdapter("selected_image",activity,arrayList,rAdapter)
+        arrayListTozihat = ArrayList()
+        rAdapter = SelectedImageAdapter("selected_image",activity,arrayList,arrayListTozihat,rAdapter)
         Recyclerview.defineRecyclerViewForImageSelected(activity, inflatedview!!.rv1, rAdapter, arrayList)
 
         return inflatedview
@@ -459,6 +473,10 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                 // create part for file (photo, video, ...)
                 for (i in arrayList!!.indices) {
                     parts.add(prepareFilePart("image$i", arrayList!![i]))
+                }
+
+                for (i in arrayListTozihat!!.indices) {
+                    parts.add(prepareFilePart("tozih$i", arrayListTozihat!![i]))
                 }
             }
             val r = Random()
