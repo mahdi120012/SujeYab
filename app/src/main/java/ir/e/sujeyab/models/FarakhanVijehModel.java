@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class FarakhanVijehModel {
     private String id;
-    @SerializedName("p1")
     private String picture;
     private String onvan;
     private String modat_baghimande;

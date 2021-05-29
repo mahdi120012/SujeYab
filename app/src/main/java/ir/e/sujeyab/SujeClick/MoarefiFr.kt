@@ -41,7 +41,6 @@ import kotlin.collections.ArrayList
     ): View? {
         inflatedview = inflater.inflate(R.layout.moarefi_fr, container, false)
 
-
         var sujeId:String = activity!!.intent.extras!!.getString("id").toString()
         var onvan:String = activity!!.intent.extras!!.getString("onvan").toString()
         var matn:String = activity!!.intent.extras!!.getString("matn").toString()
@@ -83,10 +82,6 @@ import kotlin.collections.ArrayList
 
 
 
-
-
-
-
         //init()
 
         var username = SharedPrefClass.getUserId(activity, "user")
@@ -101,7 +96,6 @@ import kotlin.collections.ArrayList
                     LoadData.LikePost(activity, clWifiState, username,
                             sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
                 }
-
             }
 
 

@@ -29,8 +29,7 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         Log.d(TAG, "onTouch: ");
         gestureDetector.onTouchEvent(event);
-        return true
-    }
+        return true }
 
     var inflatedview: View? = null
     private var rAdapter: RecyclerAdapter? = null
@@ -38,13 +37,9 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
     private var rModels2: ArrayList<FarakhanVijehModel>? = null
     private var rAdapterSujeHa: RecyclerAdapterSujeHa? = null
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         inflatedview = inflater.inflate(R.layout.suje_ha_fr, container, false)
-
 
 //        rModels = ArrayList()
 //        rAdapter = RecyclerAdapterVaziyatSujeha(
@@ -62,29 +57,14 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
 //        )
 
         rModels = ArrayList()
-        rAdapter = RecyclerAdapter(
-            "vaziyat_suje_ha",
-            activity,
-            rModels,
-            rAdapter,rModels2,rAdapterSujeHa, inflatedview!!.rv2 , inflatedview!!.clWifiState)
+        rAdapter = RecyclerAdapter("vaziyat_suje_ha", activity, rModels, rAdapter,rModels2,rAdapterSujeHa, inflatedview!!.rv2 , inflatedview!!.clWifiState)
         Recyclerview.defineRecyclerViewHorizontal(activity, inflatedview!!.rv1, rAdapter, rModels)
-        LoadData.loadVaziyatSujeHa(
-            activity,
-            inflatedview!!.clWifiState,
-            rModels,
-            rAdapter
-        )
-
+        LoadData.loadVaziyatSujeHa(activity, inflatedview!!.clWifiState, rModels, rAdapter)
 
         rModels2 = ArrayList()
         rAdapterSujeHa = RecyclerAdapterSujeHa("suje_ha", activity, rModels2, rAdapterSujeHa)
         Recyclerview.defineRecyclerViewVertical2(activity, inflatedview!!.rv2, rAdapterSujeHa, rModels2)
-        LoadData.loadSujeHaBaRetrofit(
-            activity,
-            inflatedview!!.clWifiState,
-            rModels2,
-            rAdapterSujeHa
-        )
+        LoadData.loadSujeHaBaRetrofit(activity, inflatedview!!.clWifiState, rModels2, rAdapterSujeHa)
 
         gestureDetector = GestureDetector(activity, object : OnSwipeListener() {
 
@@ -119,22 +99,18 @@ class SujeHa_fr : Fragment(), View.OnTouchListener {
                 }
                 return true
             }
-
-
         })
-
 
         inflatedview!!.setOnTouchListener(object : View.OnTouchListener {
             @Override
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                gestureDetector.onTouchEvent(event)
-                return true
+               return true
             }
         })
 
         return inflatedview
     }
-
 }
 
 

@@ -1,11 +1,15 @@
 package ir.e.sujeyab.SabtSuje
 
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +18,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.snackbar.Snackbar
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.Controller.RetrofitProvider
 import ir.e.sujeyab.CustomClasses.Recyclerview
@@ -26,7 +33,6 @@ import ir.e.sujeyab.ViewPagerAdapterForSlider
 import ir.e.sujeyab.adapters.SelectedImageAdapter
 import ir.e.sujeyab.models.SliderModel
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
-import kotlinx.android.synthetic.main.button_sabt_fori_suje.txEdame
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.*
@@ -40,12 +46,15 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -60,69 +69,46 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     var etTozihatP:EditText? = null
     var txIdFarakhan:TextView? = null
     private var arrayList: ArrayList<Uri>? = null
+    private val REQUEST_CODE_PERMISSIONS = 1
+    private val REQUEST_CODE_READ_STORAGE = 2
     var rAdapter: SelectedImageAdapter? = null
     companion object {
         const val REQUEST_CODE_PICK_IMAGE = 101
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+
 
         inflatedview = inflater.inflate(R.layout.vijegiha_fr, container, false)
-
-        /*var t = inflatedview!!.txEdame
-        t.setOnClickListener {
-            activity!!.viewPager.setCurrentItem(1)
-            //LoadData.addSujeJadid(activity,clWifiState,etOnvan,etMozo,etTozihat)
-
-
-        }*/
-        //(activity!!.txEdame)!!.setText("ثبت سوژه")
 
         inflatedview!!.clEdame.setOnClickListener {
 
            if(((activity)!!.tabLayout.getTabAt(1)!!.view as LinearLayout).visibility == View.GONE){
 
-
                if (arrayList!!.size == 0){
                    inflatedview!!.clcl.snackbar("حداقل یک تصویر انتخاب کنید")
                }else{
 
-
                inflatedview!!.clProgressBar!!.visibility = View.VISIBLE
                imgPreview.setImageURI(selectedImageUri)
                //inflatedview!!.progress_bar.visibility = View.VISIBLE
+                   uploadImagesToServer()
+                   //uploadImage1()
 
-               if (arrayList!!.size == 1){
-                   uploadImage1()
-               }else if (arrayList!!.size == 2){
-                   uploadImage2()
-               }else if (arrayList!!.size == 3){
-                   uploadImage3()
-               }else if (arrayList!!.size == 4){
-                   uploadImage4()
-               }else if (arrayList!!.size == 5){
-                   uploadImage5()
-               }else if (arrayList!!.size == 6){
-                   uploadImage6()
-               }else if (arrayList!!.size == 7){
-                   uploadImage7()
-               }else if (arrayList!!.size == 8){
-                   uploadImage8()
-               }else if (arrayList!!.size == 9){
-                   uploadImage9()
-               }else if  (arrayList!!.size == 10) {
-                   uploadImage10()
-               }
+                   /*// Display the file chooser dialog
+                   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                       askForPermission()
+                   } else {
+                       uploadImagesToServer()
+                   }
+                   uploadImagesToServer()*/
+
                }
 
                //activity!!.viewPager.setCurrentItem(0)
            }else{
                activity!!.viewPager.setCurrentItem(1)
            }
-
         }
 
         inflatedview!!.clBazgasht.setOnClickListener {
@@ -198,13 +184,12 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
     private fun openImageChooser() {
 
-        Intent(Intent.ACTION_PICK).also {
-            it.type = "image/*"
-            val mimeTypes = arrayOf("image/jpeg", "image/png")
-            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
-        }
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(intent, REQUEST_CODE_READ_STORAGE)
+
       /*  ImagePicker.with(this)
             .crop()	    			//Crop image(Optional), Check Customization for more option
             .compress(1024)			//Final image size will be less than 1 MB(Optional)
@@ -213,56 +198,59 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, resultData: Intent?) {
+
+
+        super.onActivityResult(requestCode, resultCode, resultData)
         if (resultCode == Activity.RESULT_OK) {
             inflatedview!!.clTasvirSuje.visibility = View.VISIBLE
-            //inflatedview!!. button_upload.visibility = View.VISIBLE
+            if (requestCode == REQUEST_CODE_READ_STORAGE) {
+                if (resultData != null) {
+                    if (resultData.getClipData() != null) {
+                        val count: Int = resultData.getClipData()!!.getItemCount()
+                        var currentItem = 0
+
+                        if (count > 10) {
+                            Toast.makeText(activity,"حداکثر 10 تصویر انتخاب کنید",Toast.LENGTH_SHORT).show()
+                        }else{
 
 
-/*            if (arrayList!!.size > 9) {
-                Toast.makeText(activity,"حداکثر 10 تصویر انتخاب کنید",Toast.LENGTH_SHORT).show()
-            }else{
-                val fileUri = data?.data
+                        while (currentItem < count) {
+                            val imageUri: Uri =
+                                resultData.getClipData()!!.getItemAt(currentItem).getUri()
+                            currentItem = currentItem + 1
+                            Log.d("Uri Selected", imageUri.toString())
+                            try {
+                                arrayList!!.add(imageUri)
+                                rAdapter!!.notifyDataSetChanged()
+                            } catch (e: Exception) {
+                                /*Log.e(
+                                    org.snowcorp.sample.uploadfiles.MainActivity.TAG,
+                                    "File select error",
+                                    e
+                                )*/
+                            }
+                        }}
+                    } else if (resultData.getData() != null) {
+                        val uri: Uri = resultData.getData()!!
+                        //Log.i(org.snowcorp.sample.uploadfiles.MainActivity.TAG, "Uri = $uri")
 
-                if (fileUri != null) {
-                    arrayList!!.add(fileUri)
-                }
-                rAdapter!!.notifyDataSetChanged()
-            }*/
-
-            //var count:Int = arrayList!!.size
-            var count:Int = data!!.getClipData()!!.itemCount
-
-            var currentItem:Int = 0;
-            //Toast.makeText(activity,"sssss",Toast.LENGTH_SHORT).show()
-            if (count > 10) {
-                Toast.makeText(activity,"حداکثر 10 تصویر انتخاب کنید",Toast.LENGTH_SHORT).show()
-            }else{
-                    while (currentItem < count) {
-                        var imageUri: Uri  = data!!.getClipData()!!.getItemAt(currentItem).getUri();
-                        currentItem = currentItem + 1;
-
-                        //Log.d("Uri Selected", imageUri.toString());
-
-
-                            arrayList!!.add(imageUri)
+                        try {
+                            arrayList!!.add(uri)
                             rAdapter!!.notifyDataSetChanged()
-
-
+                        } catch (e: Exception) {
+                            /*Log.e(
+                                org.snowcorp.sample.uploadfiles.MainActivity.TAG,
+                                "File select error",
+                                e
+                            )*/
+                        }
                     }
-            }
-
-            /*when (requestCode) {
-                REQUEST_CODE_PICK_IMAGE -> {
-                    var count:Int = data!!.getClipData()!!.getItemCount()
-                    Toast.makeText(activity,requestCode.toString(),Toast.LENGTH_SHORT).show()
-                    selectedImageUri = data?.data
-                    image_view.setImageURI(selectedImageUri)
                 }
-             }
-             */
+            }
         }
+
+
     }
     fun LoadPishkhanSliderByRetrofit(c: Context?, clWifi: ConstraintLayout?, mPager: ViewPager,
                                      indicator: CircleIndicator, ImgArray: ArrayList<SliderModel?>) {
@@ -363,952 +351,6 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     }
 
 
-
-    fun uploadImage2() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3","", body0),
-            MultipartBody.Part.createFormData("p4","", body0),
-            MultipartBody.Part.createFormData("p5","", body0),
-            MultipartBody.Part.createFormData("p6","", body0),
-            MultipartBody.Part.createFormData("p7","", body0),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-
-    }
-
-
-    fun uploadImage3() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4","", body0),
-            MultipartBody.Part.createFormData("p5","", body0),
-            MultipartBody.Part.createFormData("p6","", body0),
-            MultipartBody.Part.createFormData("p7","", body0),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-
-    }
-
-
-    fun uploadImage4() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5","", body0),
-            MultipartBody.Part.createFormData("p6","", body0),
-            MultipartBody.Part.createFormData("p7","", body0),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-
-    }
-
-
-    fun uploadImage5() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-        val parcelFileDescriptor4 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(4)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-        val inputStream4 = FileInputStream(parcelFileDescriptor4.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-        val file4 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(4)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-        val outputStream4 = FileOutputStream(file4)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-        inputStream4.copyTo(outputStream4)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-        val body4 = UploadRequestBody(file4, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5",file4.name, body4),
-            MultipartBody.Part.createFormData("p6","", body0),
-            MultipartBody.Part.createFormData("p7","", body0),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-    }
-
-
-    fun uploadImage6() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-        val parcelFileDescriptor4 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(4)!!, "r", null) ?: return
-        val parcelFileDescriptor5 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(5)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-        val inputStream4 = FileInputStream(parcelFileDescriptor4.fileDescriptor)
-        val inputStream5 = FileInputStream(parcelFileDescriptor5.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-        val file4 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(4)))
-        val file5 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(5)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-        val outputStream4 = FileOutputStream(file4)
-        val outputStream5 = FileOutputStream(file5)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-        inputStream4.copyTo(outputStream4)
-        inputStream5.copyTo(outputStream5)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-        val body4 = UploadRequestBody(file4, "image", this)
-        val body5 = UploadRequestBody(file5, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5",file4.name, body4),
-            MultipartBody.Part.createFormData("p6",file5.name, body5),
-            MultipartBody.Part.createFormData("p7","", body0),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-    }
-
-
-
-    fun uploadImage7() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-        val parcelFileDescriptor4 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(4)!!, "r", null) ?: return
-        val parcelFileDescriptor5 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(5)!!, "r", null) ?: return
-        val parcelFileDescriptor6 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(6)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-        val inputStream4 = FileInputStream(parcelFileDescriptor4.fileDescriptor)
-        val inputStream5 = FileInputStream(parcelFileDescriptor5.fileDescriptor)
-        val inputStream6 = FileInputStream(parcelFileDescriptor6.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-        val file4 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(4)))
-        val file5 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(5)))
-        val file6 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(6)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-        val outputStream4 = FileOutputStream(file4)
-        val outputStream5 = FileOutputStream(file5)
-        val outputStream6 = FileOutputStream(file6)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-        inputStream4.copyTo(outputStream4)
-        inputStream5.copyTo(outputStream5)
-        inputStream6.copyTo(outputStream6)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-        val body4 = UploadRequestBody(file4, "image", this)
-        val body5 = UploadRequestBody(file5, "image", this)
-        val body6 = UploadRequestBody(file6, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5",file4.name, body4),
-            MultipartBody.Part.createFormData("p6",file5.name, body5),
-            MultipartBody.Part.createFormData("p7",file6.name, body6),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-    }
-
-
-    fun uploadImage8() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-        val parcelFileDescriptor4 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(4)!!, "r", null) ?: return
-        val parcelFileDescriptor5 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(5)!!, "r", null) ?: return
-        val parcelFileDescriptor6 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(6)!!, "r", null) ?: return
-        val parcelFileDescriptor7 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(7)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-        val inputStream4 = FileInputStream(parcelFileDescriptor4.fileDescriptor)
-        val inputStream5 = FileInputStream(parcelFileDescriptor5.fileDescriptor)
-        val inputStream6 = FileInputStream(parcelFileDescriptor6.fileDescriptor)
-        val inputStream7 = FileInputStream(parcelFileDescriptor7.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-        val file4 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(4)))
-        val file5 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(5)))
-        val file6 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(6)))
-        val file7 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(7)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-        val outputStream4 = FileOutputStream(file4)
-        val outputStream5 = FileOutputStream(file5)
-        val outputStream6 = FileOutputStream(file6)
-        val outputStream7 = FileOutputStream(file7)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-        inputStream4.copyTo(outputStream4)
-        inputStream5.copyTo(outputStream5)
-        inputStream6.copyTo(outputStream6)
-        inputStream7.copyTo(outputStream7)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-        val body4 = UploadRequestBody(file4, "image", this)
-        val body5 = UploadRequestBody(file5, "image", this)
-        val body6 = UploadRequestBody(file6, "image", this)
-        val body7 = UploadRequestBody(file7, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5",file4.name, body4),
-            MultipartBody.Part.createFormData("p6",file5.name, body5),
-            MultipartBody.Part.createFormData("p7",file6.name, body6),
-            MultipartBody.Part.createFormData("p8",file7.name, body7),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-    }
-
-    fun uploadImage9() {
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-        val parcelFileDescriptor4 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(4)!!, "r", null) ?: return
-        val parcelFileDescriptor5 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(5)!!, "r", null) ?: return
-        val parcelFileDescriptor6 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(6)!!, "r", null) ?: return
-        val parcelFileDescriptor7 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(7)!!, "r", null) ?: return
-        val parcelFileDescriptor8 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(8)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-        val inputStream4 = FileInputStream(parcelFileDescriptor4.fileDescriptor)
-        val inputStream5 = FileInputStream(parcelFileDescriptor5.fileDescriptor)
-        val inputStream6 = FileInputStream(parcelFileDescriptor6.fileDescriptor)
-        val inputStream7 = FileInputStream(parcelFileDescriptor7.fileDescriptor)
-        val inputStream8 = FileInputStream(parcelFileDescriptor8.fileDescriptor)
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-        val file4 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(4)))
-        val file5 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(5)))
-        val file6 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(6)))
-        val file7 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(7)))
-        val file8 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(8)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-        val outputStream4 = FileOutputStream(file4)
-        val outputStream5 = FileOutputStream(file5)
-        val outputStream6 = FileOutputStream(file6)
-        val outputStream7 = FileOutputStream(file7)
-        val outputStream8 = FileOutputStream(file8)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-        inputStream4.copyTo(outputStream4)
-        inputStream5.copyTo(outputStream5)
-        inputStream6.copyTo(outputStream6)
-        inputStream7.copyTo(outputStream7)
-        inputStream8.copyTo(outputStream8)
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-        val body4 = UploadRequestBody(file4, "image", this)
-        val body5 = UploadRequestBody(file5, "image", this)
-        val body6 = UploadRequestBody(file6, "image", this)
-        val body7 = UploadRequestBody(file7, "image", this)
-        val body8 = UploadRequestBody(file8, "image", this)
-
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5",file4.name, body4),
-            MultipartBody.Part.createFormData("p6",file5.name, body5),
-            MultipartBody.Part.createFormData("p7",file6.name, body6),
-            MultipartBody.Part.createFormData("p8",file7.name, body7),
-            MultipartBody.Part.createFormData("p9",file8.name, body8),
-            MultipartBody.Part.createFormData("p10","", body0),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-    }
-
-    fun uploadImage10() {
-
-/*        if (arrayList!!.get(0) == null || arrayList!!.get(1) == null || arrayList!!.get(2) == null ||arrayList!!.get(3) == null || arrayList!!.get(4) == null|| arrayList!!.get(5) == null||arrayList!!.get(6) == null||arrayList!!.get(7) == null||arrayList!!.get(8) == null||arrayList!!.get(9) == null) {
-            inflatedview!!.clcl.snackbar("باید 10 تصویر انتخاب کنید")
-            return
-        }*/
-
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
-        val parcelFileDescriptor1 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(1)!!, "r", null) ?: return
-        val parcelFileDescriptor2 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(2)!!, "r", null) ?: return
-        val parcelFileDescriptor3 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(3)!!, "r", null) ?: return
-        val parcelFileDescriptor4 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(4)!!, "r", null) ?: return
-        val parcelFileDescriptor5 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(5)!!, "r", null) ?: return
-        val parcelFileDescriptor6 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(6)!!, "r", null) ?: return
-        val parcelFileDescriptor7 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(7)!!, "r", null) ?: return
-        val parcelFileDescriptor8 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(8)!!, "r", null) ?: return
-        val parcelFileDescriptor9 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(9)!!, "r", null) ?: return
-
-        val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
-        val inputStream1 = FileInputStream(parcelFileDescriptor1.fileDescriptor)
-        val inputStream2 = FileInputStream(parcelFileDescriptor2.fileDescriptor)
-        val inputStream3 = FileInputStream(parcelFileDescriptor3.fileDescriptor)
-        val inputStream4 = FileInputStream(parcelFileDescriptor4.fileDescriptor)
-        val inputStream5 = FileInputStream(parcelFileDescriptor5.fileDescriptor)
-        val inputStream6 = FileInputStream(parcelFileDescriptor6.fileDescriptor)
-        val inputStream7 = FileInputStream(parcelFileDescriptor7.fileDescriptor)
-        val inputStream8 = FileInputStream(parcelFileDescriptor8.fileDescriptor)
-        val inputStream9 = FileInputStream(parcelFileDescriptor9.fileDescriptor)
-
-
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
-        val file1 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(1)))
-        val file2 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(2)))
-        val file3 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(3)))
-        val file4 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(4)))
-        val file5 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(5)))
-        val file6 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(6)))
-        val file7 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(7)))
-        val file8 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(8)))
-        val file9 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(9)))
-
-        val outputStream0 = FileOutputStream(file0)
-        val outputStream1 = FileOutputStream(file1)
-        val outputStream2 = FileOutputStream(file2)
-        val outputStream3 = FileOutputStream(file3)
-        val outputStream4 = FileOutputStream(file4)
-        val outputStream5 = FileOutputStream(file5)
-        val outputStream6 = FileOutputStream(file6)
-        val outputStream7 = FileOutputStream(file7)
-        val outputStream8 = FileOutputStream(file8)
-        val outputStream9 = FileOutputStream(file9)
-
-        inputStream0.copyTo(outputStream0)
-        inputStream1.copyTo(outputStream1)
-        inputStream2.copyTo(outputStream2)
-        inputStream3.copyTo(outputStream3)
-        inputStream4.copyTo(outputStream4)
-        inputStream5.copyTo(outputStream5)
-        inputStream6.copyTo(outputStream6)
-        inputStream7.copyTo(outputStream7)
-        inputStream8.copyTo(outputStream8)
-        inputStream9.copyTo(outputStream9)
-
-
-
-        val r = Random()
-        val randomNumber = r.nextInt(9999999)
-
-        progress_bar.progress = 0
-        val body0 = UploadRequestBody(file0, "image", this)
-        val body1 = UploadRequestBody(file1, "image", this)
-        val body2 = UploadRequestBody(file2, "image", this)
-        val body3 = UploadRequestBody(file3, "image", this)
-        val body4 = UploadRequestBody(file4, "image", this)
-        val body5 = UploadRequestBody(file5, "image", this)
-        val body6 = UploadRequestBody(file6, "image", this)
-        val body7 = UploadRequestBody(file7, "image", this)
-        val body8 = UploadRequestBody(file8, "image", this)
-        val body9 = UploadRequestBody(file9, "image", this)
-
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2",file1.name, body1),
-            MultipartBody.Part.createFormData("p3",file2.name, body2),
-            MultipartBody.Part.createFormData("p4",file3.name, body3),
-            MultipartBody.Part.createFormData("p5",file4.name, body4),
-            MultipartBody.Part.createFormData("p6",file5.name, body5),
-            MultipartBody.Part.createFormData("p7",file6.name, body6),
-            MultipartBody.Part.createFormData("p8",file7.name, body7),
-            MultipartBody.Part.createFormData("p9",file8.name, body8),
-            MultipartBody.Part.createFormData("p10",file9.name, body9),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
-            .enqueue(object : Callback<UploadResponse> {
-
-                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
-                    inflatedview!!.clcl.snackbar(t.message!!)
-                    progress_bar.progress = 0
-                }
-
-                override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
-                ) {
-                    response.body()?.let {
-                        inflatedview!!.clcl.snackbar(it.message)
-                        progress_bar.progress = 100
-
-                        /*SharedPrefClass.clearShenaseRahgiri(activity)
-                        val sharedPreferences: SharedPreferences = activity!!.getSharedPreferences("file", Context.MODE_PRIVATE)
-                        val editor = sharedPreferences.edit()
-                        editor.putString("shenase_rahgiri", randomNumber.toString())
-                        editor.commit()*/
-
-                        //getActivity()!!.getIntent().putExtra("shenase_rahgiri", randomNumber.toString());
-
-
-                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
-                        //txShenaseRahgiri.setText(randomNumber.toString())
-
-                        activity!!.viewPager.setCurrentItem(0)
-
-                    }
-                }
-            })
-
-    }
-
     override fun onProgressUpdate(percentage: Int) {
         progress_bar.progress = percentage
     }
@@ -1331,4 +373,143 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         EventBus.getDefault().unregister(this)
         super.onStop()
     }
+
+    private fun askForPermission() {
+        if (ContextCompat.checkSelfPermission(
+                activity!!,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) +
+            ContextCompat.checkSelfPermission(
+                activity!!,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            /* Ask for permission */
+            // need to request permission
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    activity!!,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) ||
+                ActivityCompat.shouldShowRequestPermissionRationale(
+                    activity!!,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                Snackbar.make(inflatedview!!.clcl,"Please grant permissions to write data in sdcard",
+                    Snackbar.LENGTH_INDEFINITE).setAction("ENABLE") { v: View? ->
+                    ActivityCompat.requestPermissions(
+                        activity!!, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSIONS)
+                }.show()
+            } else {
+                /* Request for permission */
+                ActivityCompat.requestPermissions(
+                    activity!!, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                                android.Manifest.permission.WRITE_EXTERNAL_STORAGE),REQUEST_CODE_PERMISSIONS)
+            }
+        } else {
+            openImageChooser()
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>,grantResults: IntArray) {
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission Granted
+                openImageChooser()
+            } else {
+                // Permission Denied
+                Toast.makeText(activity!!, "Permission Denied!", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        }
+    }
+
+    private fun createPartFromString(descriptionString: String): RequestBody {
+        return RequestBody.create(FileUtils.MIME_TYPE_TEXT.toMediaTypeOrNull(), descriptionString)
+    }
+
+    private fun prepareFilePart(partName: String, fileUri: Uri): MultipartBody.Part {
+        // use the FileUtils to get the actual file by uri
+        val file = FileUtils.getFile(activity, fileUri)
+
+        // create RequestBody instance from file
+        val requestFile = RequestBody.create(FileUtils.MIME_TYPE_IMAGE.toMediaTypeOrNull(), file)
+
+        // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.Companion.createFormData(partName, file.name, requestFile)
+    }
+
+    private fun uploadImagesToServer() {
+        if (InternetConnection.checkConnection(activity!!)) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl(ApiService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+            //showProgress()
+
+            // create list of file parts (photo, video, ...)
+            val parts: MutableList<MultipartBody.Part> = ArrayList<MultipartBody.Part>()
+
+            // create upload service client
+            val service = retrofit.create(ApiService::class.java)
+            if (arrayList != null) {
+                // create part for file (photo, video, ...)
+                for (i in arrayList!!.indices) {
+                    parts.add(prepareFilePart("image$i", arrayList!![i]))
+                }
+            }
+            val r = Random()
+            val randomNumber = r.nextInt(9999999)
+
+            // create a map of data to pass along
+            val id_ferestande: RequestBody = createPartFromString(SharedPrefClass.getUserId(activity ,"user"))
+            val onvan: RequestBody = createPartFromString(etOnvanP!!.text.toString())
+            val mozo: RequestBody = createPartFromString(etMozoP!!.text.toString())
+            val tozihat: RequestBody = createPartFromString(etTozihatP!!.text.toString())
+            val type: RequestBody = createPartFromString("سوژه ها")
+            val shenase_rahgiri: RequestBody = createPartFromString(randomNumber.toString())
+            val link_video: RequestBody = createPartFromString(etLinkVideo.text.toString())
+            val tozih_video: RequestBody = createPartFromString(etTozihVideo.text.toString())
+            val id_farakhan: RequestBody = createPartFromString(txIdFarakhan!!.text.toString())
+            val size: RequestBody = createPartFromString("" + parts.size)
+
+            // finally, execute the request
+            val call = service.uploadMultiple(id_ferestande, onvan, mozo,tozihat,type,shenase_rahgiri, link_video, tozih_video,
+                id_farakhan, size, parts)
+
+            call.enqueue(object : Callback<ResponseBody?> {
+                override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                    //hideProgress()
+                    if (response.isSuccessful) {
+
+                        progress_bar.progress = 100
+                        (activity!!.txShenaseRahgiri)!!.setText(randomNumber.toString())
+                        activity!!.viewPager.setCurrentItem(0)
+
+
+                        Toast.makeText(activity,"Images successfully uploaded!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(inflatedview!!.clcl,"R.string.string_some_thing_wrong", Snackbar.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                    //hideProgress()
+                   /* Log.e(
+                        org.snowcorp.sample.uploadfiles.MainActivity.TAG,
+                        "Image upload failed!",
+                        t
+                    )*/
+                    Snackbar.make(inflatedview!!.clcl,t.toString(), Snackbar.LENGTH_LONG).show()
+                }
+            })
+        } else {
+            //hideProgress()
+            Toast.makeText(activity,"R.string.string_internet_connection_not_available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

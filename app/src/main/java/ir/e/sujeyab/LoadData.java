@@ -107,10 +107,6 @@ public class LoadData {
     public static String lastId = "0";
     public static boolean itShouldLoadMore = true;
 
-
-
-
-
     public static void LikePost(final Context c, final ConstraintLayout clWifi, String username,
                                  final String sujeId, ImageView imgLike, TextView txTedadLike) {
 
@@ -1726,7 +1722,7 @@ public class LoadData {
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         lastId = jsonObject.getString("id");
-                        String picture = jsonObject.getString("p1");
+                        String picture = jsonObject.getString("picture");
                         String onvan = jsonObject.getString("onvan");
                         String modat_baghimande = jsonObject.getString("modat_baghimande");
                         String matn_kholase = jsonObject.getString("matn_kholase");
@@ -1852,7 +1848,7 @@ public class LoadData {
                         JSONObject jsonObject = response.getJSONObject(i);
 
                         lastId = jsonObject.getString("id");
-                        String picture = jsonObject.getString("p1");
+                        String picture = jsonObject.getString("picture");
                         String onvan = jsonObject.getString("onvan");
                         //String modat_baghimande = jsonObject.getString("modat_baghimande");
                         String matn_kholase = jsonObject.getString("matn_kholase");

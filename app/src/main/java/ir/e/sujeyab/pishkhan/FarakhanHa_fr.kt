@@ -21,13 +21,10 @@ class FarakhanHa_fr : Fragment() {
     private var rAdapterVaziyatFarakhan: RadapterVaziyatFarakhan? = null
     private var rModels: ArrayList<RecyclerModel>? = null
     private var rModels2: ArrayList<RecyclerModel>? = null
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View?
 
+    {
         inflatedview = inflater.inflate(R.layout.farakhan_ha_fr, container, false)
-
 
         rModels = ArrayList()
         rAdapterVaziyatFarakhan = RadapterVaziyatFarakhan("vaziyat_farakhan",activity,rModels,rAdapterVaziyatFarakhan,
