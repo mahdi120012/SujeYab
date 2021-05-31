@@ -42,9 +42,7 @@ import kotlin.collections.ArrayList
 
         /*LoadData.LoadTasavirSujeBaVolley(activity, clWifiState,
                 sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)*/
-
         //var username = SharedPrefClass.getUserId(activity, "user")
-
         return inflatedview
     }
 }
