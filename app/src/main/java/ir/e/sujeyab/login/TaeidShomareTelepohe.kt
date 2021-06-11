@@ -5,18 +5,19 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.R
-import kotlinx.android.synthetic.main.karbar_haghighi.*
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.taeid_shomare_telephone.*
+import kotlinx.android.synthetic.main.taeid_shomare_telephone.view.*
 
 
 class TaeidShomareTelepohe : Fragment() {
     var inflatedview: View? = null
+    var username: String? = null;
+    var randomNumber: String? = null;
 
 
     override fun onCreateView(
@@ -26,18 +27,29 @@ class TaeidShomareTelepohe : Fragment() {
 
         inflatedview = inflater.inflate(R.layout.taeid_shomare_telephone, container, false)
 
+        val bundle = this.arguments
 
-        /*object :CountDownTimer(90000, 1000) {
+        if (bundle != null) {
+             username = bundle.getString("username")
+             randomNumber = bundle.getString("random_number")
+        }
+
+        LoadData.sendActivationCode(activity, username, randomNumber)
+
+
+
+        object :CountDownTimer(90000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                txTimeRemain.setText("" + millisUntilFinished / 1000)
+                inflatedview!!.txTimeRemain.setText("زمان باقی مانده: " + millisUntilFinished / 1000)
                 //here you can have your logic to set text to edittext
             }
 
             override fun onFinish() {
-                txTimeRemain.setText("تمام!")
+                inflatedview!!.txTimeRemain.setText("تمام!")
+                clErsalMojadad.visibility = View.VISIBLE
             }
 
-        }.start()*/
+        }.start()
 
         val tabLayout = (activity as Login).tabLayout
         tabLayout.visibility = View.GONE
@@ -51,19 +63,39 @@ class TaeidShomareTelepohe : Fragment() {
             txEdame!!.setOnClickListener {
 
                 var codeFaalSazi = etCodeFaalSazi.text.toString()
-                if (codeFaalSazi == "1"){
+                if (codeFaalSazi == randomNumber){
 
-                    val fr: Fragment = TakmilEtelaat()
-                    //fr.arguments = args
-                    val fm = fragmentManager
-                    val fragmentTransaction = fm!!.beginTransaction()
-                    fragmentTransaction.replace(ir.e.sujeyab.R.id.clcl, fr)
-                    fragmentTransaction.commit()
+                    LoadData.editVerifyed(activity, username, "yes")
 
-                    }else{
-                    Toast.makeText(activity,"کد فعالسازی را به درستی وارد نمایید",Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(
+                        activity,
+                        "کد فعالسازی را به درستی وارد نمایید",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+
+        inflatedview!!.clErsalMojadad.setOnClickListener {
+
+            randomNumber = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000).toInt().toString()
+            LoadData.sendActivationCode(activity, username, randomNumber)
+            clErsalMojadad.visibility = View.GONE
+
+            object :CountDownTimer(90000, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    inflatedview!!.txTimeRemain.setText("زمان باقی مانده: " + millisUntilFinished / 1000)
+                    //here you can have your logic to set text to edittext
+                }
+
+                override fun onFinish() {
+                    inflatedview!!.txTimeRemain.setText("تمام!")
+                    clErsalMojadad.visibility = View.VISIBLE
+                }
+
+            }.start()
+
+        }
 
 
         return inflatedview

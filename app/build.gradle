@@ -81,5 +81,8 @@ dependencies {
     implementation 'com.github.JarvanMo:ExoVideoView:2.1.6'
     implementation 'bg.devlabs.fullscreenvideoview:library:1.1.6'
     implementation 'com.linsea:universalvideoview:1.1.0@aar'
+    /*implementation 'com.github.AbedElazizShe:LightCompressor:0.9.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'*/
 
 }

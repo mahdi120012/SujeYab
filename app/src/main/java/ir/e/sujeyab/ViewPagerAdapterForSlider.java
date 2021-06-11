@@ -69,6 +69,8 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
         }else if (method.matches("slider_khadamat_vijeh")){
             myImageLayout  = inflater.inflate(R.layout.slider_khadamat_vijeh, view, false);
 
+        }else if (method.matches("slider_pishkhan")){
+            myImageLayout  = inflater.inflate(R.layout.slider_ba_hashiye_pishkhan, view, false);
         }
 
         if (method.matches("slider")){
@@ -190,6 +192,76 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
             txOnvan.setText(images.get(position).getPicture());
             txMozo.setText(images.get(position).getLink());
             txMatnKholase.setText(images.get(position).getDescription());
+
+            view.addView(myImageLayout, 0);
+            return myImageLayout;
+
+        }else if (method.matches("slider_pishkhan")){
+            final ImageView myImage = (ImageView) myImageLayout.findViewById(R.id.image);
+            final ImageView imgLeft = (ImageView) myImageLayout.findViewById(R.id.imgLeft);
+            final ImageView imgRight = (ImageView) myImageLayout.findViewById(R.id.imgRight);
+
+            if(images.get(position).getPicture().isEmpty()){
+                Picasso.get()
+                        .load(R.drawable.adamak_icon)
+                        .fit()
+                        .error(R.drawable.adamak_icon)
+                        .into(myImage);
+            }else {
+
+                Picasso.get()
+                        .load(images.get(position).getPicture())
+                        .error(R.drawable.adamak_icon)
+                        .into(myImage);
+            }
+
+
+            myImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(images.get(position).getLink().isEmpty()){
+
+                    }else {
+                        String data = images.get(position).getLink();
+                        Intent defaultBrowser = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_BROWSER);
+                        defaultBrowser.setData(Uri.parse(data));
+                        context.startActivity(defaultBrowser);
+                    }
+                }
+            });
+
+            imgRight.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (viewPager.getCurrentItem() == 0){
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+                    }else {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+                    }
+
+
+                }
+            });
+
+            imgLeft.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (viewPager.getCurrentItem() == 0 ){
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+
+
+                    }else {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+
+
+                    }
+
+                    // viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+                }
+            });
+
 
             view.addView(myImageLayout, 0);
             return myImageLayout;

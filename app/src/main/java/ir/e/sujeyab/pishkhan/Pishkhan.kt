@@ -23,6 +23,7 @@ import ir.e.sujeyab.SabtSuje.SabtForiSuje
 import ir.e.sujeyab.Setting
 import ir.e.sujeyab.bank_suje.Main_Cat_0
 import ir.e.sujeyab.login.Login
+import ir.e.sujeyab.login.TakmilEtelaat
 import kotlinx.android.synthetic.main.pishkhan.*
 import kotlinx.android.synthetic.main.toolbar_button.*
 
@@ -55,11 +56,8 @@ class Pishkhan : AppCompatActivity() {
         txHome.setTextColor(Color.BLACK)
 
         clSujeHa.setOnClickListener {
-            var mFragment: Fragment? = null
-            mFragment = Main_Cat_0()
-            val fragmentManager: FragmentManager = supportFragmentManager
-            fragmentManager.beginTransaction()
-                .replace(R.id.clcl, mFragment).commit()
+            val myFragment: Fragment = Main_Cat_0()
+            supportFragmentManager.beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit()
         }
 
         clSabtSuje.setOnClickListener {
@@ -86,11 +84,8 @@ class Pishkhan : AppCompatActivity() {
         }
 
         imgSearch.setOnClickListener {
-            var mFragment1: Fragment? = null
-            mFragment1 = Search_fr()
-            val fragmentManager: FragmentManager = supportFragmentManager
-            fragmentManager.beginTransaction()
-                .replace(R.id.clcl, mFragment1).commit()
+            val myFragment: Fragment = Search_fr()
+            supportFragmentManager.beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit()
         }
 
     }

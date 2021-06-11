@@ -1,13 +1,15 @@
- package ir.e.sujeyab;
+package ir.e.sujeyab;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
@@ -76,6 +78,7 @@ import ir.e.sujeyab.adapters.RecyclerAdapterTv;
 import ir.e.sujeyab.adapters.RecyclerAdapterVaziyatSujeha;
 import ir.e.sujeyab.adapters.TasavirSujeAdapter;
 import ir.e.sujeyab.login.Login;
+import ir.e.sujeyab.login.TaeidShomareTelepohe;
 import ir.e.sujeyab.login.TakmilEtelaat;
 import ir.e.sujeyab.models.CatModel;
 import ir.e.sujeyab.models.CitysModel;
@@ -108,7 +111,7 @@ public class LoadData {
     public static boolean itShouldLoadMore = true;
 
     public static void LikePost(final Context c, final ConstraintLayout clWifi, String username,
-                                 final String sujeId, ImageView imgLike, TextView txTedadLike) {
+                                final String sujeId, ImageView imgLike, TextView txTedadLike) {
 
         String usernameEncode = UrlEncoderClass.urlEncoder(username);
         String sujeIdEncode = UrlEncoderClass.urlEncoder(sujeId);
@@ -188,9 +191,81 @@ public class LoadData {
     }
 
 
+    public static void sendActivationCode(final Context c, String username,
+                                          String randomNumber) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String randomNumberEncode = UrlEncoderClass.urlEncoder(randomNumber);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=send_activation_code&username1=" + usernameEncode + "&random_number=" + randomNumberEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String message = null;
+                if (response.length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            message = jsonObject.getString("message");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+           /*     if (message.matches("like shod")){
+                    //Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                    imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
+                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    txTedadLike.setText(String.valueOf(tedad_like+1));
+                }else {
+                    //Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
+                    imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like));
+                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    txTedadLike.setText(String.valueOf(tedad_like-1));
+                }*/
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(c, (error.networkResponse.statusCode), Toast.LENGTH_LONG).show();
+
+                //itShouldLoadMore = true;
+                //progressDialog.dismissProgress();
+                /*
+               Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+               clWifi.setVisibility(View.VISIBLE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       *//* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*//*
+                    }
+                });*/
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
 
     public static void LikePost3(final Context c, final ConstraintLayout clWifi, String username,
-                                final String sujeId, ImageView imgLike, TextView txTedadLike) {
+                                 final String sujeId, ImageView imgLike, TextView txTedadLike) {
 
 
 
@@ -361,7 +436,7 @@ public class LoadData {
                 for (SliderModel sliderModel:sliderModels){
                     lastId = sliderModel.getId();
                     ImgArray.add(new SliderModel(lastId, sliderModel.getPicture(),sliderModel.getLink(),sliderModel.getDescription(),""));
-                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider", mPager));
+                    mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_pishkhan", mPager));
                     indicator.setViewPager(mPager);
                 }
             }
@@ -464,51 +539,51 @@ public class LoadData {
 
 
 
-/*    public static void uploadFile(Context c, Uri fileUri, String desc) {
+    /*    public static void uploadFile(Context c, Uri fileUri, String desc) {
 
 
 
-        File file = new File(getRealPathFromURI(c,fileUri));
+            File file = new File(getRealPathFromURI(c,fileUri));
 
-        //creating request body for file
-        RequestBody requestFile = RequestBody.create(MediaType.parse(c.getContentResolver().getType(fileUri)), file);
-        RequestBody descBody = RequestBody.create(MediaType.parse("text/plain"), desc);
+            //creating request body for file
+            RequestBody requestFile = RequestBody.create(MediaType.parse(c.getContentResolver().getType(fileUri)), file);
+            RequestBody descBody = RequestBody.create(MediaType.parse("text/plain"), desc);
 
-        //The gson builder
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+            //The gson builder
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
 
 
-        //creating retrofit object
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Api.baseUrlForUpload)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+            //creating retrofit object
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Api.baseUrlForUpload)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
 
-        //creating our api
-        Api api = retrofit.create(Api.class);
+            //creating our api
+            Api api = retrofit.create(Api.class);
 
-        //creating a call and calling the upload image method
-        Call<MyResponse> call = api.uploadImage(requestFile, descBody);
+            //creating a call and calling the upload image method
+            Call<MyResponse> call = api.uploadImage(requestFile, descBody);
 
-        //finally performing the call
-        call.enqueue(new Callback<MyResponse>() {
-            @Override
-            public void onResponse(Call<MyResponse> call, retrofit2.Response<MyResponse> response) {
-                if (response.body().toString().contains("File Uploaded Successfully")) {
-                    Toast.makeText(c, "File Uploaded Successfully...", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(c, "Some error occurred...", Toast.LENGTH_LONG).show();
+            //finally performing the call
+            call.enqueue(new Callback<MyResponse>() {
+                @Override
+                public void onResponse(Call<MyResponse> call, retrofit2.Response<MyResponse> response) {
+                    if (response.body().toString().contains("File Uploaded Successfully")) {
+                        Toast.makeText(c, "File Uploaded Successfully...", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(c, "Some error occurred...", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<MyResponse> call, Throwable t) {
-                Toast.makeText(c, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
+                @Override
+                public void onFailure(Call<MyResponse> call, Throwable t) {
+                    Toast.makeText(c, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }*/
     public static String getRealPathFromURI(Context c, Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader loader = new CursorLoader(c, contentUri, proj, null, null, null);
@@ -521,11 +596,11 @@ public class LoadData {
     }
 
     public static void editMoshakhasatMan(final Context c, final ConstraintLayout clWifi, String username, String nameFamily,String tarikhTavallod,String jensiyat,String vaziyatTaahol,
-                                String vaziyatNezamVazife,String akharinMadrakTahsili,String moadelMadrakTahsili,String reshteTahsili,String zaminehMoredAlagheHamkari,
-                                String mizanSabegheKarMortabet,String sematShoghli,String codePerseneli, String email,String shomaeTelephoneTamas,String keshvar,
-                                String ostan,String shahrestan,String shahr,String rosta, String neshani,String moaref,String telephoneTamasMoaref,String tozihat,
-                                String jensiyatSp,String vaziyatTaaholSp,String vaziyatNezamVazifeSp,String akharinMadrakTahsiliSp,
-                                ConstraintLayout clcl) {
+                                          String vaziyatNezamVazife,String akharinMadrakTahsili,String moadelMadrakTahsili,String reshteTahsili,String zaminehMoredAlagheHamkari,
+                                          String mizanSabegheKarMortabet,String sematShoghli,String codePerseneli, String email,String shomaeTelephoneTamas,String keshvar,
+                                          String ostan,String shahrestan,String shahr,String rosta, String neshani,String moaref,String telephoneTamasMoaref,String tozihat,
+                                          String jensiyatSp,String vaziyatTaaholSp,String vaziyatNezamVazifeSp,String akharinMadrakTahsiliSp,
+                                          ConstraintLayout clcl) {
 
         String jensiyatSpEncode = UrlEncoderClass.urlEncoder(jensiyatSp);
         String vaziyatTaaholSpEncode = UrlEncoderClass.urlEncoder(vaziyatTaaholSp);
@@ -710,6 +785,133 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
+
+
+    public static void editVerifyed(final Context c, String username,String verifyed) {
+
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String verifyedEncode = UrlEncoderClass.urlEncoder(verifyed);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=edit_verified&username1=" + usernameEncode + "&verified=" + verifyedEncode;
+
+        itShouldLoadMore = false;
+        final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        progressDialog.showProgress(c);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //clWifi.setVisibility(View.GONE);
+                progressDialog.dismissProgress();
+                itShouldLoadMore = true;
+
+                /*if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }*/
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "مشکلی بوجود آمده است.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String username = null,password = null;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        //lastId = jsonObject.getString("id");
+                        username = jsonObject.getString("username");
+                        password = jsonObject.getString("password");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Toast.makeText(c, "حساب شما با موفقیت ساخته شد", Toast.LENGTH_SHORT).show();
+                /*Snackbar snackbar = Snackbar.make(clcl, "مشخصات شما با موفقیت ویرایش شد", Snackbar.LENGTH_LONG);
+                snackbar.show();*/
+
+                AppCompatActivity activity = (AppCompatActivity) c;
+                Fragment myFragment = new TakmilEtelaat();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //line haye zir baraye khatayabiye  ( baraye vaghti ke connection va ... error mide )
+                if(error instanceof NoConnectionError){
+                    ConnectivityManager cm = (ConnectivityManager)c
+                            .getSystemService(c.CONNECTIVITY_SERVICE);
+                    NetworkInfo activeNetwork = null;
+                    if (cm != null) {
+                        activeNetwork = cm.getActiveNetworkInfo();
+                    }
+                    if(activeNetwork != null && activeNetwork.isConnectedOrConnecting()){
+                        Toast.makeText(c, "Server is not connected to internet.",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(c, "Your device is not connected to internet.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else if (error instanceof NetworkError || error.getCause() instanceof ConnectException
+                        || (error.getCause().getMessage() != null
+                        && error.getCause().getMessage().contains("connection"))){
+                    Toast.makeText(c, "Your device is not connected to internet.",
+                            Toast.LENGTH_SHORT).show();
+                } else if (error.getCause() instanceof MalformedURLException){
+                    Toast.makeText(c, "Bad Request.", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError || error.getCause() instanceof IllegalStateException
+                        || error.getCause() instanceof JSONException
+                        || error.getCause() instanceof XmlPullParserException){
+                    Toast.makeText(c, "Parse Error (because of invalid json or xml).",
+                            Toast.LENGTH_SHORT).show();
+                } else if (error.getCause() instanceof OutOfMemoryError){
+                    Toast.makeText(c, "Out Of Memory Error.", Toast.LENGTH_SHORT).show();
+                }else if (error instanceof AuthFailureError){
+                    Toast.makeText(c, "server couldn't find the authenticated request.",
+                            Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError || error.getCause() instanceof ServerError) {
+                    Toast.makeText(c, "Server is not responding.", Toast.LENGTH_SHORT).show();
+                }else if (error instanceof TimeoutError || error.getCause() instanceof SocketTimeoutException
+                        || error.getCause() instanceof ConnectTimeoutException
+                        || error.getCause() instanceof SocketException
+                        || (error.getCause().getMessage() != null
+                        && error.getCause().getMessage().contains("Connection timed out"))) {
+                    Toast.makeText(c, "Connection timeout error",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(c, "An unknown error occurred.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                itShouldLoadMore = true;
+                progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+            /*    clWifi.setVisibility(View.GONE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       *//* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*//*
+                    }
+                });*/
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
     public static void loadMoshakhasatBaRetrofit(final Context c, final ConstraintLayout clWifi, String username, EditText etNameFamily, EditText etTarikhTavalod
             , EditText etJensiyat, EditText etVaziyatTaahol, EditText etVaziyatNezamVazife, EditText etAkharinMadrakTahsili, EditText etMoadelMadrakTahsili
             , EditText etReshteTahsili, EditText etZamineMoredAlaghaHamkari, EditText etMizanSabegheKarMortabet, EditText etSematShoghli, EditText etCodePerseneli
@@ -849,32 +1051,32 @@ public class LoadData {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
 
-                         lastId = jsonObject.getString("id");
-                         profile_picture = jsonObject.getString("profile_picture");
-                         username = jsonObject.getString("username");
-                         nameFamily = jsonObject.getString("name_family");
-                         tarikhTavallod = jsonObject.getString("tarikh_tavallod");
-                         jensiyat = jsonObject.getString("jensiyat");
-                         vaziyatTaahol = jsonObject.getString("vaziyat_taahol");
-                         vaziyatNezamVazife = jsonObject.getString("vaziyat_nezam_vazife");
-                         akharinMadrakTahsili = jsonObject.getString("akharin_madrak_tahsili");
-                         moadelMadrakTahsili = jsonObject.getString("moadel_madrak_tahsili");
-                         reshteTahsili = jsonObject.getString("reshte_tahsili");
-                         zaminehMoredAlagheHamkari = jsonObject.getString("zamine_morede_alaghe_hamkari");
-                         mizanSabegheKarMortabet = jsonObject.getString("mizan_sabeghe_kar_motabet");
-                         sematShoghli = jsonObject.getString("semat_shoghli");
-                         codePerseneli = jsonObject.getString("code_perseneli");
-                         email = jsonObject.getString("email");
-                         shomaeTelephoneTamas = jsonObject.getString("shomare_telephone");
-                         keshvar = jsonObject.getString("keshvar");
-                         ostan = jsonObject.getString("ostan");
-                         shahrestan = jsonObject.getString("shahestan");
-                         shahr = jsonObject.getString("shahr");
-                         rosta = jsonObject.getString("rosta");
-                         neshani = jsonObject.getString("neshani");
-                         moaref = jsonObject.getString("moaref");
-                         telephoneTamasMoaref = jsonObject.getString("telephone_tamas_moaref");
-                         tozihat = jsonObject.getString("tozihat");
+                        lastId = jsonObject.getString("id");
+                        profile_picture = jsonObject.getString("profile_picture");
+                        username = jsonObject.getString("username");
+                        nameFamily = jsonObject.getString("name_family");
+                        tarikhTavallod = jsonObject.getString("tarikh_tavallod");
+                        jensiyat = jsonObject.getString("jensiyat");
+                        vaziyatTaahol = jsonObject.getString("vaziyat_taahol");
+                        vaziyatNezamVazife = jsonObject.getString("vaziyat_nezam_vazife");
+                        akharinMadrakTahsili = jsonObject.getString("akharin_madrak_tahsili");
+                        moadelMadrakTahsili = jsonObject.getString("moadel_madrak_tahsili");
+                        reshteTahsili = jsonObject.getString("reshte_tahsili");
+                        zaminehMoredAlagheHamkari = jsonObject.getString("zamine_morede_alaghe_hamkari");
+                        mizanSabegheKarMortabet = jsonObject.getString("mizan_sabeghe_kar_motabet");
+                        sematShoghli = jsonObject.getString("semat_shoghli");
+                        codePerseneli = jsonObject.getString("code_perseneli");
+                        email = jsonObject.getString("email");
+                        shomaeTelephoneTamas = jsonObject.getString("shomare_telephone");
+                        keshvar = jsonObject.getString("keshvar");
+                        ostan = jsonObject.getString("ostan");
+                        shahrestan = jsonObject.getString("shahestan");
+                        shahr = jsonObject.getString("shahr");
+                        rosta = jsonObject.getString("rosta");
+                        neshani = jsonObject.getString("neshani");
+                        moaref = jsonObject.getString("moaref");
+                        telephoneTamasMoaref = jsonObject.getString("telephone_tamas_moaref");
+                        tozihat = jsonObject.getString("tozihat");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -924,6 +1126,171 @@ public class LoadData {
                             .placeholder(R.drawable.suje_icon)
                             .into(imgProfileImage);
                 }
+
+
+                /*AppCompatActivity activity = (AppCompatActivity) c;
+                Fragment myFragment = new TaeidShomareTelepohe();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();*/
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                itShouldLoadMore = true;
+                progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       /* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*/
+                    }
+                });
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void loadMoshakhasatDarSafheProfile(final Context c, final ConstraintLayout clWifi, String userId, ImageView imgProfileImage, TextView txNameKarbar,
+                       TextView txUsername,TextView txMatnKholaseMoarefi, TextView txMadrakTahsili1,
+                       TextView txMadrakTahsili2, TextView txTakhasos, TextView txEmail, TextView txTelephone,
+                       ImageView imgCall) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(userId);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_moshakhasat_user&username1=" + usernameEncode ;
+        itShouldLoadMore = false;
+        final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        progressDialog.showProgress(c);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismissProgress();
+                itShouldLoadMore = true;
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "کاربر یافت نشد.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String username = null;
+                String nameFamily = null;
+                String tarikhTavallod = null;
+                String jensiyat = null;
+                String vaziyatTaahol = null;
+                String vaziyatNezamVazife = null;
+                String akharinMadrakTahsili = null;
+                String moadelMadrakTahsili = null;
+                String reshteTahsili = null;
+                String zaminehMoredAlagheHamkari = null;
+                String mizanSabegheKarMortabet = null;
+                String sematShoghli = null;
+                String codePerseneli = null;
+                String email = null;
+                String shomaeTelephoneTamas = null;
+                String keshvar = null;
+                String ostan = null;
+                String shahrestan = null;
+                String shahr = null;
+                String rosta = null;
+                String neshani = null;
+                String moaref = null;
+                String telephoneTamasMoaref = null;
+                String tozihat = null;
+                String profile_picture = null;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        profile_picture = jsonObject.getString("profile_picture");
+                        username = jsonObject.getString("username");
+                        nameFamily = jsonObject.getString("name_family");
+                        tarikhTavallod = jsonObject.getString("tarikh_tavallod");
+                        jensiyat = jsonObject.getString("jensiyat");
+                        vaziyatTaahol = jsonObject.getString("vaziyat_taahol");
+                        vaziyatNezamVazife = jsonObject.getString("vaziyat_nezam_vazife");
+                        akharinMadrakTahsili = jsonObject.getString("akharin_madrak_tahsili");
+                        moadelMadrakTahsili = jsonObject.getString("moadel_madrak_tahsili");
+                        reshteTahsili = jsonObject.getString("reshte_tahsili");
+                        zaminehMoredAlagheHamkari = jsonObject.getString("zamine_morede_alaghe_hamkari");
+                        mizanSabegheKarMortabet = jsonObject.getString("mizan_sabeghe_kar_motabet");
+                        sematShoghli = jsonObject.getString("semat_shoghli");
+                        codePerseneli = jsonObject.getString("code_perseneli");
+                        email = jsonObject.getString("email");
+                        shomaeTelephoneTamas = jsonObject.getString("shomare_telephone");
+                        keshvar = jsonObject.getString("keshvar");
+                        ostan = jsonObject.getString("ostan");
+                        shahrestan = jsonObject.getString("shahestan");
+                        shahr = jsonObject.getString("shahr");
+                        rosta = jsonObject.getString("rosta");
+                        neshani = jsonObject.getString("neshani");
+                        moaref = jsonObject.getString("moaref");
+                        telephoneTamasMoaref = jsonObject.getString("telephone_tamas_moaref");
+                        tozihat = jsonObject.getString("tozihat");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                txNameKarbar.setText(nameFamily);
+                txUsername.setText(username);
+                txMatnKholaseMoarefi.setText(tozihat);
+                txMadrakTahsili1.setText(akharinMadrakTahsili);
+                txTakhasos.setText(sematShoghli);
+                txEmail.setText(email);
+                txTelephone.setText(shomaeTelephoneTamas);
+
+                if (shomaeTelephoneTamas != ""){
+                    String finalShomaeTelephoneTamas = shomaeTelephoneTamas;
+                    imgCall.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //String mobileNumber = "99XXXXXXXX";
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_DIAL); // Action for what intent called for
+                            intent.setData(Uri.parse("tel: " + finalShomaeTelephoneTamas)); // Data with intent respective action on intent
+                            c.startActivity(intent);
+                        }
+                    });
+                }
+
+                if (profile_picture.isEmpty()) {
+
+                    Picasso.get()
+                            .load(R.drawable.suje_icon)
+                            .centerInside()
+                            .fit()
+                            .error(R.drawable.suje_icon)
+                            .placeholder(R.drawable.suje_icon)
+                            .into(imgProfileImage);
+
+                }else{
+                    Picasso.get()
+                            .load(profile_picture)
+                            .centerInside()
+                            .fit()
+                            .error(R.drawable.suje_icon)
+                            .placeholder(R.drawable.suje_icon)
+                            .into(imgProfileImage);
+                }
+
+
 
 
                 /*AppCompatActivity activity = (AppCompatActivity) c;
@@ -1062,7 +1429,7 @@ public class LoadData {
     }
 
     public static void loadSujeHayeVijehSliderBaRetrofit(Context c, final ConstraintLayout clWifi, ViewPager mPager,
-                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray,ArrayList<FarakhanVijehModel> sujeModel) {
+                                                         CircleIndicator indicator, ArrayList<SliderModel> ImgArray,ArrayList<FarakhanVijehModel> sujeModel) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -1082,7 +1449,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate(),"","","",farakhanVijehModel.getVaziyat_suje()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate(),"","","",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande()));
 
                     ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
                     mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager,sujeModel));
@@ -1098,7 +1465,7 @@ public class LoadData {
     }
 
     public static void loadSujeHayeVijehSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,
-                                          CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
+                                               CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
 
 
         String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_suje_haye_vijeh";
@@ -1276,7 +1643,7 @@ public class LoadData {
         MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
     }
 
-   public static void loadFarakhanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
+    public static void loadFarakhanHaBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<RecyclerModel> rModels,RecyclerAdapter rAdapter) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -1329,8 +1696,16 @@ public class LoadData {
                     editor.putString("user", username);
                     editor.commit();
 
+                    int random_int = (int)Math.floor(Math.random()*(9999-1000+1)+1000);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("random_number",String.valueOf(random_int));
+                    bundle.putString("username",String.valueOf(username));
+
                     AppCompatActivity activity = (AppCompatActivity) c;
-                    Fragment myFragment = new TakmilEtelaat();
+                    //Fragment myFragment = new TakmilEtelaat();
+                    Fragment myFragment = new TaeidShomareTelepohe();
+                    myFragment.setArguments(bundle);
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();
 
 
@@ -1372,7 +1747,7 @@ public class LoadData {
 
 
     public static void loadTvBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterTv rAdapter
-                                        ,String username1) {
+            ,String username1) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -1389,7 +1764,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1629,6 +2004,63 @@ public class LoadData {
 
     }
 
+
+    public static void sendPasokhCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
+                                              RecyclerAdapterComments rAdapter,String username ,String postId, String commenId, EditText etComment,
+                                              RecyclerView rv1) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<JsonObject> call = api.sendPasokhComments(username, commenId, etComment.getText().toString(),postId);
+
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, retrofit2.Response<JsonObject> response) {
+
+                String message = null;
+                if (response.body().toString().length() <= 0){
+                    Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    JSONObject jsonObject = null;
+                    try {
+                        jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        message = jsonObject.getString("message");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (message.matches("comment ersal shod")){
+                    Toast.makeText(c, "ارسال شد", Toast.LENGTH_LONG).show();
+                    etComment.setText("");
+
+                    ArrayList<CommentsModel> rModels = null;
+                    RecyclerAdapterComments rAdapter = null;
+                    //rv1.setAdapter(null);
+
+                    rModels = new ArrayList<>();
+                    rAdapter = new RecyclerAdapterComments("pasokh_comments", c, rModels, rAdapter);
+                    Recyclerview.defineRecyclerViewVerticalComment(c, rv1, rAdapter, rModels);
+                    LoadData.loadPasokhHayeCommentsBaRetrofit(c,clWifi,rModels,rAdapter, commenId);
+
+                }else {
+                    Toast.makeText(c, "ارسال نشد", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
     public static void loadCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
                                               RecyclerAdapterComments rAdapter,String postId) {
 
@@ -1645,7 +2077,39 @@ public class LoadData {
                     lastId = commentsModel.getId();
                     rModels.add(new CommentsModel(lastId, commentsModel.getUsername(),commentsModel.getPostId(),
                             commentsModel.getComment(),commentsModel.getDate_create(),commentsModel.getName(),
-                            commentsModel.getProfile_picture()));
+                            commentsModel.getProfile_picture(),commentsModel.getTedad_pasokh()));
+                    rAdapter.notifyDataSetChanged();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CommentsModel>> call, Throwable t) {
+                Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+    public static void loadPasokhHayeCommentsBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<CommentsModel> rModels,
+                                              RecyclerAdapterComments rAdapter,String commentId) {
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
+        Api api = retrofit.create(Api.class);
+        Call<List <CommentsModel>> call = api.getPasokhHayeComments(commentId);
+
+        call.enqueue(new Callback<List<CommentsModel>>() {
+            @Override
+            public void onResponse(Call<List<CommentsModel>> call, retrofit2.Response<List<CommentsModel>> response) {
+                List<CommentsModel> commentsModels = response.body();
+                for (CommentsModel commentsModel:commentsModels){
+
+                    lastId = commentsModel.getId();
+                    rModels.add(new CommentsModel(lastId, commentsModel.getUsername(),commentsModel.getPostId(),
+                            commentsModel.getComment(),commentsModel.getDate_create(),commentsModel.getName(),
+                            commentsModel.getProfile_picture(),commentsModel.getTedad_pasokh()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1742,10 +2206,10 @@ public class LoadData {
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
 
 
-                         rModels.add(new RecyclerModel(lastId, picture,onvan
-                                    ,modat_baghimande,
-                                 matn_kholase,motavali,date_create,vaziyat_like,tedad_like,tedad_suje));
-                         rAdapter.notifyDataSetChanged();
+                        rModels.add(new RecyclerModel(lastId, picture,onvan
+                                ,modat_baghimande,
+                                matn_kholase,motavali,date_create,vaziyat_like,tedad_like,tedad_suje));
+                        rAdapter.notifyDataSetChanged();
 
 
 
@@ -1819,6 +2283,72 @@ public class LoadData {
 
     }
 
+    public static void loadSujeHaBarAsasVaziyatInProfile(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterSujeHa rAdapter, String vaziyat, String username) {
+        String vaziyatEncode = UrlEncoderClass.urlEncoder(vaziyat);
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/load_suje_ha_bar_asas_vaziyat_in_profile?vaziyat=" + vaziyatEncode + "&username1=" + usernameEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "چیزی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String picture = jsonObject.getString("picture");
+                        String onvan = jsonObject.getString("onvan");
+                        //String modat_baghimande = jsonObject.getString("modat_baghimande");
+                        String matn_kholase = jsonObject.getString("matn_kholase");
+                        String mozo = jsonObject.getString("mozo");
+                        String id_ferestande = jsonObject.getString("id_ferestande");
+                        String motavali = jsonObject.getString("motavali");
+                        String type = jsonObject.getString("type");
+                        String type_vaziyat_farakhan = jsonObject.getString("type_vaziyat_farakhan");
+                        String name_family = jsonObject.getString("name_family");
+                        String semat_shoghli = jsonObject.getString("semat_shoghli");
+                        String date_create = jsonObject.getString("date_create");
+                        String vaziyat_like = jsonObject.getString("vaziyat_like");
+                        String tedad_like = jsonObject.getString("tedad_like");
+                        //String link_video = jsonObject.getString("link_video");
+                        String onvan_farakhan = jsonObject.getString("onvan_farakhan");
+                        String vaziyat_suje = jsonObject.getString("vaziyat_suje");
+                        String tedad_comment = jsonObject.getString("tedad_comment");
+                        String username_ferestande = jsonObject.getString("username_ferestande");
+
+                        /*String miyangin_rate = jsonObject.getString("miyangin_rate");
+                        String tedad_comment = jsonObject.getString("tedad_comment");*/
+
+                        rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
+                                "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,onvan_farakhan,"",vaziyat_suje,username_ferestande));
+                        rAdapter.notifyDataSetChanged();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(c, "چیزی یافت نشد!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
 
     public static void loadSujeHaBarAsasVaziyatBaVolley(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterSujeHa rAdapter, String vaziyat) {
         String vaziyatEncode = UrlEncoderClass.urlEncoder(vaziyat);
@@ -1862,15 +2392,19 @@ public class LoadData {
                         String date_create = jsonObject.getString("date_create");
                         String vaziyat_like = jsonObject.getString("vaziyat_like");
                         String tedad_like = jsonObject.getString("tedad_like");
-                        String link_video = jsonObject.getString("link_video");
+                        String tedad_comment = jsonObject.getString("tedad_comment");
+
+                        //String link_video = jsonObject.getString("link_video");
                         String onvan_farakhan = jsonObject.getString("onvan_farakhan");
                         String vaziyat_suje = jsonObject.getString("vaziyat_suje");
+                        String username_ferestande = jsonObject.getString("username_ferestande");
+
                         /*String miyangin_rate = jsonObject.getString("miyangin_rate");
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
 
                         rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
                                 "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
-                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,link_video,"","",onvan_farakhan,"",vaziyat_suje));
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,onvan_farakhan,"",vaziyat_suje,username_ferestande));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -1917,18 +2451,18 @@ public class LoadData {
                 if (response.body() == null){
                     Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
                 }else {
-                List<FarakhanVijehModel> farakhanVijehModels = response.body();
-                for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
+                    List<FarakhanVijehModel> farakhanVijehModels = response.body();
+                    for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
 
-                    lastId = farakhanVijehModel.getId();
-                    rModels.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
-                            farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
-                            farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
-                            farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje()));
-                    rAdapter.notifyDataSetChanged();
+                        lastId = farakhanVijehModel.getId();
+                        rModels.add(new FarakhanVijehModel(lastId, farakhanVijehModel.getPicture(),farakhanVijehModel.getOnvan(),
+                                farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
+                                farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
+                                farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
+                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),""));
+                        rAdapter.notifyDataSetChanged();
 
-                }
+                    }
                 }
             }
 
@@ -1958,7 +2492,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1988,7 +2522,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2020,7 +2554,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","",farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","",farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2057,10 +2591,10 @@ public class LoadData {
                                 farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                                 farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                                 farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje()));
+                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),""));
                         rAdapter.notifyDataSetChanged();
 
-                }
+                    }
 
 
 
@@ -2148,8 +2682,8 @@ public class LoadData {
 
         String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_vaziyat_farakhan";
         itShouldLoadMore = false;
-       // final ProgressDialogClass progressDialog = new ProgressDialogClass();
-       //progressDialog.showProgress(c);
+        // final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        //progressDialog.showProgress(c);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 null, new Response.Listener<JSONArray>() {

@@ -48,7 +48,8 @@
                 android:id="@+id/constraintLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ebf0f6">
+                android:background="#ebf0f6"
+                android:paddingBottom="8dp">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/clViewPager"
@@ -95,16 +96,16 @@
 
                 <me.relex.circleindicator.CircleIndicator
                     android:id="@+id/indicator"
-                    android:layoutDirection="rtl"
-                    android:textDirection="rtl"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_alignParentBottom="true"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"
                     app:ci_drawable="@drawable/bg_orange_ba_hashiye"
                     app:ci_drawable_unselected="@drawable/bg_orange_ba_hashiye"
-                    app:layout_constraintBottom_toBottomOf="@+id/clViewPager"
                     app:layout_constraintEnd_toEndOf="@+id/clViewPager"
-                    app:layout_constraintStart_toStartOf="@+id/clViewPager" />
+                    app:layout_constraintStart_toStartOf="@+id/clViewPager"
+                    app:layout_constraintTop_toBottomOf="@+id/clViewPager" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

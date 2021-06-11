@@ -1,5 +1,6 @@
  package ir.e.sujeyab.SujeClick
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -15,9 +16,11 @@ import com.squareup.picasso.Picasso
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
 import ir.e.sujeyab.LoadData
+import ir.e.sujeyab.Profile.MainActProfile
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.models.TasavirSujeModel
+import ir.e.sujeyab.upload.MoarefiSamarqand
 import kotlinx.android.synthetic.main.comment_fr.view.*
 import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
@@ -42,6 +45,7 @@ import kotlin.collections.ArrayList
         inflatedview = inflater.inflate(R.layout.moarefi_fr, container, false)
 
         var sujeId:String = activity!!.intent.extras!!.getString("id").toString()
+        var username_ferestande:String = activity!!.intent.extras!!.getString("username_ferestande").toString()
         var onvan:String = activity!!.intent.extras!!.getString("onvan").toString()
         var matn:String = activity!!.intent.extras!!.getString("matn").toString()
         var picture:String = activity!!.intent.extras!!.getString("picture").toString()
@@ -75,6 +79,14 @@ import kotlin.collections.ArrayList
 
         //loadImage(inflatedview!!.imgPicture,picture)3
         loadImage(inflatedview!!.imgAxFerestande, axFerestande)
+
+        inflatedview!!.clFerestande.setOnClickListener {
+            val intent = Intent(activity, MainActProfile::class.java)
+            intent.putExtra("username_ferestande", username_ferestande)
+            intent.putExtra("name_family", name)
+
+            startActivity(intent)
+        }
 
         //line zir baraye load tasavir safhe mahsole
         LoadData.LoadTasavirSujeBaVolley(activity, clWifiState,

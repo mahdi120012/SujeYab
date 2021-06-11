@@ -80,8 +80,7 @@
         android:id="@+id/txDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="14dp"
         android:fontFamily="@font/iran_sans"
         android:justificationMode="inter_word"
         android:layoutDirection="ltr"
@@ -89,8 +88,57 @@
         android:textColor="#676767"
         android:textDirection="ltr"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txMatn"
+        app:layout_constraintEnd_toEndOf="@+id/txName"
         app:layout_constraintTop_toBottomOf="@+id/txMatn" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPasokh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txMatn"
+        app:layout_constraintTop_toBottomOf="@+id/txDate">
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/comment" />
+
+        <TextView
+            android:id="@+id/txMatn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/iran_sans"
+            android:justificationMode="inter_word"
+            android:text="پاسخ"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+            app:layout_constraintStart_toEndOf="@+id/imageView14"
+            app:layout_constraintTop_toTopOf="@+id/imageView14" />
+
+        <TextView
+            android:id="@+id/txTedadPasokh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/iran_sans"
+            android:justificationMode="inter_word"
+            android:text="۰"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/txMatn3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txMatn3"
+            app:layout_constraintTop_toTopOf="@+id/txMatn3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

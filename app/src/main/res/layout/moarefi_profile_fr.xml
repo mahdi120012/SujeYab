@@ -35,7 +35,7 @@
                 android:background="#ffffff">
 
                 <TextView
-                    android:id="@+id/textView56"
+                    android:id="@+id/txMatnKholaseMoarefi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -53,7 +53,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imageView14"
+                    android:id="@+id/imgProfile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
@@ -64,7 +64,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView50"
+                    android:id="@+id/txNameKarbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -72,12 +72,12 @@
                     android:text="نام کاربر"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView14"
-                    app:layout_constraintStart_toStartOf="@+id/imageView14"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+                    app:layout_constraintEnd_toEndOf="@+id/imgProfile"
+                    app:layout_constraintStart_toStartOf="@+id/imgProfile"
+                    app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
                 <TextView
-                    android:id="@+id/textView54"
+                    android:id="@+id/txUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -85,9 +85,9 @@
                     android:text="username"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView50"
-                    app:layout_constraintStart_toStartOf="@+id/textView50"
-                    app:layout_constraintTop_toBottomOf="@+id/textView50" />
+                    app:layout_constraintEnd_toEndOf="@+id/txNameKarbar"
+                    app:layout_constraintStart_toStartOf="@+id/txNameKarbar"
+                    app:layout_constraintTop_toBottomOf="@+id/txNameKarbar" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout12"
@@ -95,9 +95,9 @@
                     android:layout_height="38dp"
                     android:layout_marginTop="24dp"
                     android:background="@drawable/bg_round_white_3"
-                    app:layout_constraintEnd_toEndOf="@+id/textView54"
-                    app:layout_constraintStart_toStartOf="@+id/textView54"
-                    app:layout_constraintTop_toBottomOf="@+id/textView54">
+                    app:layout_constraintEnd_toEndOf="@+id/txUsername"
+                    app:layout_constraintStart_toStartOf="@+id/txUsername"
+                    app:layout_constraintTop_toBottomOf="@+id/txUsername">
 
                     <TextView
                         android:id="@+id/textView55"
@@ -122,10 +122,11 @@
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/textView59"
+                    android:id="@+id/txMadrakTahsili1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
                     android:background="@drawable/bg_round_khakestari_1"
                     android:fontFamily="@font/iran_sans"
                     android:paddingLeft="10dp"
@@ -133,11 +134,12 @@
                     android:text="مدرک تحصیلی"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView57"
                     app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
                 <TextView
-                    android:id="@+id/textView60"
+                    android:id="@+id/txMadrakTahsili2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -149,9 +151,10 @@
                     android:text="مدرک تحصیلی"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView57"
-                    app:layout_constraintTop_toBottomOf="@+id/textView59" />
+                    app:layout_constraintTop_toBottomOf="@+id/txMadrakTahsili1" />
 
                 <TextView
                     android:id="@+id/textView57"
@@ -165,6 +168,128 @@
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/txTakhasos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_round_khakestari_1"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="تخصص"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView57b"
+                    app:layout_constraintTop_toBottomOf="@+id/textView57b" />
+
+                <TextView
+                    android:id="@+id/textView57b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:text="تخصص"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/txEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_round_khakestari_1"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="پست الکترونیک"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView57a"
+                    app:layout_constraintTop_toBottomOf="@+id/textView57a" />
+
+                <TextView
+                    android:id="@+id/textView57a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:text="پست الکترونیک"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/txTelephone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_round_khakestari_1"
+                    android:fontFamily="@font/iran_sans"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="تلفن"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView57ac"
+                    app:layout_constraintTop_toBottomOf="@+id/textView57ac" />
+
+                <TextView
+                    android:id="@+id/textView57ac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:text="تلفن"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgCall"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txTelephone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txTelephone"
+                    app:srcCompat="@drawable/telephone_icon" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

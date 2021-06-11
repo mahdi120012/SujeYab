@@ -6,14 +6,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian
 import ir.e.sujeyab.R
 import kotlinx.android.synthetic.main.farakhan_main_act.*
 
 class MainActSuje : AppCompatActivity() {
-    private val titles = arrayOf("نظرات","معرفی")
+
+    var a:Int = 3;
+    private var titles = arrayOf("نظرات","معرفی")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.suje_main_act)
+
+        var tedadComment:String = this!!.intent.extras!!.getString("tedad_comment").toString()
+        if (tedadComment != null){
+            tedadComment = EnglishNumberToPersian().convert(tedadComment)
+        }
+        titles = arrayOf("نظرات " + "($tedadComment)","معرفی")
+
 
         init()
         imgBack.setOnClickListener { finish() }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="180dp">
+
+    <com.universalvideoview.UniversalVideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
+
+    <com.universalvideoview.UniversalMediaController
+        android:id="@+id/media_controller"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:uvv_scalable="true"
+        android:visibility="gone"
+        />
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:background="#ebf0f6"
+        android:src="@drawable/logo" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgLeft"
+        android:layout_width="26dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_vertical"
+        android:background="#51C5B9B9"
+        app:shapeAppearanceOverlay="@style/roundedImageViewRightCorner"
+        app:srcCompat="@drawable/left_icon" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgRight"
+        android:layout_width="26dp"
+        android:layout_height="100dp"
+        android:layout_gravity="right|center_vertical"
+        android:background="#51C5B9B9"
+        app:shapeAppearanceOverlay="@style/roundedImageViewLeftCorner"
+        app:srcCompat="@drawable/right_icon" />
+</FrameLayout>

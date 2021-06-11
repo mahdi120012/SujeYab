@@ -183,7 +183,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         //intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, MAX_VIDEO_RECORDING_TIME_IN_SEC)
         intent.type = "video/*"
-        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
+        startActivityForResult(intent, REQUEST_CODE_READ_STORAGE)
 
 
         //Intent(Intent.ACTION_PICK).also {
@@ -230,10 +230,11 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
                         while (currentItem < count) {
-                            val imageUri: Uri =
-                                resultData.getClipData()!!.getItemAt(currentItem).getUri()
+
+                            val imageUri: Uri = resultData.getClipData()!!.getItemAt(currentItem).getUri()
                             currentItem = currentItem + 1
                             Log.d("Uri Selected", imageUri.toString())
+
                             try {
                                 arrayList!!.add(imageUri)
                                 rAdapter!!.notifyDataSetChanged()
@@ -475,9 +476,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                     parts.add(prepareFilePart("image$i", arrayList!![i]))
                 }
 
-                for (i in arrayListTozihat!!.indices) {
+                /*for (i in arrayListTozihat!!.indices) {
                     parts.add(prepareFilePart("tozih$i", arrayListTozihat!![i]))
-                }
+                }*/
             }
             val r = Random()
             val randomNumber = r.nextInt(9999999)
@@ -489,14 +490,13 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             val tozihat: RequestBody = createPartFromString(etTozihatP!!.text.toString())
             val type: RequestBody = createPartFromString("سوژه ها")
             val shenase_rahgiri: RequestBody = createPartFromString(randomNumber.toString())
-            val link_video: RequestBody = createPartFromString(etLinkVideo.text.toString())
-            val tozih_video: RequestBody = createPartFromString(etTozihVideo.text.toString())
             val id_farakhan: RequestBody = createPartFromString(txIdFarakhan!!.text.toString())
             val size: RequestBody = createPartFromString("" + parts.size)
 
+            Toast.makeText(activity,parts.size.toString(),Toast.LENGTH_SHORT).show()
+
             // finally, execute the request
-            val call = service.uploadMultiple(id_ferestande, onvan, mozo,tozihat,type,shenase_rahgiri, link_video, tozih_video,
-                id_farakhan, size, parts)
+            val call = service.uploadMultiple(id_ferestande, onvan, mozo,tozihat,type,shenase_rahgiri, id_farakhan, size, parts)
 
             call.enqueue(object : Callback<ResponseBody?> {
                 override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {

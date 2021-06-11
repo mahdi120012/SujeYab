@@ -101,6 +101,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
 
                     Intent intent =new Intent(c, MainActSuje.class);
                     intent.putExtra("id",rModels.get(position).getId());
+                    intent.putExtra("username_ferestande",rModels.get(position).getUsername_ferestande());
                     intent.putExtra("onvan",rModels.get(position).getOnvan());
                     intent.putExtra("matn",rModels.get(position).getMatn_kholase());
                     intent.putExtra("picture",rModels.get(position).getPicture());
@@ -111,6 +112,7 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                     intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
                     intent.putExtra("tedad_like",rModels.get(position).getTedad_like());
                     intent.putExtra("vaziyat_like",rModels.get(position).getVaziyat_like());
+                    intent.putExtra("tedad_comment",rModels.get(position).getTedad_comment());
                     c.startActivity(intent);
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();

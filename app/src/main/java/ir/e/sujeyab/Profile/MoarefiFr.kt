@@ -1,5 +1,6 @@
  package ir.e.sujeyab.Profile
 
+import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -22,9 +23,11 @@ import kotlinx.android.synthetic.main.comment_fr.view.*
 import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.clcl
+import kotlinx.android.synthetic.main.moarefi_profile_fr.*
+import kotlinx.android.synthetic.main.moarefi_profile_fr.view.*
 import kotlinx.android.synthetic.main.net_connection.*
-import kotlinx.android.synthetic.main.slider_ba_hashiye.*
-import kotlinx.android.synthetic.main.slider_ba_hashiye.view.*
+import kotlinx.android.synthetic.main.net_connection.view.*
+import kotlinx.android.synthetic.main.suje_main_act.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -32,17 +35,22 @@ import kotlin.collections.ArrayList
  class MoarefiFr : Fragment() {
     var inflatedview: View? = null
 
-    private val ImgArray = ArrayList<TasavirSujeModel>()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
         inflatedview = inflater.inflate(R.layout.moarefi_profile_fr, container, false)
 
-        var userId:String = activity!!.intent.extras!!.getString("id").toString()
+        var username_ferestande:String = activity!!.intent.extras!!.getString("username_ferestande").toString()
+        var userNameFamily:String = activity!!.intent.extras!!.getString("name_family").toString()
 
-        /*LoadData.LoadTasavirSujeBaVolley(activity, clWifiState,
-                sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)*/
-        //var username = SharedPrefClass.getUserId(activity, "user")
+        //Toast.makeText(activity,username_ferestande,Toast.LENGTH_SHORT).show()
+
+        (activity as MainActProfile).txTitlePage.setText(userNameFamily)
+
+        LoadData.loadMoshakhasatDarSafheProfile(activity, inflatedview!!.clWifiState,username_ferestande,
+            inflatedview!!.imgProfile,inflatedview!!.txNameKarbar,inflatedview!!.txUsername,
+            inflatedview!!.txMatnKholaseMoarefi,inflatedview!!.txMadrakTahsili1,inflatedview!!.txMadrakTahsili2,
+            inflatedview!!.txTakhasos, inflatedview!!.txEmail, inflatedview!!.txTelephone, inflatedview!!.imgCall)
+
         return inflatedview
     }
 }

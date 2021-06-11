@@ -28,8 +28,6 @@ public interface ApiService {
             @Part("tozihat") RequestBody tozihat,
             @Part("type") RequestBody type,
             @Part("shenase_rahgiri") RequestBody shenase_rahgiri,
-            @Part("link_video") RequestBody link_video,
-            @Part("tozih_video") RequestBody tozih_video,
             @Part("id_farakhan") RequestBody id_farakhan,
             @Part("size") RequestBody size,
             @Part List<MultipartBody.Part> files);

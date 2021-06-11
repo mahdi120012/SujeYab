@@ -80,8 +80,15 @@ public interface Api {
     @GET("load_comments")
     Call<List<CommentsModel>> getComments(@Query("post_id") String postId);
 
+    @GET("load_pasokh_haye_comments")
+    Call<List<CommentsModel>> getPasokhHayeComments(@Query("comment_id") String commentId);
+
     @GET("send_comment")
     Call<JsonObject> sendComments(@Query("username1") String username, @Query("post_id") String postId, @Query("comment") String comment);
+
+    @GET("send_pasokh_comment")
+    Call<JsonObject> sendPasokhComments(@Query("username1") String username, @Query("comment_id") String commentId, @Query("comment") String comment, @Query("post_id") String postId);
+
 
     @GET("send_rate")
     Call<JsonObject> sendRate(@Query("username1") String username, @Query("post_id") String postId, @Query("rate") String rate);

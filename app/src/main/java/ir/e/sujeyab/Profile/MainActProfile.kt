@@ -10,7 +10,7 @@ import ir.e.sujeyab.R
 import kotlinx.android.synthetic.main.farakhan_main_act.*
 
 class MainActProfile : AppCompatActivity() {
-    private val titles = arrayOf("نظرات","معرفی")
+    private val titles = arrayOf("سوژه های من","معرفی من")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.suje_main_act)
@@ -37,7 +37,7 @@ class MainActProfile : AppCompatActivity() {
         FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             when(position){
-                0-> return SujeHaFr()
+                0-> return SujeHa_fr()
                 1-> return MoarefiFr()
             }
             return MoarefiFr()

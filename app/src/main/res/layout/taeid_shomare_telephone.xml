@@ -62,6 +62,7 @@
         android:layout_width="170dp"
         android:layout_height="36dp"
         android:layout_marginTop="32dp"
+        android:visibility="gone"
         android:background="@drawable/bg_white_for_faramoshi_ramz"
         app:layout_constraintEnd_toEndOf="@+id/txTimeRemain"
         app:layout_constraintStart_toStartOf="@+id/txTimeRemain"
@@ -117,7 +118,7 @@
         android:gravity="center"
         android:hint="کد فعالسازی"
         android:inputType="number"
-        android:maxLength="11"
+        android:maxLength="6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />

@@ -1,57 +1,72 @@
  package ir.e.sujeyab.Profile
 
-import android.app.Activity
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import ir.e.sujeyab.CustomClasses.Recyclerview
-import ir.e.sujeyab.CustomClasses.SharedPrefClass
-import ir.e.sujeyab.LoadData
-import ir.e.sujeyab.R
-import ir.e.sujeyab.SabtSuje.snackbar
-import ir.e.sujeyab.adapters.RecyclerAdapterComments
-import ir.e.sujeyab.login.Login
-import ir.e.sujeyab.models.CommentsModel
-import kotlinx.android.synthetic.main.comment_fr.*
-import kotlinx.android.synthetic.main.comment_fr.view.*
-import kotlinx.android.synthetic.main.login.*
-import kotlinx.android.synthetic.main.net_connection.view.*
+ import android.os.Bundle
+ import android.view.*
+ import androidx.fragment.app.Fragment
+ import ir.e.sujeyab.CustomClasses.Recyclerview
+ import ir.e.sujeyab.LoadData
+ import ir.e.sujeyab.R
+ import ir.e.sujeyab.RecyclerAdapter
+ import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa
+ import ir.e.sujeyab.models.FarakhanVijehModel
+ import ir.e.sujeyab.models.RecyclerModel
+ import kotlinx.android.synthetic.main.farakhan_ha_fr.view.*
+ import kotlinx.android.synthetic.main.net_connection.*
+ import kotlinx.android.synthetic.main.net_connection.view.*
+ import kotlinx.android.synthetic.main.suje_ha_fr.*
 
- class SujeHaFr : Fragment() {
-    var inflatedview: View? = null
-    private var rAdapter: RecyclerAdapterComments? = null
-    private var rModels: ArrayList<CommentsModel>? = null
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        inflatedview = inflater.inflate(R.layout.comment_fr, container, false)
-        var post_id:String = activity!!.intent.extras!!.getString("id").toString()
 
-        rModels = ArrayList()
-        rAdapter = RecyclerAdapterComments("comments", activity, rModels, rAdapter)
-        Recyclerview.defineRecyclerViewVerticalComment(activity, inflatedview!!.rv1, rAdapter, rModels)
-        LoadData.loadCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, post_id)
-        var username = SharedPrefClass.getUserId(activity,"user")
+ class SujeHa_fr : Fragment() {
 
-        inflatedview!!.llsend.setOnClickListener {
+     var inflatedview: View? = null
+     private var rAdapter: RecyclerAdapter? = null
+     private var rModels: ArrayList<RecyclerModel>? = null
+     private var rModels2: ArrayList<FarakhanVijehModel>? = null
+     private var rAdapterSujeHa: RecyclerAdapterSujeHa? = null
 
-            if (username == "" || username == null){
-                inflatedview!!.clcl.snackbar("برای ارسال نظر ابتدا وارد شوید")
-            }else{
+     override fun onCreateView(
+         inflater: LayoutInflater,
+         container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
 
-                if (etMatnComment.text.toString() == ""){
-                    inflatedview!!.clcl.snackbar("طول نظر خیلی کوتاه است")
-                }else{
-                    LoadData.sendCommentsBaRetrofit(activity,inflatedview!!.clWifiState,rModels,rAdapter, username, post_id, etMatnComment, inflatedview!!.rv1)
-                }
-            }
-        }
+         inflatedview = inflater.inflate(R.layout.suje_ha_fr, container, false)
+         var username_ferestande:String = activity!!.intent.extras!!.getString("username_ferestande").toString()
 
-        return inflatedview
-}
+         rModels = ArrayList()
+         rAdapter = RecyclerAdapter(
+             "vaziyat_suje_ha",
+             activity,
+             rModels,
+             rAdapter,
+             rModels2,
+             rAdapterSujeHa,
+             inflatedview!!.rv2,
+             inflatedview!!.clWifiState
+         )
+         Recyclerview.defineRecyclerViewHorizontal(activity, inflatedview!!.rv1, rAdapter, rModels)
+         LoadData.loadVaziyatSujeHa(activity, inflatedview!!.clWifiState, rModels, rAdapter)
 
+     /*    rModels2 = ArrayList()
+         rAdapterSujeHa = RecyclerAdapterSujeHa("suje_ha", activity, rModels2, rAdapterSujeHa)
+         Recyclerview.defineRecyclerViewVertical2(
+             activity,
+             inflatedview!!.rv2,
+             rAdapterSujeHa,
+             rModels2
+         )*/
+
+         rModels2 = ArrayList()
+         rAdapterSujeHa =
+             RecyclerAdapterSujeHa("suje_ha", activity, rModels2, rAdapterSujeHa)
+         Recyclerview.defineRecyclerViewVertical2(activity, inflatedview!!.rv2, rAdapterSujeHa, rModels2)
+         LoadData.loadSujeHaBarAsasVaziyatInProfile(
+            activity,
+             inflatedview!!.clWifiState,
+             rModels2,
+             rAdapterSujeHa,"آخرین ها", username_ferestande)
+
+         return inflatedview
+     }
  }
+
