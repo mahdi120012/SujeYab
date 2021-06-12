@@ -2,12 +2,14 @@ package ir.e.sujeyab.SabtSuje
 
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +24,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.abedelazizshe.lightcompressorlibrary.CompressionListener
+import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
+import com.abedelazizshe.lightcompressorlibrary.VideoQuality
 import com.google.android.material.snackbar.Snackbar
 import ir.e.sujeyab.Controller.ApiForUpload
 import ir.e.sujeyab.Controller.RetrofitProvider
@@ -32,14 +37,11 @@ import ir.e.sujeyab.R
 import ir.e.sujeyab.ViewPagerAdapterForSlider
 import ir.e.sujeyab.adapters.SelectedImageAdapter
 import ir.e.sujeyab.models.SliderModel
-import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.*
-import kotlinx.android.synthetic.main.takmil_etelaat.*
 import kotlinx.android.synthetic.main.tarh_suje_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
-import kotlinx.android.synthetic.main.vijegiha_fr.progress_bar
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
 import me.relex.circleindicator.CircleIndicator
 import okhttp3.MediaType.Companion.toMediaType
@@ -59,6 +61,7 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 
 class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
@@ -78,7 +81,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         const val REQUEST_CODE_PICK_IMAGE = 101
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
 
 
         inflatedview = inflater.inflate(R.layout.vijegiha_fr, container, false)
@@ -168,8 +173,17 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
         arrayList = ArrayList()
         arrayListTozihat = ArrayList()
-        rAdapter = SelectedImageAdapter("selected_image",activity,arrayList,arrayListTozihat,rAdapter)
-        Recyclerview.defineRecyclerViewForImageSelected(activity, inflatedview!!.rv1, rAdapter, arrayList)
+        rAdapter = SelectedImageAdapter(
+            "selected_image",
+            activity,
+            arrayList,
+            arrayListTozihat,
+            rAdapter,
+            inflatedview!!.clTasvirSuje
+        )
+        Recyclerview.defineRecyclerViewForImageSelected(
+            activity, inflatedview!!.rv1, rAdapter, arrayList
+        )
 
         return inflatedview
     }
@@ -225,7 +239,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                         var currentItem = 0
 
                         if (count > 10) {
-                            Toast.makeText(activity,"حداکثر 10 تصویر انتخاب کنید",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity, "حداکثر 10 تصویر انتخاب کنید", Toast.LENGTH_SHORT
+                            ).show()
                         }else{
 
 
@@ -235,16 +251,107 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                             currentItem = currentItem + 1
                             Log.d("Uri Selected", imageUri.toString())
 
-                            try {
-                                arrayList!!.add(imageUri)
-                                rAdapter!!.notifyDataSetChanged()
-                            } catch (e: Exception) {
-                                /*Log.e(
-                                    org.snowcorp.sample.uploadfiles.MainActivity.TAG,
-                                    "File select error",
-                                    e
-                                )*/
+                            val fMain: File = File(
+                                Environment.getExternalStorageDirectory().toString(), "Samarqand"
+                            )
+                            if(!fMain.exists()){
+                                fMain.mkdir();
                             }
+
+                            val fVideo: File = File(
+                                Environment.getExternalStorageDirectory()
+                                    .toString() + "/" + "Samarqand", "Samarqand Video"
+                            )
+                            if(!fVideo.exists()){
+                                fVideo.mkdir();
+                            }
+
+                            val fImages: File = File(
+                                Environment.getExternalStorageDirectory()
+                                    .toString() + "/" + "Samarqand", "Samarqand Images"
+                            )
+                            if(!fImages.exists()){
+                                fImages.mkdir();
+                            }
+
+                            var random: Int = ThreadLocalRandom.current().nextInt(10000, 99999)
+
+                            val yourAppDir: File = File(
+                                Environment.getExternalStorageDirectory()
+                                    .toString() + "/" + "Samarqand" + "/" + "Samarqand Video" + "/" + random.toString() + ".mp4"
+                            )
+
+
+                            var progressDialog: ProgressDialog? = null
+
+                            VideoCompressor.start(
+                                context = activity, // => This is required if srcUri is provided. If not, it can be ignored or null.
+                                srcUri = imageUri, // => Source can be provided as content uri, it requires context.
+                                srcPath = null, // => This could be ignored or null if srcUri and context are provided.
+                                destPath = yourAppDir.toString(),
+                                listener = object : CompressionListener {
+                                    override fun onProgress(percent: Float) {
+                                        /*   // Update UI with progress value
+                                        runOnUiThread {
+                                            // update a text view
+                                            progress.text = "${percent.toLong()}%"
+                                            // update a progress bar
+                                            progressBar.progress = percent.toInt()
+                                        }*/
+                                    }
+
+                                    override fun onStart() {
+                                        Toast.makeText(activity, "onStart", Toast.LENGTH_SHORT)
+                                            .show()
+
+
+                                        progressDialog = ProgressDialog(activity)
+
+                                        progressDialog!!.setMessage("درحال پردازش...")
+                                        progressDialog!!.setCancelable(false)
+                                        progressDialog!!.show()
+
+                                    }
+
+                                    override fun onSuccess() {
+                                        Toast.makeText(activity, "onSuccess", Toast.LENGTH_SHORT)
+                                            .show()
+                                        val imageUri2: Uri =
+                                            Uri.fromFile(File("/sdcard/Samarqand/Samarqand Video/" + random.toString() + ".mp4"))
+                                        progressDialog!!.dismiss();
+
+
+
+                                        try {
+                                            arrayList!!.add(imageUri2)
+                                            rAdapter!!.notifyDataSetChanged()
+                                        } catch (e: Exception) {
+                                            /*Log.e(
+                                                org.snowcorp.sample.uploadfiles.MainActivity.TAG,
+                                                "File select error",
+                                                e
+                                            )*/
+                                        }
+
+                                    }
+
+                                    override fun onFailure(failureMessage: String) {
+                                        // On Failure
+                                    }
+
+                                    override fun onCancelled() {
+                                        // On Cancelled
+                                    }
+
+                                },
+                                quality = VideoQuality.MEDIUM,
+                                isMinBitRateEnabled = false,
+                                keepOriginalResolution = true
+                            )
+
+
+
+
                         }}
                     } else if (resultData.getData() != null) {
                         val uri: Uri = resultData.getData()!!
@@ -267,8 +374,13 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
     }
-    fun LoadPishkhanSliderByRetrofit(c: Context?, clWifi: ConstraintLayout?, mPager: ViewPager,
-                                     indicator: CircleIndicator, ImgArray: ArrayList<SliderModel?>) {
+    fun LoadPishkhanSliderByRetrofit(
+        c: Context?,
+        clWifi: ConstraintLayout?,
+        mPager: ViewPager,
+        indicator: CircleIndicator,
+        ImgArray: ArrayList<SliderModel?>
+    ) {
 
         //String usernameEncode = UrlEncoderClass.urlEncoder(etUsername.getText().toString());
         /*Retrofit retrofit = new Retrofit.Builder()
@@ -280,7 +392,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         //Api api = new RetrofitProvider().getApi();
         val call = RetrofitProvider().api.getSlider("main_slider_pishkhan")
         call.enqueue(object : Callback<List<SliderModel>> {
-            override fun onResponse(call: Call<List<SliderModel>>, response: Response<List<SliderModel>>) {
+            override fun onResponse(
+                call: Call<List<SliderModel>>, response: Response<List<SliderModel>>
+            ) {
 
                 //if (response.isSuccessful()){}
                 val sliderModels = response.body()!!
@@ -289,7 +403,15 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                 }
                 for (sliderModel in sliderModels) {
                     LoadData.lastId = sliderModel.id
-                    ImgArray.add(SliderModel(LoadData.lastId, sliderModel.picture, sliderModel.link, sliderModel.description, ""))
+                    ImgArray.add(
+                        SliderModel(
+                            LoadData.lastId,
+                            sliderModel.picture,
+                            sliderModel.link,
+                            sliderModel.description,
+                            ""
+                        )
+                    )
                     mPager.adapter = ViewPagerAdapterForSlider(c, ImgArray, "slider", mPager)
                     indicator.setViewPager(mPager)
                 }
@@ -304,11 +426,19 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
     fun uploadImage1() {
 
-        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(arrayList!!.get(0)!!, "r", null) ?: return
+        val parcelFileDescriptor0 = activity!!.contentResolver.openFileDescriptor(
+            arrayList!!.get(0)!!, "r", null
+        ) ?: return
 
         val inputStream0 = FileInputStream(parcelFileDescriptor0.fileDescriptor)
 
-        val file0 = File(activity!!.cacheDir, activity!!.contentResolver.getFileName(arrayList!!.get(0)))
+        val file0 = File(
+            activity!!.cacheDir, activity!!.contentResolver.getFileName(
+                arrayList!!.get(
+                    0
+                )
+            )
+        )
 
         val outputStream0 = FileOutputStream(file0)
 
@@ -320,26 +450,34 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         progress_bar.progress = 0
         val body0 = UploadRequestBody(file0, "image", this)
 
-        ApiForUpload().uploadImage(MultipartBody.Part.createFormData("p1",file0.name, body0),
-            MultipartBody.Part.createFormData("p2","", body0),
-            MultipartBody.Part.createFormData("p3","", body0),
-            MultipartBody.Part.createFormData("p4","", body0),
-            MultipartBody.Part.createFormData("p5","", body0),
-            MultipartBody.Part.createFormData("p6","", body0),
-            MultipartBody.Part.createFormData("p7","", body0),
-            MultipartBody.Part.createFormData("p8","", body0),
-            MultipartBody.Part.createFormData("p9","", body0),
-            MultipartBody.Part.createFormData("p10","", body0),
+        ApiForUpload().uploadImage(
+            MultipartBody.Part.createFormData("p1", file0.name, body0),
+            MultipartBody.Part.createFormData("p2", "", body0),
+            MultipartBody.Part.createFormData("p3", "", body0),
+            MultipartBody.Part.createFormData("p4", "", body0),
+            MultipartBody.Part.createFormData("p5", "", body0),
+            MultipartBody.Part.createFormData("p6", "", body0),
+            MultipartBody.Part.createFormData("p7", "", body0),
+            MultipartBody.Part.createFormData("p8", "", body0),
+            MultipartBody.Part.createFormData("p9", "", body0),
+            MultipartBody.Part.createFormData("p10", "", body0),
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(),etMozoP!!.text.toString()),
+            RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(), etOnvanP!!.text.toString()
+            ),
+            RequestBody.create("multipart/form-data".toMediaType(), etMozoP!!.text.toString()),
             RequestBody.create("multipart/form-data".toMediaType(), etTozihatP!!.text.toString()),
-            RequestBody.create("multipart/form-data".toMediaType(), SharedPrefClass.getUserId(activity ,"user")),
-            RequestBody.create("multipard/form-data".toMediaType(),"سوژه ها"),
-            RequestBody.create("multipard/form-data".toMediaType(),randomNumber.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etLinkVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),etTozihVideo.text.toString()),
-            RequestBody.create("multipard/form-data".toMediaType(),txIdFarakhan!!.text.toString()))
+            RequestBody.create(
+                "multipart/form-data".toMediaType(), SharedPrefClass.getUserId(
+                    activity, "user"
+                )
+            ),
+            RequestBody.create("multipard/form-data".toMediaType(), "سوژه ها"),
+            RequestBody.create("multipard/form-data".toMediaType(), randomNumber.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(), etLinkVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(), etTozihVideo.text.toString()),
+            RequestBody.create("multipard/form-data".toMediaType(), txIdFarakhan!!.text.toString())
+        )
             .enqueue(object : Callback<UploadResponse> {
 
                 override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
@@ -348,8 +486,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                 }
 
                 override fun onResponse(
-                    call: Call<UploadResponse>,
-                    response: Response<UploadResponse>
+                    call: Call<UploadResponse>, response: Response<UploadResponse>
                 ) {
                     response.body()?.let {
                         inflatedview!!.clcl.snackbar(it.message)
@@ -391,36 +528,42 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
     private fun askForPermission() {
         if (ContextCompat.checkSelfPermission(
-                activity!!,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE
             ) +
             ContextCompat.checkSelfPermission(
-                activity!!,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
             != PackageManager.PERMISSION_GRANTED
         ) {
             /* Ask for permission */
             // need to request permission
             if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    activity!!,
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    activity!!, android.Manifest.permission.READ_EXTERNAL_STORAGE
                 ) ||
                 ActivityCompat.shouldShowRequestPermissionRationale(
-                    activity!!,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
             ) {
-                Snackbar.make(inflatedview!!.clcl,"Please grant permissions to write data in sdcard",
-                    Snackbar.LENGTH_INDEFINITE).setAction("ENABLE") { v: View? ->
+                Snackbar.make(
+                    inflatedview!!.clcl,
+                    "Please grant permissions to write data in sdcard",
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction("ENABLE") { v: View? ->
                     ActivityCompat.requestPermissions(
-                        activity!!, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE_PERMISSIONS)
+                        activity!!, arrayOf(
+                            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ), REQUEST_CODE_PERMISSIONS
+                    )
                 }.show()
             } else {
                 /* Request for permission */
                 ActivityCompat.requestPermissions(
-                    activity!!, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                                android.Manifest.permission.WRITE_EXTERNAL_STORAGE),REQUEST_CODE_PERMISSIONS)
+                    activity!!, arrayOf(
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ), REQUEST_CODE_PERMISSIONS
+                )
             }
         } else {
             openImageChooser()
@@ -428,7 +571,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>,grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String?>, grantResults: IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted
@@ -484,7 +629,11 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             val randomNumber = r.nextInt(9999999)
 
             // create a map of data to pass along
-            val id_ferestande: RequestBody = createPartFromString(SharedPrefClass.getUserId(activity ,"user"))
+            val id_ferestande: RequestBody = createPartFromString(
+                SharedPrefClass.getUserId(
+                    activity, "user"
+                )
+            )
             val onvan: RequestBody = createPartFromString(etOnvanP!!.text.toString())
             val mozo: RequestBody = createPartFromString(etMozoP!!.text.toString())
             val tozihat: RequestBody = createPartFromString(etTozihatP!!.text.toString())
@@ -493,13 +642,17 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             val id_farakhan: RequestBody = createPartFromString(txIdFarakhan!!.text.toString())
             val size: RequestBody = createPartFromString("" + parts.size)
 
-            Toast.makeText(activity,parts.size.toString(),Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, parts.size.toString(), Toast.LENGTH_SHORT).show()
 
             // finally, execute the request
-            val call = service.uploadMultiple(id_ferestande, onvan, mozo,tozihat,type,shenase_rahgiri, id_farakhan, size, parts)
+            val call = service.uploadMultiple(
+                id_ferestande, onvan, mozo, tozihat, type, shenase_rahgiri, id_farakhan, size, parts
+            )
 
             call.enqueue(object : Callback<ResponseBody?> {
-                override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                override fun onResponse(
+                    call: Call<ResponseBody?>, response: Response<ResponseBody?>
+                ) {
                     //hideProgress()
                     if (response.isSuccessful) {
 
@@ -508,25 +661,33 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                         activity!!.viewPager.setCurrentItem(0)
 
 
-                        Toast.makeText(activity,"Images successfully uploaded!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            activity, "Images successfully uploaded!", Toast.LENGTH_SHORT
+                        ).show()
                     } else {
-                        Snackbar.make(inflatedview!!.clcl,"R.string.string_some_thing_wrong", Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(
+                            inflatedview!!.clcl,
+                            "R.string.string_some_thing_wrong",
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                     //hideProgress()
-                   /* Log.e(
+                    /* Log.e(
                         org.snowcorp.sample.uploadfiles.MainActivity.TAG,
                         "Image upload failed!",
                         t
                     )*/
-                    Snackbar.make(inflatedview!!.clcl,t.toString(), Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(inflatedview!!.clcl, t.toString(), Snackbar.LENGTH_LONG).show()
                 }
             })
         } else {
             //hideProgress()
-            Toast.makeText(activity,"R.string.string_internet_connection_not_available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                activity, "R.string.string_internet_connection_not_available", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

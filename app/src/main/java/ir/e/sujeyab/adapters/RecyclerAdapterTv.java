@@ -64,11 +64,11 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
             if (ax.isEmpty()) {
 
                 Picasso.get()
-                        .load(R.drawable.logo)
+                        .load(R.drawable.bg_tv_item)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.bg_tv_item)
+                        .placeholder(R.drawable.bg_tv_item)
                         .into(holder.imgPicture);
 
             }else{
@@ -76,8 +76,8 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                         .load(ax)
                         .centerInside()
                         .fit()
-                        .error(R.drawable.logo)
-                        .placeholder(R.drawable.logo)
+                        .error(R.drawable.bg_tv_item)
+                        .placeholder(R.drawable.bg_tv_item)
                         .into(holder.imgPicture);
             }
 

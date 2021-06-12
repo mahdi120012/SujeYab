@@ -3,6 +3,8 @@ package ir.e.sujeyab.CustomClasses;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import androidx.fragment.app.FragmentActivity;
+
 public class ProgressDialogClass {
 
     private ProgressDialog progressDialog = null;

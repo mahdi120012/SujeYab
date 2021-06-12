@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.SujeClick.MainActFarakhan;
 import ir.e.sujeyab.SujeClick.MainActSuje;
 import ir.e.sujeyab.models.FarakhanVijehModel;
@@ -155,7 +156,7 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
             txNameFerestande.setText(images.get(position).getLink());
             txSemat.setText(images.get(position).getDescription());
             txMatnKholase.setText(images.get(position).getMatn_kholase());
-            txRateAvg.setText(sujeModel.get(position).getMiyangin_rate());
+            txRateAvg.setText(new EnglishNumberToPersian().convert(sujeModel.get(position).getMiyangin_rate()));
 
             view.addView(myImageLayout, 0);
             myImageLayout.setOnClickListener(new View.OnClickListener() {

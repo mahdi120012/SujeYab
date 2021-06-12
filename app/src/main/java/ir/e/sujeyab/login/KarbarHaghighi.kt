@@ -15,7 +15,10 @@ import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.snackbar
 import kotlinx.android.synthetic.main.karbar_haghighi.*
 import kotlinx.android.synthetic.main.karbar_haghighi.clcl
+import kotlinx.android.synthetic.main.karbar_haghighi.view.*
 import kotlinx.android.synthetic.main.karbar_hoghoghi.view.*
+import kotlinx.android.synthetic.main.karbar_hoghoghi.view.clVorodBaGoogle
+import kotlinx.android.synthetic.main.karbar_hoghoghi.view.etPassword
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.net_connection.*
 import kotlinx.android.synthetic.main.takmil_etelaat.view.*
@@ -33,6 +36,15 @@ class KarbarHaghighi : Fragment() {
 
         inflatedview!!.clVorodBaGoogle.setOnClickListener {
             Toast.makeText(activity,"به زودی راه اندازی می شود",Toast.LENGTH_SHORT).show()
+        }
+
+        inflatedview!!.clForgetPassword.setOnClickListener {
+            val fr: Fragment = ShomareTelephoneForgetPassword()
+            //fr.arguments = args
+            val fm = fragmentManager
+            val fragmentTransaction = fm!!.beginTransaction()
+            fragmentTransaction.replace(R.id.clcl, fr)
+            fragmentTransaction.commit()
         }
 
         val clVorodBaNamKarbari = inflatedview!!.findViewById<View>(R.id.clVorodBaNamKarbari) as ConstraintLayout

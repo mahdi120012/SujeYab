@@ -1,11 +1,9 @@
 package ir.e.sujeyab;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +23,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.volley.AuthFailureError;
@@ -38,10 +36,8 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
@@ -51,7 +47,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
 import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.SocketException;
@@ -66,7 +61,6 @@ import ir.e.sujeyab.CustomClasses.MySingleton;
 import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
 import ir.e.sujeyab.CustomClasses.Recyclerview;
 import ir.e.sujeyab.CustomClasses.SharedPrefClass;
-import ir.e.sujeyab.CustomClasses.TimeKononi;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.adapters.CatAdapter;
@@ -75,9 +69,7 @@ import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
 import ir.e.sujeyab.adapters.RecyclerAdapterSujeHa;
 import ir.e.sujeyab.adapters.RecyclerAdapterTv;
-import ir.e.sujeyab.adapters.RecyclerAdapterVaziyatSujeha;
 import ir.e.sujeyab.adapters.TasavirSujeAdapter;
-import ir.e.sujeyab.login.Login;
 import ir.e.sujeyab.login.TaeidShomareTelepohe;
 import ir.e.sujeyab.login.TakmilEtelaat;
 import ir.e.sujeyab.models.CatModel;
@@ -86,18 +78,13 @@ import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
 import ir.e.sujeyab.models.RatesModel;
 import ir.e.sujeyab.models.RecyclerModel;
-import ir.e.sujeyab.models.RegisterModel;
 import ir.e.sujeyab.models.SliderModel;
 import ir.e.sujeyab.models.TakmilEtelaatModel;
 import ir.e.sujeyab.models.TasavirSujeModel;
 import ir.e.sujeyab.models.VaziyatModel;
-import ir.e.sujeyab.models.VaziyatSujehaModel;
 import ir.e.sujeyab.pishkhan.Pishkhan;
-import ir.e.sujeyab.upload.MyResponse;
 import me.relex.circleindicator.CircleIndicator;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -836,6 +823,138 @@ public class LoadData {
                 Toast.makeText(c, "حساب شما با موفقیت ساخته شد", Toast.LENGTH_SHORT).show();
                 /*Snackbar snackbar = Snackbar.make(clcl, "مشخصات شما با موفقیت ویرایش شد", Snackbar.LENGTH_LONG);
                 snackbar.show();*/
+
+                AppCompatActivity activity = (AppCompatActivity) c;
+                Fragment myFragment = new TakmilEtelaat();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.clcl, myFragment).addToBackStack(null).commit();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //line haye zir baraye khatayabiye  ( baraye vaghti ke connection va ... error mide )
+                if(error instanceof NoConnectionError){
+                    ConnectivityManager cm = (ConnectivityManager)c
+                            .getSystemService(c.CONNECTIVITY_SERVICE);
+                    NetworkInfo activeNetwork = null;
+                    if (cm != null) {
+                        activeNetwork = cm.getActiveNetworkInfo();
+                    }
+                    if(activeNetwork != null && activeNetwork.isConnectedOrConnecting()){
+                        Toast.makeText(c, "Server is not connected to internet.",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(c, "Your device is not connected to internet.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else if (error instanceof NetworkError || error.getCause() instanceof ConnectException
+                        || (error.getCause().getMessage() != null
+                        && error.getCause().getMessage().contains("connection"))){
+                    Toast.makeText(c, "Your device is not connected to internet.",
+                            Toast.LENGTH_SHORT).show();
+                } else if (error.getCause() instanceof MalformedURLException){
+                    Toast.makeText(c, "Bad Request.", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ParseError || error.getCause() instanceof IllegalStateException
+                        || error.getCause() instanceof JSONException
+                        || error.getCause() instanceof XmlPullParserException){
+                    Toast.makeText(c, "Parse Error (because of invalid json or xml).",
+                            Toast.LENGTH_SHORT).show();
+                } else if (error.getCause() instanceof OutOfMemoryError){
+                    Toast.makeText(c, "Out Of Memory Error.", Toast.LENGTH_SHORT).show();
+                }else if (error instanceof AuthFailureError){
+                    Toast.makeText(c, "server couldn't find the authenticated request.",
+                            Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError || error.getCause() instanceof ServerError) {
+                    Toast.makeText(c, "Server is not responding.", Toast.LENGTH_SHORT).show();
+                }else if (error instanceof TimeoutError || error.getCause() instanceof SocketTimeoutException
+                        || error.getCause() instanceof ConnectTimeoutException
+                        || error.getCause() instanceof SocketException
+                        || (error.getCause().getMessage() != null
+                        && error.getCause().getMessage().contains("Connection timed out"))) {
+                    Toast.makeText(c, "Connection timeout error",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(c, "An unknown error occurred.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                itShouldLoadMore = true;
+                progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+            /*    clWifi.setVisibility(View.GONE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       *//* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*//*
+                    }
+                });*/
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void editPassword(final Context c, String username,String newPassword) {
+
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String newPasswordEncode = UrlEncoderClass.urlEncoder(newPassword);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=edit_password&username1=" + usernameEncode + "&new_password=" + newPasswordEncode;
+
+        itShouldLoadMore = false;
+        final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        progressDialog.showProgress(c);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                //clWifi.setVisibility(View.GONE);
+                progressDialog.dismissProgress();
+                itShouldLoadMore = true;
+
+                /*if (response.length() <= 0) {
+                    Toast.makeText(c, "اطلاعاتی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }*/
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "مشکلی بوجود آمده است.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+               /* String username = null,password = null;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        //lastId = jsonObject.getString("id");
+                        username = jsonObject.getString("username");
+                        password = jsonObject.getString("password");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }*/
+                //Toast.makeText(c, "کلمه عبور حساب شما با موفقیت تغییر یافت", Toast.LENGTH_SHORT).show();
+                /*Snackbar snackbar = Snackbar.make(clcl, "مشخصات شما با موفقیت ویرایش شد", Snackbar.LENGTH_LONG);
+                snackbar.show();*/
+                SharedPrefClass.clearData(c);
+
+                SharedPreferences sharedPreferences = c.getSharedPreferences("file", c.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("user", username);
+                editor.commit();
 
                 AppCompatActivity activity = (AppCompatActivity) c;
                 Fragment myFragment = new TakmilEtelaat();
@@ -1746,8 +1865,78 @@ public class LoadData {
     }
 
 
+
+    public static void loadTvBaVolley(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterTv rAdapter
+            , String username1, SwipeRefreshLayout swiperefresh) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username1);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/load_tv?user1=" + usernameEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+                swiperefresh.setRefreshing(false);
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "چیزی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        String picture = jsonObject.getString("picture");
+                        String onvan = jsonObject.getString("onvan");
+                        //String modat_baghimande = jsonObject.getString("modat_baghimande");
+                        String matn_kholase = jsonObject.getString("matn_kholase");
+                        String mozo = jsonObject.getString("mozo");
+                        String id_ferestande = jsonObject.getString("id_ferestande");
+                        String motavali = jsonObject.getString("motavali");
+                        String type = jsonObject.getString("type");
+                        String type_vaziyat_farakhan = jsonObject.getString("type_vaziyat_farakhan");
+                        String name_family = jsonObject.getString("name_family");
+                        String semat_shoghli = jsonObject.getString("semat_shoghli");
+                        String date_create = jsonObject.getString("date_create");
+                        String vaziyat_like = jsonObject.getString("vaziyat_like");
+                        String tedad_like = jsonObject.getString("tedad_like");
+                        //String link_video = jsonObject.getString("link_video");
+                        //String onvan_farakhan = jsonObject.getString("onvan_farakhan");
+                        String vaziyat_suje = jsonObject.getString("vaziyat_suje");
+                        //String tedad_comment = jsonObject.getString("tedad_comment");
+                        String username_ferestande = jsonObject.getString("username_ferestande");
+
+                        /*String miyangin_rate = jsonObject.getString("miyangin_rate");
+                        String tedad_comment = jsonObject.getString("tedad_comment");*/
+
+                        rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
+                                "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","","","","",vaziyat_suje,username_ferestande));
+                        rAdapter.notifyDataSetChanged();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                swiperefresh.setRefreshing(false);
+                Toast.makeText(c, "چیزی یافت نشد!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
     public static void loadTvBaRetrofit(Context c, final ConstraintLayout clWifi, ArrayList<FarakhanVijehModel> rModels, RecyclerAdapterTv rAdapter
-            ,String username1) {
+            , String username1, SwipeRefreshLayout swiperefresh) {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.baseUrl).addConverterFactory(GsonConverterFactory.create()).build();
         Api api = retrofit.create(Api.class);
@@ -1756,6 +1945,8 @@ public class LoadData {
         call.enqueue(new Callback<List<FarakhanVijehModel>>() {
             @Override
             public void onResponse(Call<List<FarakhanVijehModel>> call, retrofit2.Response<List<FarakhanVijehModel>> response) {
+
+                swiperefresh.setRefreshing(false);
                 List<FarakhanVijehModel> farakhanVijehModels = response.body();
                 for (FarakhanVijehModel farakhanVijehModel:farakhanVijehModels){
 
@@ -1764,7 +1955,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -1772,6 +1963,7 @@ public class LoadData {
 
             @Override
             public void onFailure(Call<List<FarakhanVijehModel>> call, Throwable t) {
+                swiperefresh.setRefreshing(false);
                 Toast.makeText(c, t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
