@@ -17,6 +17,7 @@ import ir.e.sujeyab.RecyclerAdapter;
 import ir.e.sujeyab.SabtSuje.SabtForiSuje;
 import ir.e.sujeyab.SabtSuje.SabtFr;
 import ir.e.sujeyab.adapters.CatAdapter;
+import ir.e.sujeyab.adapters.MediaAdapter;
 import ir.e.sujeyab.adapters.RadapterVaziyatFarakhan;
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
@@ -28,6 +29,7 @@ import ir.e.sujeyab.models.CatModel;
 import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
+import ir.e.sujeyab.models.MediaModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.VaziyatSujehaModel;
 
@@ -77,6 +79,44 @@ public class Recyclerview {
     public static void defineRecyclerViewVertical2(final Context c, RecyclerView recyclerView,
                                                   final RecyclerAdapterSujeHa recyclerAdapter,
                                                   final ArrayList<FarakhanVijehModel> recyclerModels){
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setAdapter(recyclerAdapter);
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            // for this tutorial, this is the ONLY method that we need, ignore the rest
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    // Recycle view scrolling downwards...
+                    // this if statement detects when user reaches the end of recyclerView, this is only time we should load more
+                    if (!recyclerView.canScrollVertically(RecyclerView.FOCUS_DOWN)) {
+                        // remember "!" is the same as "== false"
+                        // here we are now allowed to load more, but we need to be careful
+                        // we must check if itShouldLoadMore variable is true [unlocked]
+                        if (LoadData.itShouldLoadMore) {
+                            //LoadData.loadMore(c,recyclerAdapter,recyclerModels,progressBar);
+                        }
+                    }
+
+                }
+            }
+        });
+
+    }
+
+
+    public static void defineRecyclerViewVerticalForMedia(final Context c, RecyclerView recyclerView,
+                                                   final MediaAdapter recyclerAdapter,
+                                                   final ArrayList<MediaModel> recyclerModels){
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(20);

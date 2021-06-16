@@ -261,6 +261,67 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNameAndFamily2518aa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_white_for_takmil_etelaat"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView25aa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:text="انتخاب مکان سوژه"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etEntekhabMakan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/bg_white_border"
+                    android:editable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:fontFamily="@font/iran_sans"
+                    android:gravity="clip_vertical"
+                    android:hint="انتخاب"
+                    android:inputType="none"
+                    android:maxLines="3"
+                    android:padding="6dp"
+                    android:scrollbars="none"
+                    android:singleLine="true"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView25aa"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView25aa" />
+
+                <TextView
+                    android:id="@+id/txIdFarakhan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/etEntekhabMakan"
+                    app:layout_constraintStart_toEndOf="@+id/etEntekhabMakan"
+                    app:layout_constraintTop_toTopOf="@+id/etEntekhabMakan" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clTasvirSuje"
                 android:layout_width="match_parent"

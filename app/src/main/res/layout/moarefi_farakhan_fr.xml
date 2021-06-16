@@ -35,17 +35,32 @@
                 android:layout_marginTop="16dp"
                 android:background="#ffffff">
 
+                <TextView
+                    android:id="@+id/gozareshTakhalof"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:justificationMode="inter_word"
+                    android:layoutDirection="ltr"
+                    android:text="گزارش تخلف"
+                    android:textColor="#676767"
+                    android:textDirection="ltr"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/txMatn"
+                    app:layout_constraintTop_toBottomOf="@+id/txMatn" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/clAddSuje"
                     android:layout_width="0dp"
                     android:layout_height="32dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_orange_ba_hashiye"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/txMatn"
                     app:layout_constraintStart_toStartOf="@+id/txMatn"
-                    app:layout_constraintTop_toBottomOf="@+id/txMatn">
+                    app:layout_constraintTop_toBottomOf="@+id/gozareshTakhalof">
 
                     <TextView
                         android:id="@+id/txMatn2"
@@ -246,7 +261,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/iran_sans"
-                    android:text="0"
+                    android:text="۰"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txTedadRate"

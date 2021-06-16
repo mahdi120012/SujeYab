@@ -10,9 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.R
+import ir.e.sujeyab.login.Login
+import ir.e.sujeyab.login.TaeidShomareTelepoheForgetPassword
 import ir.e.sujeyab.pishkhan.Pishkhan
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.*
 import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
+import kotlinx.android.synthetic.main.karbar_haghighi.view.*
 import kotlinx.android.synthetic.main.main_cat1.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.view.*
@@ -51,6 +54,17 @@ class SabtFr : Fragment() {
 
             val activity = activity as AppCompatActivity
             activity.finish()
+        }
+
+
+        inflatedview!!.clEdameVaSabtTozihat.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("post_id", "446")
+
+            val myFragment: Fragment = SabtTozihatRoyeAxFilm_fr()
+            myFragment.arguments = bundle
+            activity!!.supportFragmentManager.beginTransaction()
+                .replace(R.id.clcl, myFragment).addToBackStack(null).commit()
         }
 
         //(activity!!.txEdame)!!.setText("بازگشت به پیشخوان")

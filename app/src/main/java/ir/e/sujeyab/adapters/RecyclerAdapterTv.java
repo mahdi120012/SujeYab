@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -61,7 +62,12 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
 
 
             String ax = rModels.get(position).getPicture();
-            if (ax.isEmpty()) {
+            Glide.with(c).load("empty")
+                    .thumbnail(Glide.with(c).load(rModels.get(position).getPicture()))
+                    .into(holder.imgPicture);
+
+
+/*            if (ax.isEmpty()) {
 
                 Picasso.get()
                         .load(R.drawable.bg_tv_item)
@@ -79,7 +85,7 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                         .error(R.drawable.bg_tv_item)
                         .placeholder(R.drawable.bg_tv_item)
                         .into(holder.imgPicture);
-            }
+            }*/
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,6 +103,11 @@ public class RecyclerAdapterTv extends RecyclerView.Adapter<RecyclerAdapterTv.My
                     intent.putExtra("semat_shoghli",rModels.get(position).getSemat_shoghli());
                     intent.putExtra("vaziyat_like",rModels.get(position).getVaziyat_like());
                     intent.putExtra("tedad_like",rModels.get(position).getTedad_like());
+                    intent.putExtra("tedad_comment",rModels.get(position).getTedad_comment());
+                    intent.putExtra("username_ferestande",rModels.get(position).getUsername_ferestande());
+                    intent.putExtra("vaziyat_suje",rModels.get(position).getVaziyat_suje());
+                    intent.putExtra("profile_picture_ferestande",rModels.get(position).getProfile_picture_ferestande());
+
 
 
                     c.startActivity(intent);

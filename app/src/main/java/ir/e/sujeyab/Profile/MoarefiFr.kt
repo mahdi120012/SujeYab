@@ -51,6 +51,9 @@ import kotlin.collections.ArrayList
             inflatedview!!.txMatnKholaseMoarefi,inflatedview!!.txMadrakTahsili1,inflatedview!!.txMadrakTahsili2,
             inflatedview!!.txTakhasos, inflatedview!!.txEmail, inflatedview!!.txTelephone, inflatedview!!.imgCall)
 
+        inflatedview!!.clFollow.setOnClickListener {
+            inflatedview!!.clcl.snackbar("در نسخه بعدی فعال می شود")
+        }
         return inflatedview
     }
 }

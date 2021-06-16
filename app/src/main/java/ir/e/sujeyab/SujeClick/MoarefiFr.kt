@@ -1,17 +1,19 @@
  package ir.e.sujeyab.SujeClick
 
+import android.app.Activity
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.squareup.picasso.Picasso
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.CustomClasses.TimeKononi
@@ -19,8 +21,9 @@ import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.Profile.MainActProfile
 import ir.e.sujeyab.R
 import ir.e.sujeyab.SabtSuje.snackbar
+import ir.e.sujeyab.adapters.MediaAdapter
+import ir.e.sujeyab.models.MediaModel
 import ir.e.sujeyab.models.TasavirSujeModel
-import ir.e.sujeyab.upload.MoarefiSamarqand
 import kotlinx.android.synthetic.main.comment_fr.view.*
 import kotlinx.android.synthetic.main.moarefi_fr.*
 import kotlinx.android.synthetic.main.moarefi_fr.view.*
@@ -38,10 +41,7 @@ import kotlin.collections.ArrayList
     private val ImgArray = ArrayList<TasavirSujeModel>()
     //private lateinit var tasavirSujeAdapter:TasavirSujeAdapter
     private var currentPage = 0
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         inflatedview = inflater.inflate(R.layout.moarefi_fr, container, false)
 
         var sujeId:String = activity!!.intent.extras!!.getString("id").toString()
@@ -51,15 +51,20 @@ import kotlin.collections.ArrayList
         var picture:String = activity!!.intent.extras!!.getString("picture").toString()
         var motavali:String = activity!!.intent.extras!!.getString("motavali").toString()
         var modat_baghi_mande:String = activity!!.intent.extras!!.getString("modat_baghi_mande").toString()
-        var axFerestande:String = activity!!.intent.extras!!.getString("axFerestande").toString()
         var dateCreate:String = activity!!.intent.extras!!.getString("date_create").toString()
         var name:String = activity!!.intent.extras!!.getString("name").toString()
         var semat_shoghli:String = activity!!.intent.extras!!.getString("semat_shoghli").toString()
         var tedad_like:String = activity!!.intent.extras!!.getString("tedad_like").toString()
         var vaziyat_like:String = activity!!.intent.extras!!.getString("vaziyat_like").toString()
+        var vaziyat_suje:String = activity!!.intent.extras!!.getString("vaziyat_suje").toString()
+        var profile_picture_ferestande:String = activity!!.intent.extras!!.getString("profile_picture_ferestande").toString()
 
 
-        inflatedview!!.txTedadLike.setText(tedad_like)
+        //inflatedview!!.txTedadLike.setText(EnglishNumberToPersian().convert(tedad_like))
+
+
+        inflatedview!!.txVaziyatSuje.setText(vaziyat_suje)
+
         if (vaziyat_like.contains("0")) {
             inflatedview!!.imgLike.setImageDrawable(ContextCompat.getDrawable(activity!!, R.drawable.like))
         } else {
@@ -78,7 +83,7 @@ import kotlin.collections.ArrayList
         //inflatedview!!.txMatnKamel.setText(matn)
 
         //loadImage(inflatedview!!.imgPicture,picture)3
-        loadImage(inflatedview!!.imgAxFerestande, axFerestande)
+        loadImage(inflatedview!!.imgAxFerestande, profile_picture_ferestande)
 
         inflatedview!!.clFerestande.setOnClickListener {
             val intent = Intent(activity, MainActProfile::class.java)
@@ -89,8 +94,7 @@ import kotlin.collections.ArrayList
         }
 
         //line zir baraye load tasavir safhe mahsole
-        LoadData.LoadTasavirSujeBaVolley(activity, clWifiState,
-                sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
+        LoadData.LoadTasavirSujeBaVolley(activity, clWifiState, sujeId, inflatedview!!.viewPager1, inflatedview!!.indicator, ImgArray)
 
 
 
@@ -105,8 +109,7 @@ import kotlin.collections.ArrayList
                     inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
 
                 }else{
-                    LoadData.LikePost(activity, clWifiState, username,
-                            sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
+                    LoadData.LikePost(activity, clWifiState, username, sujeId, inflatedview!!.imgLike, inflatedview!!.txTedadLike)
                 }
             }
 
@@ -116,15 +119,53 @@ import kotlin.collections.ArrayList
             if (username == "" || username == null) {
                 inflatedview!!.clcl.snackbar("ابتدا وارد شوید")
             } else {
-                LoadData.sendRateBaRetrofit(activity, clWifiState, username, sujeId, rateValue.toString(), inflatedview!!.txTedadRate, inflatedview!!.txRateAvg)
+                LoadData.sendRateBaVolley(activity, clWifiState, username, sujeId, rateValue.toString(), inflatedview!!.txTedadRate, inflatedview!!.txRateAvg)
             }
         })
 
-        LoadData.loadTotalRateAndRateAvgBaRetrofit(activity, clWifiState, sujeId, inflatedview!!.txTedadRate, inflatedview!!.txRateAvg)
+        LoadData.loadTotalRateAndRateAvgBaVolley(activity, clWifiState, sujeId, inflatedview!!.txTedadRate, inflatedview!!.txRateAvg)
 
+        LoadData.loadTotalLikePostBaVolley(activity, clWifiState, sujeId, inflatedview!!.txTedadLike)
+
+        inflatedview!!.gozareshTakhalof.setOnClickListener {
+            allDialogButton(activity!!, sujeId)
+        }
 
         return inflatedview
 }
+
+
+     fun allDialogButton(context: Context, post_id: String) {
+         val dialog = Dialog(context, R.style.customDialogKar)
+         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+         val view = inflater.inflate(R.layout.dialog_sabt_takhalof, null, false)
+         val clSend: ConstraintLayout = view.findViewById(R.id.clSend)
+         val etOnvan: EditText = view.findViewById(R.id.etOnvan)
+         val etMatn: EditText = view.findViewById(R.id.etMatn)
+
+
+         clSend.setOnClickListener { //clickDialogItems(context,position,"delete",null,noeGozaresh,recyclerModels,adapter);
+
+             if (etOnvan.text.toString().length < 3 || etMatn.text.toString().length < 3){
+                 Toast.makeText(context, "طول عنوان و شرح تخلف خیلی کوتاه است.", Toast.LENGTH_SHORT).show()
+
+                 //clcl.snackbar("طول عنوان و شرح تخلف خیلی کوتاه است.")
+             }else{
+                 clcl.snackbar("گزارش شما با موفقیت ارسال شد.")
+                 //Toast.makeText(context, "حذف شد", Toast.LENGTH_SHORT).show()
+                 dialog.dismiss()
+             }
+         }
+         (context as Activity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+         dialog.setContentView(view)
+         val window = dialog.window
+         window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
+         window.setGravity(Gravity.CENTER)
+         //line zir baraye transparent kardan hashiye haye cardview ee:
+         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+         dialog.show()
+     }
 
  fun loadImage(img: ImageView, pictureLink: String){
 

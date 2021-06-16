@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
+import ir.e.sujeyab.Map.ShowMap
 import ir.e.sujeyab.SabtSuje.snackbar
 import ir.e.sujeyab.login.Login
 import ir.e.sujeyab.upload.MoarefiSamarqand
@@ -65,6 +66,7 @@ class Setting : AppCompatActivity() {
 
         clPoshtibani.setOnClickListener {
             val intent = Intent(this, Poshtibani::class.java)
+            //val intent = Intent(this, ShowMap::class.java)
             //myIntent.putExtra("key", value) //Optional parameters
             startActivity(intent)
 
@@ -74,7 +76,7 @@ class Setting : AppCompatActivity() {
            ShareCompat.IntentBuilder.from(this)
                 .setType("text/plain")
                 .setChooserTitle("اشتراک گذاری با دوستان")
-                .setText("سلام من از ثمرقند استفاده میکنم. میتونید از لینک زیر دانلودش کنید" + " " + "https://samarqand.ir/dl")
+                .setText("سلام من از ثمرقند استفاده میکنم. میتونید از لینک زیر دانلودش کنید" + " " + "yun.ir/1t6me5")
                 .startChooser();
 
         }

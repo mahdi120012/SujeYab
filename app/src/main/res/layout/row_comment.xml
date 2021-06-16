@@ -11,6 +11,21 @@
     android:textDirection="rtl">
 
     <TextView
+        android:id="@+id/gozareshTakhalof"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/iran_sans"
+        android:justificationMode="inter_word"
+        android:layoutDirection="ltr"
+        android:text="گزارش تخلف"
+        android:textColor="#676767"
+        android:textDirection="ltr"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/txDate"
+        app:layout_constraintTop_toTopOf="@+id/clPasokh" />
+
+    <TextView
         android:id="@+id/txName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

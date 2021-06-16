@@ -18,8 +18,7 @@ import kotlinx.android.synthetic.main.sabt_fori_suje.*
 
 
 class SabtForiSuje : AppCompatActivity() {
-    private val titles =
-        arrayOf("ثبت", "ورود", "ویژگی ها", "طرح سوژه")
+    private val titles = arrayOf("ثبت", "ورود", "ویژگی ها", "طرح سوژه")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sabt_fori_suje)
@@ -27,7 +26,6 @@ class SabtForiSuje : AppCompatActivity() {
 
         imgBack.setOnClickListener { finish() }
         viewPager.setCurrentItem(3)
-        //line zir baraye ine ke"
         viewPager.setOffscreenPageLimit(3);
         viewPager.setUserInputEnabled(false);
 

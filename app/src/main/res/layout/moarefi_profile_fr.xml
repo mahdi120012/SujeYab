@@ -31,7 +31,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:background="#ffffff">
 
                 <TextView
@@ -50,7 +50,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+                    app:layout_constraintTop_toBottomOf="@+id/clFollow" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgProfile"
@@ -90,11 +90,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/txNameKarbar" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout12"
+                    android:id="@+id/clFollow"
                     android:layout_width="200dp"
                     android:layout_height="38dp"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/bg_round_white_3"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_round_for_follow_button"
                     app:layout_constraintEnd_toEndOf="@+id/txUsername"
                     app:layout_constraintStart_toStartOf="@+id/txUsername"
                     app:layout_constraintTop_toBottomOf="@+id/txUsername">
@@ -118,7 +118,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:background="@color/white">
 
                 <TextView
@@ -173,7 +173,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:background="@color/white">
 
                 <TextView
@@ -211,7 +211,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:background="@color/white">
 
                 <TextView
@@ -248,7 +248,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:background="@color/white">
 
                 <TextView

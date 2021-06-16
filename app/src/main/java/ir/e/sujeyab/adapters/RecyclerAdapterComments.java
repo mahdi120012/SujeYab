@@ -123,6 +123,13 @@ public class RecyclerAdapterComments extends RecyclerView.Adapter<RecyclerAdapte
                 }
             });
 
+            holder.txGozareshTakhalof.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                        allDialogButton(c, rModels.get(position).getPostId());
+                }
+            });
+
         }else if (rowLayoutType.matches("pasokh_comments")){
             holder.txName.setText(rModels.get(position).getName());
             holder.txMatn.setText(rModels.get(position).getComment());
@@ -192,13 +199,14 @@ public class RecyclerAdapterComments extends RecyclerView.Adapter<RecyclerAdapte
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txName,txMatn,txDate,txRateCount,txTedadPasokh;
+        TextView txName,txMatn,txDate,txRateCount,txTedadPasokh, txGozareshTakhalof;
         ImageView imgPicture;
         ConstraintLayout clPasokh;
 
         MyViewHolder(View view) {
             super(view);
 
+            txGozareshTakhalof = itemView.findViewById(R.id.gozareshTakhalof);
             clPasokh = itemView.findViewById(R.id.clPasokh);
             txTedadPasokh = itemView.findViewById(R.id.txTedadPasokh);
             txName = itemView.findViewById(R.id.txName);
@@ -208,6 +216,46 @@ public class RecyclerAdapterComments extends RecyclerView.Adapter<RecyclerAdapte
             imgPicture = itemView.findViewById(R.id.imgPicture);
 
         }
+    }
+
+
+    public void allDialogButton(Context c, String post_id) {
+        final Dialog dialog = new Dialog(c, R.style.customDialogKar);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.dialog_sabt_takhalof, null, false);
+
+        final ConstraintLayout clSend = view.findViewById(R.id.clSend);
+        final EditText etOnvan = view.findViewById(R.id.etOnvan);
+        final EditText etMatn = view.findViewById(R.id.etMatn);
+
+
+        clSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etOnvan.getText().toString().length() < 3 || etMatn.getText().toString().length() < 3){
+                    Toast.makeText(c, "طول عنوان و شرح تخلف خیلی کوتاه است.", Toast.LENGTH_SHORT).show();
+
+                    //clcl.snackbar("طول عنوان و شرح تخلف خیلی کوتاه است.")
+                }else{
+
+                    Toast.makeText(c, "گزارش شما با موفقیت ارسال شد.", Toast.LENGTH_SHORT).show();
+
+                    dialog.dismiss();
+                }
+            }
+        });
+
+
+        ((Activity) c).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        dialog.setContentView(view);
+        final Window window = dialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        //line zir baraye transparent kardan hashiye haye cardview ee:
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.show();
+
     }
 
 

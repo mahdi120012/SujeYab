@@ -67,7 +67,6 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     implementation 'jp.wasabeef:picasso-transformations:2.2.1'
     implementation 'com.airbnb.android:lottie:3.6.1'
-    implementation 'ir.map:map-sdk:4.0.2'
     implementation 'com.github.javiersantos:AppUpdater:2.7'
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
     //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'
@@ -86,6 +85,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha03'
 
+    implementation 'ir.map:map-sdk:4.0.2' //این خط اضافه شده است
+    //implementation 'ir.map.servicesdk:service-sdk:4.0.3' //این خط اضافه شده است
 
+    /*// If you code kotlin, use this dependency
+    implementation 'ir.map.servicesdk:service-sdk-ktx:4.0.3' //این خط اضافه شده است*/
 
 }

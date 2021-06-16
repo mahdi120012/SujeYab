@@ -17,7 +17,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.mapbox.android.core.location.*
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog

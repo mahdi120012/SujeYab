@@ -174,6 +174,7 @@ public class ViewPagerAdapterForSlider extends PagerAdapter {
                             intent.putExtra("name",sujeModel.get(position).getName_family());
                             intent.putExtra("semat_shoghli",sujeModel.get(position).getSemat_shoghli());
                             intent.putExtra("tedad_like",sujeModel.get(position).getTedad_like());
+                            intent.putExtra("tedad_comment",sujeModel.get(position).getTedad_comment());
                             intent.putExtra("vaziyat_like",sujeModel.get(position).getVaziyat_like());
                             context.startActivity(intent);
 

@@ -53,6 +53,8 @@
                         android:layout_height="fill_parent"
                         android:background="#FFFFFF"
                         android:orientation="vertical"
+                        android:layoutDirection="rtl"
+                        android:textDirection="rtl"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/clcl">
@@ -72,7 +74,7 @@
 
                 <me.relex.circleindicator.CircleIndicator
                     android:id="@+id/indicator"
-                    android:layoutDirection="rtl"
+                    android:layoutDirection="ltr"
                     android:textDirection="rtl"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -104,13 +106,11 @@
                     android:id="@+id/txMatn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
                     android:fontFamily="@font/iran_sans"
                     android:justificationMode="inter_word"
                     android:text="متن"
                     android:textColor="@color/black"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/txOnvan"
                     app:layout_constraintStart_toStartOf="@+id/txOnvan"
                     app:layout_constraintTop_toBottomOf="@+id/txTarikh" />
@@ -128,6 +128,24 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@+id/txOnvan"
                     app:layout_constraintTop_toBottomOf="@+id/txOnvan" />
+
+                <TextView
+                    android:id="@+id/gozareshTakhalof"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:justificationMode="inter_word"
+                    android:layoutDirection="ltr"
+                    android:text="گزارش تخلف"
+                    android:textColor="#676767"
+                    android:textDirection="ltr"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/txMatn"
+                    app:layout_constraintTop_toBottomOf="@+id/txMatn" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -150,9 +168,11 @@
                     android:id="@+id/txRateAvg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/iran_sans"
-                    android:text="0/0"
+                    android:fontFamily="@font/iran_sans_bold"
+                    android:layoutDirection="ltr"
+                    android:text="۰.۰"
                     android:textColor="@color/black"
+                    android:textDirection="ltr"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/ratingBar2"
                     app:layout_constraintEnd_toStartOf="@+id/ratingBar2"
@@ -162,14 +182,41 @@
                     android:id="@+id/txTedadRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="۰"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txRateAvg"
+                    app:layout_constraintEnd_toStartOf="@+id/tx414124"
+                    app:layout_constraintTop_toTopOf="@+id/txRateAvg"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/txtttttt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:fontFamily="@font/iran_sans"
-                    android:text="0"
+                    android:text="امتیاز)"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txRateAvg"
+                    app:layout_constraintEnd_toStartOf="@+id/txTedadRate"
+                    app:layout_constraintTop_toTopOf="@+id/txRateAvg" />
+
+                <TextView
+                    android:id="@+id/tx414124"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/iran_sans"
+                    android:text="("
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txRateAvg"
                     app:layout_constraintEnd_toStartOf="@+id/txRateAvg"
-                    app:layout_constraintTop_toTopOf="@+id/txRateAvg" />
+                    app:layout_constraintTop_toTopOf="@+id/txRateAvg"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/txTedadLike"
@@ -177,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/iran_sans"
-                    android:text="0"
+                    android:text="۰"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@+id/txTedadRate"
@@ -224,6 +271,7 @@
                     android:scaleY=".6"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -310,17 +358,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView392" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgAxFerestande"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="16dp"
+                    android:src="@drawable/adamak_zard"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/bg_orange_ba_hashiye" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -57,6 +57,7 @@ import java.util.concurrent.TimeUnit;
 
 import ir.e.sujeyab.Controller.Api;
 import ir.e.sujeyab.Controller.RetrofitProvider;
+import ir.e.sujeyab.CustomClasses.EnglishNumberToPersian;
 import ir.e.sujeyab.CustomClasses.MySingleton;
 import ir.e.sujeyab.CustomClasses.ProgressDialogClass;
 import ir.e.sujeyab.CustomClasses.Recyclerview;
@@ -64,6 +65,7 @@ import ir.e.sujeyab.CustomClasses.SharedPrefClass;
 import ir.e.sujeyab.CustomClasses.UrlEncoderClass;
 import ir.e.sujeyab.SabtSuje.UploadResponse;
 import ir.e.sujeyab.adapters.CatAdapter;
+import ir.e.sujeyab.adapters.MediaAdapter;
 import ir.e.sujeyab.adapters.RadapterVaziyatFarakhan;
 import ir.e.sujeyab.adapters.RecyclerAdapterCitys;
 import ir.e.sujeyab.adapters.RecyclerAdapterComments;
@@ -76,6 +78,7 @@ import ir.e.sujeyab.models.CatModel;
 import ir.e.sujeyab.models.CitysModel;
 import ir.e.sujeyab.models.CommentsModel;
 import ir.e.sujeyab.models.FarakhanVijehModel;
+import ir.e.sujeyab.models.MediaModel;
 import ir.e.sujeyab.models.RatesModel;
 import ir.e.sujeyab.models.RecyclerModel;
 import ir.e.sujeyab.models.SliderModel;
@@ -138,15 +141,22 @@ public class LoadData {
                 }
 
                 if (message.matches("like shod")){
+
+
+
+
                     //Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
                     imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like_red));
-                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
-                    txTedadLike.setText(String.valueOf(tedad_like+1));
+                    //int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    //txTedadLike.setText(String.valueOf(tedad_like+1));
+                    LoadData.loadTotalLikePostBaVolley(c, clWifi, sujeId, txTedadLike);
+
                 }else {
                     //Toast.makeText(c, "انجام شد", Toast.LENGTH_LONG).show();
                     imgLike.setImageDrawable(ContextCompat.getDrawable(c, R.drawable.like));
-                    int tedad_like = Integer.parseInt(txTedadLike.getText().toString());
-                    txTedadLike.setText(String.valueOf(tedad_like-1));
+                    // tedad_like = Integer.parseInt(txTedadLike.getText().toString());
+                    //txTedadLike.setText(String.valueOf(tedad_like-1));
+                    LoadData.loadTotalLikePostBaVolley(c, clWifi, sujeId, txTedadLike);
                 }
 
 
@@ -1568,7 +1578,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate(),"","","",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),farakhanVijehModel.getMiyangin_rate(),farakhanVijehModel.getTedad_comment(),"","",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande(),farakhanVijehModel.getProfile_picture_ferestande()));
 
                     ImgArray.add(new SliderModel(lastId, farakhanVijehModel.getOnvan(),farakhanVijehModel.getName_family(),"(" + farakhanVijehModel.getSemat_shoghli() + ")",farakhanVijehModel.getMatn_kholase()));
                     mPager.setAdapter(new ViewPagerAdapterForSlider(c, ImgArray,"slider_suje_haye_vijeh", mPager,sujeModel));
@@ -1582,6 +1592,81 @@ public class LoadData {
             }
         });
     }
+
+
+    public static void loadSujeMedia(Context c, final ConstraintLayout clWifi, MediaAdapter adapter,
+                                     ArrayList<MediaModel> models,String postId) {
+
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/sujeyab_load_data.php?action=load_post_media&post_id=" + UrlEncoderClass.urlEncoder(postId);
+        itShouldLoadMore = false;
+        final ProgressDialogClass progressDialog = new ProgressDialogClass();
+        progressDialog.showProgress(c);
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                clWifi.setVisibility(View.GONE);
+                progressDialog.dismissProgress();
+                itShouldLoadMore = true;
+
+
+                if (response.length() <= 0) {
+                    Toast.makeText(c, "اسلایدی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String postId = null;
+                String mediaUrl = null;
+                String tozihat = null;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        lastId = jsonObject.getString("id");
+                        postId = jsonObject.getString("post_id");
+                        mediaUrl = jsonObject.getString("media_url");
+                        tozihat = jsonObject.getString("tozihat");
+
+                        models.add(new MediaModel(lastId,postId, mediaUrl,tozihat));
+                        adapter.notifyDataSetChanged();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                itShouldLoadMore = true;
+                progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       /* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*/
+                    }
+                });
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
 
     public static void loadSujeHayeVijehSlider(Context c, final ConstraintLayout clWifi, ViewPager mPager,
                                                CircleIndicator indicator, ArrayList<SliderModel> ImgArray) {
@@ -1903,18 +1988,20 @@ public class LoadData {
                         String date_create = jsonObject.getString("date_create");
                         String vaziyat_like = jsonObject.getString("vaziyat_like");
                         String tedad_like = jsonObject.getString("tedad_like");
+                        String tedad_comment = jsonObject.getString("tedad_comment");
                         //String link_video = jsonObject.getString("link_video");
                         //String onvan_farakhan = jsonObject.getString("onvan_farakhan");
                         String vaziyat_suje = jsonObject.getString("vaziyat_suje");
                         //String tedad_comment = jsonObject.getString("tedad_comment");
                         String username_ferestande = jsonObject.getString("username_ferestande");
+                        String profile_picture_ferestande = jsonObject.getString("profile_picture_ferestande");
 
                         /*String miyangin_rate = jsonObject.getString("miyangin_rate");
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
 
                         rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
                                 "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
-                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","","","","",vaziyat_suje,username_ferestande));
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,"","",vaziyat_suje,username_ferestande,profile_picture_ferestande));
                         rAdapter.notifyDataSetChanged();
 
 
@@ -1955,7 +2042,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande(),farakhanVijehModel.getProfile_picture_ferestande()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2082,6 +2169,82 @@ public class LoadData {
         });
 
     }
+
+
+
+    public static void sendRateBaVolley(Context c, final ConstraintLayout clWifi,String username ,String postId, String rate,
+                                        TextView txTedadRate, TextView txRateAvg) {
+
+        String usernameEncode = UrlEncoderClass.urlEncoder(username);
+        String postIdEncode = UrlEncoderClass.urlEncoder(postId);
+        String rateEncode = UrlEncoderClass.urlEncoder(rate);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/send_rate?username1=" + usernameEncode + "&post_id=" + postIdEncode + "&rate=" + rateEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String message = null;
+                if (response.length() <= 0){
+                    //Toast.makeText(c, "چیزی موجود نیست", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject jsonObject = response.getJSONObject(i);
+                            message = jsonObject.getString("message");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                if (message.matches("rate ersal shod")){
+                    Toast.makeText(c, "ارسال شد", Toast.LENGTH_SHORT).show();
+                    LoadData.loadTotalRateAndRateAvgBaVolley(c, clWifi, postId, txTedadRate, txRateAvg);
+
+                }else if (message.matches("rate update shod")){
+                    Toast.makeText(c, "ویرایش شد", Toast.LENGTH_SHORT).show();
+                    LoadData.loadTotalRateAndRateAvgBaVolley(c, clWifi, postId, txTedadRate, txRateAvg);
+
+                }else {
+                    Toast.makeText(c, "ارسال نشد", Toast.LENGTH_SHORT).show();
+
+                }
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(c, (error.networkResponse.statusCode), Toast.LENGTH_LONG).show();
+
+                //itShouldLoadMore = true;
+                //progressDialog.dismissProgress();
+                Toast.makeText(c, "دسترسی به اینترنت موجود نیست!", Toast.LENGTH_SHORT).show();
+                clWifi.setVisibility(View.VISIBLE);
+
+                clWifi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                       /* LoadData.checUsernameExsist(c, recyclerAdapter, recyclerModels,
+                                recyclerView, "", clWifi);*/
+                    }
+                });
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
 
     public static void sendRateBaRetrofit(Context c, final ConstraintLayout clWifi,String username ,String postId, String rate,
                                           TextView txTedadRate, TextView txRateAvg) {
@@ -2317,6 +2480,96 @@ public class LoadData {
     }
 
 
+
+    public static void loadTotalRateAndRateAvgBaVolley(Context c, final ConstraintLayout clWifi, String postId,
+                                                       TextView txTedadRate, TextView txRateAvg) {
+
+        String postIdEncode = UrlEncoderClass.urlEncoder(postId);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/load_total_rate_and_rate_avg?post_id=" + postIdEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                if (response.length() <= 0) {
+                    //Toast.makeText(c, "چیزی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        String tedad_rate = jsonObject.getString("tedad_rate");
+                        String miyangin_rate = jsonObject.getString("miyangin_rate");
+
+                        txTedadRate.setText(new EnglishNumberToPersian().convert(tedad_rate));
+                        txRateAvg.setText(new EnglishNumberToPersian().convert(miyangin_rate));
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(c, "چیزی یافت نشد!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+    public static void loadTotalLikePostBaVolley(Context c, final ConstraintLayout clWifi, String postId,
+                                                       TextView txTedadLike) {
+
+        String postIdEncode = UrlEncoderClass.urlEncoder(postId);
+
+        String url= "http://robika.ir/ultitled/practice/sujeyab/laravel_app/api/load_total_like?post_id=" + postIdEncode;
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                if (response.length() <= 0) {
+                    //Toast.makeText(c, "چیزی موجود نیست.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        String tedad_like = jsonObject.getString("tedad_like");
+
+                        txTedadLike.setText(new EnglishNumberToPersian().convert(tedad_like));
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(c, "چیزی یافت نشد!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        MySingleton.getInstance(c).addToRequestQueue(jsonArrayRequest);
+    }
+
+
     public static void loadTotalRateAndRateAvgBaRetrofit(Context c, final ConstraintLayout clWifi, String postId,
                                                          TextView txTedadRate, TextView txRateAvg) {
 
@@ -2516,13 +2769,14 @@ public class LoadData {
                         String vaziyat_suje = jsonObject.getString("vaziyat_suje");
                         String tedad_comment = jsonObject.getString("tedad_comment");
                         String username_ferestande = jsonObject.getString("username_ferestande");
+                        String profile_picture_ferestande = jsonObject.getString("profile_picture_ferestande");
 
                         /*String miyangin_rate = jsonObject.getString("miyangin_rate");
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
 
                         rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
                                 "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
-                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,onvan_farakhan,"",vaziyat_suje,username_ferestande));
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,onvan_farakhan,"",vaziyat_suje,username_ferestande,profile_picture_ferestande));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -2590,13 +2844,14 @@ public class LoadData {
                         String onvan_farakhan = jsonObject.getString("onvan_farakhan");
                         String vaziyat_suje = jsonObject.getString("vaziyat_suje");
                         String username_ferestande = jsonObject.getString("username_ferestande");
+                        String profile_picture_ferestande = jsonObject.getString("profile_picture_ferestande");
 
                         /*String miyangin_rate = jsonObject.getString("miyangin_rate");
                         String tedad_comment = jsonObject.getString("tedad_comment");*/
 
                         rModels.add(new FarakhanVijehModel(lastId, picture,onvan,
                                 "",matn_kholase,mozo,id_ferestande,motavali,type,type_vaziyat_farakhan
-                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,onvan_farakhan,"",vaziyat_suje,username_ferestande));
+                                ,name_family,semat_shoghli,date_create,vaziyat_like,tedad_like,"","",tedad_comment,onvan_farakhan,"",vaziyat_suje,username_ferestande,profile_picture_ferestande));
                         rAdapter.notifyDataSetChanged();
 
                     } catch (JSONException e) {
@@ -2651,7 +2906,7 @@ public class LoadData {
                                 farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                                 farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                                 farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),""));
+                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),"",""));
                         rAdapter.notifyDataSetChanged();
 
                     }
@@ -2684,7 +2939,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),"",""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2714,7 +2969,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande()));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"",farakhanVijehModel.getTedad_comment(),farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),farakhanVijehModel.getUsername_ferestande(),farakhanVijehModel.getProfile_picture_ferestande()));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2746,7 +3001,7 @@ public class LoadData {
                             farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                             farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                             farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","",farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),""));
+                            farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","",farakhanVijehModel.getOnvan_farakhan(),"",farakhanVijehModel.getVaziyat_suje(),"",""));
                     rAdapter.notifyDataSetChanged();
 
                 }
@@ -2783,7 +3038,7 @@ public class LoadData {
                                 farakhanVijehModel.getModat_baghimande(),farakhanVijehModel.getMatn_kholase(),farakhanVijehModel.getMozo(),
                                 farakhanVijehModel.getId_ferestande(),farakhanVijehModel.getMotavali(),farakhanVijehModel.getType(),
                                 farakhanVijehModel.getType_vaziyat_farakhan(),farakhanVijehModel.getName_family(),farakhanVijehModel.getSemat_shoghli(),
-                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),""));
+                                farakhanVijehModel.getDate_create(),farakhanVijehModel.getVaziyat_like(),farakhanVijehModel.getTedad_like(),farakhanVijehModel.getLink_video(),"","","","",farakhanVijehModel.getVaziyat_suje(),"",""));
                         rAdapter.notifyDataSetChanged();
 
                     }

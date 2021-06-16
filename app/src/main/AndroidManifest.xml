@@ -6,14 +6,16 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+<!--
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.flash" />
+-->
 
     <application
-        android:name=".AppController"
+        android:name=".Map.AppController"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SujeYab"
         android:usesCleartextTraffic="true">
+        <activity android:name=".login.SiyasatVaGhavanin"></activity>
+        <activity android:name=".Map.ShowMap"></activity>
         <activity android:name=".Profile.MainActProfile"></activity>
         <activity android:name=".upload.MoarefiSamarqand"></activity>
         <!-- <activity android:name=".login.TestLocation"></activity> -->

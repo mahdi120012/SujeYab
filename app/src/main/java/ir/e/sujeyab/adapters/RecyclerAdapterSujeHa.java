@@ -113,6 +113,9 @@ public class RecyclerAdapterSujeHa extends RecyclerView.Adapter<RecyclerAdapterS
                     intent.putExtra("tedad_like",rModels.get(position).getTedad_like());
                     intent.putExtra("vaziyat_like",rModels.get(position).getVaziyat_like());
                     intent.putExtra("tedad_comment",rModels.get(position).getTedad_comment());
+                    intent.putExtra("vaziyat_suje",rModels.get(position).getVaziyat_suje());
+                    intent.putExtra("profile_picture_ferestande",rModels.get(position).getProfile_picture_ferestande());
+
                     c.startActivity(intent);
 
                     //Toast.makeText(c, rModels.get(position).getOnvan(), Toast.LENGTH_SHORT).show();

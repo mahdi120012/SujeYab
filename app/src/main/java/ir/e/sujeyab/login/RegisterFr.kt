@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ir.e.sujeyab.LoadData
 import ir.e.sujeyab.SabtSuje.snackbar
+import ir.e.sujeyab.upload.Poshtibani
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login.clcl
 import kotlinx.android.synthetic.main.net_connection.*
@@ -36,6 +37,12 @@ class RegisterFr : Fragment() {
 
         val txEdame = (activity as Login).txEdame
 
+
+        inflatedview!!.txSiyasatVaGhavanin.setOnClickListener {
+            val intent = Intent(activity, SiyasatVaGhavanin::class.java)
+            startActivity(intent)
+        }
+
         txEdame!!.setOnClickListener {
 
             var username = etUsername.text.toString()
@@ -50,8 +57,9 @@ class RegisterFr : Fragment() {
             }else if (password.length < 6){
                 clcl.snackbar("رمز عبور می بایست حداقل ۶ حرف باشد")
 
+            }else if (!inflatedview!!.checkBoxGhavanin.isChecked){
+                clcl.snackbar("سیاست حفظ حریم خصوصی را بپذیرید")
             }else{
-
 
 /*
                 val fr: Fragment = TakmilEtelaat()
@@ -64,10 +72,6 @@ class RegisterFr : Fragment() {
                 LoadData.registerBaRetrifit(activity,clcl,clWifiState,"0"+username,password)
 
             }
-
-
-
-
         }
 
 

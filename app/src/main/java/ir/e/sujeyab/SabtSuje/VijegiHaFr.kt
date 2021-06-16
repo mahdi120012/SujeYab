@@ -12,13 +12,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -33,6 +28,7 @@ import ir.e.sujeyab.Controller.RetrofitProvider
 import ir.e.sujeyab.CustomClasses.Recyclerview
 import ir.e.sujeyab.CustomClasses.SharedPrefClass
 import ir.e.sujeyab.LoadData
+import ir.e.sujeyab.Map.ShowMap
 import ir.e.sujeyab.R
 import ir.e.sujeyab.ViewPagerAdapterForSlider
 import ir.e.sujeyab.adapters.SelectedImageAdapter
@@ -41,8 +37,10 @@ import kotlinx.android.synthetic.main.button_sabt_fori_suje.view.*
 import kotlinx.android.synthetic.main.sabt_fori_suje.*
 import kotlinx.android.synthetic.main.sabt_fr.*
 import kotlinx.android.synthetic.main.tarh_suje_fr.*
+import kotlinx.android.synthetic.main.tarh_suje_fr.view.*
 import kotlinx.android.synthetic.main.vijegiha_fr.*
 import kotlinx.android.synthetic.main.vijegiha_fr.view.*
+import kotlinx.android.synthetic.main.vijegiha_fr.view.clcl
 import me.relex.circleindicator.CircleIndicator
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -87,6 +85,13 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
         inflatedview = inflater.inflate(R.layout.vijegiha_fr, container, false)
+
+
+        inflatedview!!.etEntekhabMakan.setOnClickListener {
+            startActivity(Intent(activity, ShowMap::class.java))
+            etEntekhabMakan.setText("انتخاب شد")
+        }
+
 
         inflatedview!!.clEdame.setOnClickListener {
 
@@ -193,11 +198,10 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
     private fun openVideoChooser() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        intent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 30)
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         //intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, MAX_VIDEO_RECORDING_TIME_IN_SEC)
         intent.type = "video/*"
-        startActivityForResult(intent, REQUEST_CODE_READ_STORAGE)
+        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
 
 
         //Intent(Intent.ACTION_PICK).also {
@@ -216,7 +220,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
-        startActivityForResult(intent, REQUEST_CODE_READ_STORAGE)
+        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
 
       /*  ImagePicker.with(this)
             .crop()	    			//Crop image(Optional), Check Customization for more option
@@ -301,8 +305,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                                     }
 
                                     override fun onStart() {
-                                        Toast.makeText(activity, "onStart", Toast.LENGTH_SHORT)
-                                            .show()
+                                        //Toast.makeText(activity, "onStart", Toast.LENGTH_SHORT)
+                                        //   .show()
 
 
                                         progressDialog = ProgressDialog(activity)
@@ -314,8 +318,8 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                                     }
 
                                     override fun onSuccess() {
-                                        Toast.makeText(activity, "onSuccess", Toast.LENGTH_SHORT)
-                                            .show()
+                                        //Toast.makeText(activity, "onSuccess", Toast.LENGTH_SHORT)
+                                        //    .show()
                                         val imageUri2: Uri =
                                             Uri.fromFile(File("/sdcard/Samarqand/Samarqand Video/" + random.toString() + ".mp4"))
                                         progressDialog!!.dismiss();
@@ -353,6 +357,53 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
 
 
                         }}
+                    } else if (resultData.getData() != null) {
+                        val uri: Uri = resultData.getData()!!
+                        //Log.i(org.snowcorp.sample.uploadfiles.MainActivity.TAG, "Uri = $uri")
+
+                        try {
+                            arrayList!!.add(uri)
+                            rAdapter!!.notifyDataSetChanged()
+                        } catch (e: Exception) {
+                            /*Log.e(
+                                org.snowcorp.sample.uploadfiles.MainActivity.TAG,
+                                "File select error",
+                                e
+                            )*/
+                        }
+                    }
+                }
+            }else if(requestCode == REQUEST_CODE_PICK_IMAGE){
+                if (resultData != null) {
+                    if (resultData.getClipData() != null) {
+                        val count: Int = resultData.getClipData()!!.getItemCount()
+                        var currentItem = 0
+
+                        if (count > 10) {
+                            Toast.makeText(
+                                activity, "حداکثر 10 تصویر انتخاب کنید", Toast.LENGTH_SHORT
+                            ).show()
+                        }else{
+
+
+                            while (currentItem < count) {
+
+                                val imageUri: Uri = resultData.getClipData()!!.getItemAt(currentItem).getUri()
+                                currentItem = currentItem + 1
+                                Log.d("Uri Selected", imageUri.toString())
+
+                                try {
+                                    arrayList!!.add(imageUri)
+                                    rAdapter!!.notifyDataSetChanged()
+                                } catch (e: Exception) {
+                                    /*Log.e(
+                                        org.snowcorp.sample.uploadfiles.MainActivity.TAG,
+                                        "File select error",
+                                        e
+                                    )*/
+                                }
+
+                            }}
                     } else if (resultData.getData() != null) {
                         val uri: Uri = resultData.getData()!!
                         //Log.i(org.snowcorp.sample.uploadfiles.MainActivity.TAG, "Uri = $uri")
@@ -642,7 +693,7 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             val id_farakhan: RequestBody = createPartFromString(txIdFarakhan!!.text.toString())
             val size: RequestBody = createPartFromString("" + parts.size)
 
-            Toast.makeText(activity, parts.size.toString(), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(activity, parts.size.toString(), Toast.LENGTH_SHORT).show()
 
             // finally, execute the request
             val call = service.uploadMultiple(
@@ -661,9 +712,9 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
                         activity!!.viewPager.setCurrentItem(0)
 
 
-                        Toast.makeText(
-                            activity, "Images successfully uploaded!", Toast.LENGTH_SHORT
-                        ).show()
+                        //Toast.makeText(
+                        //    activity, "Images successfully uploaded!", Toast.LENGTH_SHORT
+                        //).show()
                     } else {
                         Snackbar.make(
                             inflatedview!!.clcl,
@@ -690,5 +741,4 @@ class VijegiHaFr() : Fragment(), UploadRequestBody.UploadCallback {
             ).show()
         }
     }
-
 }
